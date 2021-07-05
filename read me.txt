@@ -1,0 +1,14 @@
+All Country Search Pages link into Sidebar.                                               Inventory > View All Inventory
+
+Vendor Search Page link into Sidebar.                                                          Access > View All Access > Vendor Search
+
+Remittance Search Page link into Sidebar.                                                Remittance > View All  > All Payments
+
+Vendor Search Page link into Sidebar.                                                          Remittance > View All  > All Refunds
+
+my_Bank Page link into Sidebar. 
+(There is a Dropdown in this section and Now you have to change this single section)                              Reports > My Bank
+
+Replace your file (Carv-view).
+
+amendment_search & dhl_search both file for admin use only.

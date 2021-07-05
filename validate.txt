@@ -1,0 +1,21 @@
+<form action="" method="POST" onsubmit="return validateProduct();">
+
+
+function validateProduct() {
+        var productName = document.getElementById("product-name");
+        var productUnit = document.getElementById("product-unit");
+        var productPrice = document.getElementById("product-price");
+        var productCategory = document.getElementById("product-category");
+        var productImage = document.getElementById("uploadFile");
+        var productDescription = document.getElementById("product-description");
+
+        if (productName.value === "" || productUnit.value === "" || productPrice.value === "" || productCategory
+            .value === "" || productImage.value === "" || productDescription.value === "") {
+            document.getElementById("alert").innerHTML =
+                "<div id='notify' class='failed'><i class='fa fa-times' onclick='hideAlert()'></i>Please Fill Out All Fields <i class='fa fa-exclamation-triangle'></i></div>";
+            return false;
+
+        } else {
+            return true;
+        }
+    }
