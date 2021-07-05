@@ -74,7 +74,9 @@ if (isset($_POST["stock_btn"])) {
     $stock_cnf_price_print_dollar = '9';
     $stock_buying_date_print = "9";
     //$stock_auction_sheet_file = $_FILES["stock_auction_sheet_file"]['name'];
-    $stock_auction_sheet_file = 'demo';
+    $images1=$_FILES['stock_auction_sheet_file']['tmp_name'];
+  $stock_auction_sheet_file=addslashes(file_get_contents($images1));
+  
     //$temp_name = $_FILES["stock_auction_sheet_file"]["tmp_name"];
     $temp_name ='demo';
     //$stock_auction_pictures = $_FILES["stock_auction_pictures"]['name'];
@@ -83,9 +85,13 @@ if (isset($_POST["stock_btn"])) {
     $temp_name = 'demo';
     $stock_masso_date = $_POST["stock_masso_date"];
    // $stock_export_cerificate_jp_file = $_FILES["stock_export_cerificate_jp_file"];
-   $stock_export_cerificate_jp_file ='demo';
+   $images2=$_FILES['stock_export_cerificate_jp_file']['tmp_name'];
+  $stock_export_cerificate_jp_file=addslashes(file_get_contents($images2));
+  
    // $temp_name = $_FILES["stock_export_cerificate_jp_file"]["tmp_name"];
-    $stock_export_cerificate_en_file = $_FILES["stock_export_cerificate_en_file"];
+   $images3=$_FILES['stock_export_cerificate_en_file']['tmp_name'];
+    $stock_export_cerificate_en_file=addslashes(file_get_contents($images3));
+  
     //$temp_name = $_FILES["stock_export_cerificate_en_file"]["tmp_name"];
     $stock_inyard_date = $_POST["stock_inyard_date"];
     $stock_yard_pictures = $_FILES["stock_yard_pictures"]['name'];
@@ -93,37 +99,49 @@ if (isset($_POST["stock_btn"])) {
     //$temp_name = $_FILES["stock_yard_pictures"]["tmp_name"];
     $stock_reserve_date = $_POST["stock_reserve_date"];
     //$stock_invoice_file = $_FILES["stock_invoice_file"]['name'];
-    $stock_invoice_file = 'demo';
+    $images4=$_FILES['stock_invoice_file']['tmp_name'];
+    $stock_invoice_file=addslashes(file_get_contents($images4));
+   
    // $temp_name = $_FILES["stock_invoice_file"]["tmp_name"];
     $stock_sure_ok_date = $_POST["stock_sure_ok_date"];
    // $stock_tt_copy_file = $_FILES["stock_tt_copy_file"]['name'];
-   $stock_tt_copy_file ='demo'; 
+   $images5=$_FILES['stock_tt_copy_file']['tmp_name'];
+    $stock_tt_copy_file=addslashes(file_get_contents($images5));
+  
    //$temp_name = $_FILES["stock_tt_copy_file"]["tmp_name"];
     $stock_ship_date = $_POST["stock_ship_date"];
     $stock_vessel_name = $_POST["stock_vessel_name"];
     $stock_voyage = $_POST["stock_voyage"];
     $stock_ship_ok_date = $_POST["stock_ship_ok_date"];
     //$stock_shipping_invoice_file = $_FILES["stock_shipping_invoice_file"]['name'];
-    $stock_shipping_invoice_file='demo';
+    $images6=$_FILES['stock_shipping_invoice_file']['tmp_name'];
+    $stock_shipping_invoice_file=addslashes(file_get_contents($images6));
+   
     // $temp_name = $_FILES["stock_shipping_invoice_file"]["tmp_name"];
     //$stock_shipping_order_file = $_FILES["stock_shipping_order_file"]['name'];
-    $stock_shipping_order_file ='demo';
+    $images7=$_FILES['stock_shipping_order_file']['tmp_name'];
+    $stock_shipping_order_file=addslashes(file_get_contents($images7));
+  
    // $temp_name = $_FILES["stock_shipping_order_file"]["tmp_name"];
     $stock_bl_date = $_POST["stock_bl_date"];
     $stock_bl_no = $_POST["stock_bl_no"];
    // $stock_bill_of_lading_file = $_FILES["stock_bill_of_lading_file"]['name'];
-   $stock_bill_of_lading_file ='demo'; 
+   $images8=$_FILES['stock_bill_of_lading_file']['tmp_name'];
+   $stock_bill_of_lading_file=addslashes(file_get_contents($images8));
+   
    //$temp_name = $_FILES["stock_bill_of_lading_file"]["tmp_name"];
     $stock_release_ok_date = $_POST["stock_release_ok_date"];
     //$stock_bal_tt_copy_file = $_FILES["stock_balance_tt_copy_file"]['name'];
-    $stock_bal_tt_copy_file ='demo';
+    $images9=$_FILES['stock_bal_tt_copy_file']['tmp_name'];
+    $stock_bal_tt_copy_file=addslashes(file_get_contents($images9));
+  
     //$temp_name = $_FILES["stock_balance_tt_copy_file"]["tmp_name"];
     $stock_dhl_date = $_POST["stock_dhl_date"];
     $stock_tracking_number = $_POST["stock_tracking_number"];
     $stock_dhl_link = $_POST["stock_dhl_link"];
     $stock_inspection_date = $_POST["stock_inspection_date"];
-    $stock_inspection_certificate_file = $_FILES["stock_inspection_certificate_file"]['name'];
-    $stock_inspection_certificate_file ='demo';
+    $images10=$_FILES['stock_inspection_certificate_file']['tmp_name'];
+    $stock_inspection_certificate_file=addslashes(file_get_contents($images10));
     // $temp_name = $_FILES["stock_inspection_certificate_file"]["tmp_name"];
     $stock_createdBy = "username";
     $stock_createdAt = time();
@@ -350,24 +368,25 @@ if (isset($_POST["stock_btn"])) {
                                                                 <div class="col-md-1">
                                                                     <div class="position-relative form-group">
                                                                         <label class="form-control-label">Lenght</label><br/>
-                                                                        <input ng-model="length" type="text" id="stock_length" name="stock_length"   placeholder="Lenght" class="form-control">
+                                                                        <input ng-model="length" type="text" id="stock_length" name="stock_length"   placeholder="Lenght" class="form-control" onkeyup="sum()">
                                     
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-md-1">
                                                                     <div class="position-relative form-group">
                                                                         <label class="form-control-label">Width</label><br/>
-                                                                        <input ng-model="width" type="text" id="stock_width" name="stock_width"   placeholder="Width" class="form-control">
+                                                                        <input ng-model="width" type="text" id="stock_width" name="stock_width"   placeholder="Width" class="form-control" onkeyup="sum()">
                                     
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-md-1">
                                                                     <label class="form-control-label">Height</label><br/>
-                                                                    <input ng-model="height" type="text" id="stock_height" name="stock_height"   placeholder="Height" class="form-control">
+                                                                    <input ng-model="height" type="text" id="stock_height" name="stock_height"   placeholder="Height" class="form-control" onkeyup="sum()">
                                                                 </div>
                                                                 <div class="col-md-2">
                                                                     <label class="form-control-label">M &sup3; : <br/></label>
-                                                                        <span class="form-control" name="stock_cubic_meter" id="stock_cubic_meter" style="color:green; font-weight: bold; ">{{length * width * height / 1000000}}</span>
+                                                                        <!--<span class="form-control" name="stock_cubic_meter" id="stock_cubic_meter" style="color:green; font-weight: bold; ">{{length * width * height / 1000000}}</span>--->
+                                                                        <input ng-model="height" type="text" id="stock_cubic_meter" name="stock_cubic_meter"   placeholder="Height" class="form-control">
                                                                 </div>
                                                                 <div class="col-md-1">
                                                                     <label  class="form-control-label">Weight</label><br/>
@@ -997,9 +1016,20 @@ if (isset($_POST["stock_btn"])) {
                                                                     </div>
                                                                 </div>
                                                             </div> 
-                                                        </div>                                                  
+                                                        </div>
+
                                                     </div>
+
                                                     <div id="step-4">
+                                                    <div style="border:1px solid gray;width: 450px; height:300px">
+        <h2>Add two textbox values without pressing anybuttons</h2>
+        <input type="text" id="txtFirstNo" placeholder="pleaseenterFirst Number"  />
+        <input type="text" id="txtSecondNo" placeholder="pleaseenterSecond Number"  />
+        <br />
+        <div style="padding-top:10px">
+            Result:
+            <input type="text" id="txtResult" />
+        </div></div>
                                                         <div class="no-results">
                                                             <div class="swal2-icon swal2-success swal2-animate-success-icon">
                                                                 <div class="swal2-success-circular-line-left" style="background-color: rgb(255, 255, 255);"></div>
@@ -1050,6 +1080,18 @@ function getState(val) {
 	});
 }
 </script>
+<script type="text/javascript">
+        function sum() {
+            var txtFirstNo = document.getElementById('stock_length').value;
+            var txtSecondNo = document.getElementById('stock_width').value;
+            var txtThirdNo = document.getElementById('stock_height').value;
+            var result = (parseInt(txtFirstNo) * parseInt(txtSecondNo) *  parseInt(txtThirdNo)) / 1000000;
+            var ce=Math.ceil(result);
+            if (!isNaN(result)) {
+                document.getElementById('stock_cubic_meter').value = ce;
+            }
+        }
+    </script>
 <?php
 include("bottom.php");
 ?>

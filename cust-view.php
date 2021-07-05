@@ -1,6 +1,7 @@
 <?php
 include("top.php");
 include("connection_db.php");
+$id=$_GET['id'];
 $querycupdate="select * from ats_customer where ats_customer_ATS_ID='".$_GET['id']."'";
 $resultcupdate=mysqli_query($connection,$querycupdate);
 $rowcupdate=mysqli_fetch_row($resultcupdate);
@@ -194,6 +195,19 @@ $rowcust = mysqli_fetch_assoc($resultcust);
                                                 <div class="col-sm-2">
                                                 <a style="margin-top: 5%" type="submit" name="btn_cus" id="btn_cus" class="btn btn-primary float-right" value="Add Customer" href="form-customer-update.php?id=<?php echo $_GET['id']?>">Update Record</a>
                                                 </div>
+                                            </div>
+                                            <div style="margin-top: -1.5%" class="row form-group">
+                                               
+                                                 <div class="col-sm-6">
+                                                    <div class="form-group"> 
+                                                    <a style="margin-top: 5%"  name="btn_cus" id="btn_cus" class="btn btn-primary float-right" value="Add Customer" href="form-consignee.php?id=<?php echo $_GET['id']?>">Add consignee</a>
+                                                            </div>  
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <div class="form-group"> 
+                                                    <a style="margin-top: 5%" type="submit" name="btn_cus" id="btn_cus" class="btn btn-primary float-right" value="Add Customer" href=""  data-toggle="modal" data-target="#exampleModalLong">See All consignee</a>
+                                                   </div>  
+                                                </div>
                                             </div>                 
                                         </form>
                                     </div>  
@@ -206,4 +220,48 @@ $rowcust = mysqli_fetch_assoc($resultcust);
 <?php
 include("bottom.php");
 ?>
- 
+  <div class="modal hide fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-md" role="document">
+        <div class="modal-content container">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Consignee Record</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div  class="modal-body">
+                <table style="height:450px;" class="table table-responsive table-hover mt-3">
+                    <thead>
+                        <tr>
+                            <th class="text-center">Consignee Name</th>
+                            <th class="text-center">Address</th>
+                            <th class="text-center">Telephone</th>
+                            <th class="text-center">Email</th>
+                            
+                        </tr>
+                    </thead>
+                    <tbody><?php 
+                    $query="select * from ats_consignee where ats_consignee_customer_name='".$id."'";
+                    $result=mysqli_query($connection,$query);
+                    while($row=mysqli_fetch_array($result))
+                    {
+                    ?>
+                    
+                        <tr>
+                            <td><?php echo $row[4]?></td>
+                            <td><?php echo $row[5]?></td>
+                            <td><?php echo $row[6]?></td>
+                            <td><?php echo $row[14]?></td>
+                           
+                          </tr>
+                          <?php 
+                    }
+                          ?>                                    
+                    </tbody>
+                </table>  
+            </div>
+            
+        </div>
+    </div>
+</div>
