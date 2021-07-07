@@ -73,4 +73,13 @@ if(isset($_POST['region_id']))
                                                                             </div>
 <?php 
 }
+ 
+if(isset($_POST['k_id']))
+{
+    $getslab=mysqli_query($connection,"select * from kobutsu_slab where id='".$_POST['k_id']."'");
+    $getslabrow=mysqli_fetch_row($getslab);
 ?>
+<div class="position-relative "> 
+                        <input type="text" value="<?php echo $getslabrow[3]  ?>" id="stock_country_slab"  name="stock_country_slab" class="form-control-sm form-control">
+  </div>
+  <?php }?>

@@ -73,6 +73,7 @@ if (isset($_POST["stock_btn"])) {
     $stock_fob_price_print_dollar = "9";
     $stock_cnf_price_print_dollar = '9';
     $stock_buying_date_print = "9";
+    $stock_shape=$_POST['stock_shape'];
     //$stock_auction_sheet_file = $_FILES["stock_auction_sheet_file"]['name'];
     $images1=$_FILES['stock_auction_sheet_file']['tmp_name'];
   $stock_auction_sheet_file=addslashes(file_get_contents($images1));
@@ -155,11 +156,11 @@ if (isset($_POST["stock_btn"])) {
     
    // if (!empty($_FILES["stock_auction_sheet_file"]["name"]) )  {
       //  if(move_uploaded_file($temp_name,$Location.$stock_auction_sheet_file)) {
-            $insert = "insert into ats_car_stock(ats_car_stock_rec_no,ats_car_stock_chassic_no,ats_car_stock_make,ats_car_stock_model,ats_car_stock_pkg,ats_car_stock_man_year,ats_car_stock_reg_year,ats_car_stock_color,ats_car_stock_shift,ats_car_stock_fuel,ats_car_stock_door,ats_car_stock_grade,ats_car_stock_engine_size,ats_car_stock_kobutsu,ats_car_stock_engine_no,ats_car_stock_seats,ats_car_stock_mileage_1,ats_car_stock_mileage_2,ats_car_stock_length,ats_car_stock_width,ats_car_stock_height,ats_car_stock_cubic_meter,ats_car_stock_weight,ats_car_stock_total_weight,ats_car_stock_max_loading,ats_car_stock_auction_house,ats_car_stock_lot_no,ats_car_stock_buying_price,ats_car_stock_buying_date,ats_car_stock_country_location,ats_car_stock_city_location,ats_car_stock_option_ps,ats_car_stock_option_nv,ats_car_stock_option_ac,ats_car_stock_option_wab,ats_car_stock_option_rs,ats_car_stock_option_tv,ats_car_stock_option_rr,ats_car_stock_option_abs,ats_car_stock_option_ls,ats_car_stock_option_pw,ats_car_stock_option_sr,ats_car_stock_option_fog,ats_car_stock_option_ab,ats_car_stock_option_gg,ats_car_stock_option_bt,ats_car_stock_option_aw,ats_car_stock_other_option,ats_car_stock_auction_fees,ats_car_stock_rikuso,ats_car_stock_fob_charge,ats_car_stock_storage_charge,ats_car_stock_dhl_charge,ats_car_stock_radiation,ats_car_stock_thc_charge,ats_car_stock_vaining_charge,ats_car_stock_inspection_charge,ats_car_stock_freight_charge,ats_car_stock_other_charge,ats_car_stock_profit,ats_car_stock_discount,ats_car_stock_total_profit,ats_car_stock_your_profit,ats_car_stock_ats_profit,ats_car_stock_fob_price_yen,ats_car_stock_fob_price_us,ats_car_stock_cnf_price_yen,ats_car_stock_cnf_price_us,ats_car_stock_auction_sheet,ats_car_stock_auction_pics,ats_car_stock_masso_date,ats_car_stock_exp_cer_jp,ats_car_stock_exp_cer_eng,ats_car_stock_inyard_date,ats_car_stock_inyard_pictures,ats_car_stock_reserve_date,ats_car_stock_invoice_file,ats_car_stock_sure_ok_date,ats_car_stock_tt_copy_file,ats_car_stock_ship_date,ats_car_stock_vessel_name,ats_car_stock_voyage,ats_car_stock_ship_ok_date,ats_car_stock_ship_invoice_file,ats_car_stock_ship_order_file,ats_car_stock_bl_date,ats_car_stock_bl_number,ats_car_stock_bl_file,ats_car_stock_release_ok_date,ats_car_stock_bal_tt_copy_file,ats_car_stock_dhl_date,ats_car_stock_tracking_number,ats_car_stock_dhl_link,ats_car_stock_inspection_date,ats_car_stock_inspection_cer_file,ats_car_stock_createdBy,ats_car_stock_createdAt,ats_car_stock_updatedBy,ats_car_stock_updatedAt,ats_car_stock_status) 
+            $insert = "insert into ats_car_stock(ats_car_stock_rec_no,ats_car_stock_chassic_no,ats_car_stock_make,ats_car_stock_model,ats_car_stock_pkg,ats_car_stock_man_year,ats_car_stock_reg_year,ats_car_stock_color,ats_car_stock_shift,ats_car_stock_fuel,ats_car_stock_door,ats_car_stock_grade,ats_car_stock_engine_size,ats_car_stock_kobutsu,ats_car_stock_engine_no,ats_car_stock_seats,ats_car_stock_mileage_1,ats_car_stock_mileage_2,ats_car_stock_length,ats_car_stock_width,ats_car_stock_height,ats_car_stock_cubic_meter,ats_car_stock_weight,ats_car_stock_total_weight,ats_car_stock_max_loading,ats_car_stock_auction_house,ats_car_stock_lot_no,ats_car_stock_buying_price,ats_car_stock_buying_date,ats_car_stock_country_location,ats_car_stock_city_location,ats_car_stock_option_ps,ats_car_stock_option_nv,ats_car_stock_option_ac,ats_car_stock_option_wab,ats_car_stock_option_rs,ats_car_stock_option_tv,ats_car_stock_option_rr,ats_car_stock_option_abs,ats_car_stock_option_ls,ats_car_stock_option_pw,ats_car_stock_option_sr,ats_car_stock_option_fog,ats_car_stock_option_ab,ats_car_stock_option_gg,ats_car_stock_option_bt,ats_car_stock_option_aw,ats_car_stock_other_option,ats_car_stock_auction_fees,ats_car_stock_rikuso,ats_car_stock_fob_charge,ats_car_stock_storage_charge,ats_car_stock_dhl_charge,ats_car_stock_radiation,ats_car_stock_thc_charge,ats_car_stock_vaining_charge,ats_car_stock_inspection_charge,ats_car_stock_freight_charge,ats_car_stock_other_charge,ats_car_stock_profit,ats_car_stock_discount,ats_car_stock_total_profit,ats_car_stock_your_profit,ats_car_stock_ats_profit,ats_car_stock_fob_price_yen,ats_car_stock_fob_price_us,ats_car_stock_cnf_price_yen,ats_car_stock_cnf_price_us,ats_car_stock_auction_sheet,ats_car_stock_auction_pics,ats_car_stock_masso_date,ats_car_stock_exp_cer_jp,ats_car_stock_exp_cer_eng,ats_car_stock_inyard_date,ats_car_stock_inyard_pictures,ats_car_stock_reserve_date,ats_car_stock_invoice_file,ats_car_stock_sure_ok_date,ats_car_stock_tt_copy_file,ats_car_stock_ship_date,ats_car_stock_vessel_name,ats_car_stock_voyage,ats_car_stock_ship_ok_date,ats_car_stock_ship_invoice_file,ats_car_stock_ship_order_file,ats_car_stock_bl_date,ats_car_stock_bl_number,ats_car_stock_bl_file,ats_car_stock_release_ok_date,ats_car_stock_bal_tt_copy_file,ats_car_stock_dhl_date,ats_car_stock_tracking_number,ats_car_stock_dhl_link,ats_car_stock_inspection_date,ats_car_stock_inspection_cer_file,ats_car_stock_createdBy,ats_car_stock_createdAt,ats_car_stock_updatedBy,ats_car_stock_updatedAt,ats_car_stock_status,ats_car_stock_shape) 
                 values('$stock_rec_no','$stock_chassis_id','$stock_make','$stock_model','$stock_package',
                 '$stock_man_year','$stock_reg_year','$stock_color','$stock_shift','$stock_fuel','$stock_door','$stock_grade','$stock_engine_size','$stock_kobutsu','$stock_engine_no','$stock_seats','$stock_mileage_1','$stock_mileage_2','$stock_length','$stock_width','$stock_height','$stock_cubic_meter','$stock_weight','$stock_total_weight','$stock_max_loading','$stock_auction','$stock_lot_no','$stock_buying_price','$stock_buying_date','$stock_country_location','$stock_city_location','$stock_option_ps','$stock_option_nv',
                 '$stock_option_ac','$stock_option_wab','$stock_option_rs','$stock_option_tv','$stock_option_rr','$stock_option_abs','$stock_option_ls','$stock_option_pw',
-                '$stock_option_sr','$stock_option_fog','$stock_option_ab','$stock_option_gg','$stock_option_bt','$stock_option_aw','$stock_other_options','$stock_auction_charges','$stock_rikuso_charges','$stock_fob_charges','$stock_storage_charges','$stock_dhl_charges','$stock_radiation_charges','$stock_thc_charges','$stock_vainning_charges','$stock_inspection_charges','$stock_freight_charges','$stock_other_charges','$stock_profit','$stock_discount_print','$stock_total_profit_print','$stock_your_profit_print','$stock_ats_profit_print','$stock_fob_price_print_yen','$stock_fob_price_print_dollar','$stock_cnf_price_print_yen','$stock_cnf_price_print_dollar','$stock_auction_sheet_file','$stock_auction_pictures','$stock_masso_date','$stock_export_cerificate_jp_file','$stock_export_cerificate_en_file','$stock_inyard_date','$stock_yard_pictures','$stock_reserve_date','$stock_invoice_file','$stock_sure_ok_date','$stock_tt_copy_file','$stock_ship_date','$stock_vessel_name','$stock_voyage','$stock_ship_ok_date','$stock_shipping_invoice_file','$stock_shipping_order_file','$stock_bl_date','$stock_bl_no','$stock_bill_of_lading_file','$stock_release_ok_date','$stock_tt_copy_file','$stock_dhl_date','$stock_tracking_number','$stock_dhl_link','$stock_inspection_date','$stock_inspection_certificate_file','$stock_createdBy','$stock_createdAt','$stock_updatedBy','$stock_updatedAt','$stock_status')";
+                '$stock_option_sr','$stock_option_fog','$stock_option_ab','$stock_option_gg','$stock_option_bt','$stock_option_aw','$stock_other_options','$stock_auction_charges','$stock_rikuso_charges','$stock_fob_charges','$stock_storage_charges','$stock_dhl_charges','$stock_radiation_charges','$stock_thc_charges','$stock_vainning_charges','$stock_inspection_charges','$stock_freight_charges','$stock_other_charges','$stock_profit','$stock_discount_print','$stock_total_profit_print','$stock_your_profit_print','$stock_ats_profit_print','$stock_fob_price_print_yen','$stock_fob_price_print_dollar','$stock_cnf_price_print_yen','$stock_cnf_price_print_dollar','$stock_auction_sheet_file','$stock_auction_pictures','$stock_masso_date','$stock_export_cerificate_jp_file','$stock_export_cerificate_en_file','$stock_inyard_date','$stock_yard_pictures','$stock_reserve_date','$stock_invoice_file','$stock_sure_ok_date','$stock_tt_copy_file','$stock_ship_date','$stock_vessel_name','$stock_voyage','$stock_ship_ok_date','$stock_shipping_invoice_file','$stock_shipping_order_file','$stock_bl_date','$stock_bl_no','$stock_bill_of_lading_file','$stock_release_ok_date','$stock_tt_copy_file','$stock_dhl_date','$stock_tracking_number','$stock_dhl_link','$stock_inspection_date','$stock_inspection_certificate_file','$stock_createdBy','$stock_createdAt','$stock_updatedBy','$stock_updatedAt','$stock_status','$stock_shape')";
               $query = mysqli_query($connection,$insert) or die(mysqli_error($connection));
               echo $query; 
               // if ($query)
@@ -336,7 +337,23 @@ if (isset($_POST["stock_btn"])) {
                                                                 </div>
                                                                 <div class="col-md-2">
                                                                     <label class="form-control-label">Kobutsu</label><br/>
-                                                                    <input type="text" id="stock_kobutsu" name="stock_kobutsu"   placeholder="PAK" class="form-control">
+                                                                    <select id="stock_kobutsu" name="stock_kobutsu" class="form-control" onChange="getSlab(this.value);"> 
+                                                                 
+                                                                    <?php 
+                                                                        $queryfetchdetails1=mysqli_query($connection,"select * from kobutsu_slab");
+                                                                       
+                                                                        ?>
+                                                                           
+                                                                           <option disabled selected>Please Select</option>
+                                                                           <?php 
+                                                                           while($rowfetchdetails1=mysqli_fetch_array($queryfetchdetails1)){
+                                                                               ?>
+                                                                            <option class="form-control" value="<?php echo $rowfetchdetails1[0]?>"><?php echo $rowfetchdetails1[1]."-".$rowfetchdetails1[2]?></option>
+
+                                                                               <?php
+                                                                           }
+                                                                           ?>
+                                                                    </select>
                                                                 </div>
                                                                 <div class="col-md-2">
                                                                     <label class="form-control-label">Engine No.</label><br/>
@@ -410,7 +427,7 @@ if (isset($_POST["stock_btn"])) {
                                                                     <label class="form-control-label">Auction House</label><br/>
                                                                     <input type="text" id="stock_auction" name="stock_auction"   placeholder="Auction House" class="form-control">
                                                                 </div>
-                                                                <div class="col-md-2">
+                                                                <div class="col-md-1">
                                                                     <label class="form-control-label">Lot No.</label><br/>
                                                                     <input type="text" id="stock_lot_no" name="stock_lot_no"   placeholder="876****" class="form-control">
                                                             
@@ -418,12 +435,36 @@ if (isset($_POST["stock_btn"])) {
                                                                 <div class="col-md-2">
                                                                     <div class="position-relative form-group">
                                                                         <label class="form-control-label">Buying Price</label><br/>
-                                                                        <input type="text" id="stock_buying_price" name="stock_buying_price"   placeholder="*,**,***" class="form-control">
+                                                                        <input type="text" id="stock_buying_price" name="stock_buying_price"   placeholder="*,**,***" class="form-control input-mask-trigger text-left" data-inputmask="'alias': 'decimal', 'groupSeparator': ',', 'autoGroup': true" im-insert="true"   onkeyup="buyfunction()">
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-md-2">
                                                                     <label class="form-control-label">Buying Date</label><br/>
                                                                     <input type="date" id="stock_buying_date" name="stock_buying_date"    class="form-control">
+                                                                </div>
+                                                                <div class="col-md-2">
+                                                                    <label class="form-control-label">Shape</label><br/>
+                                                                    <select name="stock_shape" id="stock_shape"   class="form-control">
+                                                                  
+                                                                        <option value="" >Type : </option>
+                                                                        <option value="Sedan">Sedan</option>
+                                                                        <option value="Hatchback">Hatchback</option>
+                                                                        <option value="Station Wagon">Station Wagon</option>
+                                                                        <option value="Coupe">Coupe</option>
+                                                                        <option value="Open Top">Open Top</option>
+                                                                        <option value="SUV">SUV</option>
+                                                                        <option value="MUV">MUV</option>
+                                                                        <option value="Mini Van">Mini Van</option>
+                                                                        <option value="Van">Van</option>
+                                                                        <option value="Pickup">Pickup</option>
+                                                                        <option value="Truck">Truck</option>
+                                                                        <option value="Machinery">Machinery</option>
+                                                                        <option value="Tractor">Tractor</option>
+                                                                        <option value="Motorcycle">Motorcycle</option>
+                                                                        <option value="Other">Other</option>
+                                       
+                                
+                                                                        </select>  
                                                                 </div>
                                                                 <div class="col-md-2">
                                                                     <div class="position-relative form-group">
@@ -439,7 +480,7 @@ if (isset($_POST["stock_btn"])) {
                                                                         </select>  
                                                                     </div>
                                                                 </div>
-                                                                <div class="col-md-2">
+                                                                <div class="col-md-1">
                                                                     <div class="position-relative form-group">
                                                                         <label class="form-control-label">City</label>
                                                                         <select name="stock_city_location" id="stock_city_location"   class="form-control">
@@ -532,6 +573,300 @@ if (isset($_POST["stock_btn"])) {
                                                         <div class="form-row"> 
                                                             <div class="col-sm-3">
                                                                 <div class="position-relative form-group">
+                                                                    <label class="form-control-label">Auction Fees</label>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-sm-3">
+                                                                <div class="position-relative ">
+                                                                    <input   type="text" onkeyup="sum1()" value="0" id="stock_auction_charges" name="stock_auction_charges"   placeholder="Enter Price" class="form-control-sm form-control">
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-sm-3">
+                                                                <div class="position-relative form-group">
+                                                                    <label class="form-control-label">Radiation / Plate / Cancel / Photo</label>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-sm-3">
+                                                                <div class="position-relative ">
+                                                                    <input  type="text" onkeyup="sum1()" value="0" id="stock_radiation_charges" name="stock_radiation"   placeholder="Enter Price" class="form-control-sm form-control">
+                                                                </div>
+                                                            </div>  
+                                                        </div>
+                                                        <div class="form-row"> 
+                                                            <div class="col-sm-3">
+                                                                <div class="position-relative form-group">
+                                                                    <label class="form-control-label">Rikuso</label>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-sm-3">
+                                                                <div class="position-relative ">
+                                                                    <input  type="text" onkeyup="sum1()" value="0" id="stock_rikuso_charges" name="stock_rikuso_charges"   placeholder="Enter Price" class="form-control-sm form-control">
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-sm-3">
+                                                                <div class="position-relative form-group">
+                                                                    <label class="form-control-label">THC Charges (if container)</label>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-sm-3">
+                                                                <div class="position-relative ">
+                                                                    <input  type="text" onkeyup="sum1()" value="0" name="stock_thc_charges" id="stock_thc_charges"   placeholder="Enter Price" class="form-control-sm form-control">
+                                                                </div>
+                                                            </div> 
+                                                        </div>
+                                                        <div class="form-row"> 
+                                                            <div class="col-sm-3">
+                                                                <div class="position-relative form-group">
+                                                                    <label class="form-control-label">Clearing & Custom (FOB Charges)</label>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-sm-3">
+                                                                <div class="position-relative ">
+                                                                    <input  type="text" onkeyup="sum1()" value="0" id="stock_fob_charges" name="stock_fob_charges"   placeholder="Enter Price" class="form-control-sm form-control">
+                                                                </div>
+                                                            </div>
+                                                            
+                                                            <div class="col-sm-3">
+                                                                <div class="position-relative form-group">
+                                                                    <label class="form-control-label">Vaining Charges (if container)</label>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-sm-3">
+                                                                <div class="position-relative ">
+                                                                    <input  type="text" onkeyup="sum1()" value="0" id="stock_vainning_charges" name="stock_vainning_charges"   placeholder="Enter Price" class="form-control-sm form-control">
+                                                                </div>
+                                                            </div>  
+                                                        </div>
+                                                        <div class="form-row"> 
+                                                            <div class="col-sm-3">
+                                                                <div class="position-relative form-group">
+                                                                    <label class="form-control-label">Storage Charges</label>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-sm-3">
+                                                                <div class="position-relative ">
+                                                                    <input  type="text" onkeyup="sum1()" value="0" id="stock_storage_charges" name="stock_storage_charges"   placeholder="Enter Price" class="form-control-sm form-control">
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-sm-3">
+                                                                <div class="position-relative form-group">
+                                                                    <label class="form-control-label">Other Charges</label>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-sm-3">
+                                                                <div class="position-relative ">
+                                                                    <input   type="text" onkeyup="sum1()" value="0"  id="stock_other_charges" name="stock_other_charges"   placeholder="Enter Price" class="form-control-sm form-control">
+                                                                </div>
+                                                            </div>
+                                                            
+                                                        </div>
+                                                        <div class="form-row"> 
+                                                            <div class="col-sm-3">
+                                                                <div class="position-relative form-group">
+                                                                    <label class="form-control-label">DHL Charges</label>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-sm-3">
+                                                                <div class="position-relative">
+                                                                    <input  type="text" onkeyup="sum1()" value="0" id="stock_dhl_charges" name="stock_dhl_charges"   placeholder="Enter Price" class="form-control-sm form-control">
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-sm-3">
+                                                                <div class="position-relative form-group">
+                                                                    <label style="font-weight:bold;" class="form-control-label text-success">Total Expences</label>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-sm-3">
+                                                                <div class="position-relative">
+                                                                    <input  type="text" id="stock_total_expences" name="stock_total_expences"   placeholder="Enter Price" class="form-control-sm form-control">
+                                                                </div>
+                                                            </div>
+                                                            <input type="radio" name="inspection" Value="YES">RORO
+                                                        <input type="radio" name="inspection" value="NO">LOLO
+                                                        </div>
+                                                        <div style="background-color: lightgray;" class="divider"></div>
+                                                        <input type="radio" name="inspection" Value="YES">Yes
+                                                        <input type="radio" name="inspection" value="NO">NO
+                                                        <div style="margin-bottom: -13px;" class="form-row"> 
+                                                            <div class="col-sm-3">
+                                                                <div class="position-relative form-group">
+                                                                    <label class="form-control-label">Shiping Freight Charges</label>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-sm-3">
+                                                                <div class="position-relative ">
+                                                                    <input  type="text" id="stock_freight_charges" name="stock_freight_charges"   placeholder="Enter Price" class="form-control-sm form-control">
+                                                                </div>
+                                                            </div> 
+                                                            <div class="col-sm-3">
+                                                            <input type="radio" name="inspection1" Value="YES">Yes
+                                                        <input type="radio" name="inspection1" value="NO">NO 
+                                                                <div class="position-relative form-group">
+                                                                    <label class="form-control-label">Inspection Charges</label>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-sm-3">
+                                                                <div class="position-relative">
+                                                                    <input type="text" id="stock_inspection_charges" name="stock_inspection_charges"   placeholder="Enter Price" class="form-control-sm form-control">
+                                                                </div>
+                                                            </div>  
+                                                            
+                                                           
+                                                        </div>
+                                                        <div style="background-color: lightgray;" class="divider"></div>
+                                                        <div style="margin-bottom: -13px;" class="form-row"> 
+                                                            <div class="col-sm-1">
+                                                                <div class="position-relative form-group">
+                                                                    <label class="form-control-label mt-1">Buying&nbsp;Price</label>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-sm-3">
+                                                                <div class="position-relative ">
+                                                                    <input type="text" name="stock_buying_price_print" 
+                                                                    id="stock_buying_price_print" placeholder="Enter Price" class="form-control-sm form-control input-mask-trigger text-left" data-inputmask="'alias': 'decimal', 'groupSeparator': ',', 'autoGroup': true" im-insert="true">
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-sm-1">
+                                                                <div class="position-relative form-group">
+                                                                    <label class="form-control-label mt-1">Expences</label>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-sm-3">
+                                                                <div class="position-relative form-group">
+                                                                    <input type="text" id="stock_total_expences_print"
+                                                                    name="stock_total_expences_print"  class="form-control-sm form-control">
+                                                                </div>
+                                                            </div>
+                                                            <!-- <div class="col-sm-1">
+                                                                <div class="position-relative form-group">
+                                                                    <label class="form-control-label mt-1">Boss&nbsp;Price</label>
+                                                                </div>
+                                                            </div> -->
+                                                            <!-- <div class="col-sm-2">
+                                                                <div class="position-relative ">
+                                                                    <input type="text" id="stock_boss_price"  name="stock_boss_price" class="form-control-sm form-control">
+                                                                </div>
+                                                            </div>  -->
+                                                            <div class="col-sm-1">
+                                                                <div class="position-relative form-group">
+                                                                    <label class="form-control-label mt-1">Country&nbsp;Slab</label>
+                                                                </div>
+                                                            </div>        
+                                                            <div class="col-sm-3" id="slab-list">
+                                                                <div class="position-relative "> 
+                                                                    <text type="text" id="stock_country_slab"  name="stock_country_slab" class="form-control-sm form-control">
+                                                                </div>
+                                                            </div> 
+                                                        </div>
+                                                        <!-- <div style="background-color: lightgray;" class="divider"></div> -->
+                                                        <!-- <div style="margin-bottom: -13px;" class="form-row"> 
+                                                            <div class="col-sm-1">
+                                                                <div class="position-relative form-group">
+                                                                    <label class="form-control-label">Profit</label>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-sm-2">
+                                                                <div class="position-relative ">
+                                                                    <input  type="text" id="stock_profit"
+                                                                    name="stock_profit"  class="form-control-sm form-control">
+                                                                </div>
+                                                            </div> 
+                                                            <div class="col-sm-1">
+                                                                <div class="position-relative form-group">
+                                                                    <label class="form-control-label">Discount %</label>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-sm-1">
+                                                                <div class="position-relative form-group">
+                                                                    <input type="text" id="stock_discount_print"
+                                                                    name="stock_discount_print"  class="form-control-sm form-control">
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-sm-1">
+                                                                <div class="position-relative form-group">
+                                                                    <label class="form-control-label">Total Profit</label>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-sm-2">
+                                                                <div class="position-relative ">
+                                                                    <text type="text" id="stock_total_profit_print"  name="stock_total_profit_print" class="form-control-sm form-control">
+                                                                </div>
+                                                            </div> 
+                                                            <div class="col-sm-1">
+                                                                <div class="position-relative form-group">
+                                                                    <label class="form-control-label">Your Profit</label>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-sm-1">
+                                                                <div class="position-relative "> 
+                                                                    <text type="text" id="stock_your_profit_print"  name="stock_your_profit_print" class="form-control-sm form-control">
+                                                                </div>
+                                                            </div> 
+                                                            <div class="col-sm-1">
+                                                                <div class="position-relative form-group">
+                                                                    <label class="form-control-label">ATS Profit</label>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-sm-1">
+                                                                <div class="position-relative ">
+                                                                    <text type="text" id="stock_ats_profit_print" 
+                                                                    name="stock_ats_profit_print" class="form-control-sm form-control">
+                                                                </div>
+                                                            </div> 
+                                                        </div> -->
+                                                        <div style="background-color: lightgray;" class="divider"></div>
+                                                        <div class="form-row"> 
+                                                            <div class="col-sm-3">
+                                                                <div class="position-relative form-group">
+                                                                    <label class="form-control-label">FOB Price &yen; </label>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-sm-3">
+                                                                <div class="position-relative ">
+                                                                    <label type="text" id="stock_fob_price_print_yen" 
+                                                                    name="stock_fob_price_print_yen" class="form-control-sm form-control">
+                                                                </div>
+                                                            </div> 
+                                                            <div class="col-sm-3">
+                                                                <div class="position-relative form-group">
+                                                                    <label class="form-control-label">CNF Price &yen; </label>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-sm-3">
+                                                                <div class="position-relative ">
+                                                                    <label type="text" id="stock_cnf_price_print_yen"  name="stock_cnf_price_print_yen" class="form-control-sm form-control">
+                                                                </div>
+                                                            </div> 
+                                                        </div>
+                                                        <div class="form-row"> 
+                                                            <div class="col-sm-3">
+                                                                <div class="position-relative form-group">
+                                                                    <label class="form-control-label">FOB Price &dollar;</label>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-sm-3">
+                                                                <div class="position-relative ">
+                                                                    <label type="text" id="stock_fob_price_print_dollar"
+                                                                    name="stock_fob_price_print_dollar"  class="form-control-sm form-control">
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-sm-3">
+                                                                <div class="position-relative form-group">
+                                                                    <label class="form-control-label">CNF Price &dollar; </label>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-sm-3">
+                                                                <div class="position-relative ">
+                                                                    <label  type="text" id="stock_cnf_price_print_dollar"  
+                                                                    name="stock_cnf_price_print_dollar" class="form-control-sm form-control">
+                                                                </div>
+                                                            </div>  
+                                                        </div>
+                                                    </div>
+                                                    <!-- <div id="step-2">
+                                                        <div class="form-row"> 
+                                                            <div class="col-sm-3">
+                                                                <div class="position-relative form-group">
                                                                     <label class="form-control-label">Buying Price</label>
                                                                 </div>
                                                             </div>
@@ -570,7 +905,7 @@ if (isset($_POST["stock_btn"])) {
                                                             </div>
                                                             <div class="col-sm-3">
                                                                 <div class="position-relative ">
-                                                                    <input type="text" id="username" name="stock_thc_charges" id="stock_thc_charges"   placeholder="Enter Price" class="form-control-sm form-control">
+                                                                    <input type="text" id="stock_thc_charges" name="stock_thc_charges" id="stock_thc_charges"   placeholder="Enter Price" class="form-control-sm form-control">
                                                                 </div>
                                                             </div> 
                                                         </div>
@@ -769,7 +1104,7 @@ if (isset($_POST["stock_btn"])) {
                                                                 </div>
                                                             </div>  
                                                         </div>
-                                                    </div>
+                                                    </div> -->
                                                     <div id="step-3">
                                                         
                                                         <div class="form-row"> 
@@ -1021,15 +1356,7 @@ if (isset($_POST["stock_btn"])) {
                                                     </div>
 
                                                     <div id="step-4">
-                                                    <div style="border:1px solid gray;width: 450px; height:300px">
-        <h2>Add two textbox values without pressing anybuttons</h2>
-        <input type="text" id="txtFirstNo" placeholder="pleaseenterFirst Number"  />
-        <input type="text" id="txtSecondNo" placeholder="pleaseenterSecond Number"  />
-        <br />
-        <div style="padding-top:10px">
-            Result:
-            <input type="text" id="txtResult" />
-        </div></div>
+                                                   
                                                         <div class="no-results">
                                                             <div class="swal2-icon swal2-success swal2-animate-success-icon">
                                                                 <div class="swal2-success-circular-line-left" style="background-color: rgb(255, 255, 255);"></div>
@@ -1079,7 +1406,28 @@ function getState(val) {
 	}
 	});
 }
+function getSlab(val) {
+   // alert(val);
+	$.ajax({
+	type: "POST",
+	url: "ats_dependant_dropdown.php",
+	data:'k_id='+val,
+	success: function(data){
+		$("#slab-list").html(data);
+	}
+	});
+}
+
 </script>
+<script>
+function buyfunction() {
+    var n1 = document.getElementById('stock_buying_price');
+  var n2 = document.getElementById('stock_buying_price_print');
+    
+  n2.value = n1.value;
+  }
+</script>
+
 <script type="text/javascript">
         function sum() {
             var txtFirstNo = document.getElementById('stock_length').value;
@@ -1090,8 +1438,35 @@ function getState(val) {
             if (!isNaN(result)) {
                 document.getElementById('stock_cubic_meter').value = ce;
             }
+
+        }
+       
+    </script>
+    <script>
+     function sum1() {
+            
+            var stock_auction_charges = document.getElementById('stock_auction_charges').value;          
+            var stock_rikuso_charges = document.getElementById('stock_rikuso_charges').value;           
+            var stock_fob_charges = document.getElementById('stock_fob_charges').value;
+            var stock_storage_charges = document.getElementById('stock_storage_charges').value;
+            var stock_dhl_charges = document.getElementById('stock_dhl_charges').value;
+            var stock_radiation_charges = document.getElementById('stock_radiation_charges').value;
+            var stock_thc_charges = document.getElementById('stock_thc_charges').value;
+            var stock_vainning_charges = document.getElementById('stock_vainning_charges').value;
+            var stock_other_charges = document.getElementById('stock_other_charges').value;
+            var resultslab = parseInt(stock_auction_charges) + parseInt(stock_rikuso_charges) +  
+            parseInt(stock_fob_charges)+ parseInt(stock_storage_charges) + parseInt(stock_dhl_charges) +  
+            parseInt(stock_radiation_charges) + parseInt(stock_thc_charges) + parseInt(stock_vainning_charges) +
+             parseInt(stock_other_charges);
+            document.getElementById('stock_total_expences').value = resultslab;
+            document.getElementById('stock_total_expences_print').value = resultslab;
+              
+            
+            
         }
     </script>
+    <script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/3/masking-input.js" data-autoinit="true"></script>
+
 <?php
 include("bottom.php");
 ?>
