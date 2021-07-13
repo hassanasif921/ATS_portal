@@ -1,16 +1,18 @@
 <?php
 include("top.php");
+include("connection_db.php");
+
 ?>
             <div class="app-main__outer">
                 <div class="app-main__inner p-0">
                     <div class="app-inner-layout chat-layout">
-                        <form action="" method="">
+                        <form action="indextest.php" method="POST">
                             <div style="background:darkgray;  padding-top: 1%; padding-bottom: 1.2%; " class="container row">        
                                 <div class="col-sm-1">
                                     <label style="margin-top: 5%; font-weight: bold;" class="form-control-label">Agent</label>
                                 </div>
                                 <div style="margin-left: -4%;" class="col-sm-2 ">
-                                    <select name="stock_agent_name" id="stock_agent_name" required class="form-control form-control-sm">
+                                    <select name="stock_agent_name" id="stock_agent_name"  class="form-control form-control-sm">
                                         <option value="">Agent / User Table</option>
                                     </select> 
                                 </div>
@@ -18,7 +20,7 @@ include("top.php");
                                     <label style="margin-top: 5%; font-weight: bold;" class="form-control-label">Country</label>
                                 </div>
                                 <div style="margin-left: -2.5%;" class="col-sm-2">
-                                    <select name="stock_country" id="stock_country" class="form-control form-control-sm" required>
+                                    <select name="stock_country" id="stock_country" class="form-control form-control-sm" >
                                         <option value="---">Select Country</option>
                                         <option value="AF">Afghanistan</option>
                                         <option value="AL">Albania</option>
@@ -273,12 +275,11 @@ include("top.php");
                                     <input style="margin-left: 20%;" type="reset" name="btn-reset" class="mb-2 mr-2 btn btn-gradient-primary btn-block" value="Refresh"> 
                                 </div>
                                 <div class="col-sm-2">
-                                    <input style="margin-left: 30%;" data-toggle="collapse" data-target="#show-records"
-                                    aria-expanded="true" aria-controls="collapseOne" type="submit" name="stock_search_btn" id="stock_search_btn" class="btn mb-2 mr-2 btn btn-gradient-success btn-block" value="Search"> 
+                                    <input style="margin-left: 30%;" type="submit" name="stock_search_btn" id="stock_search_btn" class="btn mb-2 mr-2 btn btn-gradient-success btn-block" value="Search"> 
                                     
                                 </div>
                                 <div class="col-sm-2 ">
-                                    <select style="margin-left: 50%;" name="stock_all_agent" id="stock_all_agent" required class="form-control form-control-sm">
+                                    <select style="margin-left: 50%;" name="stock_all_agent" id="stock_all_agent"  class="form-control form-control-sm">
                                             <option value="">All Cars</option>
                                     </select> 
                                 </div>
@@ -295,18 +296,19 @@ include("top.php");
                                                             </div>
                                                             <input style="font-size: 12px;" name="get_stock_rec_no" id="get_stock_rec_no" type="text"  class="form-control">
                                                         </div>
-                                                        <div style="margin-right: -3%;"  class="col-sm-3 input-group input-group-sm">
-                                                            <div class="input-group-prepend">
-                                                                <span class="input-group-text">Chassis</span>
-                                                            </div>
-                                                            <input style="font-size: 12px;" name="get_stock_chassis_id" id="get_stock_chassis_id" type="text"  class="form-control">
-                                                        </div>
                                                         <div style="margin-right: -3%;" class="col-sm-3 input-group input-group-sm">
                                                             <div class="input-group-prepend">
                                                                 <span class="input-group-text">Kubotsu</span>
                                                             </div>
                                                             <input style="font-size: 12px;" name="get_stock_kobutsu" id="get_stock_kobutsu" type="text" class="form-control">
                                                         </div>
+                                                        <div style="margin-right: -3%;"  class="col-sm-3 input-group input-group-sm">
+                                                            <div class="input-group-prepend">
+                                                                <span class="input-group-text">Chassis</span>
+                                                            </div>
+                                                            <input style="font-size: 12px;" name="get_stock_chassis_id" id="get_stock_chassis_id" type="text"  class="form-control">
+                                                        </div>
+                                                      
                                                         <div  class="col-sm-3 input-group input-group-sm">
                                                             <div class="input-group-prepend">
                                                                 <span class="input-group-text">Customer</span>
@@ -319,10 +321,18 @@ include("top.php");
                                                             <div class="input-group-prepend">
                                                                 <span class="input-group-text">Make</span>
                                                             </div>
-                                                            <select name="get_stock_make" id="get_stock_make" class="form-control form-control-sm">
-                                                                <option>ABC</option>
-                                                                <option>ABC</option>
-                                                                <option>ABC</option>
+                                                            <select name="get_stock_make" id="get_stock_make" class="form-control form-control-sm" onChange="getState(this.value);">
+                                                            <?php 
+                                                                                $queryfetchdetails=mysqli_query($connection,"select * from car_make");
+                                                                                ?>
+                                                                                    <option selected value="">Please Select</option>
+                                                                                <?php 
+                                                                                    while($rowfetchdetails=mysqli_fetch_array($queryfetchdetails)){
+                                                                                    ?>
+                                                                                <option value="<?php echo $rowfetchdetails[0]?>"><?php echo $rowfetchdetails[1]?></option>
+                                                                                <?php
+                                                                                    }
+                                                                                ?>
                                                             </select>
                                                         
                                                         </div>
@@ -330,17 +340,20 @@ include("top.php");
                                                             <div class="input-group-prepend">
                                                                 <span class="input-group-text">Model</span>
                                                             </div>
-                                                            <select name="get_stock_modal" id="get_stock_modal" class="form-control form-control-sm">
-                                                                <option>ABC</option>
-                                                                <option>ABC</option>
-                                                                <option>ABC</option>
-                                                            </select>
+                                                            <select name="stock_model" id="model-list"  class="form-control form-control-sm">
+                                                                                <option  selected value="">Please Select</option>
+                                                             </select>
                                                         </div>
                                                         <div style="margin-right: -1.5%;" class="col-sm-2 input-group input-group-sm">
                                                             <div class="input-group-prepend">
                                                                 <span class="input-group-text">Shift</span>
                                                             </div>
-                                                            <input style="font-size: 12px;" name="get_stock_shift" id="get_stock_shift" type="text" class="form-control">
+                                                            <select name="get_stock_shift" id="get_stock_shift" class="form-control form-control-sm">
+                                                                                <option value="">Select</option>    
+                                                                                <option value="Automatic">Automatic</option>
+                                                                                <option value="Manual">Manual</option> 
+                                                                                <option value="Dual">Dual</option>
+                                                                            </select> 
                                                         </div>
                                                         <div style="margin-right: -1.5%;" class="col-sm-2 input-group input-group-sm">
                                                             <div class="input-group-prepend">
@@ -352,7 +365,7 @@ include("top.php");
                                                             <div class="input-group-prepend">
                                                                 <span class="input-group-text">Color</span>
                                                             </div>
-                                                            <input style="font-size: 12px;" name="get_stock_color" id="get_stock_reg_year" type="text" class="form-control">
+                                                            <input style="font-size: 12px;" name="get_stock_color" id="get_stock_color" type="text" class="form-control">
                                                         </div>
                                                         <div style="background: lightgray;" class="">
                                                         <h6 style="font-weight: bold;" name="" id="">Results</h6>
@@ -364,7 +377,12 @@ include("top.php");
                                                             <div class="input-group-prepend">
                                                                 <span class="input-group-text">Fuel</span>
                                                             </div>
-                                                            <input style="font-size: 12px;" name="get_stock_fuel" id="get_stock_fuel" type="text" class="form-control">
+                                                            <select name="stock_fuel" id="stock_fuel" class="form-control form-control-sm">
+                                                                                <option value="">Select</option>    
+                                                                                <option value="GASOLINE">GASOLINE</option>
+                                                                                <option value="DIESEL">DIESEL</option> 
+                                                                                <option value="HYBRID">HYBRID</option>
+                                                                            </select>  
                                                         </div>
                                                         <div style="margin-right: -3%;" class="col-sm-3 input-group input-group-sm">
                                                             <div class="input-group-prepend">
@@ -541,20 +559,20 @@ include("top.php");
                                                                                 <thead>
                                                                                     <tr>
                                                                                         <th>Slct all<input type="checkbox" onclick="toggle(this);" /></th>
-                                                                                        <th>Pr<br/>ice</th>
-                                                                                        <th>In<br/>yrd</th>
-                                                                                        <th>Rs<br/>rv</th>
-                                                                                        <th>Su<br/>re</th>
-                                                                                        <th>So<br/>ld</th>
-                                                                                        <th>Sh<br/>ok</th>
-                                                                                        <th>Sh<br/>inv</th>
+                                                                                        <th>Price</th>
+                                                                                        <th>Inyrd</th>
+                                                                                        <th>Rsrv</th>
+                                                                                        <th>Sure</th>
+                                                                                        <th>Sold</th>
+                                                                                        <th>Shok</th>
+                                                                                        <th>Shinv</th>
                                                                                         <th>Bl</th>
-                                                                                        <th>RL<br/>rq</th>
-                                                                                        <th>RL<br/>ok</th>
+                                                                                        <th>RLrq</th>
+                                                                                        <th>RLok</th>
                                                                                         <th>RL</th>
                                                                                     
-                                                                                        <th>Cr<br/>fct</th>
-                                                                                        <th>D<br/>hl</th>
+                                                                                        <th>Crfct</th>
+                                                                                        <th>Dhl</th>
                                                                                         <th>Rec#</th>
                                                                                         <th>Pics</th>
                                                                                         <th>Kbtsu</th>
@@ -576,75 +594,49 @@ include("top.php");
                                                                                     
                                                                                 </thead>
                                                                                 <tbody>
-                                                                                    <tr>
-                                                                                        <td><input type="checkbox" /></td>
-                                                                                        <td style="color: #ff9900; font-weight: bolder; background: wheat; ">&checkmark;</td>
-                                                                                        <td style="color: #ff9900; font-weight: bolder; background: wheat; ">&checkmark;</td>
-                                                                                        <td style="color: #ff9900; font-weight: bolder; background: wheat; ">&checkmark;</td>
-                                                                                        <td style="color: #ff9900; font-weight: bolder; background: wheat; ">&checkmark;</td>
-                                                                                        <td style="color: #ff9900; font-weight: bolder; background: wheat; ">&checkmark;</td>
-                                                                                        <td style="color: #ff9900; font-weight: bolder; background: wheat; ">&checkmark;</td>
-                                                                                        <td style="color: #ff9900; font-weight: bolder; background: wheat; ">&checkmark;</td>
-                                                                                        <td style="color: #ff9900; font-weight: bolder; background: wheat; ">&checkmark;</td>
-                                                                                        <td style="color: #ff9900; font-weight: bolder; background: wheat; ">&checkmark;</td>
-                                                                                        <td style="color: #ff9900; font-weight: bolder; background: wheat; ">&checkmark;</td>
-                                                                                        <td style="color: #ff9900; font-weight: bolder; background: wheat; ">&checkmark;</td>
-                                                                                        <td style="color: #ff9900; font-weight: bolder; background: wheat; ">&checkmark;</td>
-                                                                                        <td style="color: #ff9900; font-weight: bolder; background: wheat; ">&checkmark;</td>
-                                                                                        
-                                                                                        <td>4321</td>
-                                                                                        <td>5</td>
-                                                                                        <td>KEN</td>
-                                                                                        <td>BHJ-25465456</td>
-                                                                                        <td>NISSAN</td>
-                                                                                        <td>Juke</td>
-                                                                                        <td>2020</td>
-                                                                                        <td>Apr</td>
-                                                                                        <td>Pearl White</td>
-                                                                                        <td>Dual</td>
-                                                                                        <td>Gasoline</td>
-                                                                                        <td>4</td>
-                                                                                        <td>1400cc</td>
-                                                                                        <td>PS,NV,AC,WAB,RS,TV,RR,ABS,LS,PW,SR,FOG,AB,GG,BT,LS</td>
-                                                                                        <td>9,80,000</td>
-                                                                                        <td>4</td>
-                                                                                        <td>98,000KM</td>
-                                                                                    </tr>
-                                                                                    <tr>
-                                                                                        <td><input type="checkbox" /></td>
-                                                                                        <td style="color: #ff9900; font-weight: bolder; background: wheat; ">&checkmark;</td>
-                                                                                        <td style="color: #ff9900; font-weight: bolder; background: wheat; ">&checkmark;</td>
-                                                                                        <td style="color: #ff9900; font-weight: bolder; background: wheat; ">&checkmark;</td>
-                                                                                        <td style="color: #ff9900; font-weight: bolder; background: wheat; ">&checkmark;</td>
-                                                                                        <td style="color: #ff9900; font-weight: bolder; background: wheat; ">&checkmark;</td>
-                                                                                        <td style="color: #ff9900; font-weight: bolder; background: wheat; ">&checkmark;</td>
-                                                                                        <td style="color: #ff9900; font-weight: bolder; background: wheat; ">&checkmark;</td>
-                                                                                        <td style="color: #ff9900; font-weight: bolder; background: wheat; ">&checkmark;</td>
-                                                                                        <td style="color: #ff9900; font-weight: bolder; background: wheat; ">&checkmark;</td>
-                                                                                        <td style="color: #ff9900; font-weight: bolder; background: wheat; ">&checkmark;</td>
-                                                                                        <td style="color: #ff9900; font-weight: bolder; background: wheat; ">&checkmark;</td>
-                                                                                        
-                                                                                        <td style="color: #ff9900; font-weight: bolder; background: wheat; ">&checkmark;</td>
-                                                                                        <td style="color: #ff9900; font-weight: bolder; background: wheat; ">&checkmark;</td>
-                                                                                        <td>4321</td>
-                                                                                        <td>5</td>
-                                                                                        <td>KEN</td>
-                                                                                        <td>BHJY-25465676</td>
-                                                                                        <td>NISSAN</td>
-                                                                                        <td>Juke</td>
-                                                                                        <td>2020</td>
-                                                                                        <td>Apr</td>
-                                                                                        <td>Pearl White</td>
-                                                                                        <td>Dual</td>
-                                                                                        <td>Gasoline</td>
-                                                                                        <td>4</td>
-                                                                                        <td>1400cc</td>
-                                                                                        <td>PS,NV,AC,WAB,RS,TV,RR,ABS,LS,PW,SR,FOG,AB,GG,BT,LS</td>
-                                                                                        <td>9,80,000</td>
-                                                                                        <td>4</td>
-                                                                                        <td>98,000KM</td>
+                                                                                    <?php
+                                                                                    $queryca=mysqli_query($connection,"select * from ats_car_stock");
 
+                                                                                    
+                                                                                        while($rowca=mysqli_fetch_array($queryca))
+                                                                                        {
+                                                                                        ?>
+                                                                                    <tr>
+                                                                                       
+                                                                                        <td><input type="checkbox" /></td>
+                                                                                        <td style="color: #ff9900; font-weight: bolder; background: wheat; "><?php echo $rowca[28]?></td>
+                                                                                        <td style="color: #ff9900; font-weight: bolder; background: wheat; ">&checkmark;</td>
+                                                                                        <td style="color: #ff9900; font-weight: bolder; background: wheat; ">&checkmark;</td>
+                                                                                        <td style="color: #ff9900; font-weight: bolder; background: wheat; ">&checkmark;</td>
+                                                                                        <td style="color: #ff9900; font-weight: bolder; background: wheat; ">&checkmark;</td>
+                                                                                        <td style="color: #ff9900; font-weight: bolder; background: wheat; ">&checkmark;</td>
+                                                                                        <td style="color: #ff9900; font-weight: bolder; background: wheat; ">&checkmark;</td>
+                                                                                        <td style="color: #ff9900; font-weight: bolder; background: wheat; ">&checkmark;</td>
+                                                                                        <td style="color: #ff9900; font-weight: bolder; background: wheat; ">&checkmark;</td>
+                                                                                        <td style="color: #ff9900; font-weight: bolder; background: wheat; ">&checkmark;</td>
+                                                                                        <td style="color: #ff9900; font-weight: bolder; background: wheat; ">&checkmark;</td>
+                                                                                        <td style="color: #ff9900; font-weight: bolder; background: wheat; ">&checkmark;</td>
+                                                                                        <td style="color: #ff9900; font-weight: bolder; background: wheat; ">&checkmark;</td>
+                                                                                        
+                                                                                        <td><?php echo $rowca[1]?></td>
+                                                                                        <td>5</td>
+                                                                                        <td><?php echo $rowca[14]?></td>
+                                                                                        <td><?php echo $rowca[2]?></td>
+                                                                                        <td><?php echo $rowca[3]?></td>
+                                                                                        <td><?php echo $rowca[4]?></td>
+                                                                                        <td><?php echo $rowca[6]?></td>
+                                                                                        <td>--</td>
+                                                                                        <td><?php echo $rowca[8]?></td>
+                                                                                        <td><?php echo $rowca[9]?></td>
+                                                                                        <td><?php echo $rowca[10]?></td>
+                                                                                        <td><?php echo $rowca[11]?></td>
+                                                                                        <td><?php echo $rowca[13]?></td>
+                                                                                        <td><?php echo $rowca[32] .",".$rowca[34]?></td>
+                                                                                        <td><?php echo $rowca[51]?></td>
+                                                                                        <td><?php echo $rowca[12]?></td>
+                                                                                        <td><?php echo $rowca[17]?></td>
                                                                                     </tr>
+                                                                                <?php }?>
                                                                                 </tbody>
                                                                             </table>
                                                                         </div>
@@ -662,6 +654,19 @@ include("top.php");
                     </div>
                 </div>
             </div>
+            <script>
+function getState(val) {
+   // alert(val);
+	$.ajax({
+	type: "POST",
+	url: "regiondropdown.php",
+	data:'make_id='+val,
+	success: function(data){
+		$("#model-list").html(data);
+	}
+	});
+}
+</script>
             <?php
 include("bottom.php");
 ?>

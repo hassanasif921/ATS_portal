@@ -34,22 +34,22 @@ if (isset($_POST["stock_btn"])) {
     $stock_buying_date = $_POST["stock_buying_date"];
     $stock_country_location = $_POST["stock_country_location"];
     $stock_city_location = $_POST["stock_city_location"];
-    $stock_option_ps = isset($_POST['stock_option_ps']) ? $_POST['stock_option_ps'] : "no";
-    $stock_option_nv = isset($_POST['stock_option_nv']) ? $_POST['stock_option_nv'] : "no";
-    $stock_option_ac = isset($_POST['stock_option_ac']) ? $_POST['stock_option_ac'] : "no";
-    $stock_option_wab = isset($_POST['stock_option_wab']) ? $_POST['stock_option_wab'] : "no";
-    $stock_option_rs = isset($_POST['stock_option_rs']) ? $_POST['stock_option_rs'] : "no";
-    $stock_option_tv = isset($_POST['stock_option_tv']) ? $_POST['stock_option_tv'] : "no";
-    $stock_option_rr = isset($_POST['stock_option_rr']) ? $_POST['stock_option_rr'] : "no";
-    $stock_option_abs = isset($_POST['stock_option_abs']) ? $_POST['stock_option_abs'] : "no";
-    $stock_option_ls = isset($_POST['stock_option_ls']) ? $_POST['stock_option_ls'] : "no";
-    $stock_option_pw = isset($_POST['stock_option_pw']) ? $_POST['stock_option_pw'] : "no";
-    $stock_option_sr = isset($_POST['stock_option_sr']) ? $_POST['stock_option_sr'] : "no";
-    $stock_option_fog = isset($_POST['stock_option_fog']) ? $_POST['stock_option_fog'] : "no";
-    $stock_option_ab = isset($_POST['stock_option_ab']) ? $_POST['stock_option_ab'] : "no";
-    $stock_option_gg = isset($_POST['stock_option_gg']) ? $_POST['stock_option_gg'] : "no";
-    $stock_option_bt = isset($_POST['stock_option_bt']) ? $_POST['stock_option_bt'] : "no";
-    $stock_option_aw = isset($_POST['stock_option_aw']) ? $_POST['stock_option_aw'] : "no";
+    $stock_option_ps = isset($_POST['stock_option_ps']) ? $_POST['stock_option_ps'] : "";
+    $stock_option_nv = isset($_POST['stock_option_nv']) ? $_POST['stock_option_nv'] : "";
+    $stock_option_ac = isset($_POST['stock_option_ac']) ? $_POST['stock_option_ac'] : "";
+    $stock_option_wab = isset($_POST['stock_option_wab']) ? $_POST['stock_option_wab'] : "";
+    $stock_option_rs = isset($_POST['stock_option_rs']) ? $_POST['stock_option_rs'] : "";
+    $stock_option_tv = isset($_POST['stock_option_tv']) ? $_POST['stock_option_tv'] : "";
+    $stock_option_rr = isset($_POST['stock_option_rr']) ? $_POST['stock_option_rr'] : "";
+    $stock_option_abs = isset($_POST['stock_option_abs']) ? $_POST['stock_option_abs'] : "";
+    $stock_option_ls = isset($_POST['stock_option_ls']) ? $_POST['stock_option_ls'] : "";
+    $stock_option_pw = isset($_POST['stock_option_pw']) ? $_POST['stock_option_pw'] : "";
+    $stock_option_sr = isset($_POST['stock_option_sr']) ? $_POST['stock_option_sr'] : "";
+    $stock_option_fog = isset($_POST['stock_option_fog']) ? $_POST['stock_option_fog'] : "";
+    $stock_option_ab = isset($_POST['stock_option_ab']) ? $_POST['stock_option_ab'] : "";
+    $stock_option_gg = isset($_POST['stock_option_gg']) ? $_POST['stock_option_gg'] : "";
+    $stock_option_bt = isset($_POST['stock_option_bt']) ? $_POST['stock_option_bt'] : "";
+    $stock_option_aw = isset($_POST['stock_option_aw']) ? $_POST['stock_option_aw'] : "";
     $stock_other_options = $_POST["stock_other_options"];
     $stock_buying_price_print = $_POST["stock_buying_price"];
     $stock_radiation_charges = $_POST["stock_radiation"];
@@ -193,11 +193,35 @@ if (isset($_POST["stock_btn"])) {
            }
      
         }
-            $insert = "insert into ats_car_stock(ats_car_stock_rec_no,ats_car_stock_chassic_no,ats_car_stock_make,ats_car_stock_model,ats_car_stock_pkg,ats_car_stock_man_year,ats_car_stock_reg_year,ats_car_stock_color,ats_car_stock_shift,ats_car_stock_fuel,ats_car_stock_door,ats_car_stock_grade,ats_car_stock_engine_size,ats_car_stock_kobutsu,ats_car_stock_engine_no,ats_car_stock_seats,ats_car_stock_mileage_1,ats_car_stock_mileage_2,ats_car_stock_length,ats_car_stock_width,ats_car_stock_height,ats_car_stock_cubic_meter,ats_car_stock_weight,ats_car_stock_total_weight,ats_car_stock_max_loading,ats_car_stock_auction_house,ats_car_stock_lot_no,ats_car_stock_buying_price,ats_car_stock_buying_date,ats_car_stock_country_location,ats_car_stock_city_location,ats_car_stock_option_ps,ats_car_stock_option_nv,ats_car_stock_option_ac,ats_car_stock_option_wab,ats_car_stock_option_rs,ats_car_stock_option_tv,ats_car_stock_option_rr,ats_car_stock_option_abs,ats_car_stock_option_ls,ats_car_stock_option_pw,ats_car_stock_option_sr,ats_car_stock_option_fog,ats_car_stock_option_ab,ats_car_stock_option_gg,ats_car_stock_option_bt,ats_car_stock_option_aw,ats_car_stock_other_option,ats_car_stock_auction_fees,ats_car_stock_rikuso,ats_car_stock_fob_charge,ats_car_stock_storage_charge,ats_car_stock_dhl_charge,ats_car_stock_radiation,ats_car_stock_thc_charge,ats_car_stock_vaining_charge,ats_car_stock_inspection_charge,ats_car_stock_freight_charge,ats_car_stock_other_charge,ats_car_stock_profit,ats_car_stock_discount,ats_car_stock_total_profit,ats_car_stock_your_profit,ats_car_stock_ats_profit,ats_car_stock_fob_price_yen,ats_car_stock_fob_price_us,ats_car_stock_cnf_price_yen,ats_car_stock_cnf_price_us,ats_car_stock_auction_sheet,ats_car_stock_auction_pics,ats_car_stock_masso_date,ats_car_stock_exp_cer_jp,ats_car_stock_exp_cer_eng,ats_car_stock_inyard_date,ats_car_stock_inyard_pictures,ats_car_stock_reserve_date,ats_car_stock_invoice_file,ats_car_stock_sure_ok_date,ats_car_stock_tt_copy_file,ats_car_stock_ship_date,ats_car_stock_vessel_name,ats_car_stock_voyage,ats_car_stock_ship_ok_date,ats_car_stock_ship_invoice_file,ats_car_stock_ship_order_file,ats_car_stock_bl_date,ats_car_stock_bl_number,ats_car_stock_bl_file,ats_car_stock_release_ok_date,ats_car_stock_bal_tt_copy_file,ats_car_stock_dhl_date,ats_car_stock_tracking_number,ats_car_stock_dhl_link,ats_car_stock_inspection_date,ats_car_stock_inspection_cer_file,ats_car_stock_createdBy,ats_car_stock_createdAt,ats_car_stock_updatedBy,ats_car_stock_updatedAt,ats_car_stock_status,ats_car_stock_shape,stock_port, shipmenttype, conversionrate,extra_transportatiom) 
+            $insert = "insert into ats_car_stock(ats_car_stock_rec_no,ats_car_stock_chassic_no,ats_car_stock_make,ats_car_stock_model
+            ,ats_car_stock_pkg,ats_car_stock_man_year,ats_car_stock_reg_year,ats_car_stock_color,ats_car_stock_shift,
+            ats_car_stock_fuel,ats_car_stock_door,ats_car_stock_grade,ats_car_stock_engine_size,ats_car_stock_kobutsu
+            ,ats_car_stock_engine_no,ats_car_stock_seats,ats_car_stock_mileage_1,
+            ats_car_stock_mileage_2,ats_car_stock_length,ats_car_stock_width,
+            ats_car_stock_height,ats_car_stock_cubic_meter,ats_car_stock_weight,ats_car_stock_total_weight,
+            ats_car_stock_max_loading,ats_car_stock_auction_house,ats_car_stock_lot_no,ats_car_stock_buying_price,ats_car_stock_buying_date,
+            ats_car_stock_country_location,ats_car_stock_city_location,ats_car_stock_option_ps,ats_car_stock_option_nv,
+            ats_car_stock_option_ac,ats_car_stock_option_wab,ats_car_stock_option_rs,ats_car_stock_option_tv
+            ,ats_car_stock_option_rr,ats_car_stock_option_abs,ats_car_stock_option_ls,ats_car_stock_option_pw,ats_car_stock_option_sr
+            ,ats_car_stock_option_fog,ats_car_stock_option_ab,ats_car_stock_option_gg,ats_car_stock_option_bt,ats_car_stock_option_aw
+            ,ats_car_stock_other_option,ats_car_stock_auction_fees,ats_car_stock_rikuso,ats_car_stock_fob_charge
+            ,ats_car_stock_storage_charge,ats_car_stock_dhl_charge,ats_car_stock_radiation,ats_car_stock_thc_charge
+            ,ats_car_stock_vaining_charge,ats_car_stock_inspection_charge,ats_car_stock_freight_charge,ats_car_stock_other_charge,
+            ats_car_stock_profit,ats_car_stock_discount,ats_car_stock_total_profit,ats_car_stock_your_profit,ats_car_stock_ats_profit,
+            ats_car_stock_fob_price_yen,ats_car_stock_fob_price_us,ats_car_stock_cnf_price_yen,ats_car_stock_cnf_price_us,
+            ats_car_stock_auction_sheet,ats_car_stock_auction_pics,ats_car_stock_masso_date
+            ,ats_car_stock_exp_cer_jp,ats_car_stock_exp_cer_eng,ats_car_stock_inyard_date,ats_car_stock_inyard_pictures,
+            ats_car_stock_reserve_date,ats_car_stock_invoice_file,ats_car_stock_sure_ok_date,ats_car_stock_tt_copy_file,
+            ats_car_stock_ship_date,ats_car_stock_vessel_name,ats_car_stock_voyage,ats_car_stock_ship_ok_date,
+            ats_car_stock_ship_invoice_file,ats_car_stock_ship_order_file,ats_car_stock_bl_date,ats_car_stock_bl_number,
+            ats_car_stock_bl_file,ats_car_stock_release_ok_date,ats_car_stock_bal_tt_copy_file,ats_car_stock_dhl_date
+            ,ats_car_stock_tracking_number,ats_car_stock_dhl_link,ats_car_stock_inspection_date,ats_car_stock_inspection_cer_file,
+            ats_car_stock_createdBy,ats_car_stock_createdAt,ats_car_stock_updatedBy,ats_car_stock_updatedAt,ats_car_stock_status,
+            ats_car_stock_shape,stock_port, shipmenttype, conversionrate,extra_transportatiom) 
                 values('$stock_rec_no','$stock_chassis_id','$stock_make','$stock_model','$stock_package',
                 '$stock_man_year','$stock_reg_year','$stock_color','$stock_shift','$stock_fuel','$stock_door','$stock_grade','$stock_engine_size','$stock_kobutsu','$stock_engine_no','$stock_seats','$stock_mileage_1','$stock_mileage_2','$stock_length','$stock_width','$stock_height','$stock_cubic_meter','$stock_weight','$stock_total_weight','$stock_max_loading','$stock_auction','$stock_lot_no','$stock_buying_price','$stock_buying_date','$stock_country_location','$stock_city_location','$stock_option_ps','$stock_option_nv',
                 '$stock_option_ac','$stock_option_wab','$stock_option_rs','$stock_option_tv','$stock_option_rr','$stock_option_abs','$stock_option_ls','$stock_option_pw',
-                '$stock_option_sr','$stock_option_fog','$stock_option_ab','$stock_option_gg','$stock_option_bt','$stock_option_aw','$stock_other_options','$stock_auction_charges','$stock_rikuso_charges','$stock_fob_charges','$stock_storage_charges','$stock_dhl_charges','$stock_radiation_charges','$stock_thc_charges','$stock_vainning_charges','$stock_inspection_charges','$stock_freight_charges','$stock_other_charges','$stock_profit','$stock_discount_print','$stock_total_profit_print','$stock_your_profit_print','$stock_ats_profit_print','$stock_fob_price_print_yen','$stock_fob_price_print_dollar','$stock_cnf_price_print_yen','$stock_cnf_price_print_dollar','$stock_auction_sheet_file','$stock_auction_pictures','$stock_masso_date','$stock_export_cerificate_jp_file','$stock_export_cerificate_en_file','$stock_inyard_date','$stock_yard_pictures','$stock_reserve_date','$stock_invoice_file','$stock_sure_ok_date','$stock_tt_copy_file','$stock_ship_date','$stock_vessel_name','$stock_voyage','$stock_ship_ok_date','$stock_shipping_invoice_file','$stock_shipping_order_file','$stock_bl_date','$stock_bl_no','$stock_bill_of_lading_file','$stock_release_ok_date','$stock_tt_copy_file','$stock_dhl_date','$stock_tracking_number','$stock_dhl_link','$stock_inspection_date','$stock_inspection_certificate_file','$stock_createdBy','$stock_createdAt','$stock_updatedBy','$stock_updatedAt','$stock_status','$stock_shape','$stock_port','$shipmenttype','$conversionrate')";
+                '$stock_option_sr','$stock_option_fog','$stock_option_ab','$stock_option_gg','$stock_option_bt','$stock_option_aw','$stock_other_options','$stock_auction_charges','$stock_rikuso_charges','$stock_fob_charges','$stock_storage_charges','$stock_dhl_charges','$stock_radiation_charges','$stock_thc_charges','$stock_vainning_charges','$stock_inspection_charges','$stock_freight_charges','$stock_other_charges','$stock_profit','$stock_discount_print','$stock_total_profit_print','$stock_your_profit_print','$stock_ats_profit_print','$stock_fob_price_print_yen','$stock_fob_price_print_dollar','$stock_cnf_price_print_yen','$stock_cnf_price_print_dollar','$stock_auction_sheet_file','$stock_auction_pictures','$stock_masso_date','$stock_export_cerificate_jp_file','$stock_export_cerificate_en_file','$stock_inyard_date','$stock_yard_pictures','$stock_reserve_date','$stock_invoice_file','$stock_sure_ok_date','$stock_tt_copy_file','$stock_ship_date','$stock_vessel_name','$stock_voyage','$stock_ship_ok_date','$stock_shipping_invoice_file','$stock_shipping_order_file','$stock_bl_date','$stock_bl_no','$stock_bill_of_lading_file','$stock_release_ok_date','$stock_tt_copy_file','$stock_dhl_date','$stock_tracking_number','$stock_dhl_link','$stock_inspection_date','$stock_inspection_certificate_file','$stock_createdBy','$stock_createdAt','$stock_updatedBy','$stock_updatedAt','$stock_status','$stock_shape','$stock_port','$shipmenttype','$conversionrate','$stock_extra_transportation')";
               $query = mysqli_query($connection,$insert) or die(mysqli_error($connection));
               if ($query)
                   {
@@ -501,67 +525,67 @@ if (isset($_POST["stock_btn"])) {
                                                                             <label for="Username" class="form-control-label">Options</label>
                                                                             <div class="row">
                                                                                 <div class="col-md-3">
-                                                                                    <input name="stock_option_ps" id="stock_option_ps" type="checkbox" value="yes" >
+                                                                                    <input name="stock_option_ps" id="stock_option_ps" type="checkbox" value="PS" >
                                                                                     <label class="" >PS</label>
                                                                                 </div>
                                                                                 <div class="col-md-3">
-                                                                                    <input name="stock_option_nv" id="stock_option_nv" type="checkbox" value="yes" >
+                                                                                    <input name="stock_option_nv" id="stock_option_nv" type="checkbox" value="NV" >
                                                                                     <label class="" >NV</label>
                                                                                 </div>
                                                                                 <div class="col-md-3">
-                                                                                    <input name="stock_option_ac" id="stock_option_ac" type="checkbox"  value="yes">
+                                                                                    <input name="stock_option_ac" id="stock_option_ac" type="checkbox"  value="AC">
                                                                                     <label class="" >AC</label>
                                                                                 </div>
                                                                                 <div class="col-md-3">
-                                                                                    <input name="stock_option_wab" id="stock_option_wab" type="checkbox" value="yes" >
+                                                                                    <input name="stock_option_wab" id="stock_option_wab" type="checkbox" value="WAB" >
                                                                                     <label class="" >WAB</label>
                                                                                 </div>
                                                                                 <div class="col-md-3">
-                                                                                    <input name="stock_option_rs" id="stock_option_rs" type="checkbox" value="yes" >
+                                                                                    <input name="stock_option_rs" id="stock_option_rs" type="checkbox" value="RS" >
                                                                                     <label class="" >RS</label>
                                                                                 </div>
                                                                                 <div class="col-md-3">
-                                                                                    <input name="stock_option_tv" id="stock_option_tv" type="checkbox" value="yes">
+                                                                                    <input name="stock_option_tv" id="stock_option_tv" type="checkbox" value="TV">
                                                                                     <label class="" >TV</label>
                                                                                 </div>
                                                                                 <div class="col-md-3">
-                                                                                    <input name="stock_option_rr" id="stock_option_rr" type="checkbox" value="yes">
+                                                                                    <input name="stock_option_rr" id="stock_option_rr" type="checkbox" value="RR">
                                                                                     <label class="" >RR</label>
                                                                                 </div>
                                                                                 <div class="col-md-3">
-                                                                                    <input name="stock_option_abs" id="stock_option_abs" type="checkbox" value="yes">
+                                                                                    <input name="stock_option_abs" id="stock_option_abs" type="checkbox" value="ABS">
                                                                                     <label class="" >ABS</label>
                                                                                 </div>
                                                                                 <div class="col-md-3">
-                                                                                    <input name="stock_option_ls" id="stock_option_ls" type="checkbox"  value="yes">
+                                                                                    <input name="stock_option_ls" id="stock_option_ls" type="checkbox"  value="LS">
                                                                                     <label class="" >LS</label>
                                                                                 </div>
                                                                                 <div class="col-md-3">
-                                                                                    <input name="stock_option_pw" id="stock_option_pw" type="checkbox" value="yes">
+                                                                                    <input name="stock_option_pw" id="stock_option_pw" type="checkbox" value="PW">
                                                                                     <label class="" >PW</label>
                                                                                 </div>
                                                                                 <div class="col-md-3">
-                                                                                    <input name="stock_option_sr" id="stock_option_sr" type="checkbox" value="yes" >
+                                                                                    <input name="stock_option_sr" id="stock_option_sr" type="checkbox" value="SR" >
                                                                                     <label class="" >SR</label>
                                                                                 </div>
                                                                                 <div class="col-md-3">
-                                                                                    <input name="stock_option_fog" id="stock_option_fog" type="checkbox" value="yes" >
+                                                                                    <input name="stock_option_fog" id="stock_option_fog" type="checkbox" value="FOG" >
                                                                                     <label class="" >FOG</label>
                                                                                 </div>
                                                                                 <div class="col-md-3">
-                                                                                    <input name="stock_option_ab" id="stock_option_ab" type="checkbox" value="yes">
+                                                                                    <input name="stock_option_ab" id="stock_option_ab" type="checkbox" value="AB">
                                                                                     <label class="" >AB</label>
                                                                                 </div>
                                                                                 <div class="col-md-3">
-                                                                                    <input name="stock_option_gg" id="stock_option_gg" type="checkbox" value="yes">
+                                                                                    <input name="stock_option_gg" id="stock_option_gg" type="checkbox" value="GG">
                                                                                     <label class="" >GG</label>
                                                                                 </div>
                                                                                 <div class="col-md-3">
-                                                                                    <input name="stock_option_bt" id="stock_option_bt" type="checkbox" value="yes">
+                                                                                    <input name="stock_option_bt" id="stock_option_bt" type="checkbox" value="BT">
                                                                                     <label class="" >BT</label>
                                                                                 </div>
                                                                                 <div class="col-md-3">
-                                                                                    <input name="stock_option_aw" id="stock_option_aw" type="checkbox" value="yes" >
+                                                                                    <input name="stock_option_aw" id="stock_option_aw" type="checkbox" value="AW" >
                                                                                     <label class="" >AW</label>
                                                                                 </div>
                                                                             </div>
@@ -1383,16 +1407,14 @@ function getport(val) {
         $("#showx").hide();
         $("#showy").hide();
         $("#lr").change(function () {
-        $("#shows").show();
-         $("#showt").show(); 
-      $("#showu").show();  
-          $("#showv").show();
+            $("#shows").show();
+            $("#showt").show(); 
+            $("#showu").show();  
+            $("#showv").show();
             $("#showw").show();
             $("#showx").show();
-        $("#showy").show();
-
-
-    });
+            $("#showy").show();
+        });
 });
 </script>
 <script>
@@ -1405,7 +1427,7 @@ function getport(val) {
         //     }  
         var dollarrate = document.getElementById('stock_con_rate').value;
        
-        var fobdollar= parseInt(fobyen) * dollarrate;
+        var fobdollar= parseInt(fobyen) / dollarrate;
         document.getElementById('stock_fob_price_print_dollar').value =fobdollar;
      
         var cnfyen = document.getElementById('stock_cnf_price_print_yen').value;

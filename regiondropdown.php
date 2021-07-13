@@ -12,7 +12,7 @@ if(isset($_POST['make_id']))
 $query_get_model=mysqli_query($connection,"select * from ats_model_car where ats_model_id='".$_POST['make_id']."'");
                                                              
                                                                         ?>
-                                                                            <option disabled selected>Please Select</option>
+                                                                            <option  selected value="">Please Select</option>
 
                                                                            <?php 
                                                                            while($rowfetchmodeldetails=mysqli_fetch_array($query_get_model)){
