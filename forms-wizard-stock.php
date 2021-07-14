@@ -24,7 +24,7 @@ if (isset($_POST["stock_btn"])) {
     $stock_length = $_POST["stock_length"];
     $stock_width = $_POST["stock_width"];
     $stock_height = $_POST["stock_height"];
-    $stock_cubic_meter = "97";
+    $stock_cubic_meter = $_POST["stock_cubic_meter"];
     $stock_weight = $_POST["stock_weight"];
     $stock_total_weight = $_POST["stock_total_weight"];
     $stock_max_loading = $_POST["stock_max_loading"];
