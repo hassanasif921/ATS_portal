@@ -77,10 +77,11 @@ if (isset($_POST["stock_btn"])) {
     $stock_port=$_POST['stock_kobutsu_port'];
     $shipmenttype=$_POST['lr'];
     $conversionrate=$_POST['stock_con_rate'];
+    $stock_type=$_POST['stock_type'];
     //$stock_auction_sheet_file = $_FILES["stock_auction_sheet_file"]['name'];
     $images1=$_FILES['stock_auction_sheet_file']['tmp_name'];
   $stock_auction_sheet_file=addslashes(file_get_contents($images1));
-  
+  $stock_total_expences=$_POST['stock_total_expences'];
     //$temp_name = $_FILES["stock_auction_sheet_file"]["tmp_name"];
     $temp_name ='demo';
     //$stock_auction_pictures = $_FILES["stock_auction_pictures"]['name'];
@@ -103,8 +104,8 @@ if (isset($_POST["stock_btn"])) {
     //$temp_name = $_FILES["stock_yard_pictures"]["tmp_name"];
     $stock_reserve_date = $_POST["stock_reserve_date"];
     //$stock_invoice_file = $_FILES["stock_invoice_file"]['name'];
-    $images4=$_FILES['stock_invoice_file']['tmp_name'];
-    $stock_invoice_file=addslashes(file_get_contents($images4));
+    // $images4=$_FILES['stock_invoice_file']['tmp_name'];
+    $stock_invoice_file="";
    
    // $temp_name = $_FILES["stock_invoice_file"]["tmp_name"];
     $stock_sure_ok_date = $_POST["stock_sure_ok_date"];
@@ -125,7 +126,7 @@ if (isset($_POST["stock_btn"])) {
     //$stock_shipping_order_file = $_FILES["stock_shipping_order_file"]['name'];
     $images7=$_FILES['stock_shipping_order_file']['tmp_name'];
     $stock_shipping_order_file=addslashes(file_get_contents($images7));
-  
+    $stock_country_slab=$_POST['stock_country_slab'];
    // $temp_name = $_FILES["stock_shipping_order_file"]["tmp_name"];
     $stock_bl_date = $_POST["stock_bl_date"];
     $stock_bl_no = $_POST["stock_bl_no"];
@@ -193,6 +194,46 @@ if (isset($_POST["stock_btn"])) {
            }
      
         }
+        $totalfiles2 = count($_FILES['stock_invoice_file']['name']);
+        for($i=0;$i<$totalfiles2;$i++){
+            $filename2 = $_FILES['stock_invoice_file']['name'][$i];
+         
+           // Upload files and store in database
+           if(move_uploaded_file($_FILES["stock_invoice_file"]["tmp_name"][$i],'cardocuments/'.$filename2)){
+                   // Image db insert sql
+                  $insert12 = "INSERT INTO cardocuments(stockid, imagetype, imagename) VALUES ('$stock_rec_no','INVOICE','$filename2')";
+                  
+                  $iquery2 = mysqli_query($connection,$insert12);
+         
+         }
+                  
+         
+                  
+               else{
+                   echo 'Error in uploading file - '.$_FILES['stock_yard_pictures']['name'][$i].'<br/>';
+               }
+         
+            }
+            $totalfiles3 = count($_FILES['stock_invoice_file']['name']);
+        for($i=0;$i<$totalfiles3;$i++){
+            $filename2 = $_FILES['stock_invoice_file']['name'][$i];
+         
+           // Upload files and store in database
+           if(move_uploaded_file($_FILES["stock_invoice_file"]["tmp_name"][$i],'cardocuments/'.$filename3)){
+                   // Image db insert sql
+                  $insert123 = "INSERT INTO cardocuments(stockid, imagetype, imagename) VALUES ('$stock_rec_no','TT','$filename3')";
+                  
+                  $iquery23 = mysqli_query($connection,$insert123);
+         
+         }
+                  
+         
+                  
+               else{
+                   echo 'Error in uploading file - '.$_FILES['stock_yard_pictures']['name'][$i].'<br/>';
+               }
+         
+            }
             $insert = "insert into ats_car_stock(ats_car_stock_rec_no,ats_car_stock_chassic_no,ats_car_stock_make,ats_car_stock_model
             ,ats_car_stock_pkg,ats_car_stock_man_year,ats_car_stock_reg_year,ats_car_stock_color,ats_car_stock_shift,
             ats_car_stock_fuel,ats_car_stock_door,ats_car_stock_grade,ats_car_stock_engine_size,ats_car_stock_kobutsu
@@ -217,11 +258,13 @@ if (isset($_POST["stock_btn"])) {
             ats_car_stock_bl_file,ats_car_stock_release_ok_date,ats_car_stock_bal_tt_copy_file,ats_car_stock_dhl_date
             ,ats_car_stock_tracking_number,ats_car_stock_dhl_link,ats_car_stock_inspection_date,ats_car_stock_inspection_cer_file,
             ats_car_stock_createdBy,ats_car_stock_createdAt,ats_car_stock_updatedBy,ats_car_stock_updatedAt,ats_car_stock_status,
-            ats_car_stock_shape,stock_port, shipmenttype, conversionrate,extra_transportatiom) 
+            ats_car_stock_shape,stock_port, shipmenttype, conversionrate,extra_transportatiom,stock_type,stock_total_expences,stock_country_slab) 
                 values('$stock_rec_no','$stock_chassis_id','$stock_make','$stock_model','$stock_package',
                 '$stock_man_year','$stock_reg_year','$stock_color','$stock_shift','$stock_fuel','$stock_door','$stock_grade','$stock_engine_size','$stock_kobutsu','$stock_engine_no','$stock_seats','$stock_mileage_1','$stock_mileage_2','$stock_length','$stock_width','$stock_height','$stock_cubic_meter','$stock_weight','$stock_total_weight','$stock_max_loading','$stock_auction','$stock_lot_no','$stock_buying_price','$stock_buying_date','$stock_country_location','$stock_city_location','$stock_option_ps','$stock_option_nv',
                 '$stock_option_ac','$stock_option_wab','$stock_option_rs','$stock_option_tv','$stock_option_rr','$stock_option_abs','$stock_option_ls','$stock_option_pw',
-                '$stock_option_sr','$stock_option_fog','$stock_option_ab','$stock_option_gg','$stock_option_bt','$stock_option_aw','$stock_other_options','$stock_auction_charges','$stock_rikuso_charges','$stock_fob_charges','$stock_storage_charges','$stock_dhl_charges','$stock_radiation_charges','$stock_thc_charges','$stock_vainning_charges','$stock_inspection_charges','$stock_freight_charges','$stock_other_charges','$stock_profit','$stock_discount_print','$stock_total_profit_print','$stock_your_profit_print','$stock_ats_profit_print','$stock_fob_price_print_yen','$stock_fob_price_print_dollar','$stock_cnf_price_print_yen','$stock_cnf_price_print_dollar','$stock_auction_sheet_file','$stock_auction_pictures','$stock_masso_date','$stock_export_cerificate_jp_file','$stock_export_cerificate_en_file','$stock_inyard_date','$stock_yard_pictures','$stock_reserve_date','$stock_invoice_file','$stock_sure_ok_date','$stock_tt_copy_file','$stock_ship_date','$stock_vessel_name','$stock_voyage','$stock_ship_ok_date','$stock_shipping_invoice_file','$stock_shipping_order_file','$stock_bl_date','$stock_bl_no','$stock_bill_of_lading_file','$stock_release_ok_date','$stock_tt_copy_file','$stock_dhl_date','$stock_tracking_number','$stock_dhl_link','$stock_inspection_date','$stock_inspection_certificate_file','$stock_createdBy','$stock_createdAt','$stock_updatedBy','$stock_updatedAt','$stock_status','$stock_shape','$stock_port','$shipmenttype','$conversionrate','$stock_extra_transportation')";
+                '$stock_option_sr','$stock_option_fog','$stock_option_ab','$stock_option_gg','$stock_option_bt','$stock_option_aw','$stock_other_options','$stock_auction_charges','$stock_rikuso_charges','$stock_fob_charges','$stock_storage_charges','$stock_dhl_charges','$stock_radiation_charges','$stock_thc_charges','$stock_vainning_charges','$stock_inspection_charges','$stock_freight_charges','$stock_other_charges','$stock_profit','$stock_discount_print','$stock_total_profit_print','$stock_your_profit_print',
+                '$stock_ats_profit_print','$stock_fob_price_print_yen','$stock_fob_price_print_dollar','$stock_cnf_price_print_yen','$stock_cnf_price_print_dollar','$stock_auction_sheet_file','$stock_auction_pictures','$stock_masso_date','$stock_export_cerificate_jp_file','$stock_export_cerificate_en_file','$stock_inyard_date','$stock_yard_pictures','$stock_reserve_date','$stock_invoice_file','$stock_sure_ok_date','$stock_tt_copy_file','$stock_ship_date','$stock_vessel_name','$stock_voyage','$stock_ship_ok_date'
+                ,'$stock_shipping_invoice_file','$stock_shipping_order_file','$stock_bl_date','$stock_bl_no','$stock_bill_of_lading_file','$stock_release_ok_date','$stock_tt_copy_file','$stock_dhl_date','$stock_tracking_number','$stock_dhl_link','$stock_inspection_date','$stock_inspection_certificate_file','$stock_createdBy','$stock_createdAt','$stock_updatedBy','$stock_updatedAt','$stock_status','$stock_shape','$stock_port','$shipmenttype','$conversionrate','$stock_extra_transportation','$stock_type','$stock_total_expences','$stock_country_slab')";
               $query = mysqli_query($connection,$insert) or die(mysqli_error($connection));
               if ($query)
                   {
@@ -448,7 +491,7 @@ if (isset($_POST["stock_btn"])) {
                                                                     </div>
                                                                     <div class="col-md-2">
                                                                         <label class="form-control-label">Stock</label><br/>
-                                                                        <select name="stock_shape" id="stock_shape" class="form-control form-control-sm">
+                                                                        <select name="stock_type" id="stock_type" class="form-control form-control-sm">
                                                                             <option value="---" >Choose Stock</option>
                                                                             <option value="Company-Stock">Company-Stock</option>
                                                                             <option value="Customer-Order(Auction)">Customer Order(Auction)</option>
@@ -511,12 +554,8 @@ if (isset($_POST["stock_btn"])) {
                                                                     <div class="col-md-2">
                                                                         <div class="position-relative form-group">
                                                                             <label class="form-control-label">City</label>
-                                                                            <select name="stock_city_location" id="stock_city_location" class="form-control form-control-sm">
-                                                                                <option value="---" >Select</option>    
-                                                                                <option value="GASOLINE">GASOLINE</option>
-                                                                                <option value="DIESEL">DIESEL</option> 
-                                                                                <option value="HYBRID">HYBRID</option>
-                                                                            </select>  
+                                                                            <input type="text "name="stock_city_location" id="stock_city_location" class="form-control form-control-sm">
+
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -959,7 +998,7 @@ if (isset($_POST["stock_btn"])) {
                                                             <div class="col-sm-1"></div>
                                                             <div class="col-sm-6">
                                                                 <div class="position-relative ">
-                                                                    <div style="position: relative; overflow: hidden;" class="file mb-2 mr-2 btn btn-gradient-primary btn-sm btn-block">Upload Invoice<input style="position: absolute; width: 100%; border-radius: 20px;  opacity: 0; right: 0; top: 0;" type="file" name="stock_invoice_file" id="stock_invoice_file"/>
+                                                                    <div style="position: relative; overflow: hidden;" class="file mb-2 mr-2 btn btn-gradient-primary btn-sm btn-block">Upload Invoice<input style="position: absolute; width: 100%; border-radius: 20px;  opacity: 0; right: 0; top: 0;" type="file" name="stock_invoice_file[]" multiple="multiple" id="stock_invoice_file"/>
                                                                     </div> 
                                                                 </div>
                                                             </div>

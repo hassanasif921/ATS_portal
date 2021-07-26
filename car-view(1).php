@@ -4,8 +4,6 @@ include("connection_db.php");
 $query="select * from ats_car_stocK WHERE ats_car_stock_id=".$_GET['car_id'];
 $result=mysqli_query($connection,$query);
 $row=mysqli_fetch_row($result);
-
-
 ?>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.8.2/css/lightbox.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.8.2/js/lightbox.min.js"></script>
@@ -54,66 +52,62 @@ $row=mysqli_fetch_row($result);
                             <div  class="card-body">
                                 <form action="" method="" >    
                                     <div style="background-color: wheat; margin-left: -13px; margin-top: -1%; width: 106%;" class="row">
-                                                <div class="col-1">
-                                                    <label class="form-control-label">Rec. #</label>
-                                                    <input style="width: 80px; margin-top: -15%; font-size: 11px; height: 20px; padding: 1px;" type="text" id="get_stock_rec_no" name="get_stock_rec_no" class="form-control" value="<?php echo $row[1]?>">
-                                                </div>
-                                                <div class="col-1">
-                                                    <label class="form-control-label">Chassi #</label>
-                                                    <input style="width: 80px; margin-top: -15%; font-size: 11px; height: 20px; padding: 1px;" type="text" id="get_stock_rec_no" name="get_stock_rec_no" class="form-control" value="<?php echo $row[2]?>">
-                                                </div>
-                                                <div  class="col-1">
-                                                    <label class="form-control-label">Make</label>
-                                                    <?php 
-                                                    $querymake=mysqli_fetch_row(mysqli_query($connection,"select * from car_make where id='".$row[3]."'"));
-                                                    ?>
-                                                    <input style="width: 80px; margin-top: -15%; font-size: 11px; height: 20px; padding: 1px;" type="text" id="get_stock_rec_no" name="get_stock_rec_no" class="form-control" value="<?php echo $querymake[1]?>">
-                                                </div>
-                                                <div style="margin-left: -0.8%;" class="col-1">
-                                                    <label class="form-control-label">Model</label>
-                                                                                                       
-                                                    <?php 
-                                                    $querymodel=mysqli_fetch_row(mysqli_query($connection,"select * from ats_model_car where ats_model_id='".$row[4]."'"));
-                                                    ?>
-                                                    <label style="width: 95px; margin-top: -15%; font-size: 11px; padding: 1px; height: auto;" type="text" id="get_stock_model" name="get_stock_model" class="form-control"><?php echo $querymodel[2]?></label>
-                                                </div>
-                                                <div class="col-1">
-                                                        <label class="form-control-label">Package</label>
-                                                        <label style="width: 80px; margin-left: 10%; margin-top: -15%; font-size: 11px; height: 20px; padding: 1px;" type="text" id="get_stock_package" name="get_stock_package" class="form-control"><?php echo $row[5]?></label>
-                                                </div>
-                                                <div class="col-1">
-                                                        <label class="form-control-label">Mf.&nbsp;Y/M</label>
-                                                        <label style="width: 80px; margin-top: -15%; margin-top: -15%; font-size: 11px; height: 20px; padding: 1px;" type="text" id="get_stock_man_year" name="get_stock_man_year" class="form-control"><?php echo $row[6]?></label>
-                                                </div>
-                                                <div class="col-1">
-                                                    <label class="form-control-label">Reg.&nbsp;Y/M</label>
-                                                    <label style="width: 80px; margin-top: -15%; margin-top: -15%; font-size: 11px; height: 20px; padding: 1px;" type="text" id="get_stock_reg_year" name="get_stock_reg_year" class="form-control"><?php echo $row[7]?></label>
-                                                </div>
-                                                <div class="col-1">
-                                                    <label  class="form-control-label">Color</label>
-                                                    <label style="width: 80px; margin-top: -15%; font-size: 11px; height: 20px; padding: 1px;" type="text" id="get_stock_color" name="get_stock_color" class="form-control"><?php echo $row[8]?></label>
-                                                </div>
-                                                <div class="col-1">
-                                                    
-                                                        <label  class="form-control-label">Shift</label>
-                                                        <label style="width: 80px; margin-top: -15%;  font-size: 11px; height: 20px; padding: 1px;" type="text" id="get_stock_shift" name="get_stock_shift" class="form-control"><?php echo $row[9]?></label>
-                                                    
-                                                </div>
-                                                <div class="col-1">
-                                                        <label  class="form-control-label">Fuel</label>
-                                                        <label style="width: 80px; margin-top: -15%; font-size: 11px; height: 20px; padding: 1px;" type="text" id="get_stock_fuel" name="get_stock_fuel" class="form-control"><?php echo $row[10]?></label>
-                                                </div>
-                                                <div class="col-1">
-                                                    
-                                                        <label  class="form-control-label">Door</label>
-                                                        <label style="width: 80px; margin-top: -15%; font-size: 11px; height: 20px; padding: 1px;" type="text" id="get_stock_door" name="get_stock_door" class="form-control"><?php echo $row[11]?></label>
-                                                </div>
-                                                <div class="col-1">
-                                                        <label class="form-control-label">Engine </label>
-                                                        <label style="width: 80px; margin-top: -15%; font-size: 11px; height: 20px; padding: 1px;" type="text" id="get_stock_engine_size" name="get_stock_engine_size" class="form-control"><?php echo $row[13]?></label>
-                                                </div>
+                                        <div class="col-1">
+                                            <label class="form-control-label">Rec. #</label>
+                                            <input style="width: 80px; margin-top: -15%; font-size: 11px; height: 20px; padding: 1px;" type="text" id="get_stock_rec_no" name="get_stock_rec_no" class="form-control" value="<?php echo $row[1]?>">
+                                        </div>
+                                        <div class="col-1">
+                                            <label class="form-control-label">Chassi #</label>
+                                            <input style="width: 80px; margin-top: -15%; font-size: 11px; height: 20px; padding: 1px;" type="text" id="get_stock_rec_no" name="get_stock_rec_no" class="form-control" value="<?php echo $row[2]?>">
+                                        </div>
+                                        <div class="col-1">
+                                            <label class="form-control-label">Make</label>
+                                            <?php 
+                                                $querymake=mysqli_fetch_row(mysqli_query($connection,"select * from car_make where id='".$row[3]."'"));
+                                            ?>
+                                            <input style="width: 80px; margin-top: -15%; font-size: 11px; height: 20px; padding: 1px;" type="text" id="get_stock_rec_no" name="get_stock_rec_no" class="form-control" value="<?php echo $querymake[1]?>">
+                                        </div>
+                                        <div style="margin-left: -0.8%;" class="col-1">
+                                            <label class="form-control-label">Model</label>                                                  
+                                            <?php 
+                                            $querymodel=mysqli_fetch_row(mysqli_query($connection,"select * from ats_model_car where ats_model_id='".$row[4]."'"));
+                                            ?>
+                                            <label style="width: 95px; margin-top: -15%; font-size: 11px; padding: 1px; height: auto;" type="text" id="get_stock_model" name="get_stock_model" class="form-control"><?php echo $querymodel[2]?></label>
+                                        </div>
+                                        <div class="col-1">
+                                            <label class="form-control-label">Package</label>
+                                            <label style="width: 80px; margin-left: 10%; margin-top: -15%; font-size: 11px; height: 20px; padding: 1px;" type="text" id="get_stock_package" name="get_stock_package" class="form-control"><?php echo $row[5]?></label>
+                                        </div>
+                                        <div class="col-1">
+                                            <label class="form-control-label">Mf.&nbsp;Y/M</label>
+                                            <label style="width: 80px; margin-top: -15%; margin-top: -15%; font-size: 11px; height: 20px; padding: 1px;" type="text" id="get_stock_man_year" name="get_stock_man_year" class="form-control"><?php echo $row[6]?></label>
+                                        </div>
+                                        <div class="col-1">
+                                            <label class="form-control-label">Reg.&nbsp;Y/M</label>
+                                            <label style="width: 80px; margin-top: -15%; margin-top: -15%; font-size: 11px; height: 20px; padding: 1px;" type="text" id="get_stock_reg_year" name="get_stock_reg_year" class="form-control"><?php echo $row[7]?></label>
+                                        </div>
+                                        <div class="col-1">
+                                            <label class="form-control-label">Color</label>
+                                            <label style="width: 80px; margin-top: -15%; font-size: 11px; height: 20px; padding: 1px;" type="text" id="get_stock_color" name="get_stock_color" class="form-control"><?php echo $row[8]?></label>
+                                        </div>
+                                        <div class="col-1">
+                                            <label class="form-control-label">Shift</label>
+                                            <label style="width: 80px; margin-top: -15%;  font-size: 11px; height: 20px; padding: 1px;" type="text" id="get_stock_shift" name="get_stock_shift" class="form-control"><?php echo $row[9]?></label>    
+                                        </div>
+                                        <div class="col-1">
+                                            <label class="form-control-label">Fuel</label>
+                                            <label style="width: 80px; margin-top: -15%; font-size: 11px; height: 20px; padding: 1px;" type="text" id="get_stock_fuel" name="get_stock_fuel" class="form-control"><?php echo $row[10]?></label>
+                                        </div>
+                                        <div class="col-1">
+                                            <label class="form-control-label">Door</label>
+                                            <label style="width: 80px; margin-top: -15%; font-size: 11px; height: 20px; padding: 1px;" type="text" id="get_stock_door" name="get_stock_door" class="form-control"><?php echo $row[11]?></label>
+                                        </div>
+                                        <div class="col-1">
+                                            <label class="form-control-label">Engine </label>
+                                            <label style="width: 80px; margin-top: -15%; font-size: 11px; height: 20px; padding: 1px;" type="text" id="get_stock_engine_size" name="get_stock_engine_size" class="form-control"><?php echo $row[13]?></label>
+                                        </div>
                                     </div>
-                                    <div style=" background-color: wheat; margin-left: -13px; width: 106%; margin-top: -0.5%;" class="row" >
+                                    <div style="background-color: wheat; margin-left: -13px; width: 106%; margin-top: -0.5%;" class="row" >
                                         <div class="col-1">
                                             <label class="form-control-label-sm">Grade</label>
                                             <label style="width: 80px; margin-top: -15%; font-size: 11px; height: 20px; padding: 1px;" type="text" id="get_stock_grade" name="get_stock_grade" class="form-control"><?php echo $row[12]?></label>
@@ -127,7 +121,7 @@ $row=mysqli_fetch_row($result);
                                             <label style="width: 80px; margin-top: -15%; height: 20px; font-size: 11px;  padding: 1px;" type="text" id="get_stock_engine_no" name="get_stock_engine_no" class="form-control"><?php echo $row[16]?></label>
                                         </div>
                                         <div class="col-1">
-                                            <label  class="form-control-label">Seats</label>
+                                            <label class="form-control-label">Seats</label>
                                             <label style="width: 80px; margin-top: -15%; height: 20px; font-size: 11px;  padding: 1px;" type="text" id="get_stock_seats" name="get_stock_seats" class="form-control"><?php echo $row[16]?></label>
                                         </div>
                                         <div  class="col-1">
@@ -135,62 +129,57 @@ $row=mysqli_fetch_row($result);
                                             <label style="width: 80px; margin-top: -15%; font-size: 11px; height: 20px; padding: 1px;" type="text" id="get_stock_maleage_1" name="get_stock_maleage_1" class="form-control"><?php echo $row[17]?> </label>
                                         </div>
                                         <div class="col-1">
-                                                <label  class="form-control-label">Mileage&nbsp;.2</label>
-                                                <label style="width: 80px; margin-top: -15%; font-size: 11px; height: 20px; padding: 1px;" type="text" id="get_stock_maleage_2" name="get_stock_maleage_2" class="form-control"><?php echo $row[18]?></label>
+                                            <label class="form-control-label">Mileage&nbsp;.2</label>
+                                            <label style="width: 80px; margin-top: -15%; font-size: 11px; height: 20px; padding: 1px;" type="text" id="get_stock_maleage_2" name="get_stock_maleage_2" class="form-control"><?php echo $row[18]?></label>
                                         </div>
                                         <div class="col-3">
-                                            <label style="margin-left: 41%;"  class="form-control-label text-center"> Option</label>
+                                            <label style="margin-left: 41%;" class="form-control-label text-center"> Option</label>
                                             <label style=" width: 258px; font-size: 11px; margin-top: -3.8%; height: 20px; padding: 1px;" type="text" id="get_stock_all_options" name="get_stock_all_options" class="form-control"><?php echo $row[32] .",".$row[33].",".$row[34].",".$row[35].",".$row[36].",".$row[37].",".$row[38].",".$row[39].",".$row[40].",".$row[41].",".$row[42].",".$row[43].",".$row[44].",".$row[45].",".$row[46].",".$row[47].",".$row[48]?></label>
                                         </div>
                                         <div class="col-3">
-                                            <label style="margin-left: 40%;"  class="form-control-label text-center">Other Option</label>
+                                            <label style="margin-left: 40%;" class="form-control-label text-center">Other Option</label>
                                             <label style=" width: 248px; font-size: 11px; margin-top: -3.8%; height: 20px; padding: 1px;" type="text" id="get_stock_other_options" name="get_stock_other_options" class="form-control"><?php echo $row[48]?></label>
                                         </div>
                                     </div> 
-                                    <div style=" background-color: wheat; margin-left: -13px; width: 106%; margin-top: -0.5%;" class="row ">  
-                                        <div class="col-1">
-                                            
-                                                <label class="form-control-label">Lenght</label>
-                                                <label style="width: 80px; margin-top: -15%; font-size: 11px; height: 20px; padding: 1px;" type="text" id="get_stock_length" name="get_stock_length" class="form-control"><?php echo $row[19]?></label>
+                                    <div style="background-color: wheat; margin-left: -13px; width: 106%; margin-top: -0.5%;" class="row ">  
+                                        <div class="col-1">    
+                                            <label class="form-control-label">Lenght</label>
+                                            <label style="width: 80px; margin-top: -15%; font-size: 11px; height: 20px; padding: 1px;" type="text" id="get_stock_length" name="get_stock_length" class="form-control"><?php echo $row[19]?></label>
+                                        </div>
+                                        <div class="col-1">    
+                                            <label class="form-control-label">Width</label>
+                                            <label style="width: 80px; margin-top: -15%;  font-size: 11px; height: 20px; padding: 1px;" type="text" id="get_stock_width" name="get_stock_width" class="form-control"><?php echo $row[20]?> </label>    
+                                        </div>
+                                        <div class="col-1">    
+                                            <label class="form-control-label">Height</label>
+                                            <label style="width: 80px; margin-top: -15%; font-size: 11px; height: 20px; padding: 1px;" type="text" id="get_stock_height" name="get_stock_height" class="form-control"><?php echo $row[21]?></label>   
                                         </div>
                                         <div class="col-1">
-                                            
-                                            <label  class="form-control-label">Width</label>
-                                                <label style="width: 80px; margin-top: -15%;  font-size: 11px; height: 20px; padding: 1px;" type="text" id="get_stock_width" name="get_stock_width" class="form-control"><?php echo $row[20]?> </label>
-                                            
+                                            <label class="form-control-label">MÂ³</label>
+                                            <label style="width: 80px; margin-top: -15%; font-size: 11px; height: 20px; padding: 1px;" type="text" id="get_stock_cubic_meter" name="get_stock_cubic_meter" class="form-control"><?php echo $row[22]?></label>
                                         </div>
                                         <div class="col-1">
-                                            
-                                                <label  class="form-control-label">Height</label>
-                                                <label style="width: 80px; margin-top: -15%; font-size: 11px; height: 20px; padding: 1px;" type="text" id="get_stock_height" name="get_stock_height" class="form-control"><?php echo $row[21]?></label>
-                                            
-                                        </div>
-                                        <div class="col-1">
-                                                <label  class="form-control-label">M³</label>
-                                                <label style="width: 80px; margin-top: -15%; font-size: 11px; height: 20px; padding: 1px;" type="text" id="get_stock_cubic_meter" name="get_stock_cubic_meter" class="form-control"><?php echo $row[22]?></label>
-                                        </div>
-                                        <div class="col-1">
-                                                <label class="form-control-label">Weight</label>
-                                                <label style="width: 80px; margin-top: -15%; font-size: 11px; height: 20px; padding: 1px;" type="text" id="get_stock_weight" name="get_stock_weight" class="form-control"><?php echo $row[24]?></label>
+                                            <label class="form-control-label">Weight</label>
+                                            <label style="width: 80px; margin-top: -15%; font-size: 11px; height: 20px; padding: 1px;" type="text" id="get_stock_weight" name="get_stock_weight" class="form-control"><?php echo $row[24]?></label>
                                         </div>
                                         <div class="col-1">
                                             <label class="form-control-label">Total Wt.</label>
                                             <label style="width: 80px; margin-top: -15%; font-size: 11px; height: 20px; padding: 1px;" type="text" id="get_stock_total_weight" name="get_stock_total_weight" class="form-control"><?php echo $row[25]?></label>
                                         </div>   
                                         <div class="col-1">
-                                                <label  class="form-control-label">Max&nbsp;Load.</label>
-                                                <label style="width: 80px; margin-top: -15%; font-size: 11px; height: 20px; padding: 1px;" type="text" id="get_stock_max_loading" name="get_stock_max_loading" class="form-control"><?php echo $row[25]?></label>
+                                            <label class="form-control-label">Max&nbsp;Load.</label>
+                                            <label style="width: 80px; margin-top: -15%; font-size: 11px; height: 20px; padding: 1px;" type="text" id="get_stock_max_loading" name="get_stock_max_loading" class="form-control"><?php echo $row[25]?></label>
                                         </div>
                                         <div class="col-2">
-                                            <label  class="form-control-label">Auction House</label>
+                                            <label class="form-control-label">Auction House</label>
                                             <label style="width: 168px; margin-top: -6.5%; font-size: 11px; height: 20px; padding: 1px;" type="text" id="get_stock_auction_house" name="get_stock_auction_house" class="form-control"><?php echo $row[26]?></label>
                                         </div>
                                         <div class="col-1">
-                                            <label  class="form-control-label">Lot. No.</label>
+                                            <label class="form-control-label">Lot. No.</label>
                                             <label style="width: 80px; margin-top: -15%; font-size: 11px; height: 20px; padding: 1px;" type="text" id="get_stock_lot_no" name="get_stock_lot_no" class="form-control"><?php echo $row[27]?></label>
                                         </div>
                                         <div class="col-2">
-                                            <label  class="form-control-label">Inventory</label>
+                                            <label class="form-control-label">Inventory</label>
                                             <label style="width: 158px; margin-top: -6.5%; font-size: 11px; height: 20px; padding: 1px;" type="text" id="get_stock_country_location" name="get_stock_country_location" class="form-control"><?php echo $row[30]?></label>
                                         </div>
                                     </div>
@@ -203,48 +192,47 @@ $row=mysqli_fetch_row($result);
                                             <label class="form-control-label">Auc Fee</label>
                                             <label style="width: 80px; margin-top: -15%;  font-size: 11px; height: auto; padding: 1px;" type="text" id="get_stock_auction_charges" name="get_stock_auction_charges" class="form-control"><?php echo $row[49]?></label>
                                         </div>
-                                        <div  class="col-1">
-                                            <label  class="form-control-label">Rikuso</label>
+                                        <div class="col-1">
+                                            <label class="form-control-label">Rikuso</label>
                                             <label style="width: 80px; margin-top: -15%; font-size: 11px; height: auto; padding: 1px;" type="text" id="get_stock_rikuso_charges" name="get_stock_rikuso_charges" class="form-control"><?php echo $row[50]?></label>
                                         </div>
-                                        <div  class="col-1">
-                                            <label  class="form-control-label">FOB Ch.</label>
+                                        <div class="col-1">
+                                            <label class="form-control-label">FOB Ch.</label>
                                             <label style="width: 80px; margin-top: -15%; font-size: 11px; height: auto; padding: 1px;" type="text" id="get_stock_fob_charges" name="get_stock_fob_charges" class="form-control"><?php echo $row[65]?> </label>
                                         </div>
                                         <div class="col-1">
-                                                <label class="form-control-label">Store&nbsp;Ch.</label>
-                                                <label style="width: 80px; margin-top: -15%; font-size: 11px; height: auto; padding: 1px;" type="text" id="get_stock_storage_charges" name="get_stock_storage_charges" class="form-control"><?php echo $row[52]?></label>
+                                            <label class="form-control-label">Store&nbsp;Ch.</label>
+                                            <label style="width: 80px; margin-top: -15%; font-size: 11px; height: auto; padding: 1px;" type="text" id="get_stock_storage_charges" name="get_stock_storage_charges" class="form-control"><?php echo $row[52]?></label>
                                         </div>
                                         <div class="col-1">
-                                                <label class="form-control-label">DHL Ch.</label>
-                                                <label style="width: 80px; margin-top: -15%; padding: 1px; font-size: 11px; height: auto; " type="text" id="get_stock_dhl_charges" name="get_stock_dhl_charges" class="form-control"><?php echo $row[53]?></label>
+                                            <label class="form-control-label">DHL Ch.</label>
+                                            <label style="width: 80px; margin-top: -15%; padding: 1px; font-size: 11px; height: auto; " type="text" id="get_stock_dhl_charges" name="get_stock_dhl_charges" class="form-control"><?php echo $row[53]?></label>
                                         </div>
                                         <div class="col-1">
-                                            <label  class="form-control-label">Rad Ch.</label>
+                                            <label class="form-control-label">Rad Ch.</label>
                                             <label style="width: 80px; margin-top: -15%;  font-size: 11px; height: auto; padding: 1px;" type="text" id="get_stock_radiation_charges" name="get_stock_radiation_charges" class="form-control"><?php echo $row[54]?> </label>
                                         </div>
                                         <div class="col-1">
-                                            <label  class="form-control-label">THC Ch.</label>
+                                            <label class="form-control-label">THC Ch.</label>
                                             <label style="width: 80px; margin-top: -15%; font-size: 11px; height: auto; padding: 1px;" type="text" id="get_stock_thc_charges" name="get_stock_thc_charges" class="form-control"><?php echo $row[55]?></label>
                                         </div>
                                         <div class="col-1">
-                                                <label  class="form-control-label">Vain Ch.</label>
-                                                <label style="width: 80px; margin-top: -15%; font-size: 11px; height: auto; padding: 1px;" type="text" id="get_stock_vainning_charges" name="get_stock_vainning_charges" class="form-control"><?php echo $row[56]?></label>
+                                            <label class="form-control-label">Vain Ch.</label>
+                                            <label style="width: 80px; margin-top: -15%; font-size: 11px; height: auto; padding: 1px;" type="text" id="get_stock_vainning_charges" name="get_stock_vainning_charges" class="form-control"><?php echo $row[56]?></label>
                                         </div>
                                         <div class="col-1">
-                                                <label  class="form-control-label">Insp Ch.</label>
-                                                <label style="width: 80px; margin-top: -15%; font-size: 11px; height: auto; padding: 1px;" type="text" id="get_stock_inspection_charges" name="get_stock_inspection_charges" class="form-control"><?php echo $row[57]?></label>
+                                            <label class="form-control-label">Insp Ch.</label>
+                                            <label style="width: 80px; margin-top: -15%; font-size: 11px; height: auto; padding: 1px;" type="text" id="get_stock_inspection_charges" name="get_stock_inspection_charges" class="form-control"><?php echo $row[57]?></label>
                                         </div>
                                         <div class="col-1">
-                                                <label  class="form-control-label">Frt Ch.</label>
-                                                <label style="width: 80px; margin-top: -15%; font-size: 11px; height: auto; padding: 1px;" type="text" id="get_stock_freight_charges" name="get_stock_freight_charges" class="form-control"><?php echo $row[58]?></label>
+                                            <label class="form-control-label">Frt Ch.</label>
+                                            <label style="width: 80px; margin-top: -15%; font-size: 11px; height: auto; padding: 1px;" type="text" id="get_stock_freight_charges" name="get_stock_freight_charges" class="form-control"><?php echo $row[58]?></label>
                                         </div>
-                                        
                                         <div class="col-1">
-                                                <label  class="form-control-label">Otr Ch.</label>
-                                                <label style="width: 70px; margin-top: -15%; font-size: 11px; height: auto; padding: 1px;" type="text" id="get_stock_other_charges" name="get_stock_other_charges" class="form-control"><?php echo $row[59]?></label>
+                                            <label class="form-control-label">Otr Ch.</label>
+                                            <label style="width: 70px; margin-top: -15%; font-size: 11px; height: auto; padding: 1px;" type="text" id="get_stock_other_charges" name="get_stock_other_charges" class="form-control"><?php echo $row[59]?></label>
                                         </div>
-                                        </div> 
+                                    </div> 
                                     <div style="margin-top: -0.5%; width: 106%; margin-left: -13px; background: lightyellow" class="row ">
                                         <div class="col-1">
                                             <h5 style="margin-top: 20%; font-weight: bold;" class="text-dark">Dates</h5>
@@ -253,21 +241,21 @@ $row=mysqli_fetch_row($result);
                                             <label class="form-control-label">Buying</label>
                                             <label style="width: 80px; margin-top: -15%;  font-size: 11px; height: auto; padding: 1px;" type="text" id="get_stock_buying_date" name="get_stock_buying_date" class="form-control">2102/09</label>
                                         </div>
-                                        <div  class="col-1">
+                                        <div class="col-1">
                                             <label class="form-control-label">Masso</label>
                                             <label style="width: 80px; margin-top: -15%; font-size: 11px; height: auto; padding: 1px;" type="text" id="get_stock_masso_date" name="get_stock_masso_date" class="form-control">Daihatsu</label>
                                         </div>
-                                        <div  class="col-1">
+                                        <div class="col-1">
                                             <label class="form-control-label">Inyard</label>
                                             <label style="width: 80px; margin-top: -15%; font-size: 11px; height: auto; padding: 1px;" type="text" id="get_stock_inyard_date" name="get_stock_inyard_date" class="form-control">LandCruiser </label>
                                         </div>
                                         <div class="col-1">
-                                                <label class="form-control-label">Reserve</label>
-                                                <label style="width: 80px; margin-top: -15%; font-size: 11px; height: auto; padding: 1px;" type="text" id="get_stock_reserve_date" name="get_stock_reserve_date" class="form-control">2102/09</label>
+                                            <label class="form-control-label">Reserve</label>
+                                            <label style="width: 80px; margin-top: -15%; font-size: 11px; height: auto; padding: 1px;" type="text" id="get_stock_reserve_date" name="get_stock_reserve_date" class="form-control">2102/09</label>
                                         </div>
                                         <div class="col-1">
-                                                <label class="form-control-label">Sure OK</label>
-                                                <label style="width: 80px; margin-top: -15%; padding: 1px; font-size: 11px; height: auto; " type="text" id="get_stock_sure_ok_date" name="get_stock_sure_ok_date" class="form-control">2102/09</label>
+                                            <label class="form-control-label">Sure OK</label>
+                                            <label style="width: 80px; margin-top: -15%; padding: 1px; font-size: 11px; height: auto; " type="text" id="get_stock_sure_ok_date" name="get_stock_sure_ok_date" class="form-control">2102/09</label>
                                         </div>
                                         <div class="col-1">
                                             <label class="form-control-label">Ship</label>
@@ -278,85 +266,83 @@ $row=mysqli_fetch_row($result);
                                             <label style="width: 80px; margin-top: -15%; font-size: 11px; height: auto; padding: 1px;" type="text" id="get_stock_ship_ok_date" name="get_stock_ship_ok_date" class="form-control">Manual</label>
                                         </div>
                                         <div class="col-1">
-                                                <label class="form-control-label">BL</label>
-                                                <label style="width: 80px; margin-top: -15%; font-size: 11px; height: auto; padding: 1px;" type="text" id="get_stock_bl_date" name="get_stock_bl_date" class="form-control">Diesel</label>
+                                            <label class="form-control-label">BL</label>
+                                            <label style="width: 80px; margin-top: -15%; font-size: 11px; height: auto; padding: 1px;" type="text" id="get_stock_bl_date" name="get_stock_bl_date" class="form-control">Diesel</label>
                                         </div>
                                         <div class="col-1">
-                                                <label class="form-control-label">Release&nbsp;OK</label>
-                                                <label style="width: 80px; margin-top: -15%; font-size: 11px; height: auto; padding: 1px;" type="text" id="get_stock_release_ok_date" name="get_stock_release_ok_date" class="form-control">2102/09</label>
+                                            <label class="form-control-label">Release&nbsp;OK</label>
+                                            <label style="width: 80px; margin-top: -15%; font-size: 11px; height: auto; padding: 1px;" type="text" id="get_stock_release_ok_date" name="get_stock_release_ok_date" class="form-control">2102/09</label>
                                         </div>
                                         <div class="col-1">
-                                                <label  class="form-control-label">DHL</label>
-                                                <label style="width: 80px; margin-top: -15%; font-size: 11px; height: auto; padding: 1px;" type="text" id="get_stock_dhl_date" name="get_stock_dhl_date" class="form-control">2102/09</label>
+                                            <label class="form-control-label">DHL</label>
+                                            <label style="width: 80px; margin-top: -15%; font-size: 11px; height: auto; padding: 1px;" type="text" id="get_stock_dhl_date" name="get_stock_dhl_date" class="form-control">2102/09</label>
                                         </div>
-                                        
                                         <div class="col-1">
-                                                <label  class="form-control-label">Inspection</label>
-                                                <label style="width: 70px; margin-top: -15%; font-size: 11px; height: auto; padding: 1px;" type="text" id="get_stock_inspection_date" name="get_stock_inspection_date" class="form-control">2102/09</label>
-                                        </div>
-                                        
+                                            <label class="form-control-label">Inspection</label>
+                                            <label style="width: 70px; margin-top: -15%; font-size: 11px; height: auto; padding: 1px;" type="text" id="get_stock_inspection_date" name="get_stock_inspection_date" class="form-control">2102/09</label>
+                                        </div>    
                                     </div>
                                     <div style="margin-top: -0.5%; width: 106%; margin-left: -13px; background: khaki" class="row ">
                                         <div class="col-2">
-                                            <label  class="form-control-label">Vessel Name</label>
-                                            <label style=" font-size: 11px;  margin-top: -5%; height: 20px; padding: 1px; width: 170px;" type="text" id="get_stock_vessel_name" name="get_stock_vessel_name" class="form-control"><?php echo $row[81]?></label>
+                                            <label class="form-control-label">Vessel Name</label>
+                                            <label style=" font-size: 11px; margin-top: -5%; height: 20px; padding: 1px; width: 170px;" type="text" id="get_stock_vessel_name" name="get_stock_vessel_name" class="form-control"><?php echo $row[81]?></label>
                                         </div>
-                                        <div  class="col-2">
-                                            <label  class="form-control-label">Voyage</label>
-                                            <label style=" font-size: 11px;  margin-top: -5%; height: 20px; padding: 1px; width: 170px; " type="text" id="get_stock_voyage_name" name="get_stock_voyage_name" class="form-control"><?php echo $row[82]?></label>
-                                        </div>
-                                        <div  class="col-4">
-                                            <label  class="form-control-label">Tracking Number</label>
-                                            <label style=" font-size: 11px;  margin-top: -2.2%; height: 20px; width: 350px; padding: 1px;" type="text" id="get_stock_tracking_number" name="get_stock_tracking_number" class="form-control"><?php echo $row[92]?> </label>
+                                        <div class="col-2">
+                                            <label class="form-control-label">Voyage</label>
+                                            <label style=" font-size: 11px; margin-top: -5%; height: 20px; padding: 1px; width: 170px; " type="text" id="get_stock_voyage_name" name="get_stock_voyage_name" class="form-control"><?php echo $row[82]?></label>
                                         </div>
                                         <div class="col-4">
-                                                <label class="form-control-label">DHL Link (URL)</label>
-                                                <label style=" width: 335px;  margin-top: -2.2%; height: 20px; font-size: 11px; padding: 1px; " type="text" id="get_stock_dhl_link" name="get_stock_dhl_link" class="form-control"><?php echo $row[93]?></label>
+                                            <label class="form-control-label">Tracking Number</label>
+                                            <label style=" font-size: 11px; margin-top: -2.2%; height: 20px; width: 350px; padding: 1px;" type="text" id="get_stock_tracking_number" name="get_stock_tracking_number" class="form-control"><?php echo $row[92]?> </label>
+                                        </div>
+                                        <div class="col-4">
+                                            <label class="form-control-label">DHL Link (URL)</label>
+                                            <label style=" width: 335px; margin-top: -2.2%; height: 20px; font-size: 11px; padding: 1px; " type="text" id="get_stock_dhl_link" name="get_stock_dhl_link" class="form-control"><?php echo $row[93]?></label>
                                         </div>
                                     </div>
                                     <div class="row">       
                                         <div style="margin-left: -10px; width: 104.6%;" class="container" id="table2">
-                                            <ul  class="tabs-animated-shadow tabs-animated nav nav-justified">
-                                                        <li class="nav-item">
-                                                            <a role="tab" class="nav-link active " id="tab-c-0" data-toggle="tab" href="#tab-animated-reserve">
-                                                                <span >Reserve</span>
-                                                            </a>
-                                                        </li>
-                                                        <li class="nav-item">
-                                                            <a role="tab" class="nav-link" id="tab-c-1" data-toggle="tab" href="#tab-animated-repair">
-                                                                <span>Repair</span>
-                                                            </a>
-                                                        </li>
-                                                        <li class="nav-item">
-                                                            <a role="tab" class="nav-link" id="tab-c-2" data-toggle="tab" href="#tab-animated-transport">
-                                                                <span>Transport</span>
-                                                            </a>
-                                                        </li>
-                                                        <li class="nav-item">
-                                                            <a role="tab" class="nav-link" id="tab-c-2" data-toggle="tab" href="#tab-animated-parts">
-                                                                <span>Parts</span>
-                                                            </a>
-                                                        </li>
-                                                        <li class="nav-item">
-                                                            <a role="tab" class="nav-link" id="tab-c-2" data-toggle="tab" href="#tab-animated-money">
-                                                                <span>Recieve&nbsp;Money</span>
-                                                            </a>
-                                                        </li>
-                                                        <li class="nav-item">
-                                                            <a role="tab" class="nav-link" id="tab-c-2" data-toggle="tab" href="#tab-animated-commision">
-                                                                <span>Commision</span>
-                                                            </a>
-                                                        </li>
-                                                        <li class="nav-item">
-                                                            <a role="tab" class="nav-link" id="tab-c-2" data-toggle="tab" href="#tab-animated-price">
-                                                                <span>Boss Price</span>
-                                                            </a>
-                                                        </li>
-                                                        <li class="nav-item">
-                                                            <a role="tab" class="nav-link" id="tab-c-2" data-toggle="tab" href="#tab-animated-important">
-                                                                <span>Important</span>
-                                                            </a>
-                                                        </li>
+                                            <ul class="tabs-animated-shadow tabs-animated nav nav-justified">
+                                                <li class="nav-item">
+                                                    <a role="tab" class="nav-link active" id="tab-c-0" data-toggle="tab" href="#tab-animated-reserve">
+                                                        <span >Reserve</span>
+                                                    </a>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <a role="tab" class="nav-link" id="tab-c-1" data-toggle="tab" href="#tab-animated-repair">
+                                                        <span>Repair</span>
+                                                    </a>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <a role="tab" class="nav-link" id="tab-c-2" data-toggle="tab" href="#tab-animated-transport">
+                                                        <span>Transport</span>
+                                                    </a>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <a role="tab" class="nav-link" id="tab-c-2" data-toggle="tab" href="#tab-animated-parts">
+                                                        <span>Parts</span>
+                                                    </a>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <a role="tab" class="nav-link" id="tab-c-2" data-toggle="tab" href="#tab-animated-money">
+                                                        <span>Recieve&nbsp;Money</span>
+                                                    </a>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <a role="tab" class="nav-link" id="tab-c-2" data-toggle="tab" href="#tab-animated-commision">
+                                                        <span>Commision</span>
+                                                    </a>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <a role="tab" class="nav-link" id="tab-c-2" data-toggle="tab" href="#tab-animated-price">
+                                                        <span>Boss Price</span>
+                                                    </a>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <a role="tab" class="nav-link" id="tab-c-2" data-toggle="tab" href="#tab-animated-important">
+                                                        <span>Important</span>
+                                                    </a>
+                                                </li>
                                             </ul>
                                             <div style="height: 120px; margin-top: -12px; overflow: auto;" class="tab-content " id="table1">
                                                 <div class="tab-pane active" id="tab-animated-reserve" role="tabpanel">
@@ -436,9 +422,7 @@ $row=mysqli_fetch_row($result);
                                                                 <td>Mark</td>
                                                                 <td>Otto</td>
                                                                 <td>@mdo</td>
-                                                                <td>Mark</td>
-                                                                
-                                                                
+                                                                <td>Mark</td>   
                                                             </tr>
                                                             <tr>
                                                                 <th scope="row">2</th>
@@ -499,9 +483,7 @@ $row=mysqli_fetch_row($result);
                                                                 <td>Otto</td>
                                                                 <td>@mdo</td>
                                                                 <td>Mark</td>
-                                                                <td>Otto</td>
-                                                                
-                                                                
+                                                                <td>Otto</td>   
                                                             </tr>
                                                             <tr>
                                                                 <th scope="row">2</th>
@@ -509,8 +491,7 @@ $row=mysqli_fetch_row($result);
                                                                 <td>Otto</td>
                                                                 <td>@mdo</td>
                                                                 <td>Mark</td>
-                                                                <td>Otto</td>
-                                                              
+                                                                <td>Otto</td>  
                                                             </tr>
                                                             <tr>
                                                                 <th scope="row">3</th>
@@ -518,8 +499,7 @@ $row=mysqli_fetch_row($result);
                                                                 <td>Otto</td>
                                                                 <td>@mdo</td>
                                                                 <td>Mark</td>
-                                                                <td>Otto</td>
-                                                                
+                                                                <td>Otto</td>   
                                                             </tr>
                                                         </tbody>
                                                     </table>  
@@ -547,9 +527,7 @@ $row=mysqli_fetch_row($result);
                                                                 <td>Otto</td>
                                                                 <td>@mdo</td>
                                                                 <td>Mark</td>
-                                                                <td>Otto</td>
-                                                                
-                                                                
+                                                                <td>Otto</td>   
                                                             </tr>
                                                             <tr>
                                                                 <th scope="row">2</th>
@@ -557,8 +535,7 @@ $row=mysqli_fetch_row($result);
                                                                 <td>Otto</td>
                                                                 <td>@mdo</td>
                                                                 <td>Mark</td>
-                                                                <td>Otto</td>
-                                                                
+                                                                <td>Otto</td>   
                                                             </tr>
                                                             <tr>
                                                                 <th scope="row">3</th>
@@ -566,8 +543,7 @@ $row=mysqli_fetch_row($result);
                                                                 <td>Otto</td>
                                                                 <td>@mdo</td>
                                                                 <td>Mark</td>
-                                                                <td>Otto</td>
-                                                                
+                                                                <td>Otto</td>    
                                                             </tr>
                                                         </tbody>
                                                     </table>  
@@ -588,7 +564,7 @@ $row=mysqli_fetch_row($result);
                                                                 <th>Memo</th>
                                                             </tr>
                                                         </thead>
-                                                        <tbody  style="height: 80px;" >
+                                                        <tbody style="height: 80px;" >
                                                             <tr>
                                                                 <th scope="row">1</th>
                                                                 <td>Mark</td>
@@ -598,8 +574,7 @@ $row=mysqli_fetch_row($result);
                                                                 <td>Otto</td>
                                                                 <td>@mdo</td>
                                                                 <td>Mark</td>
-                                                                <td>Otto</td>
-                                                                
+                                                                <td>Otto</td>   
                                                             </tr>
                                                             <tr>
                                                                 <th scope="row">2</th>
@@ -627,7 +602,7 @@ $row=mysqli_fetch_row($result);
                                                     </table>  
                                                 </div>
                                                 <div class="tab-pane" id="tab-animated-money" role="tabpanel">
-                                                    <table style="font-size: 10px;" class=" table table-sm">
+                                                    <table style="font-size: 10px;" class="table table-sm">
                                                         <thead>
                                                             <tr>
                                                                 <th>#</th>
@@ -691,7 +666,7 @@ $row=mysqli_fetch_row($result);
                                                     </table>  
                                                 </div>
                                                 <div class="tab-pane" id="tab-animated-commision" role="tabpanel">
-                                                    <table style="font-size: 10px;" class=" table table-sm">
+                                                    <table style="font-size: 10px;" class="table table-sm">
                                                         <thead>
                                                             <tr>
                                                                 <th>#</th>
@@ -716,8 +691,7 @@ $row=mysqli_fetch_row($result);
                                                                 <td>Otto</td>
                                                                 <td>@mdo</td>
                                                                 <td>Mark</td>
-                                                                <td>Otto</td>
-                                                                
+                                                                <td>Otto</td>    
                                                             </tr>
                                                             <tr>
                                                                 <th scope="row">2</th>
@@ -728,8 +702,7 @@ $row=mysqli_fetch_row($result);
                                                                 <td>Otto</td>
                                                                 <td>@mdo</td>
                                                                 <td>Mark</td>
-                                                                <td>Otto</td>
-                                                                
+                                                                <td>Otto</td>    
                                                             </tr>
                                                             <tr>
                                                                 <th scope="row">3</th>
@@ -746,7 +719,7 @@ $row=mysqli_fetch_row($result);
                                                     </table>  
                                                 </div>
                                                 <div class="tab-pane" id="tab-animated-price" role="tabpanel">
-                                                    <table style="font-size: 10px;" class=" table table-sm">
+                                                    <table style="font-size: 10px;" class="table table-sm">
                                                         <thead>
                                                             <tr>
                                                                 <th>#</th>
@@ -771,8 +744,7 @@ $row=mysqli_fetch_row($result);
                                                                 <td>Otto</td>
                                                                 <td>@mdo</td>
                                                                 <td>Mark</td>
-                                                                <td>Otto</td>
-                                                                
+                                                                <td>Otto</td>    
                                                             </tr>
                                                             <tr>
                                                                 <th scope="row">2</th>
@@ -800,7 +772,7 @@ $row=mysqli_fetch_row($result);
                                                     </table>  
                                                 </div>
                                                 <div class="tab-pane" id="tab-animated-important" role="tabpanel">
-                                                    <table style="font-size: 10px;" class=" table table-sm">
+                                                    <table style="font-size: 10px;" class="table table-sm">
                                                         <thead>
                                                             <tr>
                                                                 <th>#</th>
@@ -825,8 +797,7 @@ $row=mysqli_fetch_row($result);
                                                                 <td>Otto</td>
                                                                 <td>@mdo</td>
                                                                 <td>Mark</td>
-                                                                <td>Otto</td>
-                                                                
+                                                                <td>Otto</td>    
                                                             </tr>
                                                             <tr>
                                                                 <th scope="row">2</th>
@@ -868,7 +839,6 @@ $row=mysqli_fetch_row($result);
                                             data-target="#exampleModalLong-repair"  value="Repair" type="button" class="btn-pill btn-shadow btn-wide mt-0 mb-2 btn btn-warning"
                                             style="width: 120px;">
                                         </div>
-                                        
                                         <div class="nav-item">
                                             <input data-toggle="modal"
                                             data-target="#exampleModalLong-rikuso"  value="Rikuso" type="button" class="btn-pill btn-shadow btn-wide mt-0 mb-2 btn btn-warning"
@@ -883,7 +853,6 @@ $row=mysqli_fetch_row($result);
                                             <input data-toggle="modal"
                                             data-target="#exampleModalLong-money" value="Recieve Money" type="button" class="btn-pill btn-shadow btn-wide mt-0 mb-2 btn btn-warning">
                                         </div>
-                                       
                                         <div class="nav-item">
                                             <input data-toggle="modal"
                                             data-target="#exampleModalLong-commision"  value="Commision" type="button" class="btn-pill btn-shadow btn-wide mt-0 mb-2 btn btn-warning"
@@ -898,11 +867,8 @@ $row=mysqli_fetch_row($result);
                                             <input data-toggle="modal"
                                             data-target="#exampleModalLong-important"  value="Important" type="button" class="btn-pill btn-shadow btn-wide mt-0 mb-2 btn btn-warning"
                                             style="width: 120px;">
-                                        </div>
-                                       
-                                        
+                                        </div>    
                                     </div>
-                                
                                 </form>  
                             </div>
                         </div>  
@@ -953,12 +919,12 @@ include("bottom.php");
                 <div class="modal-body">
                     <div class="row">
                         <div style="margin-top: -3%;" class="col-md-4">
-                            <label  class="form-control-label">From</label>
-                            <input style=" font-size: 11px;  margin-top: -5%; height: 20px;  width: 130px;" type="date" id="username" name="stock_chassis_id" class="form-control">
+                            <label class="form-control-label">From</label>
+                            <input style="font-size: 11px;  margin-top: -5%; height: 20px;  width: 130px;" type="date" id="username" name="stock_chassis_id" class="form-control">
                         </div>
                         <div style="margin-top: -3%;" class="col-md-4">
                             <label class="form-control-label">Till</label>
-                            <input style=" font-size: 11px;  margin-top: -5%; height: 20px;  width: 130px;" type="date" id="username" name="stock_chassis_id" class="form-control">
+                            <input style="font-size: 11px;  margin-top: -5%; height: 20px;  width: 130px;" type="date" id="username" name="stock_chassis_id" class="form-control">
                         </div>
                         <div style="margin-top: -3%;" class="col-md-4">
                             <label class="form-control-label">Agent Name</label>
@@ -970,55 +936,55 @@ include("bottom.php");
                         </div>
                         <div class="col-md-3">
                             <label class="form-control-label">Customer</label>
-                            <select style=" padding: 0px; font-size: 11px;  margin-top: -8%; height: 20px;  width: 120px;" type="text" id="username" name="stock_chassis_id" class="form-control">
+                            <select style="padding: 0px; font-size: 11px;  margin-top: -8%; height: 20px;  width: 120px;" type="text" id="username" name="stock_chassis_id" class="form-control">
                                 <option value="---">---</option>
                                 <option>Abc</option>
                                 <option>Abc</option>
                             </select>
                         </div>
-                        <div  class="col-md-3">
+                        <div class="col-md-3">
                             <label style="margin-left: 8%;" class="form-control-label">Phone</label>
-                            <input style=" font-size: 11px; margin-left: 8%; margin-top: -8%; height: 20px;  width: 100px;" type="text" id="username" name="stock_chassis_id" class="form-control">
+                            <input style="font-size: 11px; margin-left: 8%; margin-top: -8%; height: 20px;  width: 100px;" type="text" id="username" name="stock_chassis_id" class="form-control">
                         </div>
-                        <div  class="col-md-3">
+                        <div class="col-md-3">
                             <label class="form-control-label">Country</label>
-                            <input style=" font-size: 11px;  margin-top: -8%; height: 20px;  width: 100px;" type="text" id="username" name="stock_chassis_id" class="form-control">
+                            <input style="font-size: 11px;  margin-top: -8%; height: 20px;  width: 100px;" type="text" id="username" name="stock_chassis_id" class="form-control">
                         </div>
-                        <div  class="col-md-3">
+                        <div class="col-md-3">
                             <label class="form-control-label">Destination&nbsp;Port</label>
-                            <input style=" font-size: 11px;  margin-top: -8%; height: 20px;  width: 100px;" type="text" id="username" name="stock_chassis_id" class="form-control">
+                            <input style="font-size: 11px;  margin-top: -8%; height: 20px;  width: 100px;" type="text" id="username" name="stock_chassis_id" class="form-control">
                         </div>
-                        <div  class="col-md-12">
+                        <div class="col-md-12">
                             <label class="form-control-label">Address</label>
-                            <input style=" font-size: 11px; width: 472px; height: 20px;  margin-top: -2%; " type="text" id="username" name="stock_chassis_id" class="form-control">
+                            <input style="font-size: 11px; width: 472px; height: 20px;  margin-top: -2%; " type="text" id="username" name="stock_chassis_id" class="form-control">
                         </div>
                         <div class="col-md-3">
                             <label class="form-control-label">Consignee&nbsp;Name</label>
-                            <select style=" padding: 0px; font-size: 11px;  margin-top: -8%; height: 20px;  width: 120px;" type="text" id="username" name="stock_chassis_id" class="form-control">
+                            <select style="padding: 0px; font-size: 11px;  margin-top: -8%; height: 20px;  width: 120px;" type="text" id="username" name="stock_chassis_id" class="form-control">
                                 <option value="---">---</option>
                                 <option>Abc</option>
                                 <option>Abc</option>
                             </select>
                         </div>
-                        <div  class="col-md-3">
+                        <div class="col-md-3">
                             <label style="margin-left: 8%;" class="form-control-label">Consignee&nbsp;Phone</label>
-                            <input style=" font-size: 11px; margin-left: 8%; margin-top: -8%; height: 20px;  width: 100px;" type="text" id="username" name="stock_chassis_id" class="form-control">
+                            <input style="font-size: 11px; margin-left: 8%; margin-top: -8%; height: 20px;  width: 100px;" type="text" id="username" name="stock_chassis_id" class="form-control">
                         </div>
-                        <div  class="col-md-3">
+                        <div class="col-md-3">
                             <label class="form-control-label">Notify&nbsp;Name</label>
-                            <input style=" font-size: 11px;  margin-top: -8%; height: 20px;  width: 100px;" type="text" id="username" name="stock_chassis_id" class="form-control">
+                            <input style="font-size: 11px;  margin-top: -8%; height: 20px;  width: 100px;" type="text" id="username" name="stock_chassis_id" class="form-control">
                         </div>
-                        <div  class="col-md-3">
+                        <div class="col-md-3">
                             <label class="form-control-label">Notify&nbsp;Phone</label>
-                            <input style=" font-size: 11px;  margin-top: -8%; height: 20px;  width: 100px;" type="text" id="username" name="stock_chassis_id" class="form-control">
+                            <input style="font-size: 11px;  margin-top: -8%; height: 20px;  width: 100px;" type="text" id="username" name="stock_chassis_id" class="form-control">
                         </div>
-                        <div  class="col-md-6">
+                        <div class="col-md-6">
                             <label class="form-control-label">Consignee&nbsp;Address</label>
-                            <input style=" font-size: 11px; width: 232px; margin-top: -2%; height: 20px;  " type="text" id="username" name="stock_chassis_id" class="form-control">
+                            <input style="font-size: 11px; width: 232px; margin-top: -2%; height: 20px;  " type="text" id="username" name="stock_chassis_id" class="form-control">
                         </div>
-                        <div  class="col-md-6">
+                        <div class="col-md-6">
                             <label class="form-control-label">Notify&nbsp;Address</label>
-                            <input style=" font-size: 11px; width: 224px; margin-top: -2%; height: 20px;  " type="text" id="username" name="stock_chassis_id" class="form-control">
+                            <input style="font-size: 11px; width: 224px; margin-top: -2%; height: 20px;  " type="text" id="username" name="stock_chassis_id" class="form-control">
                         </div>
                         <div style="background: khaki; margin-left: 0px; padding-left: 0px; margin-top: 1%;  padding-bottom: 1%;" class="row container">
                             <div class="col-md-3">
@@ -1029,7 +995,7 @@ include("bottom.php");
                                     <option>Prepaid</option>
                                 </select>
                             </div>
-                            <div  class="col-md-3">
+                            <div class="col-md-3">
                                 <label class="form-control-label">Currency</label>
                                 <select style="padding: 0px; font-size: 11px;  margin-top: -8%; height: 20px;  width: 105px;" type="text" id="username" name="stock_chassis_id" class="form-control">
                                     <option value="---">---</option>
@@ -1037,45 +1003,45 @@ include("bottom.php");
                                     <option>&yen;</option>
                                 </select>
                             </div>
-                            <div  class="col-md-3">
+                            <div class="col-md-3">
                                 <label class="form-control-label">FOB</label>
-                                <input style=" font-size: 11px;  margin-top: -8%; height: 20px;  width: 100px;" type="text" id="username" name="stock_chassis_id" class="form-control">
+                                <input style="font-size: 11px;  margin-top: -8%; height: 20px;  width: 100px;" type="text" id="username" name="stock_chassis_id" class="form-control">
                             </div>
-                            <div  class="col-md-3">
+                            <div class="col-md-3">
                                 <label class="form-control-label">Freight</label>
-                                <input style=" font-size: 11px;  margin-top: -8%; height: 20px;  width: 100px;" type="text" id="username" name="stock_chassis_id" class="form-control">
+                                <input style="font-size: 11px;  margin-top: -8%; height: 20px;  width: 100px;" type="text" id="username" name="stock_chassis_id" class="form-control">
                             </div>
-                            <div  class="col-md-3">
+                            <div class="col-md-3">
                                 <label class="form-control-label">Inspection</label>
-                                <input style=" font-size: 11px;  margin-top: -8%; height: 20px;  width: 105px;" type="text" id="username" name="stock_chassis_id" class="form-control">
+                                <input style="font-size: 11px;  margin-top: -8%; height: 20px;  width: 105px;" type="text" id="username" name="stock_chassis_id" class="form-control">
                             </div>
                             <div class="col-md-3">
                                 <label class="form-control-label">Inspection&nbsp;Chrgs</label>
-                                <input style=" font-size: 11px;  margin-top: -8%; height: 20px;  width: 105px;" type="text" id="username" name="stock_chassis_id" class="form-control">
+                                <input style="font-size: 11px;  margin-top: -8%; height: 20px;  width: 105px;" type="text" id="username" name="stock_chassis_id" class="form-control">
                             </div>
                             <div class="col-md-3">
                                 <label class="form-control-label">Discount %</label>
-                                <input style=" font-size: 11px;  margin-top: -8%; height: 20px;  width: 100px;" type="text" id="username" name="stock_chassis_id" class="form-control">
+                                <input style="font-size: 11px;  margin-top: -8%; height: 20px;  width: 100px;" type="text" id="username" name="stock_chassis_id" class="form-control">
                             </div>
-                            <div  class="col-md-3">
+                            <div class="col-md-3">
                                 <label class="form-control-label">Yard Charges</label>
-                                <input style=" font-size: 11px;  margin-top: -8%; height: 20px;  width: 100px;" type="text" id="username" name="stock_chassis_id" class="form-control">
+                                <input style="font-size: 11px;  margin-top: -8%; height: 20px;  width: 100px;" type="text" id="username" name="stock_chassis_id" class="form-control">
                             </div>
-                            <div  class="col-md-3">
+                            <div class="col-md-3">
                                 <label class="form-control-label">Repair</label>
                                 <input style=" font-size: 11px;  margin-top: -8%; height: 20px;  width: 105px;" type="text" id="username" name="stock_chassis_id" class="form-control">
                             </div>
-                            <div  class="col-md-3">
+                            <div class="col-md-3">
                                 <label class="form-control-label">Other</label>
-                                <input style=" font-size: 11px;  margin-top: -8%; height: 20px;  width: 105px;" type="text" id="username" name="stock_chassis_id" class="form-control">
+                                <input style="font-size: 11px;  margin-top: -8%; height: 20px;  width: 105px;" type="text" id="username" name="stock_chassis_id" class="form-control">
                             </div>
-                            <div  class="col-md-3">
+                            <div class="col-md-3">
                                 <label class="form-control-label">CNF</label>
-                                <input style=" font-size: 11px;  margin-top: -8%; height: 20px;  width: 100px;" type="text" id="username" name="stock_chassis_id" class="form-control">
+                                <input style="font-size: 11px;  margin-top: -8%; height: 20px;  width: 100px;" type="text" id="username" name="stock_chassis_id" class="form-control">
                             </div>
-                            <div  class="col-md-3">
+                            <div class="col-md-3">
                                 <label class="form-control-label">Payment %</label>
-                                <select style=" padding: 0px; font-size: 11px;  margin-top: -8%; height: 20px;  width: 100px;" type="text" id="username" name="stock_chassis_id" class="form-control">
+                                <select style="padding: 0px; font-size: 11px;  margin-top: -8%; height: 20px;  width: 100px;" type="text" id="username" name="stock_chassis_id" class="form-control">
                                     <option value="---">---</option>
                                     <option>100%</option>
                                     <option>50%</option>
@@ -1084,12 +1050,10 @@ include("bottom.php");
                             </div>
                             <div  class="col-md-12">
                                 <label class="form-control-label">Memo</label>
-                                <input style=" font-size: 11px;  margin-top: -2%; width: 461px; height: 20px; " type="text" id="username" name="stock_chassis_id" class="form-control">
+                                <input style="font-size: 11px;  margin-top: -2%; width: 461px; height: 20px; " type="text" id="username" name="stock_chassis_id" class="form-control">
                             </div>
                         </div>
-                    </div>
-                   
-                   
+                    </div>   
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -1110,7 +1074,7 @@ include("bottom.php");
                 </button>
             </div>
             <div style="background: #ccc;" class="container">
-            <div class="row">
+                <div class="row">
                     <div class="col-2">
                         <label class="form-control-label">Rec. #</label>
                         <label style="width: 80px; margin-top: -15%; font-size: 11px; height: 20px; background: #ccc;  padding: 2px; border: 1px solid black; font-weight: bold; " type="text" id="get_stock_rec_no" name="get_stock_rec_no" class="form-control"><?php echo $row[1]?></label>
@@ -1137,20 +1101,20 @@ include("bottom.php");
                 <div class="modal-body">
                     <div class="row">
                         <div style="margin-top: -3%;" class="col-md-4">
-                            <label  class="form-control-label">Date</label>
-                            <input style=" font-size: 11px;  margin-top: -5%; height: 20px;" type="date" id="exp_repair_date" name="exp_repair_date" class="form-control">
+                            <label class="form-control-label">Date</label>
+                            <input style="font-size: 11px; margin-top: -5%; height: 20px;" type="date" id="exp_repair_date" name="exp_repair_date" class="form-control">
                         </div>
                         <div style="margin-top: -3%; margin-left: -2%;" class="col-md-8">
                             <label class="form-control-label">Description</label>
-                            <input style=" font-size: 11px; margin-top: -2.5%; height: 20px;" type="text" id="exp_repair_discription" name="exp_repair_discription" class="form-control">
+                            <input style="font-size: 11px; margin-top: -2.5%; height: 20px;" type="text" id="exp_repair_discription" name="exp_repair_discription" class="form-control">
                         </div>
                         <div  class="col-md-4">
                             <label class="form-control-label">Amount</label>
-                            <input style=" font-size: 11px;  margin-top: -5%; height: 20px;" type="text" id="exp_repair_amount" name="exp_repair_amount" class="form-control">
+                            <input style="font-size: 11px; margin-top: -5%; height: 20px;" type="text" id="exp_repair_amount" name="exp_repair_amount" class="form-control">
                         </div>
                         <div style="margin-left: -2%;" class="col-md-8">
                             <label class="form-control-label">Memo</label>
-                            <input style=" font-size: 11px;  margin-top: -2.5%; height: 20px;" type="text" id="exp_repair_memo" name="exp_repair_memo" class="form-control">
+                            <input style="font-size: 11px; margin-top: -2.5%; height: 20px;" type="text" id="exp_repair_memo" name="exp_repair_memo" class="form-control">
                         </div>                        
                     </div> 
                 </div>
@@ -1173,7 +1137,7 @@ include("bottom.php");
                 </button>
             </div>
             <div style="background: #ccc;" class="container">
-            <div class="row">
+                <div class="row">
                     <div class="col-2">
                         <label class="form-control-label">Rec. #</label>
                         <label style="width: 80px; margin-top: -15%; font-size: 11px; height: 20px; background: #ccc;  padding: 2px; border: 1px solid black; font-weight: bold; " type="text" id="get_stock_rec_no" name="get_stock_rec_no" class="form-control"><?php echo $row[1]?></label>
@@ -1236,7 +1200,7 @@ include("bottom.php");
                 </button>
             </div>
             <div style="background: #ccc;" class="container">
-            <div class="row">
+                <div class="row">
                     <div class="col-2">
                         <label class="form-control-label">Rec. #</label>
                         <label style="width: 80px; margin-top: -15%; font-size: 11px; height: 20px; background: #ccc;  padding: 2px; border: 1px solid black; font-weight: bold; " type="text" id="get_stock_rec_no" name="get_stock_rec_no" class="form-control"><?php echo $row[1]?></label>
@@ -1263,14 +1227,14 @@ include("bottom.php");
                 <div class="modal-body">
                     <div class="row">
                         <div style="margin-top: -3%;" class="col-md-4">
-                            <label  class="form-control-label">Date</label>
+                            <label class="form-control-label">Date</label>
                             <input style=" font-size: 11px;  margin-top: -5%; height: 20px;" type="date" id="exp_rikuso_date" name="exp_rikuso_date" class="form-control">
                         </div>
                         <div style="margin-top: -3%; margin-left: -2%;" class="col-md-8">
                             <label class="form-control-label">Description</label>
                             <input style=" font-size: 11px; margin-top: -2.5%; height: 20px;" type="text" id="exp_rikuso_discription" name="exp_rikuso_discription" class="form-control">
                         </div>
-                        <div  class="col-md-4">
+                        <div class="col-md-4">
                             <label class="form-control-label">Amount</label>
                             <input style=" font-size: 11px; margin-top: -5%; height: 20px;" type="text" id="exp_rikuso_amount" name="exp_rikuso_amount" class="form-control">
                         </div>
@@ -1299,7 +1263,7 @@ include("bottom.php");
                 </button>
             </div>
             <div style="background: #ccc;" class="container">
-            <div class="row">
+                <div class="row">
                     <div class="col-2">
                         <label class="form-control-label">Rec. #</label>
                         <label style="width: 80px; margin-top: -15%; font-size: 11px; height: 20px; background: #ccc;  padding: 2px; border: 1px solid black; font-weight: bold; " type="text" id="get_stock_rec_no" name="get_stock_rec_no" class="form-control"><?php echo $row[1]?></label>
@@ -1327,35 +1291,33 @@ include("bottom.php");
                     <div class="row">
                         <div style="margin-top: -2%" class="col-md-6">
                             <label class="form-control-label">CNF Price</label>
-                            <input style=" font-size: 11px;  margin-top: -2%; height: 20px;  width: 230px;" type="text" id="get_stock_cnf_price_print_yen" name="get_stock_cnf_price_print_yen" class="form-control">
+                            <input style="font-size: 11px; margin-top: -2%; height: 20px; width: 230px;" type="text" id="get_stock_cnf_price_print_yen" name="get_stock_cnf_price_print_yen" class="form-control">
                         </div>
                         <div style="margin-top: -2%" class="col-md-6">
                             <label class="form-control-label">Customer Name</label>
-                            <select style=" padding: 0px; font-size: 11px;  margin-top: -2%; height: 20px;  width: 205px;" type="text" id="allocation_customer_name" name="allocation_customer_name" class="form-control">
+                            <select style=" padding: 0px; font-size: 11px; margin-top: -2%; height: 20px;  width: 205px;" type="text" id="allocation_customer_name" name="allocation_customer_name" class="form-control">
                                 <option value="---">Customer Table</option>
-                                
                             </select>
                         </div>
-                        <div  class="col-md-4 mt-1">
-                            <label  class="form-control-label">Remittance ID #</label>
-                            <input style="font-size: 11px;  margin-top: -3%; height: 20px;  width: 182px;" type="text" id="get_alloacted_remittance_id_ag" name="get_alloacted_remittance_id_ag" class="form-control">
+                        <div class="col-md-4 mt-1">
+                            <label class="form-control-label">Remittance ID #</label>
+                            <input style="font-size: 11px;  margin-top: -3%; height: 20px; width: 182px;" type="text" id="get_alloacted_remittance_id_ag" name="get_alloacted_remittance_id_ag" class="form-control">
                         </div>
                         <div style="margin-left: -2.6%; margin-top: 5.7%;" class="col-md-4">
-                            <button style="float: right; height: 21px; padding: 0px 0px 1px 0px;  width: 80px;" type="button" name="btn_search_available_amount" id="btn_search_available_amount" class="btn btn-success">Search</button>
+                            <button style="float: right; height: 21px; padding: 0px 0px 1px 0px; width: 80px;" type="button" name="btn_search_available_amount" id="btn_search_available_amount" class="btn btn-success">Search</button>
                         </div>
                         <div class="col-md-4 mt-1">
                             <label class="form-control-label">Current Balance</label>
-                            <label style=" font-size: 11px;  margin-top: -3%; height: 20px;  width: 135px;" type="text" id="get_cust_available_amount" name="get_cust_available_amount" class="form-control"></label>
+                            <label style="font-size: 11px; margin-top: -3%; height: 20px; width: 135px;" type="text" id="get_cust_available_amount" name="get_cust_available_amount" class="form-control"></label>
                         </div>
-                        <div  class="col-md-6">
+                        <div class="col-md-6">
                             <label class="form-control-label">Allocated Amount</label>
-                            <input style=" font-size: 11px;  margin-top: -2%; height: 20px;  width: 230px;" type="text" id="get_cust_allocated_amount" name="get_cust_allocated_amount" class="form-control">
+                            <input style="font-size: 11px; margin-top: -2%; height: 20px; width: 230px;" type="text" id="get_cust_allocated_amount" name="get_cust_allocated_amount" class="form-control">
                         </div>
                         <div class="col-md-6">
                             <label class="form-control-label">Remaining Amount</label>
-                            <input style=" font-size: 11px;  margin-top: -2%; height: 20px;  width: 206px;" type="text" id="cust_remaining_amount" name="cust_remaining_amount" class="form-control">
+                            <input style="font-size: 11px; margin-top: -2%; height: 20px; width: 206px;" type="text" id="cust_remaining_amount" name="cust_remaining_amount" class="form-control">
                         </div>
-                        
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -1377,7 +1339,7 @@ include("bottom.php");
                 </button>
             </div>
             <div style="background: #ccc;" class="container">
-            <div class="row">
+                <div class="row">
                     <div class="col-2">
                         <label class="form-control-label">Rec. #</label>
                         <label style="width: 80px; margin-top: -15%; font-size: 11px; height: 20px; background: #ccc;  padding: 2px; border: 1px solid black; font-weight: bold; " type="text" id="get_stock_rec_no" name="get_stock_rec_no" class="form-control"><?php echo $row[1]?></label>
@@ -1404,20 +1366,20 @@ include("bottom.php");
                 <div class="modal-body">
                     <div class="row">
                         <div style="margin-top: -3%;" class="col-md-4">
-                            <label  class="form-control-label">Date</label>
-                            <input style=" font-size: 11px;  margin-top: -5%; height: 20px;" type="date" id="exp_important_date" name="exp_important_date" class="form-control">
+                            <label class="form-control-label">Date</label>
+                            <input style="font-size: 11px; margin-top: -5%; height: 20px;" type="date" id="exp_important_date" name="exp_important_date" class="form-control">
                         </div>
                         <div style="margin-top: -3%; margin-left: -2%;" class="col-md-8">
                             <label class="form-control-label">Description</label>
-                            <input style=" font-size: 11px; margin-top: -2.5%; height: 20px;" type="text" id="exp_important_discription" name="exp_important_discription" class="form-control">
+                            <input style="font-size: 11px; margin-top: -2.5%; height: 20px;" type="text" id="exp_important_discription" name="exp_important_discription" class="form-control">
                         </div>
                         <div  class="col-md-4">
                             <label class="form-control-label">Amount</label>
-                            <input style=" font-size: 11px; margin-top: -5%; height: 20px;" type="text" id="exp_important_amount" name="exp_important_amount" class="form-control">
+                            <input style="font-size: 11px; margin-top: -5%; height: 20px;" type="text" id="exp_important_amount" name="exp_important_amount" class="form-control">
                         </div>
                         <div style="margin-left: -2%;" class="col-md-8">
                             <label class="form-control-label">Memo</label>
-                            <input style=" font-size: 11px; margin-top: -2.5%; height: 20px;" type="text" id="exp_important_memo" name="exp_important_memo" class="form-control">
+                            <input style="font-size: 11px; margin-top: -2.5%; height: 20px;" type="text" id="exp_important_memo" name="exp_important_memo" class="form-control">
                         </div>                        
                     </div>
                 </div>
@@ -1440,7 +1402,7 @@ include("bottom.php");
                 </button>
             </div>
             <div style="background: #ccc;" class="container">
-              <div class="row">
+                <div class="row">
                     <div class="col-2">
                         <label class="form-control-label">Rec. #</label>
                         <label style="width: 80px; margin-top: -15%; font-size: 11px; height: 20px; background: #ccc;  padding: 2px; border: 1px solid black; font-weight: bold; " type="text" id="get_stock_rec_no" name="get_stock_rec_no" class="form-control"><?php echo $row[1]?></label>
@@ -1467,12 +1429,12 @@ include("bottom.php");
                 <div class="modal-body">
                     <div class="row">
                         <div style="margin-top: -3%;" class="col-md-4">
-                            <label  class="form-control-label">Date</label>
-                            <input style=" font-size: 11px;  margin-top: -5%; height: 20px;" type="date" id="exp_commission_date" name="exp_commission_date" class="form-control">
+                            <label class="form-control-label">Date</label>
+                            <input style="font-size: 11px; margin-top: -5%; height: 20px;" type="date" id="exp_commission_date" name="exp_commission_date" class="form-control">
                         </div>
                         <div style="margin-top: -3%; margin-left: -2%;" class="col-md-8">
                             <label class="form-control-label">Description</label>
-                            <input style=" font-size: 11px; margin-top: -2.5%; height: 20px;" type="text" id="exp_commission_discription" name="exp_commission_discription" class="form-control">
+                            <input style="font-size: 11px; margin-top: -2.5%; height: 20px;" type="text" id="exp_commission_discription" name="exp_commission_discription" class="form-control">
                         </div>
                         <div  class="col-md-4">
                             <label class="form-control-label">Amount</label>
@@ -1503,7 +1465,7 @@ include("bottom.php");
                 </button>
             </div>
             <div style="background: #ccc;" class="container">
-            <div class="row">
+                <div class="row">
                     <div class="col-2">
                         <label class="form-control-label">Rec. #</label>
                         <label style="width: 80px; margin-top: -15%; font-size: 11px; height: 20px; background: #ccc;  padding: 2px; border: 1px solid black; font-weight: bold; " type="text" id="get_stock_rec_no" name="get_stock_rec_no" class="form-control"><?php echo $row[1]?></label>
@@ -1530,20 +1492,20 @@ include("bottom.php");
                 <div class="modal-body">
                     <div class="row">
                         <div style="margin-top: -3%;" class="col-md-4">
-                            <label  class="form-control-label">Date</label>
-                            <input style=" font-size: 11px;  margin-top: -5%; height: 20px;" type="date" id="exp_boss_price_date" name="exp_boss_price_date" class="form-control">
+                            <label class="form-control-label">Date</label>
+                            <input style="font-size: 11px; margin-top: -5%; height: 20px;" type="date" id="exp_boss_price_date" name="exp_boss_price_date" class="form-control">
                         </div>
                         <div style="margin-top: -3%; margin-left: -2%;" class="col-md-8">
                             <label class="form-control-label">Description</label>
-                            <input style=" font-size: 11px; margin-top: -2.5%; height: 20px;" type="text" id="exp_boss_price_discription" name="exp_boss_price_discription" class="form-control">
+                            <input style="font-size: 11px; margin-top: -2.5%; height: 20px;" type="text" id="exp_boss_price_discription" name="exp_boss_price_discription" class="form-control">
                         </div>
                         <div  class="col-md-4">
                             <label class="form-control-label">Amount</label>
-                            <input style=" font-size: 11px; margin-top: -5%; height: 20px;" type="text" id="exp_boss_price_amount" name="exp_boss_price_amount" class="form-control">
+                            <input style="font-size: 11px; margin-top: -5%; height: 20px;" type="text" id="exp_boss_price_amount" name="exp_boss_price_amount" class="form-control">
                         </div>
                         <div style="margin-left: -2%;" class="col-md-8">
                             <label class="form-control-label">Memo</label>
-                            <input style=" font-size: 11px; margin-top: -2.5%; height: 20px;" type="text" id="exp_boss_price_memo" name="exp_boss_price_memo" class="form-control">
+                            <input style="font-size: 11px; margin-top: -2.5%; height: 20px;" type="text" id="exp_boss_price_memo" name="exp_boss_price_memo" class="form-control">
                         </div>                        
                     </div>
                 </div>
@@ -1565,17 +1527,18 @@ include("bottom.php");
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-          
             <form>
                 <div class="modal-body">
                     <div class="row">
                         <div style="margin-top: -3%;" class="col-md-12">
                             <img style="" src="data:image/jpg;charset=utf8;base64,<?php echo base64_encode($row[69]); ?>" class="img-fluid">
-                        </div>
-                                              
+                        </div>                          
                     </div>
                 </div>
-               
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" name="btn_exp_commission" id="btn_exp_commission" class="btn btn-primary">Add +</button>
+                </div>
             </form>
         </div>
     </div>
@@ -1590,21 +1553,22 @@ include("bottom.php");
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-          
             <form>
                 <div class="modal-body">
                     <div class="row">
                         <div style="margin-top: -3%;" class="col-md-12">
                             <img style="" src="data:image/jpg;charset=utf8;base64,<?php echo base64_encode($row[72]); ?>" class="img-fluid">
-                        </div>
-                                              
+                        </div>                          
                     </div>
                 </div>
-               
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" name="btn_exp_commission" id="btn_exp_commission" class="btn btn-primary">Add +</button>
+                </div>
             </form>
         </div>
     </div>
-</div>         
+</div> 
 <div class="modal fade" id="exampleModalLong-ecen" tabindex="-1" role="dialog"  aria-labelledby="exampleModalLongTitle"
     aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -1615,17 +1579,18 @@ include("bottom.php");
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-          
             <form>
                 <div class="modal-body">
                     <div class="row">
                         <div style="margin-top: -3%;" class="col-md-12">
                             <img style="" src="data:image/jpg;charset=utf8;base64,<?php echo base64_encode($row[73]); ?>" class="img-fluid">
-                        </div>
-                                              
+                        </div>                          
                     </div>
                 </div>
-               
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" name="btn_exp_commission" id="btn_exp_commission" class="btn btn-primary">Add +</button>
+                </div>
             </form>
         </div>
     </div>
@@ -1635,32 +1600,26 @@ include("bottom.php");
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLongTitle">Auction Pictures</h5>
+                <h5 class="modal-title" id="exampleModalLongTitle">Invoive</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-          
             <form>
                 <div class="modal-body">
                     <div class="row">
-                    <div class="lightbox-gallery">
-                                    <div class="container">
-                                        
-                                                <div class="row photos">
-                                                    <?php 
-                                                    $queryimginvoice=mysqli_query($connection,"select * from cardocuments where stockid='".$row[1]."' AND imagetype='INVOICE'");
-                                                    
-                                                    while($resultinvoice=mysqli_fetch_array($queryimginvoice))
-                                                    {
-                                                    ?>
-                                                    <div class="col-sm-6 col-md-4 col-lg-3 item"><a href="cardocuments/<?php echo $resultinvoice[3]?>" data-lightbox="photos"><img class="img-fluid" src="cardocuments/<?php echo $resultinvoice[3]?>"></a></div>
-                                                <?php }?>
-                                                </div>
-                                     </div>
-                                </div>
-                                              
+                        <div style="margin-top: -3%;" class="col-md-12">
+                            <img style="" src="data:image/jpg;charset=utf8;base64,<?php echo base64_encode($row[77]); ?>" class="img-fluid">
+                        </div>                          
                     </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" name="btn_exp_commission" id="btn_exp_commission" class="btn btn-primary">Add +</button>
+                </div>
+            </form>
+        </div>
+    </div>
 </div>
 <div class="modal fade" id="exampleModalLong-ttcopy" tabindex="-1" role="dialog"  aria-labelledby="exampleModalLongTitle"
     aria-hidden="true">
@@ -1672,17 +1631,18 @@ include("bottom.php");
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-          
             <form>
                 <div class="modal-body">
                     <div class="row">
                         <div style="margin-top: -3%;" class="col-md-12">
                             <img style="" src="data:image/jpg;charset=utf8;base64,<?php echo base64_encode($row[79]); ?>" class="img-fluid">
-                        </div>
-                                              
+                        </div>                          
                     </div>
                 </div>
-               
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" name="btn_exp_commission" id="btn_exp_commission" class="btn btn-primary">Add +</button>
+                </div>
             </form>
         </div>
     </div>
@@ -1697,17 +1657,18 @@ include("bottom.php");
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-          
             <form>
                 <div class="modal-body">
                     <div class="row">
                         <div style="margin-top: -3%;" class="col-md-12">
                             <img style="" src="data:image/jpg;charset=utf8;base64,<?php echo base64_encode($row[90]); ?>" class="img-fluid">
-                        </div>
-                                              
+                        </div>                          
                     </div>
                 </div>
-               
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" name="btn_exp_commission" id="btn_exp_commission" class="btn btn-primary">Add +</button>
+                </div>
             </form>
         </div>
     </div>
@@ -1722,23 +1683,23 @@ include("bottom.php");
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-          
             <form>
                 <div class="modal-body">
                     <div class="row">
                         <div style="margin-top: -3%;" class="col-md-12">
                             <img style="" src="data:image/jpg;charset=utf8;base64,<?php echo base64_encode($row[85]); ?>" class="img-fluid">
-                        </div>
-                                              
+                        </div>                          
                     </div>
                 </div>
-               
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" name="btn_exp_commission" id="btn_exp_commission" class="btn btn-primary">Add +</button>
+                </div>
             </form>
         </div>
     </div>
 </div>
-<div class="modal fade" id="exampleModalLong-bl" tabindex="-1" role="dialog"  aria-labelledby="exampleModalLongTitle"
-    aria-hidden="true">
+<div class="modal fade" id="exampleModalLong-bl" tabindex="-1" role="dialog"  aria-labelledby="exampleModalLongTitle" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -1747,17 +1708,18 @@ include("bottom.php");
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-          
             <form>
                 <div class="modal-body">
                     <div class="row">
                         <div style="margin-top: -3%;" class="col-md-12">
                             <img style="" src="data:image/jpg;charset=utf8;base64,<?php echo base64_encode($row[88]); ?>" class="img-fluid">
-                        </div>
-                                              
+                        </div>                          
                     </div>
                 </div>
-               
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" name="btn_exp_commission" id="btn_exp_commission" class="btn btn-primary">Add +</button>
+                </div>
             </form>
         </div>
     </div>
@@ -1772,26 +1734,21 @@ include("bottom.php");
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-          
             <form>
                 <div class="modal-body">
                     <div class="row">
-                    <div class="lightbox-gallery">
-                                    <div class="container">
-                                        
-                                                <div class="row photos">
-                                                    <?php 
-                                                    $queryimg=mysqli_query($connection,"select * from cardocuments where stockid='".$row[1]."' AND imagetype='AUCTION-PICTURES'");
-                                                    
-                                                    while($resultimg=mysqli_fetch_array($queryimg))
-                                                    {
-                                                    ?>
-                                                    <div class="col-sm-6 col-md-4 col-lg-3 item"><a href="cardocuments/<?php echo $resultimg[3]?>" data-lightbox="photos"><img class="img-fluid" src="cardocuments/<?php echo $resultimg[3]?>"></a></div>
-                                                <?php }?>
-                                                </div>
-                                     </div>
+                        <div class="lightbox-gallery">
+                            <div class="container">
+                                <div class="row photos">
+                                <?php 
+                                    $queryimg=mysqli_query($connection,"select * from cardocuments where stockid='".$row[1]."' AND imagetype='AUCTION-PICTURES'");
+                                        while($resultimg=mysqli_fetch_array($queryimg)){
+                                ?>
+                                <div class="col-sm-6 col-md-4 col-lg-3 item"><a href="cardocuments/<?php echo $resultimg[3]?>" data-lightbox="photos"><img class="img-fluid" src="cardocuments/<?php echo $resultimg[3]?>"></a></div>
+                                <?php }?>
                                 </div>
-                                              
+                            </div>
+                        </div>                      
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -1812,29 +1769,27 @@ include("bottom.php");
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-          
             <form>
                 <div class="modal-body">
                     <div class="row">
-                    <div class="lightbox-gallery">
-                                    <div class="container">
-                                        
-                                                <div class="row photos">
-                                                    <?php 
-                                                    $queryimg1=mysqli_query($connection,"select * from cardocuments where stockid='".$row[1]."' AND imagetype='YARD-PICTURES'");
-                                                    
-                                                    while($resultimg1=mysqli_fetch_array($queryimg1))
-                                                    {
-                                                    ?>
-                                                    <div class="col-sm-6 col-md-4 col-lg-3 item"><a href="cardocuments/<?php echo $resultimg1[3]?>" data-lightbox="photos"><img class="img-fluid" src="cardocuments/<?php echo $resultimg1[3]?>"></a></div>
-                                                <?php }?>
-                                                </div>
-                                     </div>
+                        <div class="lightbox-gallery">
+                            <div class="container">                
+                                <div class="row photos">
+                                    <?php 
+                                        $queryimg1=mysqli_query($connection,"select * from cardocuments where stockid='".$row[1]."' AND imagetype='YARD-PICTURES'");                
+                                            while($resultimg1=mysqli_fetch_array($queryimg1)){
+                                    ?>
+                                    <div class="col-sm-6 col-md-4 col-lg-3 item"><a href="cardocuments/<?php echo $resultimg1[3]?>" data-lightbox="photos"><img class="img-fluid" src="cardocuments/<?php echo $resultimg1[3]?>"></a></div>
+                                    <?php }?>
                                 </div>
-                                              
+                            </div>
+                        </div>                      
                     </div>
                 </div>
-              
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" name="btn_exp_commission" id="btn_exp_commission" class="btn btn-primary">Add +</button>
+                </div>
             </form>
         </div>
     </div>
@@ -1849,26 +1804,27 @@ include("bottom.php");
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-          
             <form>
                 <div class="modal-body">
                     <div class="row">
                         <div style="margin-top: -3%;" class="col-md-12">
                             <img style="" src="data:image/jpg;charset=utf8;base64,<?php echo base64_encode($row[95]); ?>" class="img-fluid">
-                        </div>
-                                              
+                        </div>                      
                     </div>
                 </div>
-             
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" name="btn_exp_commission" id="btn_exp_commission" class="btn btn-primary">Add +</button>
+                </div>
             </form>
         </div>
     </div>
 </div>
 <!-- Modals -->
 <script>
-            $(document).ready(function(){
-            $(".nav-tabs a").click(function(){
-                $(this).tab('show');
-            });
-            });   
+    $(document).ready(function(){
+        $(".nav-tabs a").click(function(){
+            $(this).tab('show');
+        });
+    });   
 </script>

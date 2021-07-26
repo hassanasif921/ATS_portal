@@ -93,7 +93,7 @@ if(isset($_POST['i_id']))
   <label class="form-control-label">Port</label><br/>
 <div class="position-relative "> 
                    
-                        <select id="stock_kobutsu_port" name="stock_kobutsu_port" class="form-control" onChange="getport(this.value);" > 
+                        <select id="stock_kobutsu_port" name="stock_kobutsu_port" class="form-control form-control-sm" onChange="getport(this.value);" > 
                                                                  
                                                               
                                                                         
