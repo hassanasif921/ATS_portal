@@ -1,5 +1,9 @@
 <?php
 include("connection_db.php");
+
+$querys="select * from ats_vendor where ats_vendor_id=".$_GET['id'];
+$result=mysqli_query($connection,$querys);
+$row=mysqli_fetch_row($result);
 if (isset($_POST["btnsubmit"])) {
 
     $ven_business_name = $_POST["ven_business_name"];
@@ -24,9 +28,20 @@ if (isset($_POST["btnsubmit"])) {
     $ven_primary_f_name = $_POST["ven_primary_f_name"];
     $ven_primary_m_name = $_POST["ven_primary_m_name"];
     $ven_primary_l_name = $_POST["ven_primary_l_name"];
-    $images1=$_FILES['ven_business_logo']['tmp_name'];
-    $ven_business_logo=addslashes(file_get_contents($images1));
+  
+    if(is_uploaded_file($_FILES['ven_business_logo']['tmp_name']))
+     {
+        $images1=$_FILES['ven_business_logo']['tmp_name'];
+        $ven_business_logo=addslashes(file_get_contents($images1));
+     }
    
+if(is_uploaded_file($_FILES['ven_business_logo']['tmp_name'])){
+    $echoas=",ats_vendor_bussiness_logo='$ven_business_logo',";
+    }
+    else
+    {
+    $echoas=",";
+    } 
     $ven_website_url = $_POST["ven_website_url"];
     $ven_country_citizenship = $_POST["ven_country_citizenship"];
     $ven_country_of_birth = $_POST["ven_country_of_birth"];
@@ -64,9 +79,19 @@ if (isset($_POST["btnsubmit"])) {
     $ven_bank_intermidiary_code=$_POST['ven_bank_intermidiary_code'];
     $ven_fullName_paypal=$_POST['ven_fullName_paypal'];
     $ven_email_for_paypal=$_POST['ven_email_for_paypal'];
-    $images2=$_FILES['ven_incorporation_certificate']['tmp_name'];
-    $ven_incorporation_certificate=addslashes(file_get_contents($images2));
+    if(is_uploaded_file($_FILES['ven_incorporation_certificate']['tmp_name']))
+    {
+        $images2=$_FILES['ven_incorporation_certificate']['tmp_name'];
+        $ven_incorporation_certificate=addslashes(file_get_contents($images2));
+        $echoas1=",ats_vendor_incorporation_certificate='$ven_incorporation_certificate',";
+    }
+
+   else
+   {
+   $echoas1=",";
+   } 
     $totalfiles = count($_FILES['ven_national_identity_image']['name']);
+   
   $bussiness_email=$_POST['bussiness_email'];
     $ven_national_identity_image = "";
     $ven_status = "active";
@@ -75,36 +100,7 @@ if (isset($_POST["btnsubmit"])) {
     $ven_updatedBy ="";
     $ven_updatedAt = time();
     $ats_vendor_uid=$_POST['ats_vendor_uid'];
-            $insert = "insert into ats_vendor(ats_vendor_bussiness_name,ats_vendor_bussiness_location,ats_vendor_company_registeration_number,ats_vendor_country
-            ,ats_vendor_city,ats_vendor_zip_code,ats_vendor_street,
-            ats_vendor_building,ats_vendor_suite_no,ats_vendor_number,ats_vendor_primary_contact_first_name,ats_vendor_primary_contact_middle_name,ats_vendor_primary_contact_last_name,
-            ats_vendor_bussiness_logo,ats_vendor_bussiness_website, ats_vendor_citizenship_country,
-            ats_vendor_birth_country,ats_vendor_dob,
-            ats_vendor_passport_number, ats_vendor_passport_expiry,
-            ats_vendor_bussiness_role,ats_vendor_bank_name_for_us,ats_vendor_bank_address_for_us, ats_vendor_bank_country_for_us,ats_vendor_bank_branch_name_for_us,
-            ats_vendor_branch_code_for_us,ats_vendor_account_holder_for_us,ats_vendor_account_number_for_us,ats_vendor_swift_code_for_us,ats_vendor_bank_name_for_yen,ats_vendor_bank_address_for_yen,ats_vendor_bank_country_for_yen ,ats_vendor_branch_name_for_yen ,ats_vendor_branch_code_for_yen,
-            ats_vendor_account_title_for_yen,ats_vendor_account_number_for_yen,ats_vendor_account_type_for_yen , ats_vendor_incorporation_certificate, ats_vendor_national_identity_image,
-            ats_vendor_status ,ats_vendor_createdBy ,ats_vendor_createdAt,ats_vendor_updatedBy,ats_vendor_updatedAt,ats_vendor_uid,bussiness_email,ats_vendor_country_2
-            ,ats_vendor_city_2,ats_vendor_zip_code_2,ats_vendor_street_2,
-            ats_vendor_building_2,ats_vendor_suite_no_2,ven_name_of_bank_intermidiary, ven_address_of_bank_intermidiary, 
-            ven_country_of_bank_intermidiary, ven_name_of_bank_branch_intermidiary, ven_bank_branch_code_intermidiary,
-            ven_bank_account_tittle_intermidiary, ven_bank_account_no_intermidiary, ven_bank_swift_code_intermidiary,
-            ven_bank_intermidiary_code,ven_fullName_paypal,ven_email_for_paypal) values('$ven_business_name','$ven_business_address','$ven_business_reg_no','$ven_country',
-            '$ven_city', '$ven_zip_code','$ven_street','$ven_building','$ven_suit_no','$ven_phone','$ven_primary_f_name','$ven_primary_m_name','$ven_primary_l_name',
-            '$ven_business_logo','$ven_website_url','$ven_country_citizenship',
-            '$ven_country_of_birth','$ven_date_of_birth',
-            '$ven_national_identity','$ven_id_expiration_date','',
-            '$ven_name_of_bank','$ven_address_of_bank',
-            '$ven_country_of_bank','$ven_name_of_bank_branch','$ven_bank_branch_code' ,
-            '$ven_bank_account_tittle','$ven_bank_account_no','$ven_bank_swift_code','$ven_name_of_bank_locally', '$ven_address_of_bank_locally',
-            '$ven_country_of_bank_locally','$ven_name_of_bank_branch_jp_locally',
-            '$ven_bank_branch_code_locally','$ven_bank_account_tittle_jp_locally',
-            '$ven_bank_account_no_locally','$ven_bank_account_type_locally', 
-            '$ven_incorporation_certificate','$ven_national_identity_image','$ven_status','$ven_createdBy','$ven_createdAt','$ven_updatedBy','$ven_updatedAt','$ats_vendor_uid','$bussiness_email','$ven_country_2',
-            '$ven_city_2', '$ven_zip_code_2','$ven_street_2','$ven_building_2','$ven_suit_no_2','$ven_name_of_bank_intermidiary','$ven_address_of_bank_intermidiary'
-            ,'$ven_country_of_bank_intermidiary','$ven_name_of_bank_branch_intermidiary','$ven_bank_branch_code_intermidiary','$ven_bank_account_tittle_intermidiary'
-            ,'$ven_bank_account_no_intermidiary','$ven_bank_swift_code_intermidiary'
-            ,'$ven_bank_intermidiary_code','$ven_fullName_paypal','$ven_email_for_paypal')";
+            $insert = "UPDATE ats_vendor SET ats_vendor_bussiness_name='$ven_business_name',ats_vendor_bussiness_location='$ven_business_address',ats_vendor_company_registeration_number='$ven_business_reg_no',ats_vendor_country='$ven_country',ats_vendor_city='$ven_city',ats_vendor_zip_code='$ven_zip_code',ats_vendor_street='$ven_street',ats_vendor_building='$ven_building',ats_vendor_suite_no='$ven_suit_no',ats_vendor_number='$ven_phone',ats_vendor_primary_contact_first_name='$ven_primary_f_name',ats_vendor_primary_contact_middle_name='$ven_primary_m_name',ats_vendor_primary_contact_last_name='$ven_primary_l_name' $echoas ats_vendor_bussiness_website='$ven_website_url',ats_vendor_citizenship_country='$ven_country_citizenship',ats_vendor_birth_country='$ven_country_of_birth',ats_vendor_dob='$ven_date_of_birth',ats_vendor_passport_number='$ven_national_identity',ats_vendor_passport_expiry='$ven_id_expiration_date',ats_vendor_bussiness_role='',ats_vendor_bank_name_for_us='$ven_name_of_bank',ats_vendor_bank_address_for_us='$ven_address_of_bank',ats_vendor_bank_country_for_us='$ven_country_of_bank',ats_vendor_bank_branch_name_for_us='$ven_name_of_bank_branch',ats_vendor_branch_code_for_us='$ven_bank_branch_code',ats_vendor_account_holder_for_us='$ven_bank_account_tittle',ats_vendor_account_number_for_us='$ven_bank_account_no',ats_vendor_swift_code_for_us='$ven_bank_swift_code',ats_vendor_bank_name_for_yen='$ven_name_of_bank_locally',ats_vendor_bank_address_for_yen='$ven_address_of_bank_locally',ats_vendor_bank_country_for_yen='$ven_country_of_bank_locally',ats_vendor_branch_name_for_yen='$ven_name_of_bank_branch_jp_locally',ats_vendor_branch_code_for_yen='$ven_bank_branch_code_locally',ats_vendor_account_title_for_yen='$ven_bank_account_tittle_jp_locally',ats_vendor_account_number_for_yen='$ven_bank_account_no_locally',ats_vendor_account_type_for_yen='$ven_bank_account_type_locally' $echoas1 ats_vendor_national_identity_image='',ats_vendor_status='',ats_vendor_createdBy='',ats_vendor_createdAt='',ats_vendor_updatedBy='',ats_vendor_updatedAt='',bussiness_email='$bussiness_email',ats_vendor_country_2='$ven_country_2',ats_vendor_city_2='$ven_city_2',ats_vendor_zip_code_2='$ven_zip_code_2',ats_vendor_street_2='$ven_street_2',ats_vendor_building_2='$ven_building_2',ats_vendor_suite_no_2='$ven_suit_no_2',ven_name_of_bank_intermidiary='$ven_name_of_bank_intermidiary',ven_address_of_bank_intermidiary='$ven_address_of_bank_intermidiary',ven_country_of_bank_intermidiary='$ven_country_of_bank_intermidiary',ven_name_of_bank_branch_intermidiary='$ven_name_of_bank_branch_intermidiary',ven_bank_branch_code_intermidiary='$ven_bank_branch_code_intermidiary',ven_bank_account_tittle_intermidiary='$ven_bank_account_tittle_intermidiary',ven_bank_account_no_intermidiary='$ven_bank_account_no_intermidiary',ven_bank_swift_code_intermidiary='$ven_bank_swift_code_intermidiary',ven_bank_intermidiary_code='$ven_bank_intermidiary_code',ven_fullName_paypal='$ven_fullName_paypal',ven_email_for_paypal='$ven_email_for_paypal' where ats_vendor_id=".$_GET['id'];
             $query = mysqli_query($connection,$insert);
             if ($query)
             {
@@ -118,25 +114,30 @@ if (isset($_POST["btnsubmit"])) {
                 echo("Error description: " . mysqli_error($connection));
 
             }
-            for($i=0;$i<$totalfiles;$i++){
-                $filename = $_FILES['ven_national_identity_image']['name'][$i];
-             
-               // Upload files and store in database
-               if(move_uploaded_file($_FILES["ven_national_identity_image"]["tmp_name"][$i],'vendordocuments/'.$filename)){
-                       // Image db insert sql
-                      $insert3 = "INSERT INTO vendorimages(images,uniqueid) VALUES ('$filename','$ats_vendor_uid')";
-                      
-                      $iquery = mysqli_query($connection,$insert3);
-             
-             }
-                      
-             
-                      
-                   else{
-                       echo 'Error in uploading file - '.$_FILES['ven_national_identity_image']['name'][$i].'<br/>';
-                   }
-             
-                }        
+            if(trim($totalfiles)){
+                $insertdel = "delete FROM vendorimages WHERE uniqueid=".$row[45];                   
+                 $rquerydel1 = mysqli_query($connection,$insertdel);
+                 for($i=0;$i<$totalfiles;$i++){
+                    $filename = $_FILES['ven_national_identity_image']['name'][$i];
+                 
+                   // Upload files and store in database
+                   if(move_uploaded_file($_FILES["ven_national_identity_image"]["tmp_name"][$i],'vendordocuments/'.$filename)){
+                           // Image db insert sql
+                          $insert3 = "INSERT INTO vendorimages(images,uniqueid) VALUES ('$filename','$row[45]')";
+                          
+                          $iquery = mysqli_query($connection,$insert3);
+                 
+                 }
+                          
+                 
+                          
+                       else{
+                           echo 'Error in uploading file - '.$_FILES['ven_national_identity_image']['name'][$i].'<br/>';
+                       }
+                 
+                    }
+            }
+                  
 }
 ?>
 
@@ -259,16 +260,15 @@ if (isset($_POST["btnsubmit"])) {
                                         <div class="card-body row">
                                             <div class="col-md-4 form-group">
                                                 <label style="font-weight: bold;"  ><span class="text-danger">* </span>Business Name</label>
-                                                <input type="text" name="ven_business_name" id="ven_business_name" class="form-control" >
-                                                <input type="text" name="ats_vendor_uid" id="ats_vendor_uid" class="form-control" value="<?php echo rand(10,100000)?>" style="display:none">
+                                                <input type="text" name="ven_business_name" id="ven_business_name" class="form-control" value="<?php echo $row[1]?>">
                                             </div>
                                             <div class="col-md-4 position-relative form-group">
                                                 <label style="font-weight: bold;" ><span class="text-danger">* </span>Business Location</label>
-                                                <input type="text" name="ven_business_address" id="ven_business_address" class=" form-control" >
+                                                <input type="text" name="ven_business_address" id="ven_business_address" class=" form-control" value="<?php echo $row[2]?>">
                                             </div>
                                             <div class="col-md-4 position-relative form-group">
                                                 <label style="font-weight: bold;" ><span class="text-danger">* </span>Company Registration No.</label>
-                                                <input type="text" class=" form-control" name="ven_business_reg_no" id="ven_business_reg_no" >
+                                                <input type="text" class=" form-control" name="ven_business_reg_no" id="ven_business_reg_no" value="<?php echo $row[3]?>" >
                                                 </div>
                                             <div class="col-md-12">
                                                 <label style="font-weight: bold;"  class="text-dark"><span class="text-danger">* </span>Business Address</label>
@@ -282,28 +282,35 @@ if (isset($_POST["btnsubmit"])) {
                                             <option disabled selected>Please Select</option>
                                             <?php 
                                                 while($rowfetchdetails1=mysqli_fetch_array($queryfetchdetails1)){
+                                                    if($rowfetchdetails1[0]==$row[4]){
                                             ?>
-                                            <option class="form-control" value="<?php echo $rowfetchdetails1[0]?>"><?php echo $rowfetchdetails1[1]?></option>
-
+                                            <option class="form-control" value="<?php echo $rowfetchdetails1[0]?>" SELECTED><?php echo $rowfetchdetails1[1]?></option>
                                             <?php
+                                                    }
+                                                    else {
+                                                        ?>
+                                              <option class="form-control" value="<?php echo $rowfetchdetails1[0]?>" ><?php echo $rowfetchdetails1[1]?></option>
+
+                                                        <?php
+                                                    }
                                                 }
                                             ?>
                                                 </select>
                                             </div>
                                             <div class="col-md-4 position-relative form-group">
-                                                <input type="text" class=" form-control" name="ven_city" id="ven_city"  placeholder="City / Town" >
+                                                <input type="text" class=" form-control" name="ven_city" id="ven_city"  placeholder="City / Town" value="<?php echo $row[5]?>">
                                             </div>
                                             <div class="col-md-4 position-relative form-group">
-                                                <input type="text" class=" form-control" name="ven_zip_code" id="ven_zip_code" placeholder="ZIP / Postal Code" >
+                                                <input type="text" class=" form-control" name="ven_zip_code" id="ven_zip_code" placeholder="ZIP / Postal Code" value="<?php echo $row[6]?>">
                                                 </div>
                                             <div class="col-md-4 position-relative form-group">
-                                                <input type="text" class=" form-control" name="ven_street" id="ven_street" placeholder="Street" >
+                                                <input type="text" class=" form-control" name="ven_street" id="ven_street" placeholder="Street" value="<?php echo $row[7]?>">
                                             </div>
                                             <div class="col-md-4 position-relative form-group">
-                                                <input type="text" class=" form-control" name="ven_building" id="ven_building" placeholder="Building" >
+                                                <input type="text" class=" form-control" name="ven_building" id="ven_building" placeholder="Building" value="<?php echo $row[8]?>">
                                             </div>
                                             <div class="col-md-4 position-relative form-group">
-                                                <input type="text" class=" form-control" name="ven_suit_no" id="ven_suit_no" placeholder="Suite No." >
+                                                <input type="text" class=" form-control" name="ven_suit_no" id="ven_suit_no" placeholder="Suite No." value="<?php echo $row[9]?>">
                                             </div>
                                             <div style="text-align: left;" class="col-md-12">
                                                 <input type="checkbox" name="ven_accept_address" id="ven_accept_address" value="" class="" >
@@ -319,7 +326,7 @@ if (isset($_POST["btnsubmit"])) {
                                             <div class="col-md-6 ">
                                                 <label ><span class="text-danger">* </span>Phone number for verification</label>
                                                 <div class="input-group">
-                                                    <input type="tel" name="ven_phone" id="ven_phone" class="form-control" >
+                                                    <input type="tel" name="ven_phone" id="ven_phone" class="form-control" value="<?php echo $row[10]?>">
                                                     <div class="input-group-append">
                                                     <a name="ven_opt_call" id="ven_opt_call" class="btn btn-primary text-white"  >Send / Call</a>
                                                     </div>
@@ -339,13 +346,13 @@ if (isset($_POST["btnsubmit"])) {
                                                 <label style="font-weight: bold;"><span class="text-danger">* </span>Primary Contact Person</label><br/>
                                             </div>
                                             <div class="col-md-4 position-relative form-group">
-                                                <input type="text" class="form-control"  name="ven_primary_f_name" id="ven_primary_f_name" placeholder="First name ">
+                                                <input type="text" class="form-control"  name="ven_primary_f_name" id="ven_primary_f_name" placeholder="First name " value="<?php echo $row[11]?>">
                                             </div>
                                             <div class="col-md-4 position-relative form-group">
-                                                <input type="text" class=" form-control" name="ven_primary_m_name" id="ven_primary_m_name" placeholder="Middle name ">
+                                                <input type="text" class=" form-control" name="ven_primary_m_name" id="ven_primary_m_name" placeholder="Middle name " value="<?php echo $row[12]?>">
                                             </div>
                                             <div class="col-md-4 position-relative form-group">
-                                                <input type="text" class=" form-control" name="ven_primary_l_name" id="ven_primary_l_name" placeholder="Last name ">
+                                                <input type="text" class=" form-control" name="ven_primary_l_name" id="ven_primary_l_name" placeholder="Last name " value="<?php echo $row[13]?>">
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="image-upload">
@@ -358,11 +365,11 @@ if (isset($_POST["btnsubmit"])) {
                                             </div>
                                             <div class="col-md-4">
                                                 <label style="font-weight: bold;">Business Email</label>
-                                                <input type="text" class="form-control" name="bussiness_email" id="bussiness_email" placeholder="www.abc.com">
+                                                <input type="text" class="form-control" name="bussiness_email" id="bussiness_email" placeholder="www.abc.com" value="<?php echo $row[46]?>">
                                             </div>
                                             <div class="col-md-4">
                                                 <label style="font-weight: bold;">Business Website (Url)</label>
-                                                <input type="text" class="form-control" name="ven_website_url" id="ven_website_url" placeholder="www.abc.com">
+                                                <input type="text" class="form-control" name="ven_website_url" id="ven_website_url" placeholder="www.abc.com" value="<?php echo $row[15]?>">
                                             </div>
                                         </div>
                                     </div>
@@ -380,13 +387,21 @@ if (isset($_POST["btnsubmit"])) {
                                                             <option disabled selected>Please Select</option>
                                             <?php 
                                              $queryfetchdetails2=mysqli_query($connection,"select DISTINCT countrycode,countryname from kobutsu_slab");
-                                            while($rowfetchdetails2=mysqli_fetch_array($queryfetchdetails2)){
-                                            ?>
-                                            <option class="form-control" value="<?php echo $rowfetchdetails2[0]?>"><?php echo $rowfetchdetails2[1]?></option>
+                                            
+                                             while($rowfetchdetails2=mysqli_fetch_array($queryfetchdetails2)){
+                                                 if($rowfetchdetails2[0]==$row[16]){
+                                         ?>
+                                         <option class="form-control" value="<?php echo $rowfetchdetails2[0]?>" SELECTED><?php echo $rowfetchdetails2[1]?></option>
+                                         <?php
+                                                 }
+                                                 else {
+                                                     ?>
+                                           <option class="form-control" value="<?php echo $rowfetchdetails2[0]?>" ><?php echo $rowfetchdetails2[1]?></option>
 
-                                            <?php
-                                                }
-                                            ?>
+                                                     <?php
+                                                 }
+                                             }
+                                         ?>
                                                             </select>
                                                         </div>
                                                         
@@ -396,28 +411,35 @@ if (isset($_POST["btnsubmit"])) {
                                                             <option disabled selected>Please Select</option>
                                             <?php 
                                              $queryfetchdetails3=mysqli_query($connection,"select DISTINCT countrycode,countryname from kobutsu_slab");
-                                            while($rowfetchdetails3=mysqli_fetch_array($queryfetchdetails3)){
-                                            ?>
-                                            <option class="form-control" value="<?php echo $rowfetchdetails3[0]?>"><?php echo $rowfetchdetails3[1]?></option>
-
-                                            <?php
+                                             while($rowfetchdetails3=mysqli_fetch_array($queryfetchdetails3)){
+                                                if($rowfetchdetails3[0]==$row[17]){
+                                        ?>
+                                        <option class="form-control" value="<?php echo $rowfetchdetails3[0]?>" SELECTED><?php echo $rowfetchdetails3[1]?></option>
+                                        <?php
                                                 }
-                                            ?>
+                                                else {
+                                                    ?>
+                                          <option class="form-control" value="<?php echo $rowfetchdetails3[0]?>" ><?php echo $rowfetchdetails3[1]?></option>
+
+                                                    <?php
+                                                }
+                                            }
+                                        ?>
                                                             </select>
                                                         </div>
                                                         <div class="col-md-4 position-relative form-group">
                                                             <label style="font-weight: bold;" class="text-dark">Date of birth</label>        
-                                                            <input type="date" class="form-control" name="ven_date_of_birth" id="ven_country_of_birth"  value=""/>
+                                                            <input type="date" class="form-control" name="ven_date_of_birth" id="ven_country_of_birth"  value="<?php echo $row[18]?>"/>
                                                                
                                                         </div>
                                                         <div class="col-md-6 position-relative form-group">
                                                             <label style="font-weight: bold;" class="text-dark">National Identity / Passport Number</label>        
-                                                            <input type="number" class="form-control" name="ven_national_identity" id="ven_national_identity" placeholder="National Identity / Passport Number"/>
+                                                            <input type="number" class="form-control" name="ven_national_identity" id="ven_national_identity" placeholder="National Identity / Passport Number" value="<?php echo $row[19]?>"/>
                                                                
                                                         </div>
                                                         <div class="col-md-6 position-relative form-group">
                                                             <label style="font-weight: bold;"  class="text-dark">Expiration Date</label>        
-                                                            <input type="date" class="form-control" id="ven_id_expiration_date" name="ven_id_expiration_date" value="10/24/1984"/> 
+                                                            <input type="date" class="form-control" id="ven_id_expiration_date" name="ven_id_expiration_date" value="<?php echo $row[20]?>"/> 
                                                         </div>
                                                         <div class="col-md-12 form-group">
                                                             <label style="font-weight: bold;"  class="text-dark">Residential address</label><br/>        
@@ -436,30 +458,37 @@ if (isset($_POST["btnsubmit"])) {
                                                                                 <select name="ven_country_2" id="ven_country_2" class="form-control" >
                                                                                <option disabled selected>Please Select</option>
                                                                                 <?php 
-                                                                                $queryfetchdetails3=mysqli_query($connection,"select DISTINCT countrycode,countryname from kobutsu_slab");
-                                                                                while($rowfetchdetails3=mysqli_fetch_array($queryfetchdetails3)){
-                                                                                ?>
-                                                                                <option class="form-control" value="<?php echo $rowfetchdetails3[0]?>"><?php echo $rowfetchdetails3[1]?></option>
-
-                                                                                <?php
+                                                                                $queryfetchdetails10=mysqli_query($connection,"select DISTINCT countrycode,countryname from kobutsu_slab");
+                                                                                while($rowfetchdetails10=mysqli_fetch_array($queryfetchdetails10)){
+                                                                                    if($rowfetchdetails10[0]==$row[47]){
+                                                                            ?>
+                                                                            <option class="form-control" value="<?php echo $rowfetchdetails10[0]?>" SELECTED><?php echo $rowfetchdetails10[1]?></option>
+                                                                            <?php
                                                                                     }
-                                                                                ?>
+                                                                                    else {
+                                                                                        ?>
+                                                                              <option class="form-control" value="<?php echo $rowfetchdetails10[0]?>" ><?php echo $rowfetchdetails10[1]?></option>
+                                   
+                                                                                        <?php
+                                                                                    }
+                                                                                }
+                                                                            ?>
                                                                                 </select>
                                                                             </div>
                                                                             <div class="col-md-4 position-relative form-group">
-                                                                                <input type="text" class=" form-control" name="ven_city_2" id="ven_city_2"  placeholder="City / Town" >
+                                                                                <input type="text" class=" form-control" name="ven_city_2" id="ven_city_2"  placeholder="City / Town" value="<?php echo $row[48]?>">
                                                                             </div>
                                                                             <div class="col-md-4 position-relative form-group">
-                                                                                <input type="text" class=" form-control" name="ven_zip_code_2" id="ven_zip_code_2" placeholder="ZIP / Postal Code" >
+                                                                                <input type="text" class=" form-control" name="ven_zip_code_2" id="ven_zip_code_2" placeholder="ZIP / Postal Code" value="<?php echo $row[49]?>">
                                                                             </div>
                                                                             <div class="col-md-4 position-relative form-group">
-                                                                                <input type="text" class=" form-control" name="ven_street_2" id="ven_street_2" placeholder="Street" >
+                                                                                <input type="text" class=" form-control" name="ven_street_2" id="ven_street_2" placeholder="Street" value="<?php echo $row[50]?>">
                                                                             </div>
                                                                             <div class="col-md-4 position-relative form-group">
-                                                                                <input type="text" class=" form-control" name="ven_building_2" id="ven_building_2" placeholder="Building" >
+                                                                                <input type="text" class=" form-control" name="ven_building_2" id="ven_building_2" placeholder="Building" value="<?php echo $row[51]?>">
                                                                             </div>
                                                                             <div class="col-md-4 position-relative form-group">
-                                                                                <input type="text" class=" form-control" name="ven_suit_no_2" id="ven_suit_no_2" placeholder="Suite No." >
+                                                                                <input type="text" class=" form-control" name="ven_suit_no_2" id="ven_suit_no_2" placeholder="Suite No." value="<?php echo $row[52]?>">
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -468,7 +497,6 @@ if (isset($_POST["btnsubmit"])) {
                                                         </div>
                                                         <div class="col-md-12 position-relative form-group">
                                                             <label style="font-weight: bold;"  class="text-dark">Mobile number</label><br/>        
-                                                            <input type="radio" class="" name="ven_accept_and_checked_number" id="ven_accept_and_checked_number" value="ven_accept_and_checked_number"/> +92376378634
                                                             <br/>
                                                             <div id="accordion_number" >
                                                                 <div style="background: transparent; box-shadow: none;" class="card">
@@ -539,13 +567,13 @@ if (isset($_POST["btnsubmit"])) {
                                                         </div>
                                                         <div class="col-md-4">
                                                             <label style="font-weight: bold;"  class="text-dark">Name of Bank</label>
-                                                            <input type="text" name="ven_name_of_bank" class="form-control" id="ven_name_of_bank">
+                                                            <input type="text" name="ven_name_of_bank" class="form-control" id="ven_name_of_bank" value="<?php echo $row[22]?>">
                                                          
                                                         </div>
                                                         <br/>
                                                         <div class="col-md-8 position-relative form-group">
                                                             <label style="font-weight: bold;"  class="text-dark">Bank Address</label>        
-                                                            <input type="text" class="form-control" name="ven_address_of_bank" id="ven_address_of_bank" placeholder="Bank Address" />
+                                                            <input type="text" class="form-control" name="ven_address_of_bank" id="ven_address_of_bank" placeholder="Bank Address" value="<?php echo $row[23]?>"/>
                                                                
                                                         </div>
                                                         <div class="col-md-4 position-relative form-group">
@@ -554,38 +582,45 @@ if (isset($_POST["btnsubmit"])) {
                                                             <option disabled selected>Please Select</option>
                                             <?php 
                                              $queryfetchdetails4=mysqli_query($connection,"select DISTINCT countrycode,countryname from kobutsu_slab");
-                                            while($rowfetchdetails4=mysqli_fetch_array($queryfetchdetails4)){
-                                            ?>
-                                            <option class="form-control" value="<?php echo $rowfetchdetails4[0]?>"><?php echo $rowfetchdetails4[1]?></option>
-
-                                            <?php
+                                             while($rowfetchdetails4=mysqli_fetch_array($queryfetchdetails4)){
+                                                if($rowfetchdetails4[0]==$row[24]){
+                                        ?>
+                                        <option class="form-control" value="<?php echo $rowfetchdetails4[0]?>" SELECTED><?php echo $rowfetchdetails4[1]?></option>
+                                        <?php
                                                 }
-                                            ?>
+                                                else {
+                                                    ?>
+                                          <option class="form-control" value="<?php echo $rowfetchdetails4[0]?>" ><?php echo $rowfetchdetails4[1]?></option>
+
+                                                    <?php
+                                                }
+                                            }
+                                        ?>
                                                             </select>
                                                         </div>
                                                         <div class="col-md-4 position-relative form-group">
                                                             <label style="font-weight: bold;"  class="text-dark">Branch Name</label>        
-                                                            <input type="text" class="form-control" name="ven_name_of_bank_branch" id="ven_name_of_bank_branch" placeholder="Branch Name" />
+                                                            <input type="text" class="form-control" name="ven_name_of_bank_branch" id="ven_name_of_bank_branch" placeholder="Branch Name" value="<?php echo $row[25]?>"/>
                                                                
                                                         </div>
                                                         <div class="col-md-4 position-relative form-group">
                                                             <label style="font-weight: bold;"  class="text-dark">Branch Code</label>        
-                                                            <input type="text" class="form-control" name="ven_bank_branch_code" id="ven_bank_branch_code" placeholder="Branch Code" />
+                                                            <input type="text" class="form-control" name="ven_bank_branch_code" id="ven_bank_branch_code" placeholder="Branch Code" value="<?php echo $row[26]?>"/>
                                                                
                                                         </div>
                                                         <div class="col-md-4 position-relative form-group">
                                                             <label style="font-weight: bold;"  class="text-dark">Account Tittle</label>        
-                                                            <input type="text" class="form-control" name="ven_bank_account_tittle" id="ven_bank_account_tittle"  placeholder="Name as on bank documents" />
+                                                            <input type="text" class="form-control" name="ven_bank_account_tittle" id="ven_bank_account_tittle"  placeholder="Name as on bank documents" value="<?php echo $row[27]?>"/>
                                                                
                                                         </div>
                                                         
                                                         <div class="col-md-4 position-relative form-group">
                                                             <label style="font-weight: bold;" class="text-dark">Account Number</label><br/>        
-                                                            <input type="number" class="form-control" name="ven_bank_account_no" id="ven_bank_account_no" value="" placeholder="Account No."/>
+                                                            <input type="number" class="form-control" name="ven_bank_account_no" id="ven_bank_account_no" value="" placeholder="Account No." value="<?php echo $row[28]?>"/>
                                                         </div>
                                                         <div class="col-md-4 position-relative form-group">
                                                             <label style="font-weight: bold;"  class="text-dark">Swift Code</label><br/>        
-                                                            <input type="text" class="form-control" name="ven_bank_swift_code" id="ven_bank_swift_code" value="" placeholder="Swift Code"/>
+                                                            <input type="text" class="form-control" name="ven_bank_swift_code" id="ven_bank_swift_code" value="" placeholder="Swift Code" value="<?php echo $row[29]?>"/>
                                                         </div>
                                                         <div class="col-md-12">
                                                             <h4 >For YEN JAPAN DOMESTIC Transfers only</h4>
@@ -600,52 +635,59 @@ if (isset($_POST["btnsubmit"])) {
                                             
                                                         <div class="col-md-4">
                                                             <label style="font-weight: bold;" class="text-dark">Name of Bank</label>
-                                                            <input type="text" name="country" class="form-control" name="ven_name_of_bank_locally" id="ven_name_of_bank_locally">
+                                                            <input type="text" name="country" class="form-control" name="ven_name_of_bank_locally" id="ven_name_of_bank_locally" value="<?php echo $row[30]?>">
                                                           
                                                         </div>
                                                         <br/>
                                                         <br/>
                                                         <div class="col-md-8 position-relative form-group">
                                                             <label style="font-weight: bold;"  class="text-dark">Bank Address</label>        
-                                                            <input type="text" class="form-control" name="ven_address_of_bank_locally" id="ven_address_of_bank_locally" placeholder="Bank Address"/>   
+                                                            <input type="text" class="form-control" name="ven_address_of_bank_locally" id="ven_address_of_bank_locally" placeholder="Bank Address" value="<?php echo $row[31]?>"/>   
                                                         </div>
                                                         <div class="col-md-4 position-relative form-group">
                                                             <label style="font-weight: bold;"  class="text-dark">Country</label>
                                                             <select name="ven_country_of_bank_locally" id="ven_country_of_bank_locally" class="form-control" >
                                                             <option disabled selected>Please Select</option>
                                             <?php 
-                                             $queryfetchdetails6=mysqli_query($connection,"select DISTINCT countrycode,countryname from kobutsu_slab");
-                                            while($rowfetchdetails6=mysqli_fetch_array($queryfetchdetails6)){
-                                            ?>
-                                            <option class="form-control" value="<?php echo $rowfetchdetails6[0]?>"><?php echo $rowfetchdetails6[1]?></option>
-
-                                            <?php
+                                             $queryfetchdetails8=mysqli_query($connection,"select DISTINCT countrycode,countryname from kobutsu_slab");
+                                             while($rowfetchdetails8=mysqli_fetch_array($queryfetchdetails8)){
+                                                if($rowfetchdetails8[0]==$row[32]){
+                                        ?>
+                                        <option class="form-control" value="<?php echo $rowfetchdetails8[0]?>" SELECTED><?php echo $rowfetchdetails8[1]?></option>
+                                        <?php
                                                 }
-                                            ?>
+                                                else {
+                                                    ?>
+                                          <option class="form-control" value="<?php echo $rowfetchdetails8[0]?>" ><?php echo $rowfetchdetails8[1]?></option>
+
+                                                    <?php
+                                                }
+                                            }
+                                        ?>
                                                             </select>
                                                         </div>
                                                         <div class="col-md-4 position-relative form-group">
                                                             <label style="font-weight: bold;"  class="text-dark">Branch Name (JP)</label>        
-                                                            <input type="text" class="form-control" name="ven_name_of_bank_branch_jp_locally" id="ven_name_of_bank_branch_jp_locally" placeholder="支店名" />
+                                                            <input type="text" class="form-control" name="ven_name_of_bank_branch_jp_locally" id="ven_name_of_bank_branch_jp_locally" placeholder="支店名" value="<?php echo $row[33]?>"/>
                                                                
                                                         </div>
                                                         <div class="col-md-4 position-relative form-group">
                                                             <label style="font-weight: bold;" class="text-dark">Branch Code</label>        
-                                                            <input type="text" class="form-control" name="ven_bank_branch_code_locally" id="ven_bank_branch_code_locally" placeholder="Branch Code" />
+                                                            <input type="text" class="form-control" name="ven_bank_branch_code_locally" id="ven_bank_branch_code_locally" placeholder="Branch Code" value="<?php echo $row[34]?>"/>
                                                                
                                                         </div>
                                                         <div class="col-md-4 position-relative form-group">
                                                             <label style="font-weight: bold;" class="text-dark">Account Tittle (JP)</label>        
-                                                            <input type="text" class="form-control" name="ven_bank_account_tittle_jp_locally" id="ven_bank_account_tittle_jp_locally" placeholder="アカウントのタイトル" />
+                                                            <input type="text" class="form-control" name="ven_bank_account_tittle_jp_locally" id="ven_bank_account_tittle_jp_locally" placeholder="アカウントのタイトル" value="<?php echo $row[35]?>"/>
                                                         </div>
                                                         
                                                         <div class="col-md-4 position-relative form-group">
                                                             <label style="font-weight: bold;"  class="text-dark">Account Number</label><br/>        
-                                                            <input type="number" class="form-control" name="ven_bank_account_no_locally" id="ven_bank_account_no_locally" value="" placeholder="Account No."/>
+                                                            <input type="number" class="form-control" name="ven_bank_account_no_locally" id="ven_bank_account_no_locally" value="" placeholder="Account No." value="<?php echo $row[28]?>"/>
                                                         </div>
                                                         <div class="col-md-4 position-relative form-group">
                                                             <label style="font-weight: bold;"  class="text-dark">Account Type</label><br/>        
-                                                            <input type="text" class="form-control" name="ven_bank_account_type_locally" id="ven_bank_account_type_locally" value="" placeholder="Swift Code"/>
+                                                            <input type="text" class="form-control" name="ven_bank_account_type_locally" id="ven_bank_account_type_locally" value="" placeholder="Swift Code" value="<?php echo $row[37]?>"/>
                                                         </div>
                                                         <div class="col-md-12">
                                                             <h4>Other Information</h4>
@@ -668,57 +710,65 @@ if (isset($_POST["btnsubmit"])) {
                                                                             </div>
                                                                             <div class="col-md-4">
                                                                                 <label style="font-weight: bold;"  class="text-dark">Name of Bank</label>
-                                                                                <input name="ven_name_of_bank_intermidiary" class="form-control" id="ven_name_of_bank_intermidiary">
+                                                                                <input name="ven_name_of_bank_intermidiary" class="form-control" id="ven_name_of_bank_intermidiary" value="<?php echo $row[53]?>">
                                                                                   
-                                                                               
+                                                                                
                                                                             </div>
                                                                             <br/>
                                                                             <div class="col-md-4 position-relative form-group">
                                                                                 <label style="font-weight: bold;"  class="text-dark">Bank Address</label>        
-                                                                                <input type="text" class="form-control" name="ven_address_of_bank_intermidiary" id="ven_address_of_bank_intermidiary" placeholder="Bank Address" />
+                                                                                <input type="text" class="form-control" name="ven_address_of_bank_intermidiary" id="ven_address_of_bank_intermidiary" placeholder="Bank Address"  value="<?php echo $row[54]?>"/>
                                                                                    
                                                                             </div>
                                                                             <div class="col-md-4 position-relative form-group">
                                                                                 <label style="font-weight: bold;"  class="text-dark">Country</label>
                                                                                 <select name="ven_country_of_bank_intermidiary" id="ven_country_of_bank_intermidiary" class="form-control" >
-                                                                                <?php 
+                                                                                                                        <option disabled selected>Please Select</option>
+                                                                                    <?php 
                                                                                     $queryfetchdetails8=mysqli_query($connection,"select DISTINCT countrycode,countryname from kobutsu_slab");
                                                                                     while($rowfetchdetails8=mysqli_fetch_array($queryfetchdetails8)){
-                                                                                    ?>
-                                                                                    <option class="form-control" value="<?php echo $rowfetchdetails8[0]?>"><?php echo $rowfetchdetails8[1]?></option>
-
-                                                                                    <?php
+                                                                                        if($rowfetchdetails8[0]==$row[55]){
+                                                                                ?>
+                                                                                <option class="form-control" value="<?php echo $rowfetchdetails8[0]?>" SELECTED><?php echo $rowfetchdetails8[1]?></option>
+                                                                                <?php
                                                                                         }
-                                                                                    ?>
+                                                                                        else {
+                                                                                            ?>
+                                                                                <option class="form-control" value="<?php echo $rowfetchdetails8[0]?>" ><?php echo $rowfetchdetails8[1]?></option>
+
+                                                                                            <?php
+                                                                                        }
+                                                                                    }
+                                                                                ?>
                                                                                 </select>
                                                                             </div>
                                                                             <div class="col-md-4 position-relative form-group">
                                                                                 <label style="font-weight: bold;"  class="text-dark">Branch Name</label>        
-                                                                                <input type="text" class="form-control" name="ven_name_of_bank_branch_intermidiary" id="ven_name_of_bank_branch_intermidiary" placeholder="Branch Name" />
+                                                                                <input type="text" class="form-control" name="ven_name_of_bank_branch_intermidiary" value="<?php echo $row[56]?>" id="ven_name_of_bank_branch_intermidiary" placeholder="Branch Name" />
                                                                                    
                                                                             </div>
                                                                             <div class="col-md-4 position-relative form-group">
                                                                                 <label style="font-weight: bold;"  class="text-dark">Branch Code</label>        
-                                                                                <input type="text" class="form-control" name="ven_bank_branch_code_intermidiary" id="ven_bank_branch_code_intermidiary" placeholder="Branch Code" />
+                                                                                <input type="text" class="form-control" name="ven_bank_branch_code_intermidiary" value="<?php echo $row[57]?>" id="ven_bank_branch_code_intermidiary" placeholder="Branch Code" />
                                                                                    
                                                                             </div>
                                                                             <div class="col-md-4 position-relative form-group">
                                                                                 <label style="font-weight: bold;"  class="text-dark">Account Tittle</label>        
-                                                                                <input type="text" class="form-control" name="ven_bank_account_tittle_intermidiary" id="ven_bank_account_tittle_intermidiary"  placeholder="Name as on bank documents" />
+                                                                                <input type="text" class="form-control" name="ven_bank_account_tittle_intermidiary" value="<?php echo $row[58]?>" id="ven_bank_account_tittle_intermidiary"  placeholder="Name as on bank documents" />
                                                                                    
                                                                             </div>
                                                                             
                                                                             <div class="col-md-4 position-relative form-group">
                                                                                 <label style="font-weight: bold;" class="text-dark">Account Number</label><br/>        
-                                                                                <input type="number" class="form-control" name="ven_bank_account_no_intermidiary" id="ven_bank_account_no_intermidiary" value="" placeholder="Account No."/>
+                                                                                <input type="number" class="form-control" name="ven_bank_account_no_intermidiary" value="<?php echo $row[59]?>" id="ven_bank_account_no_intermidiary" value="" placeholder="Account No."/>
                                                                             </div>
                                                                             <div class="col-md-4 position-relative form-group">
                                                                                 <label style="font-weight: bold;"  class="text-dark">Swift Code</label><br/>        
-                                                                                <input type="text" class="form-control" name="ven_bank_swift_code_intermidiary" id="ven_bank_swift_code_intermidiary" value="" placeholder="Swift Code"/>
+                                                                                <input type="text" class="form-control" name="ven_bank_swift_code_intermidiary" value="<?php echo $row[60]?>" id="ven_bank_swift_code_intermidiary" value="" placeholder="Swift Code"/>
                                                                             </div>
                                                                             <div class="col-md-4 position-relative form-group">
                                                                                 <label style="font-weight: bold;"  class="text-dark">Intermidiary Code</label><br/>        
-                                                                                <input type="text" class="form-control" name="ven_bank_intermidiary_code" id="ven_bank_intermidiary_code" value="" placeholder="Swift Code"/>
+                                                                                <input type="text" class="form-control" name="ven_bank_intermidiary_code" id="ven_bank_intermidiary_code" value="<?php echo $row[61]?>" value="" placeholder="Swift Code"/>
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -737,11 +787,11 @@ if (isset($_POST["btnsubmit"])) {
                                                                         <div class="card-body row">
                                                                             <div class="col-md-6 position-relative form-group">
                                                                                 <label style="font-weight: bold;"  class="text-dark">Full Name</label><br/>        
-                                                                                <input type="text" class="form-control" name="ven_fullName_paypal" id="ven_fullName_paypal" value="" placeholder="Full Name"/>
+                                                                                <input type="text" class="form-control" name="ven_fullName_paypal" id="ven_fullName_paypal" value="<?php echo $row[62]?>" placeholder="Full Name"/>
                                                                             </div>
                                                                             <div class="col-md-6 position-relative form-group">
                                                                                 <label style="font-weight: bold;"  class="text-dark">Email Address (For PayPal)</label><br/>        
-                                                                                <input type="text" class="form-control" name="ven_email_for_paypal" id="ven_email_for_paypal" value="" placeholder="Email Address"/>
+                                                                                <input type="text" class="form-control" name="ven_email_for_paypal" id="ven_email_for_paypal" value="<?php echo $row[63]?>" placeholder="Email Address"/>
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -776,18 +826,15 @@ if (isset($_POST["btnsubmit"])) {
                                                                                     <i class="badge badge-dot badge-dot-xl badge-success"></i>
                                                                                 </span>
                                                                                 <div class="vertical-timeline-element-content bounce-in">
-                                                                                    <h4 class="timeline-title" id="ven_business_name_print">ABC School</h4>
-                                                                                   
+                                                                                    <h4 class="timeline-title" id="ven_business_name_print"><?php echo $row[1]?></h4>
                                                                                     <span class="vertical-timeline-element-date">Name</span>
                                                                                 </div>
                                                                             </div>
                                                                         </div>
                                                                         <div class="vertical-timeline-item vertical-timeline-element">
-                                                                            <div>
-                                                                                
+                                                                            <div>    
                                                                                 <div class="vertical-timeline-element-content bounce-in">
-                                                                                    <h4 class="timeline-title" id="ven_business_address_print"></h4>
-                                                                                    
+                                                                                    <h4 class="timeline-title" id="ven_business_address_print"><?php echo $row[2]?></h4>
                                                                                     <span class="vertical-timeline-element-date"> Address</span>
                                                                                 </div>
                                                                             </div>
@@ -798,28 +845,23 @@ if (isset($_POST["btnsubmit"])) {
                                                                                     <i class="badge badge-dot badge-dot-xl badge-danger"></i>
                                                                                 </span>
                                                                                 <div class="vertical-timeline-element-content bounce-in">
-                                                                                    <h4 class="timeline-title" id="ven_phone_print"></h4>
-                                                                                    
+                                                                                    <h4 class="timeline-title" id="ven_phone_print"><?php echo $row[10]?></h4>
                                                                                     <span class="vertical-timeline-element-date">Phone</span>
                                                                                 </div>
                                                                             </div>
                                                                         </div>
                                                                         <div class="vertical-timeline-item vertical-timeline-element">
                                                                             <div>
-                                                                                
                                                                                 <div class="vertical-timeline-element-content bounce-in">
-                                                                                    <h4 class="timeline-title text-success" id="ven_email_print"></h4>
-                                                                                    
+                                                                                    <h4 class="timeline-title text-success" id="ven_email_print"><?php echo $row[46]?></h4>
                                                                                     <span class="vertical-timeline-element-date">Email</span>
                                                                                 </div>
                                                                             </div>
                                                                         </div>
                                                                         <div class="vertical-timeline-item vertical-timeline-element">
                                                                             <div>
-                                                                               
                                                                                 <div class="vertical-timeline-element-content bounce-in">
-                                                                                    <h4 class="timeline-title text-success" id="ven_business_reg_no_print"></h4>
-                                                                                    
+                                                                                    <h4 class="timeline-title text-success" id="ven_business_reg_no_print"><?php echo $row[3]?></h4>
                                                                                     <span class="vertical-timeline-element-date">Reg. No.</span>
                                                                                 </div>
                                                                             </div>
@@ -830,8 +872,7 @@ if (isset($_POST["btnsubmit"])) {
                                                                                     <i class="badge badge-dot badge-dot-xl badge-success"></i>
                                                                                 </span>
                                                                                 <div class="vertical-timeline-element-content bounce-in">
-                                                                                    <h4 class="timeline-title" id="ven_website_url_print"></h4>
-                                                                                    
+                                                                                    <h4 class="timeline-title" id="ven_website_url_print"><?php echo $row[15]?></h4>
                                                                                     <span class="vertical-timeline-element-date">Website</span>
                                                                                 </div>
                                                                             </div>
@@ -866,7 +907,11 @@ if (isset($_POST["btnsubmit"])) {
                                                                                 <span class="vertical-timeline-element-icon bounce-in">
                                                                                     <i class="badge badge-dot badge-dot-xl badge-success"></i>
                                                                                 </span>
-                                                                                        
+                                                                                <div class="vertical-timeline-element-content bounce-in">
+                                                                                    <h4 class="timeline-title" id="ven_name_print" ></h4>
+                                                                                   
+                                                                                    <span class="vertical-timeline-element-date">Name</span>
+                                                                                </div>
                                                                             </div>
                                                                         </div>
                                                                         <div class="vertical-timeline-item vertical-timeline-element">
@@ -875,11 +920,32 @@ if (isset($_POST["btnsubmit"])) {
                                                                                 <div class="vertical-timeline-element-content bounce-in">
                                                                                     <h4 class="timeline-title" id="ven_address_print"></h4>
                                                                                     
-                                                                                    <span class="vertical-timeline-element-date">Address-2</span>
+                                                                                    <span class="vertical-timeline-element-date">Address</span>
                                                                                 </div>
                                                                             </div>
                                                                         </div>
-                                                                        
+                                                                        <div class="vertical-timeline-item vertical-timeline-element">
+                                                                            <div>
+                                                                                <span class="vertical-timeline-element-icon bounce-in">
+                                                                                    <i class="badge badge-dot badge-dot-xl badge-danger"></i>
+                                                                                </span>
+                                                                                <div class="vertical-timeline-element-content bounce-in">
+                                                                                    <h4 class="timeline-title" id="ven_phone_2_print"></h4>
+                                                                                    
+                                                                                    <span class="vertical-timeline-element-date">Phone</span>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="vertical-timeline-item vertical-timeline-element">
+                                                                            <div>
+                                                                                
+                                                                                <div class="vertical-timeline-element-content bounce-in">
+                                                                                    <h4 class="timeline-title text-success" id="ven_email_2_print" ></h4>
+                                                                                    
+                                                                                    <span class="vertical-timeline-element-date">Email</span>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
                                                                         <div class="vertical-timeline-item vertical-timeline-element">
                                                                             <div>
                                                                                 <span class="vertical-timeline-element-icon bounce-in">
@@ -920,7 +986,7 @@ if (isset($_POST["btnsubmit"])) {
                                                                                     <i class="badge badge-dot badge-dot-xl badge-success"></i>
                                                                                 </span>
                                                                                 <div class="vertical-timeline-element-content bounce-in">
-                                                                                    <h4 class="timeline-title" id="ven_name_of_bank_print" ></h4>
+                                                                                    <h4 class="timeline-title" id="ven_name_of_bank_print" ><?php echo $row[22]?></h4>
                                                                                     <span class="vertical-timeline-element-date">Name</span>
                                                                                 </div>
                                                                             </div>
@@ -931,7 +997,7 @@ if (isset($_POST["btnsubmit"])) {
                                                                                     <i style="display: none;" class="badge badge-dot badge-dot-xl badge-success"> </i>
                                                                                 </span>
                                                                                 <div class="vertical-timeline-element-content bounce-in">
-                                                                                    <h4 class="timeline-title" id="ven_address_of_bank_print"></h4>
+                                                                                    <h4 class="timeline-title" id="ven_address_of_bank_print"><?php echo $row[23]?></h4>
                                                                                     <span class="vertical-timeline-element-date"> Address</span>
                                                                                 </div>
                                                                             </div>
@@ -942,7 +1008,7 @@ if (isset($_POST["btnsubmit"])) {
                                                                                     <i class="badge badge-dot badge-dot-xl badge-success"></i>
                                                                                 </span>
                                                                                 <div class="vertical-timeline-element-content bounce-in">
-                                                                                    <h4 class="timeline-title" id="ven_bank_account_tittle_print"></h4>
+                                                                                    <h4 class="timeline-title" id="ven_bank_account_tittle_print"><?php echo $row[27]?></h4>
                                                                                     <span class="vertical-timeline-element-date">Tittle</span>
                                                                                 </div>
                                                                             </div>
@@ -953,19 +1019,17 @@ if (isset($_POST["btnsubmit"])) {
                                                                                     <i class="badge badge-dot badge-dot-xl badge-success"></i>
                                                                                 </span>
                                                                                 <div class="vertical-timeline-element-content bounce-in">
-                                                                                    <h4 class="timeline-title" id="ven_bank_account_no_print"></h4>
+                                                                                    <h4 class="timeline-title" id="ven_bank_account_no_print"><?php echo $row[28]?></h4>
                                                                                     <span class="vertical-timeline-element-date">Account #</span>
                                                                                 </div>
                                                                             </div>
                                                                         </div>
                                                                         <div class="vertical-timeline-item vertical-timeline-element">
                                                                             <div>
-                                                                                <span class="vertical-timeline-element-icon bounce-in">
-                                                                                    
+                                                                                <span class="vertical-timeline-element-icon bounce-in">    
                                                                                 </span>
                                                                                 <div class="vertical-timeline-element-content bounce-in">
-                                                                                    <h4 class="timeline-title text-success" id="ven_name_of_bank_branch_print"></h4>
-                                                                                    
+                                                                                    <h4 class="timeline-title text-success" id="ven_name_of_bank_branch_print"><?php echo $row[25]?></h4>
                                                                                     <span class="vertical-timeline-element-date">Branch</span>
                                                                                 </div>
                                                                             </div>
@@ -976,8 +1040,7 @@ if (isset($_POST["btnsubmit"])) {
                                                                                     <i class="badge badge-dot badge-dot-xl badge-success"></i>
                                                                                 </span>
                                                                                 <div class="vertical-timeline-element-content bounce-in">
-                                                                                    <h4 class="timeline-title" id="ven_bank_swift_code_print" ></h4>
-                                                                                    
+                                                                                    <h4 class="timeline-title" id="ven_bank_swift_code"><?php echo $row[29]?></h4>
                                                                                     <span class="vertical-timeline-element-date">Swift Code</span>
                                                                                 </div>
                                                                             </div>
@@ -993,8 +1056,7 @@ if (isset($_POST["btnsubmit"])) {
                                                                                     <i class="badge badge-dot badge-dot-xl badge-success"></i>
                                                                                 </span>
                                                                                 <div class="vertical-timeline-element-content bounce-in">
-                                                                                    <h4 class="timeline-title" id="ven_name_of_bank_locally_print"></h4>
-                                                                                   
+                                                                                    <h4 class="timeline-title" id="ven_name_of_bank_locally"><?php echo $row[30]?></h4>
                                                                                     <span class="vertical-timeline-element-date">Name</span>
                                                                                 </div>
                                                                             </div>
@@ -1002,8 +1064,7 @@ if (isset($_POST["btnsubmit"])) {
                                                                         <div class="vertical-timeline-item vertical-timeline-element">
                                                                             <div>
                                                                                 <div class="vertical-timeline-element-content bounce-in">
-                                                                                    <h4 class="timeline-title" id="ven_address_of_bank_locally_print"></h4>
-                                                                                    
+                                                                                    <h4 class="timeline-title" id="ven_address_of_bank_locally"><?php echo $row[32]?></h4>
                                                                                     <span class="vertical-timeline-element-date" > Address</span>
                                                                                 </div>
                                                                             </div>
@@ -1014,8 +1075,7 @@ if (isset($_POST["btnsubmit"])) {
                                                                                     <i class="badge badge-dot badge-dot-xl badge-success"></i>
                                                                                 </span>
                                                                                 <div class="vertical-timeline-element-content bounce-in">
-                                                                                    <h4 class="timeline-title" id="ven_bank_account_tittle_jp_locally_print"></h4>
-                                                                                    
+                                                                                    <h4 class="timeline-title" id="ven_bank_account_tittle_jp_locally"><?php echo $row[35]?></h4>
                                                                                     <span class="vertical-timeline-element-date">Tittle (JP)</span>
                                                                                 </div>
                                                                             </div>
@@ -1026,20 +1086,16 @@ if (isset($_POST["btnsubmit"])) {
                                                                                     <i class="badge badge-dot badge-dot-xl badge-success"></i>
                                                                                 </span>
                                                                                 <div class="vertical-timeline-element-content bounce-in">
-                                                                                    <h4 class="timeline-title" id="ven_bank_account_no_locally_print"></h4>
-                                                                                    
+                                                                                    <h4 class="timeline-title" id="ven_bank_account_no_locally"><?php echo $row[36]?></h4>
                                                                                     <span class="vertical-timeline-element-date">Account #</span>
                                                                                 </div>
                                                                             </div>
                                                                         </div>
                                                                         <div class="vertical-timeline-item vertical-timeline-element">
                                                                             <div>
-                                                                                <span class="vertical-timeline-element-icon bounce-in">
-                                                                                    
-                                                                                </span>
+                                                                                <span class="vertical-timeline-element-icon bounce-in"></span>
                                                                                 <div class="vertical-timeline-element-content bounce-in">
-                                                                                    <h4 class="timeline-title text-success" id="ven_name_of_bank_branch_jp_locally_pint"></h4>
-                                                                                    
+                                                                                    <h4 class="timeline-title text-success" id="ven_name_of_bank_branch_jp_locally"><?php echo $row[33]?></h4>
                                                                                     <span class="vertical-timeline-element-date">Branch (JP)</span>
                                                                                 </div>
                                                                             </div>
@@ -1050,16 +1106,13 @@ if (isset($_POST["btnsubmit"])) {
                                                                                     <i class="badge badge-dot badge-dot-xl badge-success"></i>
                                                                                 </span>
                                                                                 <div class="vertical-timeline-element-content bounce-in">
-                                                                                    <h4 class="timeline-title" id="ven_bank_account_type_locally_print"></h4>
-                                                                                    
+                                                                                    <h4 class="timeline-title" id="ven_bank_account_type_locally"><?php echo $row[37]?></h4>
                                                                                     <span class="vertical-timeline-element-date">Type</span>
                                                                                 </div>
                                                                             </div>
                                                                             <br/>
-                                                                        </div>
-                                                                        
-                                                                    </div>
-                                                                    
+                                                                        </div>    
+                                                                    </div>    
                                                                 </div>
                                                             </div>
                                                             <label>
@@ -1200,7 +1253,6 @@ if (isset($_POST["btnsubmit"])) {
             }
 
         }
-        
     </script>
 <script>
     $(document).ready(function () {
@@ -1214,13 +1266,14 @@ if (isset($_POST["btnsubmit"])) {
         $('#ven_bank_account_tittle_jp_locally').val($('#ven_bank_account_tittle').val());
         $('#ven_bank_account_no_locally').val($('#ven_bank_account_no').val());
     });
+
 });
     </script>
-    <script>
+   <script>
     $(document).ready(function () {
     
     $('#ven_same_details_for_intermidiary').click(function () {
-       
+      
         $('#ven_name_of_bank_intermidiary').val($('#ven_name_of_bank').val());
         $('#ven_address_of_bank_intermidiary').val($('#ven_address_of_bank').val());
         $('#ven_country_of_bank_intermidiary').val($('#ven_country_of_bank').val());
@@ -1232,64 +1285,4 @@ if (isset($_POST["btnsubmit"])) {
     });
 });
     </script>
-    <script>
-        $("#ven_business_name").keyup(function() {
-  $("#ven_business_name_print").text($(this).val());
-});
-$("#ven_business_address").keyup(function() {
-  $("#ven_business_address_print").text($(this).val());
-});
-$("#ven_business_reg_no").keyup(function() {
-  $("#ven_business_reg_no_print").text($(this).val());
-});
-$("#ven_website_url").keyup(function() {
-  $("#ven_website_url_print").text($(this).val());
-});
-$("#bussiness_email").keyup(function() {
-  $("#ven_email_print").text($(this).val());
-});
-$("#bussiness_email").keyup(function() {
-  $("#ven_email_print").text($(this).val());
-});
-$("#ven_phone").keyup(function() {
-  $("#ven_phone_print").text($(this).val());
-});
-$("#ven_name_of_bank").keyup(function() {
-  $("#ven_name_of_bank_print").text($(this).val());
-});
-$("#ven_address_of_bank").keyup(function() {
-  $("#ven_address_of_bank_print").text($(this).val());
-});
-$("#ven_bank_account_tittle").keyup(function() {
-  $("#ven_bank_account_tittle_print").text($(this).val());
-});
-$("#ven_bank_account_no").keyup(function() {
-  $("#ven_bank_account_no_print").text($(this).val());
-});
-$("#ven_name_of_bank_branch").keyup(function() {
-  $("#ven_name_of_bank_branch_print").text($(this).val());
-});
-$("#ven_bank_swift_code").keyup(function() {
-  $("#ven_bank_swift_code_print").text($(this).val());
-});
-$("#ven_name_of_bank_locally").keyup(function() {
-  $("#ven_name_of_bank_locally_print").text($(this).val());
-});
-$("#ven_address_of_bank_locally").keyup(function() {
-  $("#ven_address_of_bank_locally_print").text($(this).val());
-});
-$("#ven_bank_account_tittle_jp_locally").keyup(function() {
-  $("#ven_bank_account_tittle_jp_locally_print").text($(this).val());
-});
-$("#ven_bank_account_no_locally").change(function() {
-  $("#ven_bank_account_no_locally_print").text($(this).val());
-});
-$("#ven_name_of_bank_branch_jp_locally").keyup(function() {
-  $("#ven_name_of_bank_branch_jp_locally_pint").text($(this).val());
-});
-$("#ven_bank_account_type_locally").keyup(function() {
-  $("#ven_bank_account_type_locally_print").text($(this).val());
-});
-
-    </script>   
 </html>
