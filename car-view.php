@@ -1,11 +1,37 @@
 <?php
 include("top.php");
 include("connection_db.php");
+$NewDate=Date('d/m/Y', strtotime('+3 days'));
+$NewDate1=Date('d/m/Y');
+
 $query="select * from ats_car_stocK WHERE ats_car_stock_id=".$_GET['car_id'];
 $result=mysqli_query($connection,$query);
 $row=mysqli_fetch_row($result);
+if($row[57] !== "-----" || $row[57] !== ""){
+$queryinspection="select * from inspection_charges where id=".$row[57];
+$resultinspection=mysqli_query($connection,$queryinspection);
+$rowinspection=mysqli_fetch_row($resultinspection);
+}
 
+$resultsell=mysqli_query($connection,"select * from ats_sell_person");
+if(isset($_POST['btnreserve']))
+{
+    $recordno=mysqli_real_escape_string($connection,$row[1]);
+    $date_from=mysqli_real_escape_string($connection,$_POST['date_from']);
+    $date_till=mysqli_real_escape_string($connection,$_POST['date_till']);
+    $customer=mysqli_real_escape_string($connection,$_POST['customername']);
+    $payment_per=mysqli_real_escape_string($connection,$_POST['payment_per']);
+    $memo=mysqli_real_escape_string($connection,$_POST['memo']);
+    $yard_charges=mysqli_real_escape_string($connection,$_POST['yard_charges']);
+    $repair_charges=mysqli_real_escape_string($connection,$_POST['repair_charges']);
+    $insertreservequery="INSERT INTO ats_stock_reservation(recordno, date_from, date_till, customer, payment_per, memo, yard_charges, repair_charges) VALUES ('$recordno','$date_from','$date_till','$customer','$payment_per','$memo','$yard_charges','$repair_charges')";
+    $insertreserve=mysqli_query($connection,$insertreservequery);
+    if($insertreserve)
+    {
+        echo '<script type="text/javascript"> alert("Car Reserved!")</script>';
 
+    }
+}
 ?>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.8.2/css/lightbox.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.8.2/js/lightbox.min.js"></script>
@@ -949,50 +975,56 @@ include("bottom.php");
                     </div>
                 </div>
             </div>
-            <form>
+            <form method="post">
                 <div class="modal-body">
                     <div class="row">
                         <div style="margin-top: -3%;" class="col-md-4">
                             <label  class="form-control-label">From</label>
-                            <input style=" font-size: 11px;  margin-top: -5%; height: 20px;  width: 130px;" type="date" id="username" name="stock_chassis_id" class="form-control">
+                            <input style=" font-size: 11px;  margin-top: -5%; height: 20px;  width: 130px;" type="text" id="date_from" name="date_from" class="form-control" value="<?php echo $NewDate1?>">
                         </div>
                         <div style="margin-top: -3%;" class="col-md-4">
                             <label class="form-control-label">Till</label>
-                            <input style=" font-size: 11px;  margin-top: -5%; height: 20px;  width: 130px;" type="date" id="username" name="stock_chassis_id" class="form-control">
+                            <input style=" font-size: 11px;  margin-top: -5%; height: 20px;  width: 130px;" type="text" id="date_till" name="date_till" class="form-control" value="<?php echo $NewDate?>">
                         </div>
                         <div style="margin-top: -3%;" class="col-md-4">
                             <label class="form-control-label">Agent Name</label>
-                            <select style="padding: 0px; font-size: 11px; margin-top: -5%;  height: 20px;  width: 140px;"  id="select" class="form-control">
-                                <option value="">abc</option>
-                                <option>Abc</option>
-                                <option>Abc</option>
+                            <select style="padding: 0px; font-size: 11px; margin-top: -5%;  height: 20px;  width: 140px;" name="rsellperson"  id="select" class="form-control" onChange="getCustomer(this.value);">
+                                <?php 
+                                while($rowsell=mysqli_fetch_row($resultsell))
+                                {
+                                 ?>
+                                 <option value="<?php echo $rowsell[1]?>" ><?php echo $rowsell[1]?></option>
+                                 <?php   
+                                }
+                                ?>
                             </select>
                         </div>
-                        <div class="col-md-3">
+                        <div class="col-md-3" id="custlist">
                             <label class="form-control-label">Customer</label>
-                            <select style=" padding: 0px; font-size: 11px;  margin-top: -8%; height: 20px;  width: 120px;" type="text" id="username" name="stock_chassis_id" class="form-control">
+                            <select style=" padding: 0px; font-size: 11px;  margin-top: -8%; height: 20px;  width: 120px;" type="text" id="customername" name="customername" class="form-control">
                                 <option value="---">---</option>
                                 <option>Abc</option>
                                 <option>Abc</option>
                             </select>
                         </div>
-                        <div  class="col-md-3">
+                        
+                        <div  class="col-md-3" id="customerphone">
                             <label style="margin-left: 8%;" class="form-control-label">Phone</label>
                             <input style=" font-size: 11px; margin-left: 8%; margin-top: -8%; height: 20px;  width: 100px;" type="text" id="username" name="stock_chassis_id" class="form-control">
                         </div>
-                        <div  class="col-md-3">
+                        <div  class="col-md-3" id="customercountry">
                             <label class="form-control-label">Country</label>
                             <input style=" font-size: 11px;  margin-top: -8%; height: 20px;  width: 100px;" type="text" id="username" name="stock_chassis_id" class="form-control">
                         </div>
-                        <div  class="col-md-3">
+                        <div  class="col-md-3" id="customerport">
                             <label class="form-control-label">Destination&nbsp;Port</label>
                             <input style=" font-size: 11px;  margin-top: -8%; height: 20px;  width: 100px;" type="text" id="username" name="stock_chassis_id" class="form-control">
                         </div>
-                        <div  class="col-md-12">
-                            <label class="form-control-label">Address</label>
+                        <div  class="col-md-12" id="customeradress">
+                            <label class="form-control-label" >Address</label>
                             <input style=" font-size: 11px; width: 472px; height: 20px;  margin-top: -2%; " type="text" id="username" name="stock_chassis_id" class="form-control">
                         </div>
-                        <div class="col-md-3">
+                        <div class="col-md-3" id="consigneelist">
                             <label class="form-control-label">Consignee&nbsp;Name</label>
                             <select style=" padding: 0px; font-size: 11px;  margin-top: -8%; height: 20px;  width: 120px;" type="text" id="username" name="stock_chassis_id" class="form-control">
                                 <option value="---">---</option>
@@ -1000,28 +1032,31 @@ include("bottom.php");
                                 <option>Abc</option>
                             </select>
                         </div>
-                        <div  class="col-md-3">
+                    
+                    
+                        <div  class="col-md-3" id="cp">
                             <label style="margin-left: 8%;" class="form-control-label">Consignee&nbsp;Phone</label>
                             <input style=" font-size: 11px; margin-left: 8%; margin-top: -8%; height: 20px;  width: 100px;" type="text" id="username" name="stock_chassis_id" class="form-control">
                         </div>
-                        <div  class="col-md-3">
+                        <div  class="col-md-3" id="notifyname">
                             <label class="form-control-label">Notify&nbsp;Name</label>
                             <input style=" font-size: 11px;  margin-top: -8%; height: 20px;  width: 100px;" type="text" id="username" name="stock_chassis_id" class="form-control">
                         </div>
-                        <div  class="col-md-3">
+                        <div  class="col-md-3" id="notifyphone">
                             <label class="form-control-label">Notify&nbsp;Phone</label>
                             <input style=" font-size: 11px;  margin-top: -8%; height: 20px;  width: 100px;" type="text" id="username" name="stock_chassis_id" class="form-control">
                         </div>
-                        <div  class="col-md-6">
+                        <div  class="col-md-6" id="consigneeadress">
                             <label class="form-control-label">Consignee&nbsp;Address</label>
                             <input style=" font-size: 11px; width: 232px; margin-top: -2%; height: 20px;  " type="text" id="username" name="stock_chassis_id" class="form-control">
                         </div>
-                        <div  class="col-md-6">
+                        <div  class="col-md-6" id="notifyadress">
                             <label class="form-control-label">Notify&nbsp;Address</label>
                             <input style=" font-size: 11px; width: 224px; margin-top: -2%; height: 20px;  " type="text" id="username" name="stock_chassis_id" class="form-control">
                         </div>
+                    
                         <div style="background: khaki; margin-left: 0px; padding-left: 0px; margin-top: 1%;  padding-bottom: 1%;" class="row container">
-                            <div class="col-md-3">
+                            <div class="col-md-3" id="shipment">
                                 <label class="form-control-label">Shipment</label>
                                 <select style="padding: 0px; font-size: 11px;  margin-top: -8%; height: 20px;  width: 105px;" type="text" id="username" name="stock_chassis_id" class="form-control">
                                     <option value="---">---</option>
@@ -1029,7 +1064,7 @@ include("bottom.php");
                                     <option>Prepaid</option>
                                 </select>
                             </div>
-                            <div  class="col-md-3">
+                            <div  class="col-md-3" id="currency">
                                 <label class="form-control-label">Currency</label>
                                 <select style="padding: 0px; font-size: 11px;  margin-top: -8%; height: 20px;  width: 105px;" type="text" id="username" name="stock_chassis_id" class="form-control">
                                     <option value="---">---</option>
@@ -1039,52 +1074,52 @@ include("bottom.php");
                             </div>
                             <div  class="col-md-3">
                                 <label class="form-control-label">FOB</label>
-                                <input style=" font-size: 11px;  margin-top: -8%; height: 20px;  width: 100px;" type="text" id="username" name="stock_chassis_id" class="form-control">
+                                <input style=" font-size: 11px;  margin-top: -8%; height: 20px;  width: 100px;" type="text" id="username" name="stock_chassis_id" class="form-control" value="<?php echo $row[65]?>">
                             </div>
                             <div  class="col-md-3">
                                 <label class="form-control-label">Freight</label>
-                                <input style=" font-size: 11px;  margin-top: -8%; height: 20px;  width: 100px;" type="text" id="username" name="stock_chassis_id" class="form-control">
+                                <input style=" font-size: 11px;  margin-top: -8%; height: 20px;  width: 100px;" type="text" id="username" name="stock_chassis_id" class="form-control" value="<?php echo $row[58]?>">
                             </div>
                             <div  class="col-md-3">
                                 <label class="form-control-label">Inspection</label>
-                                <input style=" font-size: 11px;  margin-top: -8%; height: 20px;  width: 105px;" type="text" id="username" name="stock_chassis_id" class="form-control">
+                                <input style=" font-size: 11px;  margin-top: -8%; height: 20px;  width: 105px;" type="text" id="username" name="stock_chassis_id" class="form-control" value="<?php echo $rowinspection[2]?>">
                             </div>
                             <div class="col-md-3">
                                 <label class="form-control-label">Inspection&nbsp;Chrgs</label>
-                                <input style=" font-size: 11px;  margin-top: -8%; height: 20px;  width: 105px;" type="text" id="username" name="stock_chassis_id" class="form-control">
+                                <input style=" font-size: 11px;  margin-top: -8%; height: 20px;  width: 105px;" type="text" id="username" name="stock_chassis_id" class="form-control" value="<?php echo $rowinspection[3]?>">
                             </div>
                             <div class="col-md-3">
                                 <label class="form-control-label">Discount %</label>
-                                <input style=" font-size: 11px;  margin-top: -8%; height: 20px;  width: 100px;" type="text" id="username" name="stock_chassis_id" class="form-control">
+                                <input style=" font-size: 11px;  margin-top: -8%; height: 20px;  width: 100px;" type="text" id="username" name="stock_chassis_id" class="form-control" value="<?php echo $row[62]?>">
                             </div>
                             <div  class="col-md-3">
                                 <label class="form-control-label">Yard Charges</label>
-                                <input style=" font-size: 11px;  margin-top: -8%; height: 20px;  width: 100px;" type="text" id="username" name="stock_chassis_id" class="form-control">
+                                <input style=" font-size: 11px;  margin-top: -8%; height: 20px;  width: 100px;" type="text" id="yard_charges" name="yard_charges" class="form-control" value="">
                             </div>
                             <div  class="col-md-3">
                                 <label class="form-control-label">Repair</label>
-                                <input style=" font-size: 11px;  margin-top: -8%; height: 20px;  width: 105px;" type="text" id="username" name="stock_chassis_id" class="form-control">
+                                <input style=" font-size: 11px;  margin-top: -8%; height: 20px;  width: 105px;" type="text" id="repair_charges" name="repair_charges" class="form-control" value="<?php ?>">
                             </div>
                             <div  class="col-md-3">
                                 <label class="form-control-label">Other</label>
-                                <input style=" font-size: 11px;  margin-top: -8%; height: 20px;  width: 105px;" type="text" id="username" name="stock_chassis_id" class="form-control">
+                                <input style=" font-size: 11px;  margin-top: -8%; height: 20px;  width: 105px;" type="text" id="username" name="stock_chassis_id" class="form-control" value="<?php echo $row[59]?>">
                             </div>
                             <div  class="col-md-3">
                                 <label class="form-control-label">CNF</label>
-                                <input style=" font-size: 11px;  margin-top: -8%; height: 20px;  width: 100px;" type="text" id="username" name="stock_chassis_id" class="form-control">
+                                <input style=" font-size: 11px;  margin-top: -8%; height: 20px;  width: 100px;" type="text" id="username" name="stock_chassis_id" class="form-control" value="<?php echo $row[67]?>">
                             </div>
                             <div  class="col-md-3">
                                 <label class="form-control-label">Payment %</label>
-                                <select style=" padding: 0px; font-size: 11px;  margin-top: -8%; height: 20px;  width: 100px;" type="text" id="username" name="stock_chassis_id" class="form-control">
+                                <select style=" padding: 0px; font-size: 11px;  margin-top: -8%; height: 20px;  width: 100px;" type="text" id="payment_per" name="payment_per" class="form-control" >
                                     <option value="---">---</option>
-                                    <option>100%</option>
-                                    <option>50%</option>
-                                    <option>30%</option>
+                                    <option value="100%">100%</option>
+                                    <option value="50%">50%</option>
+                                    <option value="30%">30%</option>
                                 </select>
                             </div>
                             <div  class="col-md-12">
                                 <label class="form-control-label">Memo</label>
-                                <input style=" font-size: 11px;  margin-top: -2%; width: 461px; height: 20px; " type="text" id="username" name="stock_chassis_id" class="form-control">
+                                <input style=" font-size: 11px;  margin-top: -2%; width: 461px; height: 20px; " type="text" id="memo" name="memo" class="form-control">
                             </div>
                         </div>
                     </div>
@@ -1093,7 +1128,7 @@ include("bottom.php");
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Confirm Reserve</button>
+                    <input type="submit" name="btnreserve" class="btn btn-primary" value="Confirm Reserve">
                 </div>
             </form>
         </div>
@@ -1133,7 +1168,7 @@ include("bottom.php");
                     </div>
                 </div>
             </div>
-            <form>
+            <form method="post">
                 <div class="modal-body">
                     <div class="row">
                         <div style="margin-top: -3%;" class="col-md-4">
@@ -1871,4 +1906,131 @@ include("bottom.php");
                 $(this).tab('show');
             });
             });   
+</script>
+<script>
+       
+function getCustomer(val) {
+   // alert(val);
+	$.ajax({
+	type: "POST",
+	url: "stockdropdown.php",
+	data:'agent_id='+val,
+	success: function(data){
+		$("#custlist").html(data);
+	}
+	});
+}
+</script>
+<script>
+       
+function getConsignee(val) {
+   
+	$.ajax({
+	type: "POST",
+	url: "stockdropdown.php",
+	data:'cust_id='+val,
+	success: function(data){
+		$("#consigneelist").html(data);
+	}
+	});
+    $.ajax({
+	type: "POST",
+	url: "stockdropdown.php",
+	data:'cust_id1='+val,
+	success: function(data){
+		$("#customerphone").html(data);
+	}
+	});
+    $.ajax({
+	type: "POST",
+	url: "stockdropdown.php",
+	data:'cust_id2='+val,
+	success: function(data){
+		$("#customercountry").html(data);
+	}
+	});
+    $.ajax({
+	type: "POST",
+	url: "stockdropdown.php",
+	data:'cust_id3='+val,
+	success: function(data){
+       
+		$("#customerport").html(data);
+	}
+	});
+    $.ajax({
+	type: "POST",
+	url: "stockdropdown.php",
+	data:'cust_id4='+val,
+	success: function(data){
+       
+		$("#customeradress").html(data);
+	}
+	});
+    $.ajax({
+	type: "POST",
+	url: "stockdropdown.php",
+	data:'shipment='+val,
+	success: function(data){
+       
+		$("#shipment").html(data);
+	}
+	});
+    $.ajax({
+	type: "POST",
+	url: "stockdropdown.php",
+	data:'currency='+val,
+	success: function(data){
+       
+		$("#currency").html(data);
+	}
+	});
+}
+</script>
+<script>
+       
+function getConsigneedetails(val) {
+    
+	$.ajax({
+	type: "POST",
+	url: "stockdropdown.php",
+	data:'consigneephone='+val,
+	success: function(data){
+		$("#cp").html(data);
+	}
+	});
+     
+	$.ajax({
+	type: "POST",
+	url: "stockdropdown.php",
+	data:'notifyname='+val,
+	success: function(data){
+		$("#notifyname").html(data);
+	}
+	});
+    $.ajax({
+	type: "POST",
+	url: "stockdropdown.php",
+	data:'notifyphone='+val,
+	success: function(data){
+		$("#notifyphone").html(data);
+	}
+	});
+    $.ajax({
+	type: "POST",
+	url: "stockdropdown.php",
+	data:'consigneeadress='+val,
+	success: function(data){
+		$("#consigneeadress").html(data);
+	}
+	});
+    $.ajax({
+	type: "POST",
+	url: "stockdropdown.php",
+	data:'notifyadress='+val,
+	success: function(data){
+		$("#notifyadress").html(data);
+	}
+	});
+}
 </script>

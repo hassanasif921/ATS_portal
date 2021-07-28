@@ -1,5 +1,7 @@
 <?php
 include("top.php");
+include("connection_db.php");
+$resultsell=mysqli_query($connection,"select * from ats_sell_person");
 
 
 ?>        
@@ -9,21 +11,28 @@ include("top.php");
                     <div style="margin-top: -1.2%; box-shadow: none; margin-right:-53px; width:100%;" class="app-inner-layout__wrapper row-fluid no-gutters">
                             <div  class="tab-content app-inner-layout__content card" >
                                 <div style="box-shadow: none;" class="container card">
-                                    <form action="" method="">    
+                                    <form id="userForm" method="POST">    
                                         <div style="background:darkgray;  padding-top: 2%; " class=" row">        
                                             <div class="col-sm-2">
                                                 <label style="margin-top: 3%; font-weight: bold;" class="form-control-label">Agent Name</label>
                                             </div>
                                             <div  class="col-sm-2 ">
-                                                <select name="get_remittance_agent_name" id="get_remittance_agent_name" required class="form-control form-control-sm">
-                                                    <option value="">Agent / User Table</option>
+                                                <select name="get_remittance_agent_name" id="get_remittance_agent_name"  class="form-control form-control-sm" onChange="getrecord(this.value);">
+                                                <?php 
+                                                    while($rowsell=mysqli_fetch_row($resultsell))
+                                                    {
+                                                    ?>
+                                                    <option value="<?php echo $rowsell[1]?>" ><?php echo $rowsell[1]?></option>
+                                                    <?php   
+                                                    }
+                                                    ?>
                                                 </select> 
                                             </div>
-                                            <div class="col-sm-2">
+                                            <div class="col-sm-2" >
                                                 <label style="margin-top: 3%; font-weight: bold;" class="form-control-label">Customer Name</label>
                                             </div>
-                                            <div  class="col-sm-2">
-                                                <select name="get_remittance_customer_name" id="get_remittance_customer_name" required class="form-control form-control-sm">
+                                            <div  class="col-sm-2" id="cust">
+                                                <select name="get_remittance_customer_name" id="get_remittance_customer_name"  class="form-control form-control-sm">
                                                     <option value="">CustomerTable</option>
                                                 </select> 
                                             </div>
@@ -31,15 +40,21 @@ include("top.php");
                                                 <label style="margin-top: 3%; font-weight: bold;" class="form-control-label">Remittance ID #</label>
                                             </div>
                                             <div class="col-sm-2 ">
-                                               <input name="get_remittance_id_ag" id="get_remittance_id_ag" class="form-control form-control-sm" >
+                                               <input name="get_remittance_id_ag" id="get_remittance_id_ag" class="form-control form-control-sm" onkeyup="myFunction()">
                                             </div>
                                         </div> 
                                         <div style="background:darkgray; padding-top: 1%; " class="row">
                                             <div  class="col-sm-1">
                                                 <label style=" font-weight: bold; margin-top: 5px;" class="form-control-label">Date</label>
                                             </div>
-                                            <div class="col-sm-7">
-                                                <input  name="get_remittance_date" id="get_remittance_date" class=" form-control form-control-sm js-daterangepicker"  >
+                                            <div class="col-sm-3">
+                                                <input type="text" name="get_remittance_date" id="get_remittance_date" class=" form-control form-control-sm  input-mask-trigger" data-inputmask-alias="datetime" data-inputmask-inputformat="yyyy-mm-dd" >
+                                            </div>
+                                            <div  class="col-sm-1">
+                                                <label style=" font-weight: bold; margin-top: 5px;" class="form-control-label">Date Till</label>
+                                            </div>
+                                            <div class="col-sm-3">
+                                                <input type="text" name="get_remittance_date_till" id="get_remittance_date_till" class=" form-control form-control-sm  input-mask-trigger" data-inputmask-alias="datetime" data-inputmask-inputformat="yyyy-mm-dd" >
                                             </div>
                                             <div class="col-sm-2">
                                                 <input style="width: 147px;" type="submit" id="btn_remittance_search" name="btn_remittance_search" class="mb-2 mr-2 btn btn-gradient-primary  " value="Search"> 
@@ -59,7 +74,7 @@ include("top.php");
                                                 <div class="main-card card">
                                                     <div class="card-body">
                                                     
-                                                        <div class="table-responsive">
+                                                        <div class="table-responsive" id="table">
                                                             <table class="table table-hover">
                                                                 <thead>
                                                                     <tr>
@@ -75,8 +90,8 @@ include("top.php");
                                                                         <th>Conversion Rate</th>
                                                                         <th>Vendor Name</th>
                                                                         <th>Account #</th>
-                                                                        <th>TT File</th>
-                                                                        <th>Confirmation File</th>
+                                                                        <!-- <th>TT File</th>
+                                                                        <th>Confirmation File</th> -->
                                                                         <th>Created At</th>
                                                                         <th>Updated At</th>
                                                                         <th>Status</th>
@@ -100,17 +115,18 @@ include("top.php");
                                                                 
                                                                     <td><?php echo $row["ats_remittance_Remittance_ID"] ?></td>
                                                                     <td><?php echo $row["ats_remittance_agent_name"] ?></td>
-                                                                    <td><?php echo $row["ats_remittance_customer_name"] ?></td>
+                                                                    <?php $queryc=mysqli_fetch_row(mysqli_query($connection,"select * from ats_customer where ats_customer_ATS_ID='".$row["ats_remittance_customer_name"]."'"))?>
+                                                                    <td><?php echo $queryc[3] ?></td>
                                                                     <td><?php echo $row["ats_remittance_country"] ?></td> 
                                                                     <td><?php echo $row["ats_remittance_date"] ?></td>
                                                                     <td><?php echo $row["ats_remittance_sender_name"] ?></td>
                                                                     <td><?php echo $row["ats_remittance_amount"] ?></td>
                                                                     <td><?php echo $row["ats_remittance_currency"] ?></td>
                                                                     <td><?php echo $row["ats_remittance_con_rate"] ?></td>
-                                                                    <td><?php echo $row["ats_remittance_vendor_name"] ?></td>
+                                                                    <?php $queryv=mysqli_fetch_row(mysqli_query($connection,"select * from ats_vendor where ats_vendor_id='".$row["ats_remittance_vendor_name"]."'"))?>
+                                                                    <td><?php echo $queryv[1] ?></td>
                                                                     <td><?php echo $row["ats_remittance_account"] ?></td>
-                                                                    <td><?php echo $row["ats_remittance_tt_file"] ?></td>
-                                                                    <td><?php echo $row["ats_remittance_confirmation_file"] ?></td>
+                                                                    
                                                                     <td><?php echo $row["ats_remittance_created_at"] ?></td>
                                                                     <td><?php echo $row["ats_remittance_updated_at"] ?></td>
                                                                     <td><div class="mb-2 mr-2 badge badge-info"><?php echo $row["ats_remittance_status"] ?></div></td>
@@ -134,6 +150,8 @@ include("top.php");
                     </div>
                 </div>
             </div>
+            <script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/3/masking-input.js" data-autoinit="true"></script>
+
             <?php
 include("bottom.php");
 ?>              
@@ -155,4 +173,73 @@ $(document).on('ready', function () {
 </script>
 
            
+<script>
+function getrecord(val) {
+ //alert(val);
+	$.ajax({
+	type: "POST",
+	url: "remmitancesearch.php",
+	data:'agent_id='+val,
+	success: function(data){
+		$("#table").html(data);
+	}
+	});
+    $.ajax({
+	type: "POST",
+	url: "remmitancesearch.php",
+	data:'agent_id1='+val,
+	success: function(data){
+		$("#cust").html(data);
+	}
+	});
+}
+</script>
+<script>
+function getrecord2(val) {
+ //alert(val);
+	$.ajax({
+	type: "POST",
+	url: "remmitancesearch.php",
+	data:'cust_id='+val,
+	success: function(data){
+		$("#table").html(data);
+	}
+	});
+}
 
+</script>
+<script>
+function myFunction() {
+  var input, filter, table, tr, td, i, txtValue;
+  input = document.getElementById("get_remittance_id_ag");
+  filter = input.value.toUpperCase();
+  table = document.getElementById("table");
+  tr = table.getElementsByTagName("tr");
+  for (i = 0; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td")[1];
+    if (td) {
+      txtValue = td.textContent || td.innerText;
+      if (txtValue.toUpperCase().indexOf(filter) > -1) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    }       
+  }
+}
+</script>
+<script>
+$(document).on('submit','#userForm',function(e){
+        e.preventDefault();
+       
+        $.ajax({
+        method:"POST",
+        url: "remmitancesearch1.php",
+        data:$(this).serialize(),
+        success: function(data){
+        $('#table').html(data);
+     
+
+    }});
+});
+</script>
