@@ -33,7 +33,7 @@ $query_get_con=mysqli_query($connection,"select * from ats_consignee where ats_c
 
 ?>
 <label class="form-control-label">Consignee&nbsp;Name</label>
-<select style=" padding: 0px; font-size: 11px;  margin-top: -8%; height: 20px;  width: 120px;" type="text" id="customername" name="customername" class="form-control" onChange="getConsigneedetails(this.value);">
+<select style=" padding: 0px; font-size: 11px;  margin-top: -8%; height: 20px;  width: 120px;" type="text" id="consignee_id" name="consignee_id" class="form-control" onChange="getConsigneedetails(this.value);">
 <option  selected value="">Please Select</option>
 
 <?php 

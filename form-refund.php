@@ -47,9 +47,9 @@ if (isset($_POST["btn_refund"])) {
                                         <h5 class="card-title">Refund Request</h5>
                                     </div>
                                     <div class="col-md-4"></div>
-                                    <div class="col-md-3">
+                                    <div class="col-md-3" id="available">
                                         <label class=" card-title">Available Amount :</label>
-                                        <label style="float: right;" ng-model="amount" name="get_ven_available_balance" id="get_ven_available_balance" value="100000" class="text-danger card-title">{{ 100000 - refund }}</label>
+                                        <label style="float: right;"  name="get_ven_available_balance" id="get_ven_available_balance" value="100000" class="text-danger card-title">{{ 100000 - refund }}</label>
                                     </div>
                                     <div class="col-md-4"></div>
                                 </div>
@@ -60,7 +60,7 @@ if (isset($_POST["btn_refund"])) {
                                             <input name="get_remittance_refund_id_ag" id="get_remittance_refund_id_ag" type="text" class="form-control">
                                         </div>
                                     </div>
-                                    <div class="col-md-2">
+                                    <div class="col-md-2" id="agent">
                                         <div class="position-relative form-group">
                                             <label class="">Agent Name</label>
                                             <select name="get_remittance_refund_agent_name" id="get_remittance_refund_agent_name"   class="form-control">
@@ -71,10 +71,10 @@ if (isset($_POST["btn_refund"])) {
                                     <div class="col-md-2">
                                         <div class="position-relative form-group">
                                             <label class="">Refund Amount</label>
-                                            <input ng-model="refund" id="refund_amount" name="refund_amount" type="text" class="form-control"  >
+                                            <input  id="refund_amount" name="refund_amount" type="text" class="form-control"  >
                                         </div>
                                     </div>
-                                    <div class="col-md-3">
+                                    <div class="col-md-3" id="custn">
                                         <div class="position-relative form-group">
                                             <label class="">Customer Name</label>
                                             <select name="get_remittance_refund_customer_name" id="get_remittance_refund_customer_name" class="form-control ">
@@ -201,3 +201,35 @@ if (isset($_POST["btn_refund"])) {
 <?php
 include("bottom.php");
 ?>   
+<script>
+$(document).ready(function(){
+  $("#get_remittance_refund_id_ag").keyup(function(){
+    var test=this.value;
+    $.ajax({
+	type: "POST",
+	url: "remittancedd.php",
+	data:'remitance_id='+test,
+	success: function(data){
+		$("#agent").html(data);
+	}
+	});
+    $.ajax({
+	type: "POST",
+	url: "remittancedd.php",
+	data:'remitance_id1='+test,
+	success: function(data){
+		$("#custn").html(data);
+	}
+	});
+    $.ajax({
+	type: "POST",
+	url: "remittancedd.php",
+	data:'remitance_id2='+test,
+	success: function(data){
+		$("#available").html(data);
+	}
+	});
+  });
+ 
+});
+</script>

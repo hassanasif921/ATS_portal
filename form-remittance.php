@@ -30,9 +30,22 @@ if (isset($_POST["btn_remittance_add"])) {
      $query = mysqli_query($connection,$insert);
      if ($query)
      {
+         $totalremittance=mysqli_query($connection,"select * from total_remmitance where customer_id='".$remittance_customer_name."'");
+         $rowsofremittance=mysqli_num_rows($totalremittance);
+         if($rowsofremittance)
+         {
+            $inserttotalremittance=mysqli_fetch_row(mysqli_query($connection,"select * from total_remmitance where customer_id='".$remittance_customer_name."'"));
+            $updatedremittance=$inserttotalremittance[2]+$remittance_amount;
+            $queryinserttotalremittance=mysqli_query($connection,"UPDATE total_remmitance SET amount='$updatedremittance' where customer_id='".$remittance_customer_name."'");
+           
+         }
+         else{
+            $inserttotalremittance=mysqli_query($connection,"INSERT INTO total_remmitance(customer_id, amount) VALUES ('$remittance_customer_name','$remittance_amount')");
+           
+         }
          echo '<script type="text/javascript"> alert("Inserted Inserted !!!")</script>';
-         //echo '<script language="javascript">window.location.href ="form-amendment.php"</script>';
-     }
+        }
+     
      else
      {
          echo '<script type="text/javascript"> alert("Something Wrong :(")</script>';

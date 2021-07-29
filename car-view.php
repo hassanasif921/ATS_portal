@@ -19,18 +19,103 @@ if(isset($_POST['btnreserve']))
     $recordno=mysqli_real_escape_string($connection,$row[1]);
     $date_from=mysqli_real_escape_string($connection,$_POST['date_from']);
     $date_till=mysqli_real_escape_string($connection,$_POST['date_till']);
-    $customer=mysqli_real_escape_string($connection,$_POST['customername']);
+    $customerreserve=$_POST['customername'];
     $payment_per=mysqli_real_escape_string($connection,$_POST['payment_per']);
     $memo=mysqli_real_escape_string($connection,$_POST['memo']);
     $yard_charges=mysqli_real_escape_string($connection,$_POST['yard_charges']);
     $repair_charges=mysqli_real_escape_string($connection,$_POST['repair_charges']);
-    $insertreservequery="INSERT INTO ats_stock_reservation(recordno, date_from, date_till, customer, payment_per, memo, yard_charges, repair_charges) VALUES ('$recordno','$date_from','$date_till','$customer','$payment_per','$memo','$yard_charges','$repair_charges')";
+    $consignee_id=mysqli_real_escape_string($connection,$_POST['consignee_id']);
+
+    
+    $insertreservequery="INSERT INTO ats_stock_reservation(recordno, date_from, date_till, customer, payment_per, memo, yard_charges, repair_charges,consignee_id) VALUES ('$recordno','$date_from','$date_till','$customerreserve','$payment_per','$memo','$yard_charges','$repair_charges','$consignee_id')";
     $insertreserve=mysqli_query($connection,$insertreservequery);
     if($insertreserve)
     {
         echo '<script type="text/javascript"> alert("Car Reserved!")</script>';
 
     }
+}
+if(isset($_POST['btn_exp_repair']))
+{
+    $exp_repair_date=$_POST['exp_repair_date'];
+    $exp_repair_discription=$_POST['exp_repair_discription'];
+    $exp_repair_amount=$_POST['exp_repair_amount'];
+    $exp_repair_memo=$_POST['exp_repair_memo'];
+    $newvalue1=$row[59]+$exp_repair_amount;
+    $newvalue2=$row[65]+$exp_repair_amount;
+    $newvalue3=$row[67]+$exp_repair_amount;
+    $fobdollar=$newvalue2/$row[104];
+    $cnfdollar=$newvalue3/$row[104];
+    $queryrepair=mysqli_query($connection,"INSERT INTO repairdetails(recordno, r_date, r_description, amount, memo) VALUES ('$row[1]','$exp_repair_date','$exp_repair_discription','$exp_repair_amount','$exp_repair_memo')");
+    $updaterecrepair=mysqli_query($connection, "UPDATE ats_car_stock SET ats_car_stock_other_charge='$newvalue1' ,ats_car_stock_fob_price_yen='$newvalue2',ats_car_stock_cnf_price_yen='$newvalue3',ats_car_stock_fob_price_us='$fobdollar',ats_car_stock_cnf_price_us='$cnfdollar' where ats_car_stock_id ='".$_GET['car_id']."' " );
+}
+if(isset($_POST['btn_exp_parts']))
+{
+    $exp_parts_date=$_POST['exp_parts_date'];
+    $exp_parts_discription=$_POST['exp_parts_discription'];
+    $exp_parts_amount=$_POST['exp_parts_amount'];
+    $exp_parts_memo=$_POST['exp_parts_memo'];
+    $newvalue1=$row[59]+$exp_repair_amount;
+    $newvalue2=$row[65]+$exp_repair_amount;
+    $newvalue3=$row[67]+$exp_repair_amount;
+    $fobdollar=$newvalue2/$row[104];
+    $cnfdollar=$newvalue3/$row[104];
+    $queryrepair=mysqli_query($connection,"INSERT INTO partsrecord(recno, exp_parts_date, exp_parts_discription, exp_parts_amount, exp_parts_memo) VALUES ('$row[1]','$exp_parts_date','$exp_parts_discription','$exp_parts_amount','$exp_parts_memo')");
+    $updaterecrepair=mysqli_query($connection, "UPDATE ats_car_stock SET ats_car_stock_other_charge='$newvalue1' ,ats_car_stock_fob_price_yen='$newvalue2',ats_car_stock_cnf_price_yen='$newvalue3',ats_car_stock_fob_price_us='$fobdollar',ats_car_stock_cnf_price_us='$cnfdollar' where ats_car_stock_id ='".$_GET['car_id']."' " );
+}
+if(isset($_POST['btn_exp_parts']))
+{
+    $exp_parts_date=$_POST['exp_parts_date'];
+    $exp_parts_discription=$_POST['exp_parts_discription'];
+    $exp_parts_amount=$_POST['exp_parts_amount'];
+    $exp_parts_memo=$_POST['exp_parts_memo'];
+    $newvalue1=$row[28]+$exp_repair_amount;
+    $newvalue2=$row[65]+$exp_repair_amount;
+    $newvalue3=$row[67]+$exp_repair_amount;
+    $fobdollar=$newvalue2/$row[104];
+    $cnfdollar=$newvalue3/$row[104];
+    $queryrepair=mysqli_query($connection,"INSERT INTO partsrecord(recno, exp_parts_date, exp_parts_discription, exp_parts_amount, exp_parts_memo) VALUES ('$row[1]','$exp_parts_date','$exp_parts_discription','$exp_parts_amount','$exp_parts_memo')");
+    $updaterecrepair=mysqli_query($connection, "UPDATE ats_car_stock SET ats_car_stock_buying_price='$newvalue1' ,ats_car_stock_fob_price_yen='$newvalue2',ats_car_stock_cnf_price_yen='$newvalue3',ats_car_stock_fob_price_us='$fobdollar',ats_car_stock_cnf_price_us='$cnfdollar' where ats_car_stock_id ='".$_GET['car_id']."' " );
+}
+if(isset($_POST['btn_exp_boss_price']))
+{
+    $exp_boss_price_date=$_POST['exp_boss_price_date'];
+    $exp_boss_price_discription=$_POST['exp_boss_price_discription'];
+    $exp_boss_price_amount=$_POST['exp_boss_price_amount'];
+    $exp_boss_price_memo=$_POST['exp_boss_price_memo'];
+    $newvalueb1=$row[28]+$exp_boss_price_amount;
+    $newvalueb2=$row[65]+$exp_boss_price_amount;
+    $newvalueb3=$row[67]+$exp_boss_price_amount;
+    $fobdollar1=$newvalueb2/$row[104];
+    $cnfdollar1=$newvalueb3/$row[104];
+    $querybossprice=mysqli_query($connection,"INSERT INTO boss_price(recno, date, description, amount, memo) VALUES ('$row[1]','$exp_boss_price_date','$exp_boss_price_discription','$exp_boss_price_amount','$exp_boss_price_memo')");
+    $updatebossprice1=mysqli_query($connection, "UPDATE ats_car_stock SET ats_car_stock_buying_price='$newvalueb1' ,ats_car_stock_fob_price_yen='$newvalueb2',ats_car_stock_cnf_price_yen='$newvalueb3',ats_car_stock_fob_price_us='$fobdollar1',ats_car_stock_cnf_price_us='$cnfdollar1' where ats_car_stock_id ='".$_GET['car_id']."' " );
+}
+if(isset($_POST['btn_exp_rec_money']))
+{
+    $get_stock_cnf_price_print_yen=$_POST['get_stock_cnf_price_print_yen'];
+    $allocation_customer_name=$_POST['allocation_customer_name'];
+    $get_cust_allocated_amount=$_POST['get_cust_allocated_amount'];
+    $cust_remaining_amount=$_POST['cust_remaining_amount'];
+    
+    $query_rec_money=mysqli_query($connection,"INSERT INTO reservationmoney(recordno, cnfprice, customername, allocatedamount, remaing_amount) VALUES ('$row[1]','$get_stock_cnf_price_print_yen','$allocation_customer_name','$get_cust_allocated_amount','$cust_remaining_amount')");
+    $update_reservation_status=mysqli_query($connection, "UPDATE ats_stock_reservation SET reservedpaymentstatus='CONFIRMED' where recordno ='".$row[1]."' " );
+    $update_remaining_amount=mysqli_query($connection, "UPDATE total_remmitance SET amount='$cust_remaining_amount' where customer_id ='$allocation_customer_name' " );
+}
+if(isset($_POST['btn_exp_important']))
+{
+    $exp_important_date=$_POST['exp_important_date'];
+    $exp_important_discription=$_POST['exp_important_discription'];
+    $exp_important_amount=$_POST['exp_important_amount'];
+    $exp_important_memo=$_POST['exp_important_memo'];
+    $newvaluei1=$row[59]+$exp_boss_price_memo;
+    $newvaluei2=$row[65]+$exp_boss_price_memo;
+    $newvaluei3=$row[67]+$exp_boss_price_memo;
+    $fobdollar2=$newvaluei2/$row[104];
+    $cnfdollar2=$newvaluei3/$row[104];
+    $query_important=mysqli_query($connection,"INSERT INTO important(recordno, date, description, amount, memo) VALUES ('$row[1]','$exp_important_date','$exp_important_discription','$exp_important_amount','$exp_important_memo')");
+    $updateimportant=mysqli_query($connection, "UPDATE ats_car_stock SET ats_car_stock_other_charge='$newvaluei1' ,ats_car_stock_fob_price_yen='$newvaluei2',ats_car_stock_cnf_price_yen='$newvaluei3',ats_car_stock_fob_price_us='$fobdollar2',ats_car_stock_cnf_price_us='$cnfdollar2' where ats_car_stock_id ='".$_GET['car_id']."' " );
+
 }
 ?>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.8.2/css/lightbox.min.css">
@@ -1191,7 +1276,7 @@ include("bottom.php");
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" name="btn_exp_repair" id="btn_exp_repair" class="btn btn-primary">Add +</button>
+                    <input type="submit"  name="btn_exp_repair" id="btn_exp_repair" class="btn btn-primary" value="ADD+">
                 </div>
             </form>
         </div>
@@ -1231,7 +1316,7 @@ include("bottom.php");
                     </div>
                 </div>
             </div>
-            <form>
+            <form method="post">
                 <div class="modal-body">
                     <div class="row">
                         <div style="margin-top: -3%;" class="col-md-4">
@@ -1254,7 +1339,7 @@ include("bottom.php");
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" name="btn_exp_parts" id="btn_exp_parts" class="btn btn-primary">Add +</button>
+                    <input type="submit" name="btn_exp_parts" id="btn_exp_parts" class="btn btn-primary" value="Add +">
                 </div>
             </form>
         </div>
@@ -1357,18 +1442,22 @@ include("bottom.php");
                     </div>
                 </div>
             </div>
-            <form>
+            <form method="POST">
                 <div class="modal-body">
                     <div class="row">
                         <div style="margin-top: -2%" class="col-md-6">
                             <label class="form-control-label">CNF Price</label>
-                            <input style=" font-size: 11px;  margin-top: -2%; height: 20px;  width: 230px;" type="text" id="get_stock_cnf_price_print_yen" name="get_stock_cnf_price_print_yen" class="form-control">
+                            <input style=" font-size: 11px;  margin-top: -2%; height: 20px;  width: 230px;" type="text" id="get_stock_cnf_price_print_yen" name="get_stock_cnf_price_print_yen" class="form-control" value="<?php echo $row[67]?>">
                         </div>
                         <div style="margin-top: -2%" class="col-md-6">
                             <label class="form-control-label">Customer Name</label>
                             <select style=" padding: 0px; font-size: 11px;  margin-top: -2%; height: 20px;  width: 205px;" type="text" id="allocation_customer_name" name="allocation_customer_name" class="form-control">
-                                <option value="---">Customer Table</option>
-                                
+                            <?php $queryremittance=mysqli_fetch_row(mysqli_query($connection,"select * from ats_stock_reservation where recordno='".$row[1]."'"));
+                            $queryreservecustomers=mysqli_query($connection,"select * from ats_customer where ats_customer_ATS_ID='".$queryremittance[4]."'");
+                            while($fetchreservedcustomer=mysqli_fetch_array($queryreservecustomers))
+                            {?>
+                                <option value="<?php echo $fetchreservedcustomer[1]?>"><?php echo $fetchreservedcustomer[3]?></option>
+                                <?php }?>
                             </select>
                         </div>
                         <div  class="col-md-4 mt-1">
@@ -1380,11 +1469,27 @@ include("bottom.php");
                         </div>
                         <div class="col-md-4 mt-1">
                             <label class="form-control-label">Current Balance</label>
-                            <label style=" font-size: 11px;  margin-top: -3%; height: 20px;  width: 135px;" type="text" id="get_cust_available_amount" name="get_cust_available_amount" class="form-control"></label>
+                            <?php
+                            $queryremittance1=mysqli_fetch_row(mysqli_query($connection,"select * from ats_stock_reservation where recordno='".$row[1]."'"));
+                            $queryreservecustomers1=mysqli_query($connection,"select * from ats_customer where ats_customer_ATS_ID='".$queryremittance1[4]."'");
+                            $fetchreservedcustomer1=mysqli_fetch_row($queryreservecustomers1);
+                            $resultgetremittance=mysqli_query($connection,"select * from total_remmitance where customer_id='".$fetchreservedcustomer1[1]."'");
+                            $rows_of_result_get_remittance=mysqli_num_rows($resultgetremittance);
+                            if($rows_of_result_get_remittance)
+                            {
+                            $querygetremittance=mysqli_fetch_row($resultgetremittance);
+                            $remittanceprint=$querygetremittance[2];
+                            }   
+                            else
+                            {
+                                $remittanceprint="No Remittance Found";
+                            }
+                            ?>
+                            <input style=" font-size: 11px;  margin-top: -3%; height: 20px;  width: 135px;" type="text" id="get_cust_available_amount" name="get_cust_available_amount" class="form-control" value="<?php echo $remittanceprint?>">
                         </div>
                         <div  class="col-md-6">
                             <label class="form-control-label">Allocated Amount</label>
-                            <input style=" font-size: 11px;  margin-top: -2%; height: 20px;  width: 230px;" type="text" id="get_cust_allocated_amount" name="get_cust_allocated_amount" class="form-control">
+                            <input style=" font-size: 11px;  margin-top: -2%; height: 20px;  width: 230px;" type="text" id="get_cust_allocated_amount" name="get_cust_allocated_amount" class="form-control" onkeyup="remainingamount()">
                         </div>
                         <div class="col-md-6">
                             <label class="form-control-label">Remaining Amount</label>
@@ -1395,7 +1500,7 @@ include("bottom.php");
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" name="btn_exp_rec_money" id="btn_exp_rec_money" class="btn btn-primary">Add +</button>
+                    <input type="submit" name="btn_exp_rec_money" id="btn_exp_rec_money" class="btn btn-primary" value="ADD +" >
                 </div>
             </form>
         </div>
@@ -1435,7 +1540,7 @@ include("bottom.php");
                     </div>
                 </div>
             </div>
-            <form>
+            <form method="POST">
                 <div class="modal-body">
                     <div class="row">
                         <div style="margin-top: -3%;" class="col-md-4">
@@ -1458,7 +1563,7 @@ include("bottom.php");
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" name="btn_exp_important" id="btn_exp_important" class="btn btn-primary">Add +</button>
+                    <input type="submit" name="btn_exp_important" id="btn_exp_important" class="btn btn-primary" value="ADD +">
                 </div>
             </form>
         </div>
@@ -1561,7 +1666,7 @@ include("bottom.php");
                     </div>
                 </div>
             </div>
-            <form>
+            <form method="POST"> 
                 <div class="modal-body">
                     <div class="row">
                         <div style="margin-top: -3%;" class="col-md-4">
@@ -1584,7 +1689,7 @@ include("bottom.php");
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" name="btn_exp_boss_price" id="btn_exp_boss_price" class="btn btn-primary">Add +</button>
+                    <input type="submit" name="btn_exp_boss_price" id="btn_exp_boss_price" class="btn btn-primary" value="Add +">
                 </div>
             </form>
         </div>
@@ -2034,3 +2139,11 @@ function getConsigneedetails(val) {
 	});
 }
 </script>
+<script>
+  function remainingamount(){
+    var x = parseInt(document.getElementById("get_cust_available_amount").value);
+    var y= parseInt(document.getElementById("get_cust_allocated_amount").value);
+    var ansD = document.getElementById("cust_remaining_amount");
+    ansD.value =x - y;
+    }
+    </script>

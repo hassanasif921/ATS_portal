@@ -51,4 +51,51 @@ $vend_id=mysqli_fetch_row($vend_id);
 </div>
 <?php
 }
+if(isset($_POST['remitance_id']))
+{
+$qr=mysqli_query($connection,"select * from ats_remittance where ats_remittance_Remittance_ID='".$_POST['remitance_id']."'");
+?>
+<div class="position-relative form-group">
+<label class="">Agent Name</label>
+<select name="get_remittance_refund_agent_name" id="get_remittance_refund_agent_name"   class="form-control">
+<?php while($rowqr=mysqli_fetch_array($qr))
+{
+?>
+<option value="<?php echo $rowqr[2]?>"><?php echo $rowqr[2]?></option>
+<?php
+}
+?>
+</select> 
+</div>
+<?php 
+}
+if(isset($_POST['remitance_id1']))
+{
+$qr=mysqli_fetch_row(mysqli_query($connection,"select * from ats_remittance where ats_remittance_Remittance_ID='".$_POST['remitance_id1']."'"));
+$query = mysqli_query($connection,"select * from ats_customer");
+?>
+<div class="position-relative form-group">
+<label class="">Customer Name</label>
+                                            <select name="get_remittance_refund_customer_name" id="get_remittance_refund_customer_name" class="form-control ">
+<?php while($rowqr1=mysqli_fetch_array($query))
+{
+    if($rowqr1[1]==$qr[3]){
+?>
+<option value="<?php echo $rowqr1[1]?>" selected><?php echo $rowqr1[3]?></option>
+<?php
+    }
+}
+?>
+</select> 
+</div>
+<?php 
+}
+if(isset($_POST['remitance_id2']))
+{
+$qr2=mysqli_fetch_row(mysqli_query($connection,"select * from ats_remittance where ats_remittance_Remittance_ID='".$_POST['remitance_id2']."'"));
+?>
+<label class=" card-title">Available Amount :</label>
+<label style="float: right;"  name="get_ven_available_balance" id="get_ven_available_balance" value="<?php echo $qr2[7] ?>" class="text-danger card-title"><?php echo $qr2[7] ?> - refund</label>
+<?php 
+}
 ?>
