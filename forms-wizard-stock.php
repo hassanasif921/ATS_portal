@@ -721,7 +721,7 @@ if (isset($_POST["stock_btn"])) {
                                                                 </div>
                                                                 <div class="col-sm-3">
                                                                     <div class="position-relative ">
-                                                                        <input   type="text" onkeyup="sum1()" value="0" id="stock_other_charges" name="stock_other_charges" placeholder="Enter Price" class="form-control-sm form-control">
+                                                                        <input   type="text" onkeyup="sum1()"  id="stock_other_charges" name="stock_other_charges" placeholder="Enter Price" class="form-control-sm form-control">
                                                                     </div>
                                                                 </div>
                                                                 
@@ -1244,7 +1244,8 @@ function buyfunction() {
   var n2 = document.getElementById('stock_buying_price_print');
   var v = $("#stock_kobutsu").val();
   var bp = $("#stock_buying_price").val();
-
+alert(v);
+alert(bp);
 
   n2.value = n1.value;
   $.ajax({
@@ -1252,6 +1253,7 @@ function buyfunction() {
 	url: "getslab.php",
 	data:{'c_id': v, 'bp': bp},
 	success: function(data){
+        alert(data);
 		//$("#freight1").html(data);
         	$("#slab-list").html(data);
 	}

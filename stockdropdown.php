@@ -119,6 +119,7 @@ if($cp1[8]== $rowcountry[0])
 {
 ?>
 <input style=" font-size: 11px; margin-left: 8%; margin-top: -8%; height: 20px;  width: 100px;" type="text" id="username" name="stock_chassis_id" class="form-control" value="<?php echo $rowcountry[1]?>">
+<input style=" font-size: 11px; margin-left: 8%; margin-top: -8%; height: 20px;  width: 100px;display:none" type="text" id="countryi" name="countryi" class="form-control" value="<?php echo $rowcountry[0]?>">
 
 
 <?php
@@ -187,5 +188,72 @@ $currency=mysqli_fetch_row($currency)
 </select>
 <?php
 }
+if(isset($_POST['get_alloacted_remittance_id_ag']))
+{
+    ?>
+    <label class="form-control-label">Current Balance</label>
+    <?php
+   
+    $resultgetremittance=mysqli_fetch_row(mysqli_query($connection,"select * from ats_remittance where ats_remittance_Remittance_ID='".$_POST['get_alloacted_remittance_id_ag']."'"));
+
+    $remittanceprint=$resultgetremittance[17];
+    
+    ?>
+    <input style=" font-size: 11px;  margin-top: -3%; height: 20px;  width: 135px;" type="text" id="get_cust_available_amount" name="get_cust_available_amount" class="form-control" value="<?php echo $remittanceprint?>">
+<?php
+}
+if(isset($_POST['payment_per']))
+{
+    $get_customer_country=mysqli_fetch_row(mysqli_query($connection,"select ats_customer_country from ats_customer where ats_customer_ATS_ID ='".$_POST['payment_per']."'"));
+    $get_payment_country=mysqli_query($connection,"select * from payment_per_country where country_code='".$get_customer_country[0]."'");
+
+?>
+<label class="form-control-label">Payment %</label>
+<select style=" padding: 0px; font-size: 11px;  margin-top: -8%; height: 20px;  width: 100px;" type="text" id="payment_per" name="payment_per" class="form-control" onChange="getcountryslab(this.value);">
+<?php 
+$i=0;
+while($row_get_payment_country=mysqli_fetch_array($get_payment_country))
+{
+    $i++;
+?>
+<option value="<?php echo $row_get_payment_country[2]?>"><?php echo $row_get_payment_country[2]?>%</option>
+<?php 
+}
+?>
+</select><?php 
+
+}
+if(isset($_POST['getcountryslab']))
+{
+    $per_country=$_POST['getcountryslab'];
+    $countrycode=$_POST['countrycode'];
+    $buying=$_POST['buying'];
+    $countryslab=$_POST['countryslabval'];
+
+    $query=mysqli_fetch_row(mysqli_query($connection,"select * from slabcharges where country_id='".$_POST['countrycode']."' AND $buying>= buyingprice AND $buying<=buyingprice_end"));
+if($per_country==30)
+{
 ?>
 
+ <label class="form-control-label">Final F.O.B</label>
+ <input style=" font-size: 11px;  margin-top: -2%; width: 461px; height: 20px; " type="text" id="finalfob" name="finalfob" value="<?php echo $query[4]+$countryslab?>" class="form-control">
+<?php 
+}
+if($per_country==50)
+{
+?>
+
+ <label class="form-control-label">Final F.O.B</label>
+ <input style=" font-size: 11px;  margin-top: -2%; width: 461px; height: 20px; " type="text" id="finalfob" name="finalfob" value="<?php echo $query[5]+$countryslab?>" class="form-control">
+<?php 
+}
+if($per_country==100)
+{
+?>
+
+ <label class="form-control-label">Final F.O.B</label>
+ <input style=" font-size: 11px;  margin-top: -2%; width: 461px; height: 20px; " type="text" id="finalfob" name="finalfob" value="<?php echo $query[6]+$countryslab?>" class="form-control">
+<?php 
+}
+}
+?>

@@ -24,8 +24,8 @@ if (isset($_POST["btn_remittance_add"])) {
     $remittance_tt_file=addslashes(file_get_contents($imagestt));
     $imagescf=$_FILES['remittance_confirmation_file']['tmp_name'];
     $remittance_confirmation_file=addslashes(file_get_contents($imagescf));
-    $insert = "insert into ats_remittance(ats_remittance_Remittance_ID,ats_remittance_agent_name,ats_remittance_customer_name,ats_remittance_country,ats_remittance_date,ats_remittance_sender_name,ats_remittance_amount,ats_remittance_currency,ats_remittance_con_rate,ats_remittance_vendor_name, ats_remittance_account,ats_remittance_tt_file,ats_remittance_confirmation_file,ats_remittance_created_at,ats_remittance_updated_at,ats_remittance_status)
-     values('$remittance_id_ag','$remittance_agent_name','$remittance_customer_name','$get_customer_country','$remittance_date','$remittance_sender_name','$remittance_amount','$remittance_currency','$remittance_currency_con_rate','$remittance_vendor_name','$remittance_account_number','$remittance_tt_file','$remittance_confirmation_file','$remittance_created_at','$remittance_updated_at','$remittance_status')";
+    $insert = "insert into ats_remittance(ats_remittance_Remittance_ID,ats_remittance_agent_name,ats_remittance_customer_name,ats_remittance_country,ats_remittance_date,ats_remittance_sender_name,ats_remittance_amount,ats_remittance_currency,ats_remittance_con_rate,ats_remittance_vendor_name, ats_remittance_account,ats_remittance_tt_file,ats_remittance_confirmation_file,ats_remittance_created_at,ats_remittance_updated_at,ats_remittance_status,remaining_amount)
+     values('$remittance_id_ag','$remittance_agent_name','$remittance_customer_name','$get_customer_country','$remittance_date','$remittance_sender_name','$remittance_amount','$remittance_currency','$remittance_currency_con_rate','$remittance_vendor_name','$remittance_account_number','$remittance_tt_file','$remittance_confirmation_file','$remittance_created_at','$remittance_updated_at','$remittance_status','$remittance_amount')";
     
      $query = mysqli_query($connection,$insert);
      if ($query)

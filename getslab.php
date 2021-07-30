@@ -12,6 +12,6 @@ $row=mysqli_fetch_row($query);
 
 
    <div class="position-relative "> 
- <input style="margin-left:2.5%;" type="text" id="stock_country_slab"  name="stock_country_slab" class="form-control-sm form-control" value="<?php echo $row[4]?>">
+ <input style="margin-left:2.5%;" type="text" id="stock_country_slab"  name="stock_country_slab" class="form-control-sm form-control" value="<?php echo $row[7]?>">
    </div>
      
