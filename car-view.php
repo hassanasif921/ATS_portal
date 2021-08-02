@@ -55,28 +55,15 @@ if(isset($_POST['btn_exp_parts']))
 	$exp_parts_discription=$_POST['exp_parts_discription'];
 	$exp_parts_amount=$_POST['exp_parts_amount'];
 	$exp_parts_memo=$_POST['exp_parts_memo'];
-	$newvalue1=$row[59]+$exp_repair_amount;
-	$newvalue2=$row[65]+$exp_repair_amount;
-	$newvalue3=$row[67]+$exp_repair_amount;
+	$newvalue1=$row[59]+$exp_parts_amount;
+	$newvalue2=$row[65]+$exp_parts_amount;
+	$newvalue3=$row[67]+$exp_parts_amount;
 	$fobdollar=$newvalue2/$row[104];
 	$cnfdollar=$newvalue3/$row[104];
 	$queryrepair=mysqli_query($connection,"INSERT INTO partsrecord(recno, exp_parts_date, exp_parts_discription, exp_parts_amount, exp_parts_memo) VALUES ('$row[1]','$exp_parts_date','$exp_parts_discription','$exp_parts_amount','$exp_parts_memo')");
 	$updaterecrepair=mysqli_query($connection, "UPDATE ats_car_stock SET ats_car_stock_other_charge='$newvalue1' ,ats_car_stock_fob_price_yen='$newvalue2',ats_car_stock_cnf_price_yen='$newvalue3',ats_car_stock_fob_price_us='$fobdollar',ats_car_stock_cnf_price_us='$cnfdollar' where ats_car_stock_id ='".$_GET['car_id']."' " );
 }
-if(isset($_POST['btn_exp_parts']))
-{
-	$exp_parts_date=$_POST['exp_parts_date'];
-	$exp_parts_discription=$_POST['exp_parts_discription'];
-	$exp_parts_amount=$_POST['exp_parts_amount'];
-	$exp_parts_memo=$_POST['exp_parts_memo'];
-	$newvalue1=$row[28]+$exp_repair_amount;
-	$newvalue2=$row[65]+$exp_repair_amount;
-	$newvalue3=$row[67]+$exp_repair_amount;
-	$fobdollar=$newvalue2/$row[104];
-	$cnfdollar=$newvalue3/$row[104];
-	$queryrepair=mysqli_query($connection,"INSERT INTO partsrecord(recno, exp_parts_date, exp_parts_discription, exp_parts_amount, exp_parts_memo) VALUES ('$row[1]','$exp_parts_date','$exp_parts_discription','$exp_parts_amount','$exp_parts_memo')");
-	$updaterecrepair=mysqli_query($connection, "UPDATE ats_car_stock SET ats_car_stock_buying_price='$newvalue1' ,ats_car_stock_fob_price_yen='$newvalue2',ats_car_stock_cnf_price_yen='$newvalue3',ats_car_stock_fob_price_us='$fobdollar',ats_car_stock_cnf_price_us='$cnfdollar' where ats_car_stock_id ='".$_GET['car_id']."' " );
-}
+
 if(isset($_POST['btn_exp_boss_price']))
 {
 	$exp_boss_price_date=$_POST['exp_boss_price_date'];
@@ -108,9 +95,9 @@ if(isset($_POST['btn_exp_important']))
 	$exp_important_discription=$_POST['exp_important_discription'];
 	$exp_important_amount=$_POST['exp_important_amount'];
 	$exp_important_memo=$_POST['exp_important_memo'];
-	$newvaluei1=$row[59]+$exp_boss_price_memo;
-	$newvaluei2=$row[65]+$exp_boss_price_memo;
-	$newvaluei3=$row[67]+$exp_boss_price_memo;
+	$newvaluei1=$row[59]+$exp_important_amount;
+	$newvaluei2=$row[65]+$exp_important_amount;
+	$newvaluei3=$row[67]+$exp_important_amount;
 	$fobdollar2=$newvaluei2/$row[104];
 	$cnfdollar2=$newvaluei3/$row[104];
 	$query_important=mysqli_query($connection,"INSERT INTO important(recordno, date, description, amount, memo) VALUES ('$row[1]','$exp_important_date','$exp_important_discription','$exp_important_amount','$exp_important_memo')");
@@ -126,7 +113,7 @@ if(isset($_POST['btn_exp_important']))
 						<div style="margin-left: -18px; margin-right: -53px;" class="container">
 							<div style="padding-top: 1%; margin-left: 8px; " class="container row">
 								<div class="col-sm-1">
-									<input style="width: 80px;" value="Auc. Pics" name="btn_stock_auc_pics" id="btn_stock_auc_pics" type="button" class="btn-square btn-shadow btn btn-warning " data-toggle="modal" data-target="#exampleModalLong-aucpics">
+									<input style="width: 80px;" value="Auc. Pics" name="btn_stock_auc_pics" id="btn_stock_auc_pics" type="button" class="btn-square btn-shadow btn btn-warning " data-toggle="modal" data-target="#exampleModalLong-aucpics1">
 								</div>
 								<div class="col-sm-1">
 									<input style="width: 80px;" value="Auc Sht" name="btn_stock_auc_sht" id="btn_stock_auc_sht" type="button" class="btn-square btn-shadow btn btn-warning" data-toggle="modal" data-target="#exampleModalLong-auc-sheet">
@@ -475,7 +462,7 @@ if(isset($_POST['btn_exp_important']))
 											</ul>
 											<div style="height: 120px; margin-top: -12px; overflow: auto;" class="tab-content " id="table1">
 												<div class="tab-pane active" id="tab-animated-reserve" role="tabpanel">
-													<table style="font-size: 11px; white-space: nowrap;" class="tables-grid">
+													<table style=" white-space: nowrap;" class="tables-grid">
 														<thead>
 															<tr>
 																<th>#</th>
@@ -548,24 +535,27 @@ if(isset($_POST['btn_exp_important']))
 																$resultportcountry=mysqli_fetch_row(mysqli_query($connection,$queryport));
 																?>
 																<td><?php echo $resultportcountry[1]?></td>
+																<?php $queryconsignee=mysqli_fetch_row(mysqli_query($connection,"SELECT * FROM ats_consignee where ats_consignee_id='".$result_reserve[9]."'"));
+																?>
+																<td><?php echo $queryconsignee[4]?></td>
+																<td><?php echo $queryconsignee[6]?></td>
+																<td><?php echo $queryconsignee[5]?></td>
+																<td><?php echo $queryconsignee[8]?></td>
+																<td><?php echo $queryconsignee[10]?></td>
+																<td><?php echo $queryconsignee[9]?></td>
 																<td>Mark</td>
 																<td>Otto</td>
-																<td>@mdo</td>
+																<td><?php echo $row[65]?></td>
+																<td><?php echo $row[58]?></td>
+																<?php $queryinspectiuon=mysqli_fetch_row(mysqli_query($connection,"select * from inspection_charges where id='".$row[57]."'"));?>
+																<td><?php echo $queryinspectiuon[2]?></td>
+																<td><?php echo $queryinspectiuon[3]?></td>
 																<td>Mark</td>
-																<td>Otto</td>
+																<td></td>																	
 																<td>@mdo</td>
-																<td>Mark</td>
-																<td>Otto</td>
-																<td>@mdo</td>
-																<td>Mark</td>
-																<td>Otto</td>
-																<td>@mdo</td>
-																<td>Mark</td>
-																<td>Otto</td>
-																<td>@mdo</td>
-																<td>Mark</td>
-																<td>Otto</td>
-																<td>@mdo</td>
+																<td><?php echo $row[59]?></td>
+																<td><?php echo $row[67]?></td>
+																<td><?php echo $result_reserve[5]."%"?></td>
 																<td>Mark</td>
 																
 																
@@ -576,7 +566,7 @@ if(isset($_POST['btn_exp_important']))
 													</table>       
 												</div>
 												<div class="tab-pane" id="tab-animated-repair" role="tabpanel">
-													<table style="font-size: 10px;" class=" table table-sm">
+													<table style="" class="tables-grid">
 														<thead>
 															<tr>
 																<th>#</th>
@@ -592,39 +582,31 @@ if(isset($_POST['btn_exp_important']))
 															</tr>
 														</thead>
 														<tbody>
+															<?php 
+															$queryrepairdata=mysqli_query($connection,"select * from repairdetails where recordno='".$row[1]."'");
+															while($rowrepair=mysqli_fetch_array($queryrepairdata))
+															{
+															?>
 															<tr>
-																<th scope="row">1</th>
-																<td>Mark</td>
-																<td>Otto</td>
-																<td>@mdo</td>
-																<td>Mark</td>
-																<td>Otto</td>
-																
-																
+																<th>1</th>
+																<td><?php echo $row[1]?></td>
+																<td><?php echo $row[2]?></td>
+																<td><?php echo $querymake[1]?></td>
+																<td><?php echo $querymodel[2]?></td>
+																<td><?php echo $row[6]?></td>
+																<td><?php echo $rowrepair[2]?></td>
+																<td><?php echo $rowrepair[3]?></td>
+																<td><?php echo $rowrepair[4]?></td>
+																<td><?php echo $rowrepair[5]?></td>
 															</tr>
-															<tr>
-																<th scope="row">2</th>
-																<td>Mark</td>
-																<td>Otto</td>
-																<td>@mdo</td>
-																<td>Mark</td>
-																<td>Otto</td>
-															  
-															</tr>
-															<tr>
-																<th scope="row">3</th>
-																<td>Mark</td>
-																<td>Otto</td>
-																<td>@mdo</td>
-																<td>Mark</td>
-																<td>Otto</td>
-																
-															</tr>
+															<?php 
+															}
+															?>
 														</tbody>
 													</table>  
 												</div>
 												<div class="tab-pane" id="tab-animated-transport" role="tabpanel">
-													<table style="font-size: 10px;" class=" table table-sm">
+													<table style="" class="tables-grid">
 														<thead>
 															<tr>
 																<th>#</th>
@@ -672,7 +654,7 @@ if(isset($_POST['btn_exp_important']))
 													</table>  
 												</div>
 												<div class="tab-pane" id="tab-animated-parts" role="tabpanel">
-													<table style="font-size: 10px;" class="table table-sm">
+													<table style="" class="table table-sm">
 														<thead>
 															<tr>
 																<th>#</th>
@@ -688,45 +670,30 @@ if(isset($_POST['btn_exp_important']))
 															</tr>
 														</thead>
 														<tbody  style="height: 80px;" >
+														<?php 
+															$queryparts=mysqli_query($connection,"select * from partsrecord where recno='".$row[1]."'");
+															while($rowparts=mysqli_fetch_array($queryparts))
+															{
+															?>
 															<tr>
-																<th scope="row">1</th>
-																<td>Mark</td>
-																<td>Otto</td>
-																<td>@mdo</td>
-																<td>Mark</td>
-																<td>Otto</td>
-																<td>@mdo</td>
-																<td>Mark</td>
-																<td>Otto</td>
+															<th>1</th>
+																<td><?php echo $row[1]?></td>
+																<td><?php echo $row[2]?></td>
+																<td><?php echo $querymake[1]?></td>
+																<td><?php echo $querymodel[2]?></td>
+																<td><?php echo $row[6]?></td>
+																<td><?php echo $rowparts[1]?></td>
+																<td><?php echo $rowparts[2]?></td>
+																<td><?php echo $rowparts[3]?></td>
+																<td><?php echo $rowparts[4]?></td>
 																
 															</tr>
-															<tr>
-																<th scope="row">2</th>
-																<td>Mark</td>
-																<td>Otto</td>
-																<td>@mdo</td>
-																<td>Mark</td>
-																<td>Otto</td>
-																<td>@mdo</td>
-																<td>Mark</td>
-																<td>Otto</td>
-															</tr>
-															<tr>
-																<th scope="row">3</th>
-																<td>Mark</td>
-																<td>Otto</td>
-																<td>@mdo</td>
-																<td>Mark</td>
-																<td>Otto</td>
-																<td>@mdo</td>
-																<td>Mark</td>
-																<td>Otto</td>
-															</tr>
+														<?php }?>
 														</tbody>
 													</table>  
 												</div>
 												<div class="tab-pane" id="tab-animated-money" role="tabpanel">
-													<table style="font-size: 10px;" class=" table table-sm">
+													<table style="" class="tables-grid">
 														<thead>
 															<tr>
 																<th>#</th>
@@ -739,58 +706,38 @@ if(isset($_POST['btn_exp_important']))
 																<th>Customer Name</th>
 																<th>Remittance ID #</th>
 																<th>Balance Amount</th>
-																<th>Balance Amount</th>
+																
 																<th>Remaining Amount</th>
 															</tr>
 														</thead>
 														<tbody>
+														<?php 
+															$queryreservationmoney=mysqli_query($connection,"select * from reservationmoney where recordno='".$row[1]."'");
+															while($rowreservationmoney=mysqli_fetch_array($queryreservationmoney))
+															{
+															?>
 															<tr>
 																<th scope="row">1</th>
-																<td>Mark</td>
-																<td>Otto</td>
-																<td>@mdo</td>
-																<td>Mark</td>
-																<td>Otto</td>
-																<td>@mdo</td>
-																<td>Mark</td>
-																<td>Otto</td>
-																<td>@mdo</td>
-																<td>Mark</td>
-																<td>Otto</td>
+																<td><?php echo $row[1]?></td>
+																<td><?php echo $row[2]?></td>
+																<td><?php echo $querymake[1]?></td>
+																<td><?php echo $querymodel[2]?></td>
+																<td><?php echo $row[6]?></td>
+																<td><?php echo $row[67]?></td>
+																<?php $querycusmoney=mysqli_fetch_row(mysqli_query($connection,"select * from ats_customer where ats_customer_ATS_ID='".$rowreservationmoney[3]."'")); ?>
+																<td><?php echo $querycusmoney[3]?></td>
+																<td><?php echo $rowreservationmoney[6]?></td>
+																<td><?php echo $rowreservationmoney[4]?></td>
+																<td><?php echo $rowreservationmoney[5]?></td>
+
+															
 															</tr>
-															<tr>
-																<th scope="row">2</th>
-																<td>Mark</td>
-																<td>Otto</td>
-																<td>@mdo</td>
-																<td>Mark</td>
-																<td>Otto</td>
-																<td>@mdo</td>
-																<td>Mark</td>
-																<td>Otto</td>
-																<td>@mdo</td>
-																<td>Mark</td>
-																<td>Otto</td>
-															</tr>
-															<tr>
-																<th scope="row">3</th>
-																<td>Mark</td>
-																<td>Otto</td>
-																<td>@mdo</td>
-																<td>Mark</td>
-																<td>Otto</td>
-																<td>@mdo</td>
-																<td>Mark</td>
-																<td>Otto</td>
-																<td>@mdo</td>
-																<td>Mark</td>
-																<td>Otto</td>
-															</tr>
+															<?php } ?>
 														</tbody>
 													</table>  
 												</div>
 												<div class="tab-pane" id="tab-animated-commision" role="tabpanel">
-													<table style="font-size: 10px;" class=" table table-sm">
+													<table style="" class="tables-grid">
 														<thead>
 															<tr>
 																<th>#</th>
@@ -845,7 +792,7 @@ if(isset($_POST['btn_exp_important']))
 													</table>  
 												</div>
 												<div class="tab-pane" id="tab-animated-price" role="tabpanel">
-													<table style="font-size: 10px;" class=" table table-sm">
+													<table style="" class="tables-grid">
 														<thead>
 															<tr>
 																<th>#</th>
@@ -861,45 +808,30 @@ if(isset($_POST['btn_exp_important']))
 															</tr>
 														</thead>
 														<tbody>
+														<?php 
+															$querybossprice=mysqli_query($connection,"select * from boss_price where recno='".$row[1]."'");
+															while($rowbossprice=mysqli_fetch_array($querybossprice))
+															{
+															?>
 															<tr>
-																<th scope="row">1</th>
-																<td>Mark</td>
-																<td>Otto</td>
-																<td>@mdo</td>
-																<td>Mark</td>
-																<td>Otto</td>
-																<td>@mdo</td>
-																<td>Mark</td>
-																<td>Otto</td>
+															<th>1</th>
+																<td><?php echo $row[1]?></td>
+																<td><?php echo $row[2]?></td>
+																<td><?php echo $querymake[1]?></td>
+																<td><?php echo $querymodel[2]?></td>
+																<td><?php echo $row[6]?></td>
+																<td><?php echo $rowbossprice[1]?></td>
+																<td><?php echo $rowbossprice[2]?></td>
+																<td><?php echo $rowbossprice[3]?></td>
+																<td><?php echo $rowbossprice[4]?></td>
 																
 															</tr>
-															<tr>
-																<th scope="row">2</th>
-																<td>Mark</td>
-																<td>Otto</td>
-																<td>@mdo</td>
-																<td>Mark</td>
-																<td>Otto</td>
-																<td>@mdo</td>
-																<td>Mark</td>
-																<td>Otto</td>
-															</tr>
-															<tr>
-																<th scope="row">3</th>
-																<td>Mark</td>
-																<td>Otto</td>
-																<td>@mdo</td>
-																<td>Mark</td>
-																<td>Otto</td>
-																<td>@mdo</td>
-																<td>Mark</td>
-																<td>Otto</td>
-															</tr>
+														<?php }?>
 														</tbody>
 													</table>  
 												</div>
 												<div class="tab-pane" id="tab-animated-important" role="tabpanel">
-													<table style="font-size: 10px;" class=" table table-sm">
+													<table style="" class="tables-grid">
 														<thead>
 															<tr>
 																<th>#</th>
@@ -915,40 +847,25 @@ if(isset($_POST['btn_exp_important']))
 															</tr>
 														</thead>
 														<tbody>
+														<?php 
+															$querybossprice=mysqli_query($connection,"select * from important where recordno='".$row[1]."'");
+															while($rowbossprice=mysqli_fetch_array($querybossprice))
+															{
+															?>
 															<tr>
-																<th scope="row">1</th>
-																<td>Mark</td>
-																<td>Otto</td>
-																<td>@mdo</td>
-																<td>Mark</td>
-																<td>Otto</td>
-																<td>@mdo</td>
-																<td>Mark</td>
-																<td>Otto</td>
+															<th>1</th>
+																<td><?php echo $row[1]?></td>
+																<td><?php echo $row[2]?></td>
+																<td><?php echo $querymake[1]?></td>
+																<td><?php echo $querymodel[2]?></td>
+																<td><?php echo $row[6]?></td>
+																<td><?php echo $rowbossprice[1]?></td>
+																<td><?php echo $rowbossprice[2]?></td>
+																<td><?php echo $rowbossprice[3]?></td>
+																<td><?php echo $rowbossprice[4]?></td>
 																
 															</tr>
-															<tr>
-																<th scope="row">2</th>
-																<td>Mark</td>
-																<td>Otto</td>
-																<td>@mdo</td>
-																<td>Mark</td>
-																<td>Otto</td>
-																<td>@mdo</td>
-																<td>Mark</td>
-																<td>Otto</td>
-															</tr>
-															<tr>
-																<th scope="row">3</th>
-																<td>Mark</td>
-																<td>Otto</td>
-																<td>@mdo</td>
-																<td>Mark</td>
-																<td>Otto</td>
-																<td>@mdo</td>
-																<td>Mark</td>
-																<td>Otto</td>
-															</tr>
+														<?php }?> 	
 														</tbody>
 													</table>  
 												</div>
@@ -1746,6 +1663,47 @@ include("bottom.php");
 		</div>
 	</div>
 </div>
+<div class="modal fade" id="exampleModalLong-aucpics1" tabindex="-1" role="dialog"  aria-labelledby="exampleModalLongTitle"
+	aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="exampleModalLongTitle">Auction Pictures</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+		  
+			<form>
+				<div class="modal-body">
+				<div class="row">
+					<div class="lightbox-gallery">
+									<div class="container">
+										
+												<div class="row photos">
+													<?php 
+													$queryimg=mysqli_query($connection,"select * from cardocuments where stockid='".$row[1]."' AND imagetype='AUCTION-PICTURES'");
+													
+													while($resultimg=mysqli_fetch_array($queryimg))
+													{
+													?>
+													<div class="col-sm-6 col-md-4 col-lg-3 item"><a href="cardocuments/<?php echo $resultimg[3]?>" data-lightbox="photos"><img class="img-fluid" src="cardocuments/<?php echo $resultimg[3]?>"></a></div>
+												<?php }?>
+												</div>
+									 </div>
+					</div>
+											  
+				</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+					<button type="button" name="btn_exp_commission" id="btn_exp_commission" class="btn btn-primary">Add +</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+
 <div class="modal fade" id="exampleModalLong-invoice" tabindex="-1" role="dialog"  aria-labelledby="exampleModalLongTitle"
 	aria-hidden="true">
 	<div class="modal-dialog" role="document">
@@ -1763,7 +1721,7 @@ include("bottom.php");
 					<div class="lightbox-gallery">
 									<div class="container">
 										
-												<div class="row photos">
+													<div class="row photos">
 													<?php 
 													$queryimginvoice=mysqli_query($connection,"select * from cardocuments where stockid='".$row[1]."' AND imagetype='INVOICE'");
 													
@@ -1772,12 +1730,18 @@ include("bottom.php");
 													?>
 													<div class="col-sm-6 col-md-4 col-lg-3 item"><a href="cardocuments/<?php echo $resultinvoice[3]?>" data-lightbox="photos"><img class="img-fluid" src="cardocuments/<?php echo $resultinvoice[3]?>"></a></div>
 												<?php }?>
-												</div>
-									 </div>
+													</div>
+										</div>
 								</div>
 											  
 					</div>
-</div>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>	
+													</div>
+
 <div class="modal fade" id="exampleModalLong-ttcopy" tabindex="-1" role="dialog"  aria-labelledby="exampleModalLongTitle"
 	aria-hidden="true">
 	<div class="modal-dialog" role="document">
@@ -1853,6 +1817,7 @@ include("bottom.php");
 		</div>
 	</div>
 </div>
+
 <div class="modal fade" id="exampleModalLong-bl" tabindex="-1" role="dialog"  aria-labelledby="exampleModalLongTitle"
 	aria-hidden="true">
 	<div class="modal-dialog" role="document">
@@ -1878,46 +1843,7 @@ include("bottom.php");
 		</div>
 	</div>
 </div>
-<div class="modal fade" id="exampleModalLong-aucpics" tabindex="-1" role="dialog"  aria-labelledby="exampleModalLongTitle"
-	aria-hidden="true">
-	<div class="modal-dialog" role="document">
-		<div class="modal-content">
-			<div class="modal-header">
-				<h5 class="modal-title" id="exampleModalLongTitle">Auction Pictures</h5>
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-					<span aria-hidden="true">&times;</span>
-				</button>
-			</div>
-		  
-			<form>
-				<div class="modal-body">
-					<div class="row">
-					<div class="lightbox-gallery">
-									<div class="container">
-										
-												<div class="row photos">
-													<?php 
-													$queryimg=mysqli_query($connection,"select * from cardocuments where stockid='".$row[1]."' AND imagetype='AUCTION-PICTURES'");
-													
-													while($resultimg=mysqli_fetch_array($queryimg))
-													{
-													?>
-													<div class="col-sm-6 col-md-4 col-lg-3 item"><a href="cardocuments/<?php echo $resultimg[3]?>" data-lightbox="photos"><img class="img-fluid" src="cardocuments/<?php echo $resultimg[3]?>"></a></div>
-												<?php }?>
-												</div>
-									 </div>
-								</div>
-											  
-					</div>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-					<button type="button" name="btn_exp_commission" id="btn_exp_commission" class="btn btn-primary">Add +</button>
-				</div>
-			</form>
-		</div>
-	</div>
-</div>
+
 <div class="modal fade" id="exampleModalLong-yp" tabindex="-1" role="dialog"  aria-labelledby="exampleModalLongTitle"
 	aria-hidden="true">
 	<div class="modal-dialog" role="document">
