@@ -1221,7 +1221,7 @@ function getSlab(val) {
 	});
     $.ajax({
 	type: "POST",
-	url: "ats_dependant_dropdown.php",
+	url: "ats_dependant_dropdown.php",  
 	data:'i_id='+val,
 	success: function(data){
 		$("#port").html(data);
@@ -1244,8 +1244,6 @@ function buyfunction() {
   var n2 = document.getElementById('stock_buying_price_print');
   var v = $("#stock_kobutsu").val();
   var bp = $("#stock_buying_price").val();
-alert(v);
-alert(bp);
 
   n2.value = n1.value;
   $.ajax({
@@ -1253,7 +1251,7 @@ alert(bp);
 	url: "getslab.php",
 	data:{'c_id': v, 'bp': bp},
 	success: function(data){
-        alert(data);
+       
 		//$("#freight1").html(data);
         	$("#slab-list").html(data);
 	}

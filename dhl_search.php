@@ -1,5 +1,7 @@
 <?php
 include("top.php");
+include("connection_db.php");
+$resultsell=mysqli_query($connection,"select * from ats_sell_person");
 ?>
             <div class="app-main__outer">
                 <div class="app-main__inner p-0">
@@ -7,20 +9,27 @@ include("top.php");
                         <div  style="margin-top: -1.2%; box-shadow: none; " class="app-inner-layout__wrapper row-fluid no-gutters">
                             <div class="tab-content app-inner-layout__content card">
                                 <div style="box-shadow: none;" class="container card">
-                                    <form action="" method="">    
+                                    <form action="" method="POST" id="userForm">    
                                         <div style="background:darkgray; padding-top: 2%; padding-bottom: 0.5%;" class="row">
                                             <div class="col-sm-2">
                                                 <label style=" font-weight: bold; margin-top: 5px;" class="form-control-label">Agent Name</label>
                                             </div>
                                             <div style="margin-left: -8%; "class="col-sm-1">
-                                                <select style="width: 140px;" name="get_search_dhl_request_agent_name" id="get_search_dhl_request_agent_name" type="text" class="form-control form-control-sm">
-                                                    <option>Employee Table</option>
+                                                <select style="width: 140px;" name="get_search_dhl_request_agent_name" id="get_search_dhl_request_agent_name" type="text" class="form-control form-control-sm" onChange="getrecord(this.value);">
+                                                <?php 
+                                                    while($rowsell=mysqli_fetch_row($resultsell))
+                                                    {
+                                                    ?>
+                                                    <option value="<?php echo $rowsell[1]?>" ><?php echo $rowsell[1]?></option>
+                                                    <?php   
+                                                    }
+                                                    ?>
                                                 </select>
                                             </div>
                                             <div style="margin-left: 8%;" class="col-sm-2">
                                                 <label style=" font-weight: bold; margin-top: 5px;" class="form-control-label">Customer Name</label>
                                             </div>
-                                            <div style="margin-left: -6%;" class="col-sm-1 ">
+                                            <div style="margin-left: -6%;" class="col-sm-1 " id="cust">
                                                 <select style="width: 140px;" name="get_search_dhl_request_customer_name" id="get_search_dhl_request_customer_name" type="text" class="form-control form-control-sm">
                                                     <option>Customer Table</option>
                                                 </select>
@@ -31,19 +40,28 @@ include("top.php");
                                             <div style="margin-left: -2%;" class="col-sm-1">
                                                 <input style="width: 145px;" name="get_search_stock_tracking_number" id="get_search_stock_tracking_number" class="form-control form-control-sm">
                                             </div>
-                                            <div style="margin-left: 80px;" class="col-sm-3">
-                                                <input style="width:100px;" type="reset" name="btn_reset" class="mb-2 mr-2 btn btn-gradient-primary" value="Refresh"> 
-                                                <input style="width: 100px;" type="submit" name="btn_search_dhl_request" id="btn_search_dhl_request" class="mb-2 mr-2 btn btn-gradient-success" value="Search"> 
+\
+                                        </div>
+                                        <div style="background:darkgray; padding-top: 1%; " class="row">
+                                            <div  class="col-sm-1">
+                                                <label style=" font-weight: bold; margin-top: 5px;" class="form-control-label">Date</label>
                                             </div>
-                                            <div class="col-sm-2"></div>
+                                            <div class="col-sm-3">
+                                                <input type="text" name="get_remittance_date" id="get_remittance_date" class=" form-control form-control-sm  input-mask-trigger" data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" >
+                                            </div>
+                                            <div  class="col-sm-1">
+                                                <label style=" font-weight: bold; margin-top: 5px;" class="form-control-label">Date Till</label>
+                                            </div>
+                                            <div class="col-sm-3">
+                                                <input type="text" name="get_remittance_date_till" id="get_remittance_date_till" class=" form-control form-control-sm  input-mask-trigger" data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" >
+                                            </div>
+                                            <div class="col-sm-2">
+                                                <input style="width: 147px;" type="submit" id="btn_remittance_search" name="btn_remittance_search" class="mb-2 mr-2 btn btn-gradient-primary  " value="Search"> 
+                                            </div>
                                             <div  class="col-sm-2">
-                                                <label style=" font-weight: bold; " class="form-control-label col-form-label">Select Date</label>
-                                            </div>
-                                            <div  class="col-sm-6">
-                                                <input style="margin-left: -89px;" name="get_search_dhl_request_date" id="get_search_dhl_request_date" class="form-control form-control-sm js-daterangepicker"  >
-                                            </div>
-                                            <div class="col-sm-2"></div>    
-                                        </div>     
+                                                <input style="width: 147px;" type="reset" name="stock_add_btn" class="mb-2 mr-2 btn btn-gradient-success  " value="Refresh"> 
+                                            </div>                                                
+                                        </div>            
                                     </form>
                                 </div>
                                 <div style="background-color: gray; height: 1px; "></div>
@@ -53,8 +71,8 @@ include("top.php");
                                         <div class="col-lg-12">
                                             <div style="margin-left: 60px;" class="main-card  card">
                                                 <div class="card-body">
-                                                    <div class="table-responsive">
-                                                        <table style="font-size:11px;" class="table">
+                                                    <div class="table-responsive" id="table">
+                                                        <table style="font-size:11px;" >
                                                             <thead>
                                                                 <tr>
                                                                     <th>Slct all<br/><input type="checkbox" onclick="toggle(this);" /></th>
@@ -129,4 +147,54 @@ include("bottom.php");
 </script>
 
            
+<script>
+function getrecord(val) {
+ //alert(val);
+	$.ajax({
+	type: "POST",
+	url: "dhlsearch.php",
+	data:'agent_id='+val,
+	success: function(data){
+		$("#table").html(data);
+	}
+	});
+    $.ajax({
+	type: "POST",
+	url: "dhlsearch.php",
+	data:'agent_id1='+val,
+	success: function(data){
+		$("#cust").html(data);
+	}
+	});
+}
+</script>
+<script>
+function getrecord2(val) {
+ //alert(val);
+	$.ajax({
+	type: "POST",
+	url: "dhlsearch.php",
+	data:'cust_id='+val,
+	success: function(data){
+		$("#table").html(data);
+	}
+	});
+}
 
+</script>         
+
+<script>
+$(document).on('submit','#userForm',function(e){
+        e.preventDefault();
+       
+        $.ajax({
+        method:"POST",
+        url: "dhldatesearch.php",
+        data:$(this).serialize(),
+        success: function(data){
+        $('#table').html(data);
+     
+
+    }});
+});
+</script>

@@ -242,7 +242,7 @@ if(isset($_POST['btn_exp_important']))
 										</div>
 										<div class="col-3">
 											<label style="margin-left: 41%;"  class="form-control-label text-center"> Option</label>
-											<label style=" width: 258px; font-size: 11px; margin-top: -3.8%; height: 20px; padding: 1px;" type="text" id="get_stock_all_options" name="get_stock_all_options" class="form-control"><?php echo $row[32] .",".$row[33].",".$row[34].",".$row[35].",".$row[36].",".$row[37].",".$row[38].",".$row[39].",".$row[40].",".$row[41].",".$row[42].",".$row[43].",".$row[44].",".$row[45].",".$row[46].",".$row[47].",".$row[48]?></label>
+											<label style=" width: 258px; font-size: 11px; margin-top: -3.8%; height: 20px; padding: 1px;" type="text" id="get_stock_all_options" name="get_stock_all_options" class="form-control"><?php echo $row[32] .",".$row[33].",".$row[34].",".$row[35].",".$row[36].",".$row[37].",".$row[38].",".$row[39].",".$row[40].",".$row[41].",".$row[42].",".$row[43].",".$row[44].",".$row[45].",".$row[46].",".$row[47]?></label>
 										</div>
 										<div class="col-3">
 											<label style="margin-left: 40%;"  class="form-control-label text-center">Other Option</label>

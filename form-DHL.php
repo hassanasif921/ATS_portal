@@ -1,6 +1,7 @@
 <?php
 include("top.php");
 include("connection_db.php");
+$queryagent=mysqli_query($connection,"select * from ats_sell_person");
 if (isset($_POST["btn_dhl_request"])) {
     $get_dhl_request_agent_name = $_POST["get_dhl_request_agent_name"];
     $get_dhl_request_customer_name = $_POST["get_dhl_request_customer_name"];
@@ -32,7 +33,8 @@ if (isset($_POST["btn_dhl_request"])) {
     $dhl_stock_chassis_id_5 = $_POST["dhl_stock_chassis_id_5"];
     $dhl_stock_man_year_5 = $_POST["dhl_stock_man_year_5"];
     $dhl_stock_bl_surrender_checked_5 = isset($_POST['dhl_stock_bl_surrender_checked_5']) ? $_POST['dhl_stock_bl_surrender_checked_5'] : "no";
-    $dhl_created_at = time();
+    $dhl_created_at = date("Y-m-d");
+
     $dhl_updated_at = time();
     $dhl_status = "active";
                    
@@ -71,34 +73,39 @@ if (isset($_POST["btn_dhl_request"])) {
                                     <div class="col-md-3">
                                         <div class="position-relative form-group">
                                             <label class="">Agent Name</label>
-                                            <select name="get_dhl_request_agent_name" id="get_dhl_request_agent_name" required class="form-control">
+                                            <select name="get_dhl_request_agent_name" id="get_dhl_request_agent_name" required class="form-control" onChange="getcustomer(this.value)">
                                                 <option value="">Agent / User Table</option>
-                                                <option value="MUQEET">MUQEET</option>
+                                                <?php while($rowagent=mysqli_fetch_array($queryagent))
+                                                {?>
+                                                <option value="<?php echo $rowagent[1]?>"><?php echo $rowagent[1]?></option>
+                                                <?php 
+                                                }
+                                                ?>
                                             </select> 
                                         </div>
                                     </div>
-                                    <div class="col-md-3">
+                                    <div class="col-md-3" id="customer_name">
                                         <div class="position-relative form-group">
                                             <label class="">Customer Name</label>
-                                            <select name="get_dhl_request_customer_name" id="get_dhl_request_customer_name" required class="form-control ">
+                                            <select name="get_dhl_request_customer_name" id="get_dhl_request_customer_name" required class="form-control " onChange="customerchange(this.value)">
                                                 <option value="">CustomerTable</option>
                                                 <option value="BUNGALI">BUNGALI</option>
                                             </select>
                                         </div>
                                     </div>
-                                    <div class="col-md-2">
+                                    <div class="col-md-2" id="customer_adress">
                                         <div class="position-relative form-group">
                                             <label class="">Customer Address</label>
                                             <input name="get_dhl_request_cus_address" id="get_dhl_request_cus_address"  type="text" class="form-control">
                                         </div>
                                     </div>
-                                    <div class="col-md-2">
+                                    <div class="col-md-2" id="customer_postal">
                                         <div class="position-relative form-group">
                                             <label class="">Postal Code</label>
                                             <input name="cus_postal_code" id="cus_postal_code"  type="" class="form-control">
                                         </div>
                                     </div>
-                                    <div class="col-md-2">
+                                    <div class="col-md-2" id="customer_phone">
                                         <div class="position-relative form-group">
                                             <label class="">Phone</label>
                                             <input name="get_dhl_customer_phone" id="get_dhl_customer_phone"  type="tel" class="form-control">
@@ -110,22 +117,23 @@ if (isset($_POST["btn_dhl_request"])) {
                                         <div class="col-md-2">
                                             <div class="input-group">
                                                 <label class="text-left col-form-label">Rec. No. &nbsp;</label>
-                                                <input name="dhl_stock_rec_no" id="dhl_stock_rec_no" class="form-control" type="text">
+                                                <input name="dhl_stock_rec_no" id="dhl_stock_rec_no" class="form-control" type="text" onkeyup="carrecord(this.value)">
                                             </div>
                                         </div>
-                                        <div class="col-md-3">
+                                       
+                                        <div class="col-md-3" id="make_model_1">
                                             <div class="input-group">
                                                 <label class="text-left col-form-label">Maker / Model &nbsp;</label>
                                                 <input name="dhl_stock_maker_modal" id="dhl_stock_maker_modal" class="form-control" type="text">
                                             </div>
                                         </div>
-                                        <div class="col-md-3">
+                                        <div class="col-md-3" id="make_model_2">
                                             <div class="input-group">
                                                 <label class=" text-left col-form-label">Chassis ID #&nbsp;</label>
                                                 <input class="form-control" id="dhl_stock_chassis_id" name="dhl_stock_chassis_id" type="text">
                                             </div>
                                         </div>
-                                        <div class="col-md-2">
+                                        <div class="col-md-2" id="make_model_3">
                                             <div class="input-group">
                                                 <label class=" text-left col-form-label">Year &nbsp;</label>
                                                 <input class="form-control" name="dhl_stock_man_year" id="dhl_stock_man_year" type="text">
@@ -147,22 +155,22 @@ if (isset($_POST["btn_dhl_request"])) {
                                                             <div class="col-md-2">
                                                                 <div class="input-group">
                                                                     <label class=" text-left col-form-label">Rec. No. &nbsp;</label>
-                                                                    <input name="dhl_stock_rec_no_2" id="dhl_stock_rec_no_2" class="form-control" type="text">
+                                                                    <input name="dhl_stock_rec_no_2" id="dhl_stock_rec_no_2" class="form-control" type="text" onkeyup="carrecord_2(this.value)">
                                                                 </div>
                                                             </div>
-                                                            <div class="col-md-3">
-                                                                <div class="input-group">
+                                                            <div class="col-md-3" id="make_model_4">
+                                                                <div class="input-group" >
                                                                     <label class=" text-left col-form-label">Maker / Model &nbsp;</label>
                                                                     <input name="dhl_stock_maker_modal_2" id="dhl_stock_maker_modal_2" class="form-control" type="text">
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-3">
-                                                                <div class="input-group">
+                                                                <div class="input-group" id="make_model_5">
                                                                     <label class=" text-left col-form-label">Chassis ID #&nbsp;</label>
                                                                     <input class="form-control" id="dhl_stock_chassis_id_2" name="dhl_stock_chassis_id_2" type="text">
                                                                 </div>
                                                             </div>
-                                                            <div class="col-md-2">
+                                                            <div class="col-md-2" id="make_model_6">
                                                                 <div class="input-group">
                                                                     <label class=" text-left col-form-label">Year &nbsp;</label>
                                                                     <input class="form-control" name="dhl_stock_man_year_2" id="dhl_stock_man_year_2" type="text">
@@ -184,22 +192,22 @@ if (isset($_POST["btn_dhl_request"])) {
                                                                         <div class="col-md-2">
                                                                             <div class="input-group">
                                                                                 <label class=" text-left col-form-label">Rec. No. &nbsp;</label>
-                                                                                <input name="dhl_stock_rec_no_3" id="dhl_stock_rec_no_3" class="form-control" type="text">
+                                                                                <input name="dhl_stock_rec_no_3" id="dhl_stock_rec_no_3" class="form-control" type="text" onkeyup="carrecord_3(this.value)">
                                                                             </div>
                                                                         </div>
                                                                         <div class="col-md-3">
-                                                                            <div class="input-group">
+                                                                            <div class="input-group" id="make_model_7">
                                                                                 <label class=" text-left col-form-label">Maker / Model &nbsp;</label>
                                                                                 <input name="dhl_stock_maker_modal_3" id="dhl_stock_maker_modal_3" class="form-control" type="text">
                                                                             </div>
                                                                         </div>
-                                                                        <div class="col-md-3">
+                                                                        <div class="col-md-3" id="make_model_8">
                                                                             <div class="input-group">
                                                                                 <label class=" text-left col-form-label">Chassis ID #&nbsp;</label>
                                                                                 <input class="form-control" id="dhl_stock_chassis_id_3" name="dhl_stock_chassis_id_3" type="text">
                                                                             </div>
                                                                         </div>
-                                                                        <div class="col-md-2">
+                                                                        <div class="col-md-2" id="make_model_9">
                                                                             <div class="input-group">
                                                                                 <label class=" text-left col-form-label">Year &nbsp;</label>
                                                                                 <input class="form-control" name="dhl_stock_man_year_3" id="dhl_stock_man_year_3" type="text">
@@ -221,22 +229,22 @@ if (isset($_POST["btn_dhl_request"])) {
                                                                                     <div class="col-md-2">
                                                                                         <div class="input-group">
                                                                                             <label class=" text-left col-form-label">Rec. No. &nbsp;</label>
-                                                                                            <input name="dhl_stock_rec_no_4" id="dhl_stock_rec_no_4" class="form-control" type="text">
+                                                                                            <input name="dhl_stock_rec_no_4" id="dhl_stock_rec_no_4" class="form-control" type="text" onkeyup="carrecord_4(this.value)">
                                                                                         </div>
                                                                                     </div>
-                                                                                    <div class="col-md-3">
+                                                                                    <div class="col-md-3" id="make_model_10">
                                                                                         <div class="input-group">
                                                                                             <label class=" text-left col-form-label">Maker / Model &nbsp;</label>
                                                                                             <input name="dhl_stock_maker_modal_4" id="dhl_stock_maker_modal_4" class="form-control" type="text">
                                                                                         </div>
                                                                                     </div>
-                                                                                    <div class="col-md-3">
+                                                                                    <div class="col-md-3" id="make_model_11">
                                                                                         <div class="input-group">
                                                                                             <label class=" text-left col-form-label">Chassis ID #&nbsp;</label>
                                                                                             <input class="form-control" id="dhl_stock_chassis_id_4" name="dhl_stock_chassis_id_4" type="text">
                                                                                         </div>
                                                                                     </div>
-                                                                                    <div class="col-md-2">
+                                                                                    <div class="col-md-2" id="make_model_12">
                                                                                         <div class="input-group">
                                                                                             <label class=" text-left col-form-label">Year &nbsp;</label>
                                                                                             <input class="form-control" name="dhl_stock_man_year_4" id="dhl_stock_man_year_4" type="text">
@@ -258,22 +266,22 @@ if (isset($_POST["btn_dhl_request"])) {
                                                                                                 <div class="col-md-2">
                                                                                                     <div class="input-group">
                                                                                                         <label class=" text-left col-form-label">Rec. No. &nbsp;</label>
-                                                                                                        <input name="dhl_stock_rec_no_5" id="dhl_stock_rec_no_5" class="form-control" type="text">
+                                                                                                        <input name="dhl_stock_rec_no_5" id="dhl_stock_rec_no_5" class="form-control" type="text" onkeyup="carrecord_5(this.value)">
                                                                                                     </div>
                                                                                                 </div>
-                                                                                                <div class="col-md-3">
+                                                                                                <div class="col-md-3" id="make_model_13">
                                                                                                     <div class="input-group">
                                                                                                         <label class=" text-left col-form-label">Maker / Model &nbsp;</label>
                                                                                                         <input name="dhl_stock_maker_modal_5" id="dhl_stock_maker_modal_5" class="form-control" type="text">
                                                                                                     </div>
                                                                                                 </div>
-                                                                                                <div class="col-md-3">
+                                                                                                <div class="col-md-3" id="make_model_14">
                                                                                                     <div class="input-group">
                                                                                                         <label class=" text-left col-form-label">Chassis ID #&nbsp;</label>
                                                                                                         <input class="form-control" id="dhl_stock_chassis_id_5" name="dhl_stock_chassis_id_5" type="text">
                                                                                                     </div>
                                                                                                 </div>
-                                                                                                <div class="col-md-2">
+                                                                                                <div class="col-md-2" id="make_model_15">
                                                                                                     <div class="input-group">
                                                                                                         <label class=" text-left col-form-label">Year &nbsp;</label>
                                                                                                         <input class="form-control" name="dhl_stock_man_year_5" id="dhl_stock_man_year_5" type="text">
@@ -308,6 +316,188 @@ if (isset($_POST["btn_dhl_request"])) {
                     </div>
                 </div>
             </div>
+<script>
+   function getcustomer(val)
+    {
+    $.ajax({
+	type: "POST",
+	url: "ats_dependant_dropdown.php",
+	data:'agent_id_dhl='+val,
+	success: function(data){
+		$("#customer_name").html(data);
+	}
+	});
+   
+    }
+    </script>
+    <script>
+   function customerchange(val)
+    {
+    $.ajax({
+	type: "POST",
+	url: "ats_dependant_dropdown.php",
+	data:'agent_id_dhl_2='+val,
+	success: function(data){
+		$("#customer_adress").html(data);
+	}
+	});
+    $.ajax({
+	type: "POST",
+	url: "ats_dependant_dropdown.php",
+	data:'agent_id_dhl_3='+val,
+	success: function(data){
+		$("#customer_phone").html(data);
+	}
+	});
+    }
+    </script>
+    <script>
+function carrecord(val)
+{
+    $.ajax({
+	type: "POST",
+	url: "ats_dependant_dropdown.php",
+	data:'make_model_1='+val,
+	success: function(data){
+		$("#make_model_1").html(data);
+	}
+	});
+    $.ajax({
+	type: "POST",
+	url: "ats_dependant_dropdown.php",
+	data:'make_model_2='+val,
+	success: function(data){
+		$("#make_model_2").html(data);
+	}
+	});
+    $.ajax({
+	type: "POST",
+	url: "ats_dependant_dropdown.php",
+	data:'make_model_3='+val,
+	success: function(data){
+		$("#make_model_3").html(data);
+	}
+	});
+}
+    </script>
+        <script>
+function carrecord_2(val)
+{
+    $.ajax({
+	type: "POST",
+	url: "ats_dependant_dropdown.php",
+	data:'make_model_4='+val,
+	success: function(data){
+		$("#make_model_4").html(data);
+	}
+	});
+    $.ajax({
+	type: "POST",
+	url: "ats_dependant_dropdown.php",
+	data:'make_model_5='+val,
+	success: function(data){
+		$("#make_model_5").html(data);
+	}
+	});
+    $.ajax({
+	type: "POST",
+	url: "ats_dependant_dropdown.php",
+	data:'make_model_6='+val,
+	success: function(data){
+		$("#make_model_6").html(data);
+	}
+	});
+}
+    </script>
+    <script>
+function carrecord_3(val)
+{
+    $.ajax({
+	type: "POST",
+	url: "ats_dependant_dropdown.php",
+	data:'make_model_7='+val,
+	success: function(data){
+		$("#make_model_7").html(data);
+	}
+	});
+    $.ajax({
+	type: "POST",
+	url: "ats_dependant_dropdown.php",
+	data:'make_model_8='+val,
+	success: function(data){
+		$("#make_model_8").html(data);
+	}
+	});
+    $.ajax({
+	type: "POST",
+	url: "ats_dependant_dropdown.php",
+	data:'make_model_9='+val,
+	success: function(data){
+		$("#make_model_9").html(data);
+	}
+	});
+}
+    </script>
+    <script>
+function carrecord_4(val)
+{
+    $.ajax({
+	type: "POST",
+	url: "ats_dependant_dropdown.php",
+	data:'make_model_10='+val,
+	success: function(data){
+		$("#make_model_10").html(data);
+	}
+	});
+    $.ajax({
+	type: "POST",
+	url: "ats_dependant_dropdown.php",
+	data:'make_model_11='+val,
+	success: function(data){
+		$("#make_model_11").html(data);
+	}
+	});
+    $.ajax({
+	type: "POST",
+	url: "ats_dependant_dropdown.php",
+	data:'make_model_12='+val,
+	success: function(data){
+		$("#make_model_12").html(data);
+	}
+	});
+}
+    </script>
+        <script>
+function carrecord_5(val)
+{
+  
+    $.ajax({
+	type: "POST",
+	url: "ats_dependant_dropdown.php",
+	data:'make_model_13='+val,
+	success: function(data){
+      
+		$("#make_model_13").html(data);
+	}
+	});
+    $.ajax({
+	type: "POST",
+	url: "ats_dependant_dropdown.php",
+	data:'make_model_14='+val,
+	success: function(data){
+		$("#make_model_14").html(data);
+	}
+	});
+    $.ajax({
+	type: "POST",
+	url: "ats_dependant_dropdown.php",
+	data:'make_model_15='+val,
+	success: function(data){
+		$("#make_model_15").html(data);
+	}
+	});
+}
+    </script>
 <?php
 include("bottom.php");
 ?>
