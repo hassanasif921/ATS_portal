@@ -26,8 +26,9 @@ if(isset($_POST['btnreserve']))
 	$repair_charges=mysqli_real_escape_string($connection,$_POST['repair_charges']);
 	$consignee_id=mysqli_real_escape_string($connection,$_POST['consignee_id']);
 	$finalfob=$_POST['finalfob'];
-	
-	$insertreservequery="INSERT INTO ats_stock_reservation(recordno, date_from, date_till, customer, payment_per, memo, yard_charges, repair_charges,consignee_id,finalfob) VALUES ('$recordno','$date_from','$date_till','$customerreserve','$payment_per','$memo','$yard_charges','$repair_charges','$consignee_id','$finalfob')";
+	$agent_name=$_POST['rsellperson'];
+	$created_at=date("Y-m-d");
+	$insertreservequery="INSERT INTO ats_stock_reservation(recordno, date_from, date_till, customer, payment_per, memo, yard_charges, repair_charges,consignee_id,finalfob,agent_name,created_at) VALUES ('$recordno','$date_from','$date_till','$customerreserve','$payment_per','$memo','$yard_charges','$repair_charges','$consignee_id','$finalfob','$agent_name','$created_at')";
 	$insertreserve=mysqli_query($connection,$insertreservequery);
 	if($insertreserve)
 	{
@@ -85,8 +86,9 @@ if(isset($_POST['btn_exp_rec_money']))
 	$get_cust_allocated_amount=$_POST['get_cust_allocated_amount'];
 	$cust_remaining_amount=$_POST['cust_remaining_amount'];
 	$get_alloacted_remittance_id_ag=$_POST['get_alloacted_remittance_id_ag'];
+	$dateofconfirmation=date("Y-m-d");
 	$query_rec_money=mysqli_query($connection,"INSERT INTO reservationmoney(recordno, cnfprice, customername, allocatedamount, remaing_amount,remittance_id) VALUES ('$row[1]','$get_stock_cnf_price_print_yen','$allocation_customer_name','$get_cust_allocated_amount','$cust_remaining_amount','$get_alloacted_remittance_id_ag')");
-	$update_reservation_status=mysqli_query($connection, "UPDATE ats_stock_reservation SET reservedpaymentstatus='CONFIRMED' where recordno ='".$row[1]."' " );
+	$update_reservation_status=mysqli_query($connection, "UPDATE ats_stock_reservation SET reservedpaymentstatus='CONFIRMED',sold_status='$dateofconfirmation' where recordno ='".$row[1]."' " );
 	$update_remaining_amount=mysqli_query($connection, "UPDATE ats_remittance SET remaining_amount='$cust_remaining_amount' where ats_remittance_Remittance_ID ='$get_alloacted_remittance_id_ag' " );
 }
 if(isset($_POST['btn_exp_important']))

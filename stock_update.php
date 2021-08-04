@@ -147,7 +147,7 @@ else {
 }
 
    // $temp_name = $_FILES["stock_invoice_file"]["tmp_name"];
-    $stock_sure_ok_date = $_POST["stock_sure_ok_date"];
+    $stock_sure_ok_date =date("Y-m-d", strtotime($_POST["stock_sure_ok_date"]));
    // $stock_tt_copy_file = $_FILES["stock_tt_copy_file"]['name'];
   
    if(is_uploaded_file($_FILES['stock_tt_copy_file']['tmp_name']))
@@ -161,10 +161,10 @@ else {
     }
     
    //$temp_name = $_FILES["stock_tt_copy_file"]["tmp_name"];
-    $stock_ship_date = $_POST["stock_ship_date"];
+    $stock_ship_date = date("Y-m-d", strtotime($_POST["stock_ship_date"]));
     $stock_vessel_name = $_POST["stock_vessel_name"];
     $stock_voyage = $_POST["stock_voyage"];
-    $stock_ship_ok_date = $_POST["stock_ship_ok_date"];
+    $stock_ship_ok_date = date("Y-m-d", strtotime($_POST["stock_ship_ok_date"]));;
     //$stock_shipping_invoice_file = $_FILES["stock_shipping_invoice_file"]['name'];
     if(is_uploaded_file($_FILES['stock_shipping_invoice_file']['tmp_name']))
     {
@@ -202,7 +202,7 @@ else {
     else{
         $echoas7=",";
     }
-    $stock_release_ok_date = $_POST["stock_release_ok_date"];
+    $stock_release_ok_date = date("Y-m-d", strtotime($_POST["stock_release_ok_date"]);
   
     if(is_uploaded_file($_FILES['stock_shipping_invoice_file']['tmp_name']))
     {

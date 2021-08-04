@@ -53,22 +53,22 @@ else
                                         <div class="col-md-3">
                                             <div class="input-group">
                                                 <label class="text-left col-form-label">Rec. No. &nbsp;</label><br/>
-                                                <input name="get_amendment_stock_rec_no" id="get_amendment_stock_rec_no" class="form-control " type="text"   >
+                                                <input name="get_amendment_stock_rec_no" id="get_amendment_stock_rec_no" class="form-control " type="text"   onkeyup="carrecord(this.value)">
                                             </div>
                                         </div>
-                                        <div class="col-md-3">
+                                        <div class="col-md-3" id="make_model_1">
                                             <div class="input-group">
                                                 <label class="text-left col-form-label">Maker / Model &nbsp;</label>
                                                 <input name="get_amendment_stock_maker_modal" id="get_amendment_stock_maker_modal" class="form-control " type="text"   >
                                             </div>
                                         </div>
-                                        <div class="col-md-3">
+                                        <div class="col-md-3" id="make_model_2">
                                             <div class="input-group">
                                                 <label class=" text-left col-form-label">Chassis &nbsp;</label>
                                                 <input name="get_amendment_stock_chassis_id" id="get_amendment_stock_chassis_id" class="form-control" type="text"   >
                                             </div>
                                         </div>
-                                        <div class="col-md-3">
+                                        <div class="col-md-3" id="make_model_3">
                                             <div class="input-group">
                                                 <label class=" text-left col-form-label">Year &nbsp;</label>
                                                 <input class="form-control" name="get_amendment_stock_man_year" id="get_amendment_stock_man_year" type="number"   >
@@ -103,7 +103,7 @@ else
                                         </div>
                                     </div>  
                                     <div class="col-md-12">
-                                        <input type="checkbox" class="checkbox text-warning">
+                                        <input type="checkbox" class="checkbox text-warning" name="consignee_notify_same_as_consignee_chacked" id="consignee_notify_same_as_consignee_chacked">
                                         &nbsp; Notify Party is Same as Consignee.
                                     </div>
                                     <div class="col-md-3">
@@ -165,8 +165,47 @@ else
             return true;
         }
     }
+    $(document).ready(function () {
+    $('#consignee_notify_same_as_consignee_chacked').click(function () {
+        
+        $('#amendment_consignee_notify_name').val($('#amendment_consignee_name').val());
+        $('#amendment_consignee_notify_address').val($('#amendment_consignee_address').val());
+        $('#amendment_consignee_notify_phone_no').val($('#amendment_consignee_phone_no').val());
+        $('#amendment_consignee_notify_fax_no').val($('#amendment_consignee_fax_no').val());
+
+    });
+});
 
 </script>  
+<script>  
+function carrecord(val)
+{
+    $.ajax({
+	type: "POST",
+	url: "amendmentdd.php",
+	data:'make_model_1='+val,
+	success: function(data){
+		$("#make_model_1").html(data);
+	}
+	});
+    $.ajax({
+	type: "POST",
+	url: "amendmentdd.php",
+	data:'make_model_2='+val,
+	success: function(data){
+		$("#make_model_2").html(data);
+	}
+	});
+    $.ajax({
+	type: "POST",
+	url: "amendmentdd.php",
+	data:'make_model_3='+val,
+	success: function(data){
+		$("#make_model_3").html(data);
+	}
+	});
+}
+    </script>
 <?php
 include("bottom.php");
 ?>

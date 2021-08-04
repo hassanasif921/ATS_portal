@@ -421,7 +421,7 @@ if (isset($_POST["btnsubmit"])) {
                                                         </div>
                                                         <div class="col-md-12 form-group">
                                                             <label style="font-weight: bold;"  class="text-dark">Residential address</label><br/>        
-                                                            <input type="radio" class="" id="ven_accept_and_checked_address" name="ven_accept_and_checked_address" VALUE="ven_accept_and_checked_addresS"/> ABC, Karachi, Pakistan ABC, Karachi, Pakistan
+                                                            <input type="radio" class="" id="ven_accept_and_checked_address" name="ven_accept_and_checked_address" VALUE="ven_accept_and_checked_addresS"/><label for="ven_accept_and_checked_address"> ABC, Karachi, Pakistan ABC, Karachi, Pakistan</label>
                                                             <br/>
                                                             <div id="accordion_address" >
                                                                 <div style="background: transparent; box-shadow: none;" class="card">
@@ -468,7 +468,7 @@ if (isset($_POST["btnsubmit"])) {
                                                         </div>
                                                         <div class="col-md-12 position-relative form-group">
                                                             <label style="font-weight: bold;"  class="text-dark">Mobile number</label><br/>        
-                                                            <input type="radio" class="" name="ven_accept_and_checked_number" id="ven_accept_and_checked_number" value="ven_accept_and_checked_number"/> +92376378634
+                                                            <input type="radio" class="" name="ven_accept_and_checked_number" id="ven_accept_and_checked_number" value="ven_accept_and_checked_number"/> <label for="ven_phone">+92376378634</label>
                                                             <br/>
                                                             <div id="accordion_number" >
                                                                 <div style="background: transparent; box-shadow: none;" class="card">
@@ -593,9 +593,9 @@ if (isset($_POST["btnsubmit"])) {
                                                        
                                                         <div style="text-align: left;" class="col-md-12">
                                                             <label class="text-danger">Do you have domestic / local Japanese Account in this Same Bank?&nbsp; &nbsp;</label>
-                                                            <input type="radio" class="radio" name="ven_same_bank_account" id="ven_same_bank_account_yes">&nbsp;YES
+                                                            <input type="radio" class="radio" name="ven_same_bank_account" id="ven_same_bank_account_yes" value="YES">&nbsp;YES
                                                             &nbsp; &nbsp;
-                                                            <input type="radio" class="radio" name="ven_same_bank_account" id="ven_same_bank_account_no">&nbsp;NO
+                                                            <input type="radio" class="radio" name="ven_same_bank_account" id="ven_same_bank_account_no" value="NO">&nbsp;NO
                                                         </div>
                                             
                                                         <div class="col-md-4">
@@ -1233,6 +1233,116 @@ if (isset($_POST["btnsubmit"])) {
 });
     </script>
     <script>
+         $("#ven_country").change(function() {
+            
+             
+              var country=$( "#ven_country option:selected" ).text();
+              var city=$("#ven_city").val();
+              var zip=$("#ven_zip_code").val();
+              var street=$("#ven_street").val();
+              var building=$("#ven_building").val();
+              var suiteno=$("#ven_suit_no").val();
+
+           var add= suiteno.concat(" ",building," ",street," ",zip," ",city," ",country);
+           $('label[for=ven_accept_and_checked_address]').html(add);
+
+});
+        </script>
+         <script>
+         $("#ven_city").keyup(function() {
+            
+             
+              var country=$( "#ven_country option:selected" ).text();
+              var city=$("#ven_city").val();
+              var zip=$("#ven_zip_code").val();
+              var street=$("#ven_street").val();
+              var building=$("#ven_building").val();
+              var suiteno=$("#ven_suit_no").val();
+
+           var add= suiteno.concat(" ",building," ",street," ",zip," ",city," ",country);
+           $('label[for=ven_accept_and_checked_address]').html(add);
+
+});
+        </script>
+         <script>
+         $("#ven_zip_code").keyup(function() {
+            
+             
+              var country=$( "#ven_country option:selected" ).text();
+              var city=$("#ven_city").val();
+              var zip=$("#ven_zip_code").val();
+              var street=$("#ven_street").val();
+              var building=$("#ven_building").val();
+              var suiteno=$("#ven_suit_no").val();
+
+           var add= suiteno.concat(" ",building," ",street," ",zip," ",city," ",country);
+           $('label[for=ven_accept_and_checked_address]').html(add);
+
+});
+        </script>
+        <script>
+         $("#ven_street").keyup(function() {
+            
+             
+              var country=$( "#ven_country option:selected" ).text();
+              var city=$("#ven_city").val();
+              var zip=$("#ven_zip_code").val();
+              var street=$("#ven_street").val();
+              var building=$("#ven_building").val();
+              var suiteno=$("#ven_suit_no").val();
+
+           var add= suiteno.concat(" ",building," ",street," ",zip," ",city," ",country);
+           $('label[for=ven_accept_and_checked_address]').html(add);
+
+});
+        </script>
+        <script>
+         $("#ven_building").keyup(function() {
+            
+             
+              var country=$( "#ven_country option:selected" ).text();
+              var city=$("#ven_city").val();
+              var zip=$("#ven_zip_code").val();
+              var street=$("#ven_street").val();
+              var building=$("#ven_building").val();
+              var suiteno=$("#ven_suit_no").val();
+
+           var add= suiteno.concat(" ",building," ",street," ",zip," ",city," ",country);
+           $('label[for=ven_accept_and_checked_address]').html(add);
+
+});
+        </script>
+        <script>
+         $("#ven_suit_no").keyup(function() {
+            
+             
+              var country=$( "#ven_country option:selected" ).text();
+              var city=$("#ven_city").val();
+              var zip=$("#ven_zip_code").val();
+              var street=$("#ven_street").val();
+              var building=$("#ven_building").val();
+              var suiteno=$("#ven_suit_no").val();
+
+           var add= suiteno.concat(" ",building," ",street," ",zip," ",city," ",country);
+           $('label[for=ven_accept_and_checked_address]').html(add);
+
+});
+        </script>
+        <script>
+         $("#ven_phone").keyup(function() {
+            
+             
+          
+        
+              var venphone=$("#ven_phone").val();
+
+         
+           $('label[for=ven_phone]').html(venphone);
+
+});
+        </script>
+    <script>
+         
         $("#ven_business_name").keyup(function() {
   $("#ven_business_name_print").text($(this).val());
 });
@@ -1272,23 +1382,41 @@ $("#ven_name_of_bank_branch").keyup(function() {
 $("#ven_bank_swift_code").keyup(function() {
   $("#ven_bank_swift_code_print").text($(this).val());
 });
-$("#ven_name_of_bank_locally").keyup(function() {
+$("#ven_name_of_bank_locally").change(function() {
+    
   $("#ven_name_of_bank_locally_print").text($(this).val());
 });
-$("#ven_address_of_bank_locally").keyup(function() {
+$("#ven_address_of_bank_locally").change(function() {
   $("#ven_address_of_bank_locally_print").text($(this).val());
 });
-$("#ven_bank_account_tittle_jp_locally").keyup(function() {
+$("#ven_bank_account_tittle_jp_locally").change(function() {
   $("#ven_bank_account_tittle_jp_locally_print").text($(this).val());
 });
 $("#ven_bank_account_no_locally").change(function() {
   $("#ven_bank_account_no_locally_print").text($(this).val());
 });
-$("#ven_name_of_bank_branch_jp_locally").keyup(function() {
+$("#ven_name_of_bank_branch_jp_locally").change(function() {
   $("#ven_name_of_bank_branch_jp_locally_pint").text($(this).val());
 });
-$("#ven_bank_account_type_locally").keyup(function() {
+$("#ven_bank_account_type_locally").change(function() {
   $("#ven_bank_account_type_locally_print").text($(this).val());
+});
+$('input[type=radio][name=ven_same_bank_account]').change(function() {
+    if (this.value == 'YES') {
+        $("#ven_name_of_bank_locally_print").text($("#ven_name_of_bank").val());
+        $("#ven_address_of_bank_locally_print").text($("#ven_address_of_bank").val());
+        $("#ven_bank_account_tittle_jp_locally_print").text($("#ven_bank_account_tittle").val());
+        $("#ven_bank_account_no_locally_print").text($("#ven_bank_account_no").val());
+        $("#ven_name_of_bank_branch_jp_locally_pint").text($("#ven_name_of_bank_branch").val());
+
+    }
+    else if (this.value == 'NO') {
+        $("#ven_name_of_bank_locally_print").text($("#ven_name_of_bank_locally").val());
+        $("#ven_address_of_bank_locally_print").text($("#ven_address_of_bank_locally").val());
+        $("#ven_bank_account_tittle_jp_locally_print").text($("#ven_bank_account_tittle_jp_locally").val());
+        $("#ven_bank_account_no_locally_print").text($("#ven_bank_account_no_locally").val());
+        $("#ven_name_of_bank_branch_jp_locally_pint").text($("#ven_name_of_bank_branch_jp_locally").val());
+    }
 });
 
     </script>   

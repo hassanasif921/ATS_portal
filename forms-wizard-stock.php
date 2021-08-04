@@ -3,7 +3,7 @@ include("top.php");
 include("connection_db.php");
 
 if (isset($_POST["stock_btn"])) {
-    $stock_rec_no = $_POST["stock_rec_no"];
+    $stock_rec_no = $_POST["stock_project"]."-".$_POST['stock_rec_no'];
     $stock_chassis_id = $_POST["stock_chassis_id"];
     $stock_make = $_POST["stock_make"];
     $stock_model = $_POST["stock_model"];
@@ -114,10 +114,10 @@ if (isset($_POST["stock_btn"])) {
     $stock_tt_copy_file=addslashes(file_get_contents($images5));
   
    //$temp_name = $_FILES["stock_tt_copy_file"]["tmp_name"];
-    $stock_ship_date = $_POST["stock_ship_date"];
+    $stock_ship_date = date("Y-m-d", strtotime($_POST["stock_ship_date"]));
     $stock_vessel_name = $_POST["stock_vessel_name"];
     $stock_voyage = $_POST["stock_voyage"];
-    $stock_ship_ok_date = $_POST["stock_ship_ok_date"];
+    $stock_ship_ok_date = date("Y-m-d", strtotime($_POST["stock_ship_ok_date"]));
     //$stock_shipping_invoice_file = $_FILES["stock_shipping_invoice_file"]['name'];
     $images6=$_FILES['stock_shipping_invoice_file']['tmp_name'];
     $stock_shipping_invoice_file=addslashes(file_get_contents($images6));
@@ -135,7 +135,7 @@ if (isset($_POST["stock_btn"])) {
    $stock_bill_of_lading_file=addslashes(file_get_contents($images8));
    
    //$temp_name = $_FILES["stock_bill_of_lading_file"]["tmp_name"];
-    $stock_release_ok_date = $_POST["stock_release_ok_date"];
+    $stock_release_ok_date = date("Y-m-d", strtotime($_POST["stock_release_ok_date"]));
     //$stock_bal_tt_copy_file = $_FILES["stock_balance_tt_copy_file"]['name'];
     $images9=$_FILES['stock_balance_tt_copy_file']['tmp_name'];
     $stock_bal_tt_copy_file=addslashes(file_get_contents($images9));
@@ -310,330 +310,347 @@ if (isset($_POST["stock_btn"])) {
                                                     
                                                 </ul>
                                                 <div class="form-wizard-content">
-                                                <div id="step-1">
-                                                                <div class="form-row"> 
-                                                                    <div class="col-md-2">
-                                                                        <div class="position-relative form-group">
-                                                                            <label class="form-control-label">Rec. No.</label>
-                                                                            <input type="text" id="stock_rec_no" name="stock_rec_no" class="form-control form-control-sm" placeholder="Record No.">
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="col-md-2">
-                                                                        <div class="position-relative form-group">
-                                                                            <label class="form-control-label">Chassis ID</label>
-                                                                            <input type="text" id="stock_chassis_id" name="stock_chassis_id" class="form-control form-control-sm" placeholder="Enter Price">
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="col-md-2">
-                                                                        <div class="position-relative form-group">
-                                                                            <label class="form-control-label">Make</label>
-                                                                            <select name="stock_make" id="stock_make" onChange="getState(this.value);" class="form-control form-control-sm">
-                                                                                <?php 
-                                                                                $queryfetchdetails=mysqli_query($connection,"select * from car_make");
-                                                                                ?>
-                                                                                    <option disabled selected>Please Select</option>
-                                                                                <?php 
-                                                                                    while($rowfetchdetails=mysqli_fetch_array($queryfetchdetails)){
-                                                                                    ?>
-                                                                                <option value="<?php echo $rowfetchdetails[0]?>"><?php echo $rowfetchdetails[1]?></option>
-                                                                                <?php
-                                                                                    }
-                                                                                ?>
-                                                                            </select>  
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="col-md-2">
-                                                                        <div class="position-relative form-group">
-                                                                            <label class="form-control-label">Model</label>
-                                                                            <select name="stock_model" id="model-list"  class="form-control form-control-sm">
-                                                                                <option disabled selected>Please Select</option>
-                                                                            </select>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="col-md-1">
-                                                                        <label class="form-control-label">Package</label>
-                                                                        <input type="text" id="stock_package" name="stock_package" placeholder="" class="form-control form-control-sm">
-                                                                    </div>
-                                                                    <div class="col-md-1">
-                                                                        <label class="form-control-label">Man. Year</label>
-                                                                        <input type="text" id="stock_man_year" name="stock_man_year" placeholder="2002" class="form-control form-control-sm">
-                                                                    </div>
-                                                                    <div class="col-md-1">
-                                                                        <label class="form-control-label">Reg. Year</label>
-                                                                        <input type="text" id="stock_reg_year" name="stock_reg_year" placeholder="2002" class="form-control form-control-sm">
-                                                                    </div>
-                                                                    <div class="col-md-1">
-                                                                        <label class="form-control-label">Color</label>
-                                                                        <input type="text" id="stock_color" name="stock_color" placeholder="Color" class="form-control form-control-sm">
-                                                                    </div>  
+                                                        <div id="step-1">
+                                                            <div class="form-row"> 
+                                                                <div class="col-sm-2">
+                                                                    <label class="form-control-label">Project</label>
+                                                                    <select name="stock_project" id="stock_project" class="form-control form-control-sm" required>
+                                                                        <option value="" selected disabled>Please Select</option>
+                                                                        <option value="MI">MI JAPAN (MI)</option>
+                                                                        <option value="ZM">ZMCL (ZM)</option>
+                                                                        <option value="AT">ALI TRADING (AT)</option>
+                                                                        <option value="BF">BE FORWARD (BF)</option>
+                                                                        <option value="HM">HUSSIAN TRADING (HM)</option>
+                                                                    </select> 
                                                                 </div>
-                                                                <div class="form-row"> 
-                                                                    <div class="col-md-2">
-                                                                        <div class="position-relative form-group">
-                                                                            <label class="form-control-label">Shift</label>
-                                                                            <select name="stock_shift" id="stock_shift" class="form-control form-control-sm">
-                                                                                <option value="---">Select</option>    
-                                                                                <option value="Automatic">Automatic</option>
-                                                                                <option value="Manual">Manual</option> 
-                                                                                <option value="Dual">Dual</option>
-                                                                            </select> 
-                                                                        </div>
+                                                                <div class="col-md-2">
+                                                                    <div class="position-relative form-group">
+                                                                        <label class="form-control-label">Rec. No.</label>
+                                                                        <input type="text" id="stock_rec_no" name="stock_rec_no" class="form-control form-control-sm" placeholder="Record No.">
                                                                     </div>
-                                                                    <div class="col-md-2">
-                                                                        <div class="position-relative form-group">
-                                                                            <label class="form-control-label">Fuel</label>
-                                                                            <select name="stock_fuel" id="stock_fuel" class="form-control form-control-sm">
-                                                                                <option value="---">Select</option>    
-                                                                                <option value="GASOLINE">GASOLINE</option>
-                                                                                <option value="DIESEL">DIESEL</option> 
-                                                                                <option value="HYBRID">HYBRID</option>
-                                                                            </select>  
-                                                                        </div>
+                                                                </div>
+                                                                <div class="col-md-2">
+                                                                    <div class="position-relative form-group">
+                                                                        <label class="form-control-label">Chassis ID</label>
+                                                                        <input type="text" id="stock_chassis_id" name="stock_chassis_id" class="form-control form-control-sm" placeholder="Enter Price">
                                                                     </div>
-                                                                    <div class="col-md-1">
-                                                                        <div class="position-relative form-group">
-                                                                            <label class="form-control-label">Door</label>
-                                                                            <input type="text" id="stock_door" name="stock_door" class="form-control form-control-sm">
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="col-md-1">
-                                                                        <label class="form-control-label">Grade</label><br/>
-                                                                        <input type="text" id="stock_grade" name="stock_grade" placeholder="Grade" class="form-control form-control-sm">
-                                                                    </div>
-                                                                    <div class="col-md-2">
-                                                                        <label class="form-control-label">Engine Size</label><br/>
-                                                                        <input type="text" id="stock_engine_size" name="stock_engine_size" placeholder="****cc" class="form-control form-control-sm">
-                                                                    </div>
-                                                                    <div class="col-md-2">
-                                                                        <label class="form-control-label">Kobutsu</label><br/>
-                                                                        <select id="stock_kobutsu" name="stock_kobutsu" class="form-control form-control-sm" onChange="getSlab(this.value);">
+                                                                </div>
+                                                                <div class="col-md-2">
+                                                                    <div class="position-relative form-group">
+                                                                        <label class="form-control-label">Make</label>
+                                                                        <select name="stock_make" id="stock_make" onChange="getState(this.value);" class="form-control form-control-sm">
                                                                             <?php 
-                                                                                $queryfetchdetails1=mysqli_query($connection,"select DISTINCT countrycode,countryname from kobutsu_slab");
+                                                                                $queryfetchdetails=mysqli_query($connection,"select * from car_make");
                                                                             ?>
                                                                             <option disabled selected>Please Select</option>
                                                                             <?php 
-                                                                                while($rowfetchdetails1=mysqli_fetch_array($queryfetchdetails1)){
+                                                                                while($rowfetchdetails=mysqli_fetch_array($queryfetchdetails)){
                                                                             ?>
-                                                                            <option class="form-control" value="<?php echo $rowfetchdetails1[0]?>"><?php echo $rowfetchdetails1[0]."-".$rowfetchdetails1[1]?></option>
-
+                                                                            <option value="<?php echo $rowfetchdetails[0]?>"><?php echo $rowfetchdetails[1]?></option>
                                                                             <?php
                                                                                 }
                                                                             ?>
+                                                                        </select>  
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-2">
+                                                                    <div class="position-relative form-group">
+                                                                        <label class="form-control-label">Model</label>
+                                                                        <select name="stock_model" id="model-list" class="form-control form-control-sm">
+                                                                            <option disabled selected>Please Select</option>
                                                                         </select>
                                                                     </div>
-                                                                    <div class="col-md-2" id="port">
-                                                                        <label class="form-control-label">Port</label><br/>
-                                                                    </div>
-                                                                    
                                                                 </div>
-                                                                <div data-ng-app="" data-ng-init="length=;width=;height=;" class="form-row">
-                                                                    <div class="col-md-2">
-                                                                        <label class="form-control-label">Engine No.</label><br/>
-                                                                        <input type="text" id="stock_engine_no" name="stock_engine_no" placeholder="8785****" class="form-control-sm form-control">
-                                                                    </div>
-                                                                    <div class="col-md-1">
-                                                                        <div class="position-relative form-group">
-                                                                            <label class="form-control-label">Seats</label><br/>
-                                                                            <input type="text" id="stock_seats" name="stock_seats" placeholder="" class="form-control-sm form-control">
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="col-md-1">
-                                                                        <div class="position-relative form-group">
-                                                                            <label class="form-control-label">Mileage .1</label><br/>
-                                                                            <input type="text" id="stock_mileage_1" name="stock_mileage_1" placeholder="Km 1" class="form-control form-control-sm">
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="col-md-1">
-                                                                        <div class="position-relative form-group">
-                                                                            <label class="form-control-label">Mileage .2</label><br/>
-                                                                            <input  type="text" id="stock_mileage_2" name="stock_mileage_2" placeholder="Km 2" class="form-control form-control-sm">
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="col-md-1">
-                                                                        <div class="position-relative form-group">
-                                                                            <label class="form-control-label">Lenght</label><br/>
-                                                                            <input ng-model="length" type="text" id="stock_length" name="stock_length" placeholder="Lenght" class="form-control form-control-sm" onkeyup="sum()">
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="col-md-1">
-                                                                        <div class="position-relative form-group">
-                                                                            <label class="form-control-label">Width</label><br/>
-                                                                            <input ng-model="width" type="text" id="stock_width" name="stock_width" placeholder="Width" class="form-control form-control-sm" onkeyup="sum()">
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="col-md-1">
-                                                                        <label class="form-control-label">Height</label><br/>
-                                                                        <input ng-model="height" type="text" id="stock_height" name="stock_height" placeholder="Height" class="form-control form-control-sm" onkeyup="sum()">
-                                                                    </div>
-                                                                    <div class="col-md-1">
-                                                                        <label class="form-control-label">M &sup3; : <br/></label>
-                                                                            <!--<span class="form-control" name="stock_cubic_meter" id="stock_cubic_meter" style="color:green; font-weight: bold; ">{{length * width * height / 1000000}}</span>--->
-                                                                            <input ng-model="height" type="text" id="stock_cubic_meter" name="stock_cubic_meter" placeholder="" class="form-control form-control-sm">
-                                                                    </div>
-                                                                    <div class="col-md-1">
-                                                                        <label  class="form-control-label">Weight</label><br/>
-                                                                        <input type="text" id="stock_weight" name="stock_weight" placeholder="Weight" class="form-control form-control-sm">
-                                                                    </div>
-                                                                    <div class="col-md-2">
-                                                                        <div class="position-relative form-group">
-                                                                            <label class="form-control-label">Total Weight</label><br/>
-                                                                            <input type="text" id="stock_total_weight" name="stock_total_weight" placeholder="Total Weight" class="form-control form-control-sm">
-                                                                        </div>
-                                                                    </div>
-                                                                    
+                                                                <div class="col-md-2">
+                                                                    <label class="form-control-label">Package</label>
+                                                                    <input type="text" id="stock_package" name="stock_package" placeholder="" class="form-control form-control-sm">
                                                                 </div>
-                                                                <div class="form-row">
-                                                                    <div class="col-md-2">
-                                                                        <div class="position-relative form-group">
-                                                                            <label class="form-control-label">Max Loading</label><br/>
-                                                                            <input type="text" id="stock_max_loading" name="stock_max_loading" placeholder="Loading Capacity" class="form-control form-control-sm">
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="col-md-2">
-                                                                        <label class="form-control-label">Stock</label><br/>
-                                                                        <select name="stock_type" id="stock_type" class="form-control form-control-sm">
-                                                                            <option value="---" >Choose Stock</option>
-                                                                            <option value="Company-Stock">Company-Stock</option>
-                                                                            <option value="Customer-Order(Auction)">Customer Order(Auction)</option>
-                                                                        </select>  
-                                                                    </div>
-                                                                    <div class="col-md-2">
-                                                                        <label class="form-control-label">Auction House</label><br/>
-                                                                        <input type="text" id="stock_auction" name="stock_auction" placeholder="Auction House" class="form-control form-control-sm">
-                                                                    </div>
-                                                                    <div class="col-md-2">
-                                                                        <label class="form-control-label">Lot No.</label><br/>
-                                                                        <input type="text" id="stock_lot_no" name="stock_lot_no" placeholder="876****" class="form-control form-control-sm">
+                                                                 
+                                                            </div>
+                                                            <div class="form-row"> 
                                                                 
-                                                                    </div> 
-                                                                    <div class="col-md-2">
-                                                                        <div class="position-relative form-group">
-                                                                            <label class="form-control-label">Buying Price</label><br/>
-                                                                            <input type="text" id="stock_buying_price" name="stock_buying_price" placeholder="*,**,***" class="form-control form-control-sm"  onkeyup="buyfunction()">
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="col-md-2">
-                                                                        <label class="form-control-label">Buying Date</label><br/>
-                                                                        <input type="date" id="stock_buying_date" name="stock_buying_date" class="form-control form-control-sm">
-                                                                    </div>
-                                                                    <div class="col-md-2">
-                                                                        <label class="form-control-label">Shape</label><br/>
-                                                                        <select name="stock_shape" id="stock_shape" class="form-control form-control-sm">
-                                                                            <option value="---" >Type : </option>
-                                                                            <option value="Sedan">Sedan</option>
-                                                                            <option value="Hatchback">Hatchback</option>
-                                                                            <option value="Station Wagon">Station Wagon</option>
-                                                                            <option value="Coupe">Coupe</option>
-                                                                            <option value="Open Top">Open Top</option>
-                                                                            <option value="SUV">SUV</option>
-                                                                            <option value="MUV">MUV</option>
-                                                                            <option value="Mini Van">Mini Van</option>
-                                                                            <option value="Van">Van</option>
-                                                                            <option value="Pickup">Pickup</option>
-                                                                            <option value="Truck">Truck</option>
-                                                                            <option value="Machinery">Machinery</option>
-                                                                            <option value="Tractor">Tractor</option>
-                                                                            <option value="Motorcycle">Motorcycle</option>
-                                                                            <option value="Other">Other</option>
-                                                                        </select>  
-                                                                    </div>
-                                                                    <div class="col-md-2">
-                                                                        <div class="position-relative form-group">
-                                                                            <label class="form-control-label">Country (Car Location)</label>
-                                                                            <select name="stock_country_location" id="stock_country_location" class="form-control form-control-sm">
-                                                                                <option value="---">Select</option>    
-                                                                                <option value="Japan">Japan</option>
-                                                                                <option value="Dubai">Dubai</option> 
-                                                                                <option value="Singapore">Singapore</option>
-                                                                                <option value="Thailand">Thailand</option>
-                                                                                <option value="USA">USA</option>
-                                                                                <option value="Pakistan">Pakistan</option>
-                                                                            </select>  
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="col-md-2">
-                                                                        <div class="position-relative form-group">
-                                                                            <label class="form-control-label">City</label>
-                                                                            <input type="text "name="stock_city_location" id="stock_city_location" class="form-control form-control-sm">
-
-                                                                        </div>
+                                                                <div class="col-md-1">
+                                                                    <label class="form-control-label">Man. Year</label>
+                                                                    <input type="text" id="stock_man_year" name="stock_man_year" placeholder="2002" class="form-control form-control-sm">
+                                                                </div>
+                                                                <div class="col-md-1">
+                                                                    <label class="form-control-label">Reg. Year</label>
+                                                                    <input type="text" id="stock_reg_year" name="stock_reg_year" placeholder="2002" class="form-control form-control-sm">
+                                                                </div>
+                                                                <div class="col-md-2">
+                                                                    <label class="form-control-label">Color</label>
+                                                                    <input type="text" id="stock_color" name="stock_color" placeholder="Color" class="form-control form-control-sm">
+                                                                </div> 
+                                                                <div class="col-md-2">
+                                                                    <div class="position-relative form-group">
+                                                                        <label class="form-control-label">Shift</label>
+                                                                        <select name="stock_shift" id="stock_shift" class="form-control form-control-sm">
+                                                                            <option value="---">Select</option>    
+                                                                            <option value="Automatic">Automatic</option>
+                                                                            <option value="Manual">Manual</option> 
+                                                                            <option value="Dual">Dual</option>
+                                                                        </select> 
                                                                     </div>
                                                                 </div>
-                                                                <div class="row">
-                                                                        <div class="col-md-4">
-                                                                            <label for="Username" class="form-control-label">Options</label>
-                                                                            <div class="row">
-                                                                                <div class="col-md-3">
-                                                                                    <input name="stock_option_ps" id="stock_option_ps" type="checkbox" value="PS" >
-                                                                                    <label class="" >PS</label>
-                                                                                </div>
-                                                                                <div class="col-md-3">
-                                                                                    <input name="stock_option_nv" id="stock_option_nv" type="checkbox" value="NV" >
-                                                                                    <label class="" >NV</label>
-                                                                                </div>
-                                                                                <div class="col-md-3">
-                                                                                    <input name="stock_option_ac" id="stock_option_ac" type="checkbox"  value="AC">
-                                                                                    <label class="" >AC</label>
-                                                                                </div>
-                                                                                <div class="col-md-3">
-                                                                                    <input name="stock_option_wab" id="stock_option_wab" type="checkbox" value="WAB" >
-                                                                                    <label class="" >WAB</label>
-                                                                                </div>
-                                                                                <div class="col-md-3">
-                                                                                    <input name="stock_option_rs" id="stock_option_rs" type="checkbox" value="RS" >
-                                                                                    <label class="" >RS</label>
-                                                                                </div>
-                                                                                <div class="col-md-3">
-                                                                                    <input name="stock_option_tv" id="stock_option_tv" type="checkbox" value="TV">
-                                                                                    <label class="" >TV</label>
-                                                                                </div>
-                                                                                <div class="col-md-3">
-                                                                                    <input name="stock_option_rr" id="stock_option_rr" type="checkbox" value="RR">
-                                                                                    <label class="" >RR</label>
-                                                                                </div>
-                                                                                <div class="col-md-3">
-                                                                                    <input name="stock_option_abs" id="stock_option_abs" type="checkbox" value="ABS">
-                                                                                    <label class="" >ABS</label>
-                                                                                </div>
-                                                                                <div class="col-md-3">
-                                                                                    <input name="stock_option_ls" id="stock_option_ls" type="checkbox"  value="LS">
-                                                                                    <label class="" >LS</label>
-                                                                                </div>
-                                                                                <div class="col-md-3">
-                                                                                    <input name="stock_option_pw" id="stock_option_pw" type="checkbox" value="PW">
-                                                                                    <label class="" >PW</label>
-                                                                                </div>
-                                                                                <div class="col-md-3">
-                                                                                    <input name="stock_option_sr" id="stock_option_sr" type="checkbox" value="SR" >
-                                                                                    <label class="" >SR</label>
-                                                                                </div>
-                                                                                <div class="col-md-3">
-                                                                                    <input name="stock_option_fog" id="stock_option_fog" type="checkbox" value="FOG" >
-                                                                                    <label class="" >FOG</label>
-                                                                                </div>
-                                                                                <div class="col-md-3">
-                                                                                    <input name="stock_option_ab" id="stock_option_ab" type="checkbox" value="AB">
-                                                                                    <label class="" >AB</label>
-                                                                                </div>
-                                                                                <div class="col-md-3">
-                                                                                    <input name="stock_option_gg" id="stock_option_gg" type="checkbox" value="GG">
-                                                                                    <label class="" >GG</label>
-                                                                                </div>
-                                                                                <div class="col-md-3">
-                                                                                    <input name="stock_option_bt" id="stock_option_bt" type="checkbox" value="BT">
-                                                                                    <label class="" >BT</label>
-                                                                                </div>
-                                                                                <div class="col-md-3">
-                                                                                    <input name="stock_option_aw" id="stock_option_aw" type="checkbox" value="AW" >
-                                                                                    <label class="" >AW</label>
-                                                                                </div>
+                                                                <div class="col-md-2">
+                                                                    <div class="position-relative form-group">
+                                                                        <label class="form-control-label">Fuel</label>
+                                                                        <select name="stock_fuel" id="stock_fuel" class="form-control form-control-sm">
+                                                                            <option value="---">Select</option>    
+                                                                            <option value="GASOLINE">GASOLINE</option>
+                                                                            <option value="DIESEL">DIESEL</option> 
+                                                                            <option value="HYBRID">HYBRID</option>                                       
+                                                                        </select>  
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-1">
+                                                                    <div class="position-relative form-group">
+                                                                        <label class="form-control-label">Door</label>
+                                                                        <input type="text" id="stock_door" name="stock_door" class="form-control form-control-sm">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-1">
+                                                                    <label class="form-control-label">Grade</label><br/>
+                                                                    <input type="text" id="stock_grade" name="stock_grade" placeholder="Grade" class="form-control form-control-sm">
+                                                                </div>
+                                                                <div class="col-md-2">
+                                                                    <label class="form-control-label">Engine Size</label>
+                                                                    <br/>
+                                                                    <input type="text" id="stock_engine_size" name="stock_engine_size" placeholder="****cc" class="form-control form-control-sm">
+                                                                </div>
+                                                                <div class="col-md-2">
+                                                                    <label class="form-control-label">Kobutsu</label><br/>
+                                                                    <select id="stock_kobutsu" name="stock_kobutsu" class="form-control form-control-sm" onChange="getSlab(this.value);">
+                                                                        <?php 
+                                                                            $queryfetchdetails1=mysqli_query($connection,"select DISTINCT countrycode,countryname from kobutsu_slab");
+                                                                        ?>
+                                                                        <option disabled selected>Please Select</option>
+                                                                        <?php 
+                                                                            while($rowfetchdetails1=mysqli_fetch_array($queryfetchdetails1)){
+                                                                        ?>
+                                                                        <option class="form-control" value="<?php echo $rowfetchdetails1[0]?>"><?php echo $rowfetchdetails1[0]."-".$rowfetchdetails1[1]?></option>
+                                                                        <?php
+                                                                            }
+                                                                        ?>
+                                                                    </select>
+                                                                </div>
+                                                                <div class="col-md-2" id="port">
+                                                                    <label class="form-control-label">Port</label><br/>
+                                                                </div>
+                                                                <div class="col-md-2">
+                                                                    <label class="form-control-label">Engine No.</label><br/>
+                                                                    <input type="text" id="stock_engine_no" name="stock_engine_no" placeholder="8785****" class="form-control-sm form-control">
+                                                                </div>
+                                                                <div class="col-md-1">
+                                                                    <div class="position-relative form-group">
+                                                                        <label class="form-control-label">Seats</label><br/>
+                                                                        <input type="text" id="stock_seats" name="stock_seats" placeholder="" class="form-control-sm form-control">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-1">
+                                                                    <div class="position-relative form-group">
+                                                                        <label class="form-control-label">Mileage .1</label><br/>
+                                                                        <input type="text" id="stock_mileage_1" name="stock_mileage_1" placeholder="Km 1" class="form-control form-control-sm">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-1">
+                                                                    <div class="position-relative form-group">
+                                                                        <label class="form-control-label">Mileage .2</label><br/>
+                                                                        <input  type="text" id="stock_mileage_2" name="stock_mileage_2" placeholder="Km 2" class="form-control form-control-sm">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-1">
+                                                                    <label class="form-control-label">Weight</label><br/>
+                                                                    <input type="text" id="stock_weight" name="stock_weight" placeholder="Weight" class="form-control form-control-sm">
+                                                                </div>
+                                                                <div class="col-md-2">
+                                                                    <div class="position-relative form-group">
+                                                                        <label class="form-control-label">Total Weight</label><br/>
+                                                                        <input type="text" id="stock_total_weight" name="stock_total_weight" placeholder="Total Weight" class="form-control form-control-sm">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div data-ng-app="" data-ng-init="length=;width=;height=;" class="form-row">
+                                                                
+                                                                <div class="col-md-1">
+                                                                    <div class="position-relative form-group">
+                                                                        <label class="form-control-label">Lenght</label><br/>
+                                                                        <input ng-model="length" type="text" id="stock_length" name="stock_length" placeholder="Lenght" class="form-control form-control-sm" onkeyup="sum()">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-1">
+                                                                    <div class="position-relative form-group">
+                                                                        <label class="form-control-label">Width</label><br/>
+                                                                        <input ng-model="width" type="text" id="stock_width" name="stock_width" placeholder="Width" class="form-control form-control-sm" onkeyup="sum()">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-1">
+                                                                    <label class="form-control-label">Height</label><br/>
+                                                                    <input ng-model="height" type="text" id="stock_height" name="stock_height" placeholder="Height" class="form-control form-control-sm" onkeyup="sum()">
+                                                                </div>
+                                                                <div class="col-md-1">
+                                                                    <label class="form-control-label">M &sup3; : <br/></label>
+                                                                    <!--<span class="form-control" name="stock_cubic_meter" id="stock_cubic_meter" style="color:green; font-weight: bold;">{{length * width * height / 1000000}}</span>--->
+                                                                    <input ng-model="height" type="text" id="stock_cubic_meter" name="stock_cubic_meter" placeholder="" class="form-control form-control-sm">
+                                                                </div>
+                                                                <div class="col-md-2">
+                                                                    <div class="position-relative form-group">
+                                                                        <label class="form-control-label">Max Loading</label><br/>
+                                                                        <input type="text" id="stock_max_loading" name="stock_max_loading" placeholder="Loading Capacity" class="form-control form-control-sm">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-2">
+                                                                    <label class="form-control-label">Stock</label><br/>
+                                                                    <select name="stock_shape" id="stock_shape" class="form-control form-control-sm">
+                                                                        <option value="---">Choose Stock</option>
+                                                                        <option value="Company-Stock">Company-Stock</option>
+                                                                        <option value="Customer-Order(Auction)">Customer Order(Auction)</option>
+                                                                    </select>  
+                                                                </div>
+                                                                <div class="col-md-2">
+                                                                    <label class="form-control-label">Auction House</label><br/>
+                                                                    <input type="text" id="stock_auction" name="stock_auction" placeholder="Auction House" class="form-control form-control-sm">
+                                                                </div>
+                                                                <div class="col-md-2">
+                                                                    <label class="form-control-label">Lot No.</label><br/>
+                                                                    <input type="text" id="stock_lot_no" name="stock_lot_no" placeholder="876****" class="form-control form-control-sm">                                                    
+                                                                </div>
+                                                                
+                                                            </div>
+                                                            <div class="form-row">
+                                                                 
+                                                                <div class="col-md-2">
+                                                                    <div class="position-relative form-group">
+                                                                        <label class="form-control-label">Buying Price</label><br/>
+                                                                        <input type="text" id="stock_buying_price" name="stock_buying_price" placeholder="*,**,***" class="form-control form-control-sm" onkeyup="buyfunction()">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-2">
+                                                                    <label class="form-control-label">Buying Date</label><br/>
+                                                                    <input type="date" id="stock_buying_date" name="stock_buying_date" class="form-control form-control-sm">
+                                                                </div>
+                                                                <div class="col-md-2">
+                                                                    <label class="form-control-label">Shape</label><br/>
+                                                                    <select name="stock_shape" id="stock_shape" class="form-control form-control-sm">
+                                                                        <option value="---">Type : </option>
+                                                                        <option value="Sedan">Sedan</option>
+                                                                        <option value="Hatchback">Hatchback</option>
+                                                                        <option value="Station Wagon">Station Wagon</option>
+                                                                        <option value="Coupe">Coupe</option>
+                                                                        <option value="Open Top">Open Top</option>
+                                                                        <option value="SUV">SUV</option>
+                                                                        <option value="MUV">MUV</option>
+                                                                        <option value="Mini Van">Mini Van</option>
+                                                                        <option value="Van">Van</option>
+                                                                        <option value="Pickup">Pickup</option>
+                                                                        <option value="Truck">Truck</option>
+                                                                        <option value="Machinery">Machinery</option>
+                                                                        <option value="Tractor">Tractor</option>
+                                                                        <option value="Motorcycle">Motorcycle</option>
+                                                                        <option value="Other">Other</option>
+                                                                    </select>  
+                                                                </div>       
+                                                                <div class="col-md-2">
+                                                                    <div class="position-relative form-group">
+                                                                        <label class="form-control-label">Country (Car Location)</label>
+                                                                        <select name="stock_country_location" id="stock_country_location" class="form-control form-control-sm">
+                                                                            <option value="---">Select</option>    
+                                                                            <option value="Japan">Japan</option>
+                                                                            <option value="Dubai">Dubai</option> 
+                                                                            <option value="Singapore">Singapore</option>
+                                                                            <option value="Thailand">Thailand</option>
+                                                                            <option value="USA">USA</option>
+                                                                            <option value="Pakistan">Pakistan</option>
+                                                                        </select>  
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-2">
+                                                                    <div class="position-relative form-group">
+                                                                        <label class="form-control-label">City</label>
+                                                                        <select name="stock_city_location" id="stock_city_location" class="form-control form-control-sm">
+                                                                            <option value="---">Select</option>    
+                                                                            <option value="GASOLINE">GASOLINE</option>
+                                                                            <option value="DIESEL">DIESEL</option> 
+                                                                            <option value="HYBRID">HYBRID</option>
+                                                                        </select>  
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col-md-4">
+                                                                    <label for="Username" class="form-control-label">Options</label>
+                                                                        <div class="row">
+                                                                            <div class="col-md-3">
+                                                                                <input name="stock_option_ps" id="stock_option_ps" type="checkbox" value="PS">
+                                                                                <label class="">PS</label>
+                                                                            </div>
+                                                                            <div class="col-md-3">
+                                                                                <input name="stock_option_nv" id="stock_option_nv" type="checkbox" value="NV">
+                                                                                <label class="">NV</label>
+                                                                            </div>
+                                                                            <div class="col-md-3">
+                                                                                <input name="stock_option_ac" id="stock_option_ac" type="checkbox" value="AC">
+                                                                                <label class="">AC</label>
+                                                                            </div>
+                                                                            <div class="col-md-3">
+                                                                                <input name="stock_option_wab" id="stock_option_wab" type="checkbox" value="WAB">
+                                                                                <label class="">WAB</label>
+                                                                            </div>
+                                                                            <div class="col-md-3">
+                                                                                <input name="stock_option_rs" id="stock_option_rs" type="checkbox" value="RS">
+                                                                                <label class="">RS</label>
+                                                                            </div>
+                                                                            <div class="col-md-3">
+                                                                                <input name="stock_option_tv" id="stock_option_tv" type="checkbox" value="TV">
+                                                                                <label class="">TV</label>
+                                                                            </div>
+                                                                            <div class="col-md-3">
+                                                                                <input name="stock_option_rr" id="stock_option_rr" type="checkbox" value="RR">
+                                                                                <label class="">RR</label>
+                                                                            </div>
+                                                                            <div class="col-md-3">
+                                                                                <input name="stock_option_abs" id="stock_option_abs" type="checkbox" value="ABS">
+                                                                                <label class="">ABS</label>
+                                                                            </div>
+                                                                            <div class="col-md-3">
+                                                                                <input name="stock_option_ls" id="stock_option_ls" type="checkbox" value="LS">
+                                                                                <label class="">LS</label>
+                                                                            </div>
+                                                                            <div class="col-md-3">
+                                                                                <input name="stock_option_pw" id="stock_option_pw" type="checkbox" value="PW">
+                                                                                <label class="">PW</label>
+                                                                            </div>
+                                                                            <div class="col-md-3">
+                                                                                <input name="stock_option_sr" id="stock_option_sr" type="checkbox" value="SR">
+                                                                                <label class="">SR</label>
+                                                                            </div>
+                                                                            <div class="col-md-3">
+                                                                                <input name="stock_option_fog" id="stock_option_fog" type="checkbox" value="FOG">
+                                                                                <label class="">FOG</label>
+                                                                            </div>
+                                                                            <div class="col-md-3">
+                                                                                <input name="stock_option_ab" id="stock_option_ab" type="checkbox" value="AB">
+                                                                                <label class="">AB</label>
+                                                                            </div>
+                                                                            <div class="col-md-3">
+                                                                                <input name="stock_option_gg" id="stock_option_gg" type="checkbox" value="GG">
+                                                                                <label class="">GG</label>
+                                                                            </div>
+                                                                            <div class="col-md-3">
+                                                                                <input name="stock_option_bt" id="stock_option_bt" type="checkbox" value="BT">
+                                                                                <label class="">BT</label>
+                                                                            </div>
+                                                                            <div class="col-md-3">
+                                                                                <input name="stock_option_aw" id="stock_option_aw" type="checkbox" value="AW">
+                                                                                <label class="">AW</label>
                                                                             </div>
                                                                         </div>
-                                                                        <div class="col-md-8" >
-                                                                            <label class="form-control-label">Other Options</label><br/>
-                                                                            <textarea name="stock_other_options" id="stock_other_options" cols="30" rows="4" placeholder="Enter Other Options" class="form-control form-control-sm"></textarea>
-                                                                        </div>
-                                                                </div> 
+                                                                </div>
+                                                                <div class="col-md-8">
+                                                                    <label class="form-control-label">Other Options</label><br/>
+                                                                    <textarea name="stock_other_options" id="stock_other_options" cols="30" rows="4" placeholder="Enter Other Options" class="form-control form-control-sm"></textarea>
+                                                                </div>
+                                                            </div> 
                                                         </div>
                                                         <div id="step-2">
                                                             <div class="form-row"> 

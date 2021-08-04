@@ -1,5 +1,8 @@
 <?php
 include("top.php");
+include("connection_db.php");
+$query_reserved=mysqli_query($connection,"select * from ats_stock_reservation");
+
 ?>
             
             <div class="app-main__outer">
@@ -8,29 +11,44 @@ include("top.php");
                         <div style="margin-top: -1.2%; box-shadow: none; margin-right:-53px; width:100%;" class="app-inner-layout__wrapper row-fluid no-gutters">
                             <div class="tab-content app-inner-layout__content card">
                                 <div style="box-shadow: none;" class="container card">
-                                    <form action="" method="">    
+                                <form action="" method="POST" id="userForm">     
                                         <div style="background:darkgray; padding-top: 2%; padding-bottom: 0.5%;" class="row">
                                             <div class="col-sm-2">
                                                 <label style=" font-weight: bold; margin-top: 5px;" class="form-control-label">Agent Name</label>
                                             </div>
                                             <div style="margin-left: -8%; "class="col-sm-1">
-                                                <select style="width: 160px;" name="get_all_ship_paid_agent_name" id="get_all_ship_paid_agent_name" type="text" class="form-control form-control-sm">
-                                                    <option>Employee Table</option>
+                                                <select style="width: 160px;" name="get_all_reserved_reports_agent_name" id="get_all_reserved_reports_agent_name" type="text" class="form-control form-control-sm" onChange="getcustomer(this.value);">
+                                                <?php
+                                                $query_sell = mysqli_query($connection,"select * from ats_sell_person");
+                                               
+                                                while($row = mysqli_fetch_array($query_sell))
+                                                {
+                                               
+                                                
+                                                ?>
+                                                <option value = "<?php echo($row['Sell_person'])?>" >
+                                                    <?php echo($row['Sell_person']) ?>
+                                                </option>
+                                                <?php
+                                                
+                                            
+                                                }                                             
+                                                ?>  
                                                 </select>
                                             </div>
                                             <div style="margin-left: 8%;" class="col-sm-2">
                                                 <label style=" font-weight: bold; margin-top: 5px;" class="form-control-label">Customer Name</label>
                                             </div>
-                                            <div style="margin-left: -6%;" class="col-sm-1 ">
-                                                <select style="width: 160px;" name="get_all_ship_paid_customer_name" id="get_all_ship_paid_customer_name" type="text" class="form-control form-control-sm">
-                                                    <option>Customer Table</option>
+                                            <div style="margin-left: -6%;" class="col-sm-1 " id="getcustomer_reserved">
+                                                <select style="width: 160px;" name="get_all_reserved_reports_customer_name" id="get_all_reserved_reports_customer_name" type="text" class="form-control form-control-sm">
+                                                   
                                                 </select>
                                             </div>
                                             <div style="margin-left: 8%;" class="col-sm-1">
                                                 <label style=" font-weight: bold; margin-top: 5px;" class="form-control-label">Country</label>
                                             </div>
                                             <div style="margin-left: -2%;" class="col-sm-2">
-                                                <select  name="get_all_ship_paid_country_name" id="get_all_ship_paid_country_name" required class="form-control form-control-sm">
+                                                <select  name="get_all_reserved_reports_country_name" id="get_all_reserved_reports_country_name" required class="form-control form-control-sm">
                                                     <option value="---">Select Country...</option>
                                                     <option value="AF">Afghanistan</option>
                                                     <option value="AL">Albania</option>
@@ -281,20 +299,28 @@ include("top.php");
                                                     <option value="ZW">Zimbabwe</option>
                                                 </select> 
                                             </div>
+                                            <div style="background:darkgray; padding-top: 1%; " class="row">
+                                            <div  class="col-sm-1">
+                                                <label style=" font-weight: bold; margin-top: 5px;" class="form-control-label">Date</label>
+                                            </div>
                                             <div class="col-sm-3">
-                                                <input style="width:100px;" type="reset" name="btn_reset" class="mb-2 mr-2 btn btn-gradient-primary" value="Refresh"> 
-                                                <input style="width: 100px;" type="submit" name="btn_all_ship_paid_search" id="btn_all_ship_paid_search" class="mb-2 mr-2 btn btn-gradient-success   " value="Search"> 
+                                                <input type="text" name="get_remittance_date" id="get_remittance_date" class=" form-control form-control-sm  input-mask-trigger" data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" required>
                                             </div>
-                                            <div class="col-sm-2"></div>
+                                            <div  class="col-sm-1">
+                                                <label style=" font-weight: bold; margin-top: 5px;" class="form-control-label">Date Till</label>
+                                            </div>
+                                            <div class="col-sm-3">
+                                                <input type="text" name="get_remittance_date_till" id="get_remittance_date_till" class=" form-control form-control-sm  input-mask-trigger" data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" required>
+                                            </div>
+                                            <div class="col-sm-2">
+                                                <input style="width: 147px;" type="submit" id="btn_remittance_search" name="btn_remittance_search" class="mb-2 mr-2 btn btn-gradient-primary  " value="Search"> 
+                                            </div>
                                             <div  class="col-sm-2">
-                                                <label style=" font-weight: bold; " class="form-control-label col-form-label">Select Date</label>
-                                            </div>
-                                            <div  class="col-sm-6">
-                                                <input style="margin-left: -89px;" name="get_all_ship_paid_date" id="get_all_ship_paid_date" class="form-control form-control-sm js-daterangepicker"  >
-                                            </div>
-                                            <div class="col-sm-2"></div>    
+                                                <input style="width: 147px;" type="reset" name="stock_add_btn" class="mb-2 mr-2 btn btn-gradient-success  " value="Refresh"> 
+                                            </div>                                                
+                                        </div>          
                                         </div>     
-                                    </form>
+                                </form>
                                 </div>
                                 <div style="background-color: gray; height: 1px; "></div>
                                 <div style="margin-left: -19px;" class="container">
@@ -303,12 +329,16 @@ include("top.php");
                                         <div class="col-lg-12">
                                             <div class="main-card  card">
                                                 <div class="card-body">
-                                                    <div class="table-responsive">
-                                                        <table style="" class="table">
+                                                    <div class="table-responsive" id="table">
+                                                    <table style="font-size: 8px;" class="table" id="myTable">
                                                             <thead>
+
                                                                 <tr>
                                                                     <th>Slct all<input type="checkbox" onclick="toggle(this);" /></th>
                                                                     <th>Rec#</th>
+                                                                    <th >agent name</th>
+                                                                   <th >customer name</th>
+                                                                    
                                                                     <th>Kbtsu</th>
                                                                     <th>Chassis&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
                                                                     <th>Make</th>
@@ -324,60 +354,62 @@ include("top.php");
                                                                     <th>FOB</th>
                                                                     <th>Grd</th>
                                                                     <th>Mileage</th>
-                                                                    <th>FOB</th>
-                                                                    <th>Grd</th>
-                                                                    <th>FOB</th>
-                                                                    <th>Grd</th>
-                                                                    <th style="text-align: center;">Opt.</th>
-                                                                    <th>FOB</th>
-                                                                    <th>Grd</th>
-                                                                    <th>Mileage</th>
-                                                                    <th>FOB</th>
-                                                                    <th>Grd</th>
-                                                                    <th>FOB</th>
-                                                                    <th>Grd</th>
                                                                     
                                                                 </tr>
                                                             </thead>
                                                             <tbody>
+                                                                <?php 
+                                                                    while($rowreserved=mysqli_fetch_array($query_reserved))
+                                                                    {
+                                                                        $querycar=mysqli_fetch_row(mysqli_query($connection,"select * from ats_car_stock where ats_car_stock_rec_no='".$rowreserved[1]."' AND ats_car_stock_ship_date<>'' "));
+
+                                                                        if($querycar >0)
+                                                                        {
+                                                                ?>
                                                                 <tr>
+                                                                    <?php 
+                                                                   
+                                                                    ?>
                                                                     <td><input type="checkbox" /></td>
-                                                                    <td>4321</td>
-                                                                    <td>KEN</td>
-                                                                    <td>BHJ-25465456</td>
-                                                                    <td>NISSAN</td>
-                                                                    <td>Juke</td>
-                                                                    <td>2020</td>
-                                                                    <td>Apr</td>
-                                                                    <td>Pearl White</td>
-                                                                    <td>Dual</td>
-                                                                    <td>Gasoline</td>
-                                                                    <td>4</td>
-                                                                    <td>1400cc</td>
-                                                                    <td>PS,NV,AC,WAB,RS,TV,RR,ABS,LS,PW,SR,FOG,AB,GG,BT,LS</td>
-                                                                    <td>9,80,000</td>
-                                                                    <td>4</td>
-                                                                    <td>98,000KM</td>
+                                                                    <td><?php echo $rowreserved[1]?></td>
+                                                                    <td ><?php echo $rowreserved[12]?></td>
+                                                                    <td ><?php echo $rowreserved[4]?></td>
+
+                                                                    <td><?php echo $querycar[14]?></td>
+                                                                    <td><?php echo $querycar[2]?></td>
+                                                                    <td><?php echo $querycar[3]?></td>
+                                                                    <td><?php echo $querycar[4]?></td>
+                                                                    <td><?php echo $querycar[6]?></td>
+                                                                    <td><?php echo $querycar[14]?></td>
+                                                                    <td><?php echo $querycar[8]?></td>
+                                                                    <td><?php echo $querycar[9]?></td>
+                                                                    <td><?php echo $querycar[10]?></td>
+                                                                    <td><?php echo $querycar[11]?></td>
+                                                                    <td><?php echo $querycar[13]?></td>
+                                                                    <td>
+                                                                    <?php 
+                                                                        for($i=32;$i<48;$i++)
+                                                                        {
+                                                                            if(trim($querycar[$i]))
+                                                                            {
+                                                                                $y=$i+1;
+                                                                                echo $querycar[$i].",";
+                                                                                
+                                                                               
+                                                                                
+                                                                            }
+                                                                        }
+                                                                    ?>
+                                                                    </td>
+                                                                    <td><?php echo $querycar[66]?></td>
+                                                                    <td><?php echo $querycar[12]?></td>
+                                                                    <td><?php echo $querycar[17]?></td>
                                                                 </tr>
-                                                                <tr>
-                                                                    <td><input type="checkbox" /></td>
-                                                                    <td>4321</td>
-                                                                    <td>KEN</td>
-                                                                    <td>BHJY-25465676</td>
-                                                                    <td>NISSAN</td>
-                                                                    <td>Juke</td>
-                                                                    <td>2020</td>
-                                                                    <td>Apr</td>
-                                                                    <td>Pearl White</td>
-                                                                    <td>Dual</td>
-                                                                    <td>Gasoline</td>
-                                                                    <td>4</td>
-                                                                    <td>1400cc</td>
-                                                                    <td>PS,NV,AC,WAB,RS,TV,RR,ABS,LS,PW,SR,FOG,AB,GG,BT,LS</td>
-                                                                    <td>9,80,000</td>
-                                                                    <td>4</td>
-                                                                    <td>98,000KM</td>
-                                                                </tr>
+                                                                <?php 
+                                                                        }
+                                                                    }
+                                                                ?>
+                                                              
                                                             </tbody>
                                                         </table>
                                                     </div>
@@ -391,6 +423,78 @@ include("top.php");
                     </div>
                 </div>
             </div>
+            <script>
+function getcustomer(val)
+{
+    $.ajax({
+	type: "POST",
+	url: "reportsajax.php",
+	data:'getcustomer_reserved='+val,
+	success: function(data){
+       // alert(data);
+		$("#getcustomer_reserved").html(data);
+	}
+	});
+    var input, filter, table, tr, td, i, txtValue;
+  input = document.getElementById("get_all_reserved_reports_agent_name");
+  filter = input.value.toUpperCase();
+  table = document.getElementById("myTable");
+  tr = table.getElementsByTagName("tr");
+  for (i = 0; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td")[2];
+    if (td) {
+      txtValue = td.textContent || td.innerText;
+      if (txtValue.toUpperCase().indexOf(filter) > -1) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    }       
+  }
+}
+
+</script>
+
+<script>
+function getcustomerreserved(val)
+{
+    
+    var input, filter, table, tr, td, i, txtValue;
+  input = document.getElementById("get_all_reserved_reports_customer_name");
+  filter = input.value.toUpperCase();
+  table = document.getElementById("myTable");
+  tr = table.getElementsByTagName("tr");
+  for (i = 0; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td")[3];
+    if (td) {
+      txtValue = td.textContent || td.innerText;
+      if (txtValue.toUpperCase().indexOf(filter) > -1) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    }       
+  }
+}
+
+</script>
+<script>
+$(document).on('submit','#userForm',function(e){
+  
+        e.preventDefault();
+       
+        $.ajax({
+        method:"POST",
+        url: "dateshippaid.php",
+        data:$(this).serialize(),
+        success: function(data){
+         
+        $('#table').html(data);
+     
+
+    }});
+});
+</script>
 <?php
 include("bottom.php");
 ?> 
