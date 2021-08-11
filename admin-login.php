@@ -1,21 +1,37 @@
 <?php	
 session_start();
 include("connection_db.php");
+if(isset($_SESSION['user_id']))
+{
+    header("Location:index.php");
 
+}
 if(isset($_POST["btn_login"]))
 {
+    
+    $ciphering = "AES-128-CTR";
+    $iv_length = openssl_cipher_iv_length($ciphering);
+    $options = 0;
+    $decryption_iv = '1234567891011121';
+    $decryption_key = "atsportal";
+    $encryptionusername = mysqli_real_escape_string($connection,$_POST["username"]);
+	$encryptionpassword = mysqli_real_escape_string($connection,$_POST["password"]);
 
-	mysqli_select_db($connection,"ats_databasenew");
-	$user_name = $_POST["username"];
-	$user_password = $_POST["password"];
+    // Use openssl_decrypt() function to decrypt the data
+    $user_name=openssl_encrypt ($encryptionusername, $ciphering, 
+            $decryption_key, $options, $decryption_iv);
+    $user_password=openssl_encrypt ($encryptionpassword, $ciphering, 
+            $decryption_key, $options, $decryption_iv);
 
-	$query = mysqli_query($connection,"select * from ats_customer_signup where ats_customer_signup_name ='".$user_name."'");
+
+
+	$query = mysqli_query($connection,"select * from admin_details where admin_username ='".$user_name."'");
 	$row = mysqli_fetch_array($query);
 	
-	if($row ["ats_customer_signup_name"] == $user_name && $row ["ats_customer_signup_password"] == $user_password)
+	if($row ["admin_username"] == $user_name && $row ["admin_password"] == $user_password)
 	{
-        $_SESSION["userName"] = $row["ats_customer_signup_name"];
-        $_SESSION["user_id"] = $row["ats_customer_signup_id"];
+        $_SESSION['userName'] = $row['admin_username'];
+        $_SESSION['user_id'] = $row['admin_id'];
 		header("Location:index.php");
 	}
 	else
@@ -95,7 +111,7 @@ crossorigin="anonymous"></script>
                         <div class="mx-auto app-login-box col-sm-12 col-md-10 col-lg-9">
                             <div class="app-logo"></div>
                             <h4 style="margin-top: -4%;" class="mb-0">
-                                <span class="d-block">Welcome back,</span>
+                                <span class="d-block">Welcome Admin</span>
                                 <span>Please sign in to your account.</span>
                             </h4>
                             <h6 class="mt-3">No account? <a href="pages-register.php" class="text-primary">Sign up now</a></h6>

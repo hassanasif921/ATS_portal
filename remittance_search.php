@@ -102,7 +102,7 @@ $resultsell=mysqli_query($connection,"select * from ats_sell_person");
                                                                 <?php
                                                                     include("connection_db.php");
 
-                                                                    $query = mysqli_query($connection,"select * from ats_remittance");
+                                                                    $query = mysqli_query($connection,"select * from ats_remittance ORDER BY ats_remittance_id DESC");
                                                                     $count =mysqli_num_rows($query);
                                                                     if($count > 0)
                                                                     {

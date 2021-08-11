@@ -2,7 +2,7 @@
 include("top.php");
 include("connection_db.php");
 
-$query="select * from ats_car_stocK  where ats_car_stock_country_location='Japan'";
+$query="select * from ats_car_stocK  where ats_car_stock_country_location='Japan' ORDER BY ats_car_stock_id DESC";
 $queryca=mysqli_query($connection,$query);
 
 ?>

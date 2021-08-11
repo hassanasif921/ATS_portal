@@ -12,8 +12,24 @@ include("connection_db.php");
                                     <label style="margin-top: 5%; font-weight: bold;" class="form-control-label">Agent</label>
                                 </div>
                                 <div style="margin-left: -4%;" class="col-sm-2 ">
-                                    <select name="stock_agent_name" id="stock_agent_name"  class="form-control form-control-sm">
-                                        <option value="">Agent / User Table</option>
+                                    <select name="stock_agent_name" id="stock_agent_name"  class="form-control form-control-sm" onChange="getcustomer(this.value);">
+                                   <option value="">SELECT</option>
+                                   <?php
+                                                $query_reserve = mysqli_query($connection,"select DISTINCT agent_name from ats_stock_reservation");
+                                               
+                                                while($row = mysqli_fetch_array($query_reserve))
+                                                {
+                                                    $query_sell=mysqli_fetch_row(mysqli_query($connection,"select * from ats_sell_person where Sell_person='".$row[0]."'"));
+                                                
+                                                ?>
+                                                <option value = "<?php echo $query_sell[1]?>" >
+                                                    <?php echo $query_sell[1]?>
+                                                </option>
+                                                <?php
+                                                
+                                            
+                                                }                                             
+                                                ?>  
                                     </select> 
                                 </div>
                                 <div class="col-sm-1">
@@ -279,9 +295,12 @@ include("connection_db.php");
                                     
                                 </div>
                                 <div class="col-sm-2 ">
-                                    <select style="margin-left: 50%;" name="stock_all_agent" id="stock_all_agent"  class="form-control form-control-sm">
-                                            <option value="">All Cars</option>
-                                    </select> 
+                                <select style="margin-left: 50%;" name="stock_all_agent" id="stock_all_agent" class="form-control form-control-sm">
+                                        <option value="All Cars">All Cars</option>
+                                        <option value="All Reserved">All Reserved</option>
+                                        <option value="All Sold">All Sold</option>
+                                        <option value="All Paid">All Paid</option>
+                                    </select>
                                 </div>
                             </div> 
                             <div style="margin-top: -1.2%; box-shadow: none;" class="app-inner-layout__wrapper row-fluid no-gutters">
@@ -309,7 +328,7 @@ include("connection_db.php");
                                                             <input style="font-size: 12px;" name="get_stock_chassis_id" id="get_stock_chassis_id" type="text"  class="form-control">
                                                         </div>
                                                       
-                                                        <div  class="col-sm-3 input-group input-group-sm">
+                                                        <div  class="col-sm-3 input-group input-group-sm" id="customer">
                                                             <div class="input-group-prepend">
                                                                 <span class="input-group-text">Customer</span>
                                                             </div>
@@ -405,32 +424,61 @@ include("connection_db.php");
                                                         <h6 style="font-weight: bold;" name="get_stock_total_results" id="get_stock_total_results" class="text-primary">1,009</h6>  
                                                 </div>
                                                 <div style="margin-top: 0.4%;" class="row">
-                                                        <div style="margin-right: -2.1%;" class="col-sm-6 input-group input-group-sm">
-                                                            <div class="input-group-prepend">
-                                                                <span style="width: 100px;" class="input-group-text">Buy Date</span>
-                                                            </div>
-                                                            <input name="get_stock_buying_date" id="get_stock_buying_date" style="background: #ff9900; " class="btn form-control form-control-sm js-daterangepicker"  >
+                                                    <div class="col-sm-6 input-group input-group-sm">
+                                                        <div class="input-group-prepend">
+                                                            <span style="width: 100px;" class="input-group-text">Buy Date</span>
                                                         </div>
-                                                        <div class="col-sm-6 input-group input-group-sm">
-                                                            <div class="input-group-prepend">
-                                                                <span style="width: 100px;" class="input-group-text">Rsrv Date</span>
+                                                        <div class="row">
+                                                            <div class="col-md-6">
+                                                                <input name="get_stock_buying_date_from" id="get_stock_buying_date_from" placeholder="From" style="background: #ff9900;" class="form-control form-control-sm input-mask-trigger"  data-inputmask-alias="datetime" data-inputmask-inputformat="dd/mm/yyyy">
                                                             </div>
-                                                            <input style="background: #ff9900;" name="" id="" class="btn form-control form-control-sm js-daterangepicker"  >
-                                                        </div>   
+                                                            <div class="col-md-6">
+                                                                <input name="get_stock_buying_date_till" id="get_stock_buying_date_till" placeholder="Till" style="background: #ff9900;" class="form-control form-control-sm input-mask-trigger"  data-inputmask-alias="datetime" data-inputmask-inputformat="dd/mm/yyyy">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-6 input-group input-group-sm">
+                                                        <div class="input-group-prepend">
+                                                            <span style="width: 100px;" class="input-group-text">Reserve Date</span>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-md-6">
+                                                                <input name="get_stock_reserve_ok_date_from" id="get_stock_reserve_ok_date_from" placeholder="From" style="background: #ff9900;" class="form-control form-control-sm input-mask-trigger"  data-inputmask-alias="datetime" data-inputmask-inputformat="dd/mm/yyyy">
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <input name="get_stock_reserve_ok_date_till" id="get_stock_reserve_ok_date_till" placeholder="Till" style="background: #ff9900;" class="form-control form-control-sm input-mask-trigger"  data-inputmask-alias="datetime" data-inputmask-inputformat="dd/mm/yyyy">
+                                                            </div>
+                                                        </div>
+                                                    </div>   
                                                 </div>
                                                 <div style="margin-top: 0.4%;" class="row">
-                                                        <div style="margin-right: -2.1%;" class="col-sm-6 input-group input-group-sm">
-                                                            <div class="input-group-prepend">
-                                                                <span style="width: 100px;" class="input-group-text">Ship Ok Date</span>
-                                                            </div>
-                                                            <input name="get_stock_ship_ok_date" id="get_stock_ship_ok_date" style="background: #ff9900;" class="btn form-control form-control-sm js-daterangepicker"  >
+                                                    <div class="col-sm-6 input-group input-group-sm">
+                                                        <div class="input-group-prepend">
+                                                            <span style="width: 100px;" class="input-group-text">Ship Ok Date</span>
                                                         </div>
-                                                        <div class="col-sm-6 input-group input-group-sm">
-                                                            <div class="input-group-prepend">
-                                                                <span style="width: 100px;" class="input-group-text">Rel. OK Date</span>
+                                                        <div class="row">
+                                                            <div class="col-md-6">
+                                                                <input name="get_stock_ship_ok_date_from" id="get_stock_ship_ok_date_from" placeholder="From" style="background: #ff9900;" class="form-control form-control-sm input-mask-trigger"  data-inputmask-alias="datetime" data-inputmask-inputformat="dd/mm/yyyy">
                                                             </div>
-                                                            <input name="get_stock_release_ok_date" id="get_stock_release_ok_date" style="background: #ff9900;" class="btn form-control form-control-sm js-daterangepicker"  >
+                                                            <div class="col-md-6">
+                                                                <input name="get_stock_ship_ok_date_till" id="get_stock_ship_ok_date_till" placeholder="Till" style="background: #ff9900;" class="form-control form-control-sm input-mask-trigger"  data-inputmask-alias="datetime" data-inputmask-inputformat="dd/mm/yyyy">
+                                                            </div>
                                                         </div>
+                                                        
+                                                    </div>
+                                                    <div class="col-sm-6 input-group input-group-sm">
+                                                        <div class="input-group-prepend">
+                                                            <span style="width: 100px;" class="input-group-text">Rel. OK Date</span>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-md-6">
+                                                                <input name="get_stock_release_ok_date_from" id="get_stock_release_ok_date_from" placeholder="From" style="background: #ff9900;" class="form-control form-control-sm input-mask-trigger"  data-inputmask-alias="datetime" data-inputmask-inputformat="dd/mm/yyyy">
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <input name="get_stock_release_ok_date_till" id="get_stock_release_ok_date_till" placeholder="Till" style="background: #ff9900;" class="form-control form-control-sm input-mask-trigger"  data-inputmask-alias="datetime" data-inputmask-inputformat="dd/mm/yyyy">
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                                 <div style="margin-top: 0.4%; " class="row ">
                                                         <div style="margin-right: 5%;"  class="col-md-1 ">
@@ -438,7 +486,7 @@ include("connection_db.php");
                                                         <div class="col-md-1 ">
                                                             <label style="padding: 5px;" class="input-group-text">Price</label> 
                                                             <select name="get_stock_buying_date" id="get_stock_buying_date" class="form-control form-control-sm">
-                                                                <option>--</option>
+                                                                <option value="">--</option>
                                                                 <option value="Yes">YES</option>
                                                                 <option value="No">NO</option>
                                                             </select>
@@ -509,7 +557,7 @@ include("connection_db.php");
                                                         </div>
                                                         <div style="margin-left: -2.5%;" class="col-md-1">
                                                             <label style="padding: 5px;" class="input-group-text">Rel-req</label> 
-                                                            <select name="get_stock_bl_date" id="get_stock_bl_date" class="form-control form-control-sm">
+                                                            <select name="get_stock_rel_date" id="get_stock_rel_date" class="form-control form-control-sm">
                                                                 <option>--</option>
                                                                 <option value="Yes">YES</option>
                                                                 <option value="No">NO</option>
@@ -684,4 +732,18 @@ $(document).on('ready', function () {
       $('.js-daterangepicker').daterangepicker();
     });
            
+</script>
+<script>
+function getcustomer(val)
+{
+    $.ajax({
+	type: "POST",
+	url: "stock_search.php",
+	data:'getcustomer_reserved='+val,
+	success: function(data){
+       // alert(data);
+		$("#customer").html(data);
+	}
+	});
+}
 </script>

@@ -6,10 +6,11 @@ if(isset($_POST['getcustomer_reserved']))
     $getcustomer_reserved=mysqli_query($connection,"select * from ats_customer where ats_customer_sell_person='".$_POST['getcustomer_reserved']."'");
 ?>
 <select style="width: 160px;" name="get_all_reserved_reports_customer_name" id="get_all_reserved_reports_customer_name" type="text" class="form-control form-control-sm" onChange="getcustomerreserved(this.value);">
+<option value="">Please Select</option>
+
 <?php while($rowcustomer_reserved=mysqli_fetch_array($getcustomer_reserved))
 {
 ?>
-<option value="">Please Select</option>
 <option value="<?php echo $rowcustomer_reserved[1]?>"><?php echo $rowcustomer_reserved[3]?></option>
 <?php }?>
 </select>

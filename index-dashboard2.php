@@ -1,4 +1,3 @@
-
 <?php
 include("top.php");
 include("connection_db.php");
@@ -8,19 +7,19 @@ include("connection_db.php");
                 <div class="app-main__inner p-0">
                     <div class="app-inner-layout chat-layout">
                         <form action="indextest.php" method="POST">
-                            <div style="background:darkgray; padding-top: 1%; width:101.4%;" class="row">        
-                                <div class="col-sm-2">
-                                    <label style="margin-top: 3%; margin-left: 10%; font-weight: bold;" class="form-control-label">Agent Name</label>
+                            <div style="background:darkgray;  padding-top: 1%; padding-bottom: 1.2%; " class="container row">        
+                                <div class="col-sm-1">
+                                    <label style="margin-top: 5%; font-weight: bold;" class="form-control-label">Agent</label>
                                 </div>
-                                <div  style="margin-left: -6%;" class="col-sm-2">
+                                <div style="margin-left: -4%;" class="col-sm-2 ">
                                     <select name="stock_agent_name" id="stock_agent_name"  class="form-control form-control-sm">
                                         <option value="">Agent / User Table</option>
                                     </select> 
                                 </div>
-                                <div class="col-sm-2">
-                                    <label style="margin-top: 3%; font-weight: bold;" class="form-control-label">Country</label>
+                                <div class="col-sm-1">
+                                    <label style="margin-top: 5%; font-weight: bold;" class="form-control-label">Country</label>
                                 </div>
-                                <div style="margin-left: -10%;" class="col-sm-2">
+                                <div style="margin-left: -2.5%;" class="col-sm-2">
                                     <select name="stock_country" id="stock_country" class="form-control form-control-sm" >
                                         <option value="---">Select Country</option>
                                         <option value="AF">Afghanistan</option>
@@ -273,419 +272,381 @@ include("connection_db.php");
                                     </select>
                                 </div>
                                 <div class="col-sm-2">
-                                    <input style="margin-left: 110%;" type="reset" name="btn-reset" class="mb-2 mr-2 btn btn-gradient-primary btn-block" value="Refresh"> 
+                                    <input style="margin-left: 20%;" type="reset" name="btn-reset" class="mb-2 mr-2 btn btn-gradient-primary btn-block" value="Refresh"> 
                                 </div>
                                 <div class="col-sm-2">
-                                    <input style="margin-left: 110%;" type="submit" name="stock_search_btn" id="stock_search_btn" class="btn mb-2 mr-2 btn btn-gradient-success btn-block" value="Search"> 
+                                    <input style="margin-left: 30%;" type="submit" name="stock_search_btn" id="stock_search_btn" class="btn mb-2 mr-2 btn btn-gradient-success btn-block" value="Search"> 
+                                    
                                 </div>
-                                <!-- <div class="col-sm-2 ">
-                                    <select style="margin-left: 20%;" name="stock_all_agent" id="stock_all_agent"  class="form-control form-control-sm">
+                                <div class="col-sm-2 ">
+                                    <select style="margin-left: 50%;" name="stock_all_agent" id="stock_all_agent"  class="form-control form-control-sm">
                                             <option value="">All Cars</option>
                                     </select> 
-                                </div>  -->
+                                </div>
                             </div> 
-                            <div style="box-shadow: none;" class="app-inner-layout__wrapper row-fluid no-gutters">
+                            <div style="margin-top: -1.2%; box-shadow: none;" class="app-inner-layout__wrapper row-fluid no-gutters">
                                 <div class="tab-content app-inner-layout__content card" >
-                                    <div id="">
-                                        <div class="card">
-                                            <div class="card-body">
+                                    <div id="accordion" >
+                                        <div data-parent="#accordion" id="back-to-search" aria-labelledby="headingOne" class="collapse show" style="box-shadow: none;"  id="car-search" role="tabpanel"  class="tab-pane active container card">
+                                            <div class="card-body ">
                                                 <div style="margin-top: 0.5%;" class="row">
-                                                    <div style="margin-right: -3%;"  class="col-sm-3 input-group input-group-sm">
-                                                        <div  class="input-group-prepend">
-                                                            <span class="input-group-text wd-70">Rec. No.</span>
+                                                        <div style="margin-right: -3%;"  class="col-sm-3 input-group input-group-sm">
+                                                            <div  class="input-group-prepend">
+                                                                <span style="background: lightgray" class="input-group-text">Rec. No.</span>
+                                                            </div>
+                                                            <input style="font-size: 12px;" name="get_stock_rec_no" id="get_stock_rec_no" type="text"  class="form-control">
                                                         </div>
-                                                        <input style="font-size: 12px;" name="get_stock_rec_no" id="get_stock_rec_no" type="text"  class="form-control form-control-sm">
-                                                    </div>
-                                                    <div style="margin-right: -3%;"  class="col-sm-3 input-group input-group-sm">
-                                                        <div class="input-group-prepend">
-                                                            <span class="input-group-text wd-70">Chassis</span>
+                                                        <div style="margin-right: -3%;" class="col-sm-3 input-group input-group-sm">
+                                                            <div class="input-group-prepend">
+                                                                <span class="input-group-text">Kubotsu</span>
+                                                            </div>
+                                                            <input style="font-size: 12px;" name="get_stock_kobutsu" id="get_stock_kobutsu" type="text" class="form-control">
                                                         </div>
-                                                        <input style="font-size: 12px;" name="get_stock_chassis_id" id="get_stock_chassis_id" type="text"  class="form-control">
-                                                    </div>
-                                                    <div style="margin-right: -3%;" class="col-sm-3 input-group input-group-sm">
-                                                        <div class="input-group-prepend">
-                                                            <span class="input-group-text wd-70">Kubotsu</span>
+                                                        <div style="margin-right: -3%;"  class="col-sm-3 input-group input-group-sm">
+                                                            <div class="input-group-prepend">
+                                                                <span class="input-group-text">Chassis</span>
+                                                            </div>
+                                                            <input style="font-size: 12px;" name="get_stock_chassis_id" id="get_stock_chassis_id" type="text"  class="form-control">
                                                         </div>
-                                                        <input style="font-size: 12px;" name="get_stock_kobutsu" id="get_stock_kobutsu" type="text" class="form-control">
-                                                    </div>
-                                                    <div  class="col-sm-3 input-group input-group-sm">
-                                                        <div class="input-group-prepend">
-                                                            <span class="input-group-text" style="width:80px">Customer</span>
+                                                      
+                                                        <div  class="col-sm-3 input-group input-group-sm">
+                                                            <div class="input-group-prepend">
+                                                                <span class="input-group-text">Customer</span>
+                                                            </div>
+                                                            <input style="font-size: 12px;" name="get_stock_customer_name" id="get_stock_customer_name" type="text" class="form-control">
                                                         </div>
-                                                        <input style="font-size: 12px;" name="get_stock_customer_name" id="get_stock_customer_name" type="text" class="form-control">
-                                                    </div>
                                                 </div>
                                                 <div style="margin-top: 0.4%;" class="row">
-                                                    <div style="margin-right: -3%;" class="col-sm-3 input-group input-group-sm">
-                                                        <div class="input-group-prepend">
-                                                            <span class="input-group-text wd-70">Make</span>
-                                                        </div>
-                                                        <select name="get_stock_make" id="get_stock_make" class="form-control form-control-sm" onChange="getState(this.value);">
+                                                        <div style="margin-right: -3%;" class="col-sm-3 input-group input-group-sm">
+                                                            <div class="input-group-prepend">
+                                                                <span class="input-group-text">Make</span>
+                                                            </div>
+                                                            <select name="get_stock_make" id="get_stock_make" class="form-control form-control-sm" onChange="getState(this.value);">
                                                             <?php 
-                                                                $queryfetchdetails=mysqli_query($connection,"select * from car_make");
-                                                            ?>
-                                                            <option selected value="">Please Select</option>
-                                                                <?php 
-                                                                    while($rowfetchdetails=mysqli_fetch_array($queryfetchdetails)){
-                                                                ?>
-                                                                <option value="<?php echo $rowfetchdetails[0]?>"><?php echo $rowfetchdetails[1]?></option>
-                                                                <?php
-                                                                    }
-                                                                ?>
-                                                        </select>                    
-                                                    </div>
-                                                    <div style="margin-right: -3%;" class="col-sm-3 input-group input-group-sm">
-                                                        <div class="input-group-prepend">
-                                                            <span class="input-group-text wd-70">Model</span>
+                                                                                $queryfetchdetails=mysqli_query($connection,"select * from car_make");
+                                                                                ?>
+                                                                                    <option selected value="">Please Select</option>
+                                                                                <?php 
+                                                                                    while($rowfetchdetails=mysqli_fetch_array($queryfetchdetails)){
+                                                                                    ?>
+                                                                                <option value="<?php echo $rowfetchdetails[0]?>"><?php echo $rowfetchdetails[1]?></option>
+                                                                                <?php
+                                                                                    }
+                                                                                ?>
+                                                            </select>
+                                                        
                                                         </div>
-                                                        <select name="stock_model" id="model-list"  class="form-control form-control-sm">
-                                                            <option  selected value="">Please Select</option>
-                                                        </select>
-                                                    </div>
-                                                    <div style="margin-right: -1.5%;" class="col-sm-2 input-group input-group-sm">
-                                                        <div class="input-group-prepend">
-                                                            <span class="input-group-text wd-70">Shift</span>
+                                                        <div style="margin-right: -3%;" class="col-sm-3 input-group input-group-sm">
+                                                            <div class="input-group-prepend">
+                                                                <span class="input-group-text">Model</span>
+                                                            </div>
+                                                            <select name="stock_model" id="model-list"  class="form-control form-control-sm">
+                                                                                <option  selected value="">Please Select</option>
+                                                             </select>
                                                         </div>
-                                                        <input style="font-size: 12px;" name="get_stock_shift" id="get_stock_shift" type="text" class="form-control">
-                                                    </div>
-                                                    <div style="margin-right: -1.5%;" class="col-sm-2 input-group input-group-sm">
-                                                        <div class="input-group-prepend">
-                                                            <span class="input-group-text wd-70">Year</span>
+                                                        <div style="margin-right: -1.5%;" class="col-sm-2 input-group input-group-sm">
+                                                            <div class="input-group-prepend">
+                                                                <span class="input-group-text">Shift</span>
+                                                            </div>
+                                                            <select name="get_stock_shift" id="get_stock_shift" class="form-control form-control-sm">
+                                                                                <option value="">Select</option>    
+                                                                                <option value="Automatic">Automatic</option>
+                                                                                <option value="Manual">Manual</option> 
+                                                                                <option value="Dual">Dual</option>
+                                                                            </select> 
                                                         </div>
-                                                        <input style="font-size: 12px;" name="get_stock_reg_year" id="get_stock_reg_year" type="text" class="form-control">
-                                                    </div>
-                                                    <div class="col-sm-2 input-group input-group-sm">
-                                                        <div class="input-group-prepend">
-                                                            <span class="input-group-text">Color</span>
+                                                        <div style="margin-right: -1.5%;" class="col-sm-2 input-group input-group-sm">
+                                                            <div class="input-group-prepend">
+                                                                <span class="input-group-text">Year</span>
+                                                            </div>
+                                                            <input style="font-size: 12px;" name="get_stock_reg_year" id="get_stock_reg_year" type="text" class="form-control">
                                                         </div>
-                                                            <input style="font-size: 12px;" name="get_stock_color" id="get_stock_reg_year" type="text" class="form-control">
-                                                    </div>
-                                                    <h6 style="font-weight: bold;" name="" id="">Results</h6>    
+                                                        <div  class="col-sm-2 input-group input-group-sm">
+                                                            <div class="input-group-prepend">
+                                                                <span class="input-group-text">Color</span>
+                                                            </div>
+                                                            <input style="font-size: 12px;" name="get_stock_color" id="get_stock_color" type="text" class="form-control">
+                                                        </div>
+                                                        <div style="background: lightgray;" class="">
+                                                        <h6 style="font-weight: bold;" name="" id="">Results</h6>
+                                                        </div>
                                                 </div>
                                                 <div style="margin-top: 0.4%;" class="row">
-                                                    <div style="margin-right: -3%;" class="col-sm-3 input-group input-group-sm">
-                                                        <div class="input-group-prepend">
-                                                            <span class="input-group-text wd-70">Fuel</span>
+                                                        
+                                                        <div style="margin-right: -3%;" class="col-sm-3 input-group input-group-sm">
+                                                            <div class="input-group-prepend">
+                                                                <span class="input-group-text">Fuel</span>
+                                                            </div>
+                                                            <select name="stock_fuel" id="stock_fuel" class="form-control form-control-sm">
+                                                                                <option value="">Select</option>    
+                                                                                <option value="GASOLINE">GASOLINE</option>
+                                                                                <option value="DIESEL">DIESEL</option> 
+                                                                                <option value="HYBRID">HYBRID</option>
+                                                                            </select>  
                                                         </div>
-                                                        <select name="stock_fuel" id="stock_fuel" class="form-control form-control-sm">
-                                                            <option value="">Select</option>    
-                                                            <option value="GASOLINE">GASOLINE</option>
-                                                            <option value="DIESEL">DIESEL</option> 
-                                                            <option value="HYBRID">HYBRID</option>
-                                                         </select>
-                                                    </div>
-                                                    <div style="margin-right: -3%;" class="col-sm-3 input-group input-group-sm">
-                                                        <div class="input-group-prepend">
-                                                            <span class="input-group-text wd-70">Vessel</span>
+                                                        <div style="margin-right: -3%;" class="col-sm-3 input-group input-group-sm">
+                                                            <div class="input-group-prepend">
+                                                                <span class="input-group-text">Vessel</span>
+                                                            </div>
+                                                            <input style="font-size: 12px;" name="get_stock_vessel_name" id="get_stock_vessel_name" type="text" class="form-control">
                                                         </div>
-                                                        <input style="font-size: 12px;" name="get_stock_vessel_name" id="get_stock_vessel_name" type="text" class="form-control">
-                                                    </div>
-                                                    <div style="margin-right: -3%;" class="col-sm-3 input-group input-group-sm">
-                                                        <div class="input-group-prepend">
-                                                            <span class="input-group-text wd-70">Voyage</span>
+                                                        <div style="margin-right: -3%;" class="col-sm-3 input-group input-group-sm">
+                                                            <div class="input-group-prepend">
+                                                                <span class="input-group-text">Voyage</span>
+                                                            </div>
+                                                            <input style="font-size: 12px;" name="get_stock_voyage" id="get_stock_voyage" type="text" class="form-control">
                                                         </div>
-                                                        <input style="font-size: 12px;" name="get_stock_voyage" id="get_stock_voyage" type="text" class="form-control">
-                                                    </div>
-                                                    <div class="col-sm-3 input-group input-group-sm">
-                                                        <div class="input-group-prepend">
-                                                            <span class="input-group-text"  style="width:80px;">BL No.</span>
-                                                        </div>
-                                                        <input style="font-size: 12px;" name="get_stock_bl_no" id="get_stock_bl_no" type="text" class="form-control">
-                                                    </div> 
-                                                    <h6 style="font-weight: bold;" name="get_stock_total_results" id="get_stock_total_results" class="text-primary">1,009</h6>  
+                                                        <div  class="col-sm-3 input-group input-group-sm">
+                                                            <div class="input-group-prepend">
+                                                                <span class="input-group-text">BL No.</span>
+                                                            </div>
+                                                            <input style="font-size: 12px;" name="get_stock_bl_no" id="get_stock_bl_no" type="text" class="form-control">
+                                                        </div> 
+                                                        <h6 style="font-weight: bold;" name="get_stock_total_results" id="get_stock_total_results" class="text-primary">1,009</h6>  
                                                 </div>
                                                 <div style="margin-top: 0.4%;" class="row">
-                                                    <div style="margin-right: -2.1%;" class="col-sm-6 input-group input-group-sm">
-                                                        <div class="input-group-prepend">
-                                                            <span style="width: 100px;" class="input-group-text">Buy Date</span>
+                                                        <div style="margin-right: -2.1%;" class="col-sm-6 input-group input-group-sm">
+                                                            <div class="input-group-prepend">
+                                                                <span style="width: 100px;" class="input-group-text">Buy Date</span>
+                                                            </div>
+                                                            <input name="get_stock_buying_date" id="get_stock_buying_date" style="background: #ff9900; " class="btn form-control form-control-sm js-daterangepicker"  >
                                                         </div>
-                                                        <input name="get_stock_buying_date" id="get_stock_buying_date" style="background: #ff9900; " class="btn form-control form-control-sm js-daterangepicker"  >
-                                                    </div>
-                                                    <div class="col-sm-6 input-group input-group-sm">
-                                                        <div class="input-group-prepend">
-                                                            <span style="width: 100px;" class="input-group-text">Rsrv Date</span>
-                                                        </div>
-                                                        <input style="background: #ff9900;" name="" id="" class="btn form-control form-control-sm js-daterangepicker"  >
-                                                    </div>   
+                                                        <div class="col-sm-6 input-group input-group-sm">
+                                                            <div class="input-group-prepend">
+                                                                <span style="width: 100px;" class="input-group-text">Rsrv Date</span>
+                                                            </div>
+                                                            <input style="background: #ff9900;" name="" id="" class="btn form-control form-control-sm js-daterangepicker"  >
+                                                        </div>   
                                                 </div>
                                                 <div style="margin-top: 0.4%;" class="row">
-                                                    <div style="margin-right: -2.1%;" class="col-sm-6 input-group input-group-sm">
-                                                        <div class="input-group-prepend">
-                                                            <span style="width: 100px;" class="input-group-text">Ship Ok Date</span>
+                                                        <div style="margin-right: -2.1%;" class="col-sm-6 input-group input-group-sm">
+                                                            <div class="input-group-prepend">
+                                                                <span style="width: 100px;" class="input-group-text">Ship Ok Date</span>
+                                                            </div>
+                                                            <input name="get_stock_ship_ok_date" id="get_stock_ship_ok_date" style="background: #ff9900;" class="btn form-control form-control-sm js-daterangepicker"  >
                                                         </div>
-                                                        <input name="get_stock_ship_ok_date" id="get_stock_ship_ok_date" style="background: #ff9900;" class="btn form-control form-control-sm js-daterangepicker"  >
-                                                    </div>
-                                                    <div class="col-sm-6 input-group input-group-sm">
-                                                        <div class="input-group-prepend">
-                                                            <span style="width: 100px;" class="input-group-text">Rel. OK Date</span>
+                                                        <div class="col-sm-6 input-group input-group-sm">
+                                                            <div class="input-group-prepend">
+                                                                <span style="width: 100px;" class="input-group-text">Rel. OK Date</span>
+                                                            </div>
+                                                            <input name="get_stock_release_ok_date" id="get_stock_release_ok_date" style="background: #ff9900;" class="btn form-control form-control-sm js-daterangepicker"  >
                                                         </div>
-                                                        <input name="get_stock_release_ok_date" id="get_stock_release_ok_date" style="background: #ff9900;" class="btn form-control form-control-sm js-daterangepicker"  >
-                                                    </div>
                                                 </div>
                                                 <div style="margin-top: 0.4%; " class="row ">
-                                                    <div style="margin-right: 5%;"  class="col-md-1">
-                                                    </div>
-                                                    <div class="col-md-1 ">
-                                                        <label style="padding: 5px;" class="input-group-text">Price</label> 
-                                                        <select name="get_stock_buying_date" id="get_stock_buying_date" class="form-control form-control-sm">
-                                                            <option>--</option>
-                                                            <option value="Yes">YES</option>
-                                                            <option value="No">NO</option>
-                                                        </select>
-                                                    </div>
-                                                    <div style="margin-left: -2.5%;" class="col-md-1 ">
-                                                        <label style="padding: 5px;" class="input-group-text">InYard</label> 
-                                                        <select name="get_stock_inyard_date" id="get_stock_inyard_date" class="form-control form-control-sm">
-                                                            <option>--</option>
-                                                            <option value="Yes">YES</option>
-                                                            <option value="No">NO</option>
-                                                        </select>
-                                                    </div>
-                                                    <div style="margin-left: -2.5%;" class="col-md-1 ">
-                                                        <label style="padding: 5px;" class="input-group-text">Rsrv</label> 
-                                                        <select name="get_stock_reserve_date" id="get_stock_reserve_date" class="form-control form-control-sm">
-                                                            <option>--</option>
-                                                            <option value="Yes">YES</option>
-                                                            <option value="No">NO</option>
-                                                        </select>
-                                                    </div>
-                                                    <div style="margin-left: -2.5%;" class="col-md-1 ">
-                                                        <label style="padding: 5px;" class="input-group-text">Sure</label>
-                                                        <select name="get_stock_sure_ok_date" id="get_stock_sure_ok_date" class="form-control form-control-sm">
-                                                            <option>--</option>
-                                                            <option value="Yes">YES</option>
-                                                            <option value="No">NO</option>                                                            </select>
-                                                    </div>
-                                                    <div style="margin-left: -2.5%;" class="col-md-1 ">
-                                                        <label style="padding: 5px;" class="input-group-text">Sold</label> 
-                                                        <select name="get_stock_sold_date" id="get_stock_sold_date" class="form-control form-control-sm">
-                                                            <option>--</option>
-                                                            <option value="Yes">YES</option>
-                                                            <option value="No">NO</option>
-                                                        </select>
-                                                    </div>
-                                                    <div style="margin-left: -2.5%;" class="col-md-1 ">
-                                                        <label style="padding: 5px;" class="input-group-text">Paid</label> 
-                                                        <select name="get_stock_payment_status" id="get_stock_payment_status" class="form-control form-control-sm">
-                                                            <option>--</option>
-                                                            <option value="Yes">YES</option>
-                                                            <option value="No">NO</option>                                                            </select>
-                                                    </div>
-                                                    <div style="margin-left: -2.5%;" class="col-md-1 ">
-                                                        <label style="padding: 5px;" class="input-group-text">ShipOK</label> 
-                                                        <select name="get_stock_ship_ok_date" id="stock_ship_ok_date" class="form-control form-control-sm">
-                                                            <option>--</option>
-                                                            <option value="Yes">YES</option>
-                                                            <option value="No">NO</option>
-                                                        </select>
-                                                    </div>
-                                                    <div style="margin-left: -2.5%;" class="col-md-1">
-                                                        <label style="padding: 5px;" class="input-group-text">S/O</label> 
-                                                        <select name="get_stock_shipping_order_file" id="get_stock_shipping_order_file" class="form-control form-control-sm">
-                                                            <option>--</option>
-                                                            <option value="Yes">YES</option>
-                                                            <option value="No">NO</option>
-                                                        </select>
-                                                    </div>
-                                                    <div style="margin-left: -2.5%;" class="col-md-1">
-                                                        <label style="padding: 5px;" class="input-group-text">B/L</label> 
-                                                        <select name="get_stock_bl_date" id="get_stock_bl_date" class="form-control form-control-sm">
-                                                            <option>--</option>
-                                                            <option value="Yes">YES</option>
-                                                            <option value="No">NO</option>
-                                                        </select>
-                                                    </div>
-                                                    <div style="margin-left: -2.5%;" class="col-md-1">
-                                                        <label style="padding: 5px;" class="input-group-text">Rel-req</label> 
-                                                        <select name="get_stock_bl_date" id="get_stock_bl_date" class="form-control form-control-sm">
-                                                            <option>--</option>
-                                                            <option value="Yes">YES</option>
-                                                            <option value="No">NO</option>
-                                                        </select>
-                                                    </div>
-                                                    <div style="margin-left: -2.5%;" class="col-md-1 ">
-                                                        <label style="padding: 5px;" class="input-group-text">Rel OK</label> 
-                                                        <select name="get_stock_release_ok_date" id="get_stock_release_ok_date" class="form-control form-control-sm">
-                                                            <option>--</option>
-                                                            <option value="Yes">YES</option>
-                                                            <option value="No">NO</option>
-                                                        </select>
-                                                    </div>
-                                                    <div style="margin-left: -2.5%;" class="col-md-1 ">
-                                                        <label style="padding: 5px;" class="input-group-text">Rel</label> 
-                                                        <select name="get_stock_dhl_date" id="get_stock_dhl_date" class="form-control form-control-sm">
-                                                            <option>--</option>
-                                                            <option value="Yes">YES</option>
-                                                            <option value="No">NO</option>
-                                                        </select>
-                                                    </div>
+                                                        <div style="margin-right: 5%;"  class="col-md-1 ">
+                                                        </div>
+                                                        <div class="col-md-1 ">
+                                                            <label style="padding: 5px;" class="input-group-text">Price</label> 
+                                                            <select name="get_stock_buying_date" id="get_stock_buying_date" class="form-control form-control-sm">
+                                                                <option>--</option>
+                                                                <option value="Yes">YES</option>
+                                                                <option value="No">NO</option>
+                                                            </select>
+                                                        </div>
+                                                        <div style="margin-left: -2.5%;" class="col-md-1 ">
+                                                            <label style="padding: 5px;" class="input-group-text">InYard</label> 
+                                                            <select name="get_stock_inyard_date" id="get_stock_inyard_date" class="form-control form-control-sm">
+                                                                <option>--</option>
+                                                                <option value="Yes">YES</option>
+                                                                <option value="No">NO</option>
+                                                            </select>
+                                                        </div>
+                                                        <div style="margin-left: -2.5%;" class="col-md-1 ">
+                                                            <label style="padding: 5px;" class="input-group-text">Rsrv</label> 
+                                                            <select name="get_stock_reserve_date" id="get_stock_reserve_date" class="form-control form-control-sm">
+                                                                <option>--</option>
+                                                                <option value="Yes">YES</option>
+                                                                <option value="No">NO</option>
+                                                            </select>
+                                                        </div>
+                                                        <div style="margin-left: -2.5%;" class="col-md-1 ">
+                                                            <label style="padding: 5px;" class="input-group-text">Sure</label>
+                                                            <select name="get_stock_sure_ok_date" id="get_stock_sure_ok_date" class="form-control form-control-sm">
+                                                                <option>--</option>
+                                                                <option value="Yes">YES</option>
+                                                                <option value="No">NO</option>
+                                                            </select>
+                                                        </div>
+                                                        <div style="margin-left: -2.5%;" class="col-md-1 ">
+                                                            <label style="padding: 5px;" class="input-group-text">Sold</label> 
+                                                            <select name="get_stock_sold_date" id="get_stock_sold_date" class="form-control form-control-sm">
+                                                                <option>--</option>
+                                                                <option value="Yes">YES</option>
+                                                                <option value="No">NO</option>
+                                                            </select>
+                                                        </div>
+                                                        <div style="margin-left: -2.5%;" class="col-md-1 ">
+                                                            <label style="padding: 5px;" class="input-group-text">Paid</label> 
+                                                            <select name="get_stock_payment_status" id="get_stock_payment_status" class="form-control form-control-sm">
+                                                                <option>--</option>
+                                                                <option value="Yes">YES</option>
+                                                                <option value="No">NO</option>
+                                                            </select>
+                                                        </div>
+                                                        <div style="margin-left: -2.5%;" class="col-md-1 ">
+                                                            <label style="padding: 5px;" class="input-group-text">ShipOK</label> 
+                                                            <select name="get_stock_ship_ok_date" id="stock_ship_ok_date" class="form-control form-control-sm">
+                                                                <option>--</option>
+                                                                <option value="Yes">YES</option>
+                                                                <option value="No">NO</option>
+                                                            </select>
+                                                        </div>
+                                                        <div style="margin-left: -2.5%;" class="col-md-1">
+                                                            <label style="padding: 5px;" class="input-group-text">S/O</label> 
+                                                            <select name="get_stock_shipping_order_file" id="get_stock_shipping_order_file" class="form-control form-control-sm">
+                                                                <option>--</option>
+                                                                <option value="Yes">YES</option>
+                                                                <option value="No">NO</option>
+                                                            </select>
+                                                        </div>
+                                                        <div style="margin-left: -2.5%;" class="col-md-1">
+                                                            <label style="padding: 5px;" class="input-group-text">B/L</label> 
+                                                            <select name="get_stock_bl_date" id="get_stock_bl_date" class="form-control form-control-sm">
+                                                                <option>--</option>
+                                                                <option value="Yes">YES</option>
+                                                                <option value="No">NO</option>
+                                                            </select>
+                                                        </div>
+                                                        <div style="margin-left: -2.5%;" class="col-md-1">
+                                                            <label style="padding: 5px;" class="input-group-text">Rel-req</label> 
+                                                            <select name="get_stock_bl_date" id="get_stock_bl_date" class="form-control form-control-sm">
+                                                                <option>--</option>
+                                                                <option value="Yes">YES</option>
+                                                                <option value="No">NO</option>
+                                                            </select>
+                                                        </div>
+                                                        <div style="margin-left: -2.5%;" class="col-md-1 ">
+                                                            <label style="padding: 5px;" class="input-group-text">Rel OK</label> 
+                                                            <select name="get_stock_release_ok_date" id="get_stock_release_ok_date" class="form-control form-control-sm">
+                                                                <option>--</option>
+                                                                <option value="Yes">YES</option>
+                                                                <option value="No">NO</option>
+                                                            </select>
+                                                        </div>
+                                                        <div style="margin-left: -2.5%;" class="col-md-1 ">
+                                                            <label style="padding: 5px;" class="input-group-text">Rel</label> 
+                                                            <select name="get_stock_dhl_date" id="get_stock_dhl_date" class="form-control form-control-sm">
+                                                                <option>--</option>
+                                                                <option value="Yes">YES</option>
+                                                                <option value="No">NO</option>
+                                                            </select>
+                                                        </div>
                                                 </div>
                                                 <div style="margin-top: 0.4%;" class="row">
-                                                    <div class="col-sm-2"></div>
-                                                    <div class="col-sm-8 input-group input-group-sm">
-                                                        <div class="input-group-prepend">
-                                                            <span class="input-group-text">Select Dt.</span>
+                                                        <div class="col-sm-2"></div>
+                                                        <div class="col-sm-8 input-group input-group-sm">
+                                                            <div class="input-group-prepend">
+                                                                <span class="input-group-text">Select Dt.</span>
+                                                            </div>
+                                                            <input style="background: wheat;" name="get_stock_select_all_dates" id="get_stock_select_all_dates" class="btn form-control form-control-sm js-daterangepicker"  >
                                                         </div>
-                                                        <input style="background: wheat;" name="get_stock_select_all_dates" id="get_stock_select_all_dates" class="btn form-control form-control-sm js-daterangepicker"  >
-                                                    </div>
-                                                    <div class="col-sm-2"></div> 
+                                                        <div class="col-sm-2"></div> 
                                                 </div>     
                                             </div> 
                                         </div>
-                                        <div style="background-color: gray; height: 1px;"></div> 
-                                        <!-- <div data-parent="#accordion" id="show-records" aria-labelledby="headingOne" class="collapse ">
-                                            <div style="margin-left: -71px;" class="container">
-                                                <div class="row ">
-                                                    <div style="margin-left:6.5%;" class="col-lg-12 mt-3">
-                                                        <a data-toggle="collapse" data-target="#back-to-search" aria-expanded="true" aria-controls="collapseOne" class="btn btn-primary text-center text-white">Back to Search</a>
-                                                        <div class="main-card card mt-2">
-                                                            <div class="card-body">
-                                                                <div class="table-responsive">
-                                                                    <table class="table">
-                                                                        <thead>
-                                                                            <tr class="text-center">
-                                                                                <th>Select all </br><input type="checkbox" onclick="toggle(this);" /></th>
-                                                                                <th>Price</th>
-                                                                                <th>Inyrd</th>
-                                                                                <th>Rsrv</th>
-                                                                                <th>Sure</th>
-                                                                                <th>Sold</th>
-                                                                                <th>Ship ok</th>
-                                                                                <th>Ship Invoice</th>
-                                                                                <th>BL</th>
-                                                                                <th>RL rq</th>
-                                                                                <th>RL ok</th>
-                                                                                <th>RL</th>
-                                                                                <th>Certificate</th>
-                                                                                <th>DHL</th>
-                                                                                <th>Rec#</th>
-                                                                                <th>Pics</th>
-                                                                                <th>Kbtsu</th>
-                                                                                <th>Chassis</th>
-                                                                                <th>Make</th>
-                                                                                <th>Model</th>
-                                                                                <th>Year</th>
-                                                                                <th>Mth</th>
-                                                                                <th>Color</th>
-                                                                                <th>Sft</th>
-                                                                                <th>Feul</th>
-                                                                                <th>Door</th>
-                                                                                <th>CC</th>
-                                                                                <th>Opt.</th>
-                                                                                <th>FOB</th>
-                                                                                <th>Grd</th>
-                                                                                <th>Mileage</th>
-                                                                            </tr> 
-                                                                        </thead>
-                                                                        <tbody>
-                                                                            <tr>
-                                                                                <td><input type="checkbox"/></td>
-                                                                                <td style="color: #ff9900; font-weight: bolder; background: wheat; ">&checkmark;</td>
-                                                                                <td style="color: #ff9900; font-weight: bolder; background: wheat; ">&checkmark;</td>
-                                                                                <td style="color: #ff9900; font-weight: bolder; background: wheat; ">&checkmark;</td>
-                                                                                <td style="color: #ff9900; font-weight: bolder; background: wheat; ">&checkmark;</td>
-                                                                                <td style="color: #ff9900; font-weight: bolder; background: wheat; ">&checkmark;</td>
-                                                                                <td style="color: #ff9900; font-weight: bolder; background: wheat; ">&checkmark;</td>
-                                                                                <td style="color: #ff9900; font-weight: bolder; background: wheat; ">&checkmark;</td>
-                                                                                <td style="color: #ff9900; font-weight: bolder; background: wheat; ">&checkmark;</td>
-                                                                                <td style="color: #ff9900; font-weight: bolder; background: wheat; ">&checkmark;</td>
-                                                                                <td style="color: #ff9900; font-weight: bolder; background: wheat; ">&checkmark;</td>
-                                                                                <td style="color: #ff9900; font-weight: bolder; background: wheat; ">&checkmark;</td>
-                                                                                <td style="color: #ff9900; font-weight: bolder; background: wheat; ">&checkmark;</td>
-                                                                                <td style="color: #ff9900; font-weight: bolder; background: wheat; ">&checkmark;</td>
-                                                                                <td>4321</td>
-                                                                                <td>5</td>
-                                                                                <td>KEN</td>
-                                                                                <td>BHJ-25465456</td>
-                                                                                <td>NISSAN</td>
-                                                                                <td>Juke</td>
-                                                                                <td>2020</td>
-                                                                                <td>Apr</td>
-                                                                                <td>Pearl White</td>
-                                                                                <td>Dual</td>
-                                                                                <td>Gasoline</td>
-                                                                                <td>4</td>
-                                                                                <td>1400cc</td>
-                                                                                <td>PS,NV,AC,WAB,RS,TV,RR,ABS,LS,PW,SR,FOG,AB,GG,BT,LS</td>
-                                                                                <td>9,80,000</td>
-                                                                                <td>4</td>
-                                                                                <td>98,000KM</td>
-                                                                            </tr>
-                                                                            <tr>
-                                                                                <td><input type="checkbox"/></td>
-                                                                                <td style="color: #ff9900; font-weight: bolder; background: wheat; ">&checkmark;</td>
-                                                                                <td style="color: #ff9900; font-weight: bolder; background: wheat; ">&checkmark;</td>
-                                                                                <td style="color: #ff9900; font-weight: bolder; background: wheat; ">&checkmark;</td>
-                                                                                <td style="color: #ff9900; font-weight: bolder; background: wheat; ">&checkmark;</td>
-                                                                                <td style="color: #ff9900; font-weight: bolder; background: wheat; ">&checkmark;</td>
-                                                                                <td style="color: #ff9900; font-weight: bolder; background: wheat; ">&checkmark;</td>
-                                                                                <td style="color: #ff9900; font-weight: bolder; background: wheat; ">&checkmark;</td>
-                                                                                <td style="color: #ff9900; font-weight: bolder; background: wheat; ">&checkmark;</td>
-                                                                                <td style="color: #ff9900; font-weight: bolder; background: wheat; ">&checkmark;</td>
-                                                                                <td style="color: #ff9900; font-weight: bolder; background: wheat; ">&checkmark;</td>
-                                                                                <td style="color: #ff9900; font-weight: bolder; background: wheat; ">&checkmark;</td>
-                                                                                <td style="color: #ff9900; font-weight: bolder; background: wheat; ">&checkmark;</td>
-                                                                                <td style="color: #ff9900; font-weight: bolder; background: wheat; ">&checkmark;</td>
-                                                                                <td>4321</td>
-                                                                                <td>5</td>
-                                                                                <td>KEN</td>
-                                                                                <td>BHJ-25465456</td>
-                                                                                <td>NISSAN</td>
-                                                                                <td>Juke</td>
-                                                                                <td>2020</td>
-                                                                                <td>Apr</td>
-                                                                                <td>Pearl White</td>
-                                                                                <td>Dual</td>
-                                                                                <td>Gasoline</td>
-                                                                                <td>4</td>
-                                                                                <td>1400cc</td>
-                                                                                <td>PS,NV,AC,WAB,RS,TV,RR,ABS,LS,PW,SR,FOG,AB,GG,BT,LS</td>
-                                                                                <td>9,80,000</td>
-                                                                                <td>4</td>
-                                                                                <td>98,000KM</td>
-                                                                            </tr>
-                                                                            <tr>
-                                                                                <td><input type="checkbox"/></td>
-                                                                                <td style="color: #ff9900; font-weight: bolder; background: wheat; ">&checkmark;</td>
-                                                                                <td style="color: #ff9900; font-weight: bolder; background: wheat; ">&checkmark;</td>
-                                                                                <td style="color: #ff9900; font-weight: bolder; background: wheat; ">&checkmark;</td>
-                                                                                <td style="color: #ff9900; font-weight: bolder; background: wheat; ">&checkmark;</td>
-                                                                                <td style="color: #ff9900; font-weight: bolder; background: wheat; ">&checkmark;</td>
-                                                                                <td style="color: #ff9900; font-weight: bolder; background: wheat; ">&checkmark;</td>
-                                                                                <td style="color: #ff9900; font-weight: bolder; background: wheat; ">&checkmark;</td>
-                                                                                <td style="color: #ff9900; font-weight: bolder; background: wheat; ">&checkmark;</td>
-                                                                                <td style="color: #ff9900; font-weight: bolder; background: wheat; ">&checkmark;</td>
-                                                                                <td style="color: #ff9900; font-weight: bolder; background: wheat; ">&checkmark;</td>
-                                                                                <td style="color: #ff9900; font-weight: bolder; background: wheat; ">&checkmark;</td>
-                                                                                <td style="color: #ff9900; font-weight: bolder; background: wheat; ">&checkmark;</td>
-                                                                                <td style="color: #ff9900; font-weight: bolder; background: wheat; ">&checkmark;</td>
-                                                                                <td>4321</td>
-                                                                                <td>5</td>
-                                                                                <td>KEN</td>
-                                                                                <td>BHJ-25465456</td>
-                                                                                <td>NISSAN</td>
-                                                                                <td>Juke</td>
-                                                                                <td>2020</td>
-                                                                                <td>Apr</td>
-                                                                                <td>Pearl White</td>
-                                                                                <td>Dual</td>
-                                                                                <td>Gasoline</td>
-                                                                                <td>4</td>
-                                                                                <td>1400cc</td>
-                                                                                <td>PS,NV,AC,WAB,RS,TV,RR,ABS,LS,PW,SR,FOG,AB,GG,BT,LS</td>
-                                                                                <td>9,80,000</td>
-                                                                                <td>4</td>
-                                                                                <td>98,000KM</td>
-                                                                            </tr>   
-                                                                        </tbody>
-                                                                    </table>
+                                        <div style="background-color: gray; height: 1px;"></div>
+                                        <div data-parent="#accordion" id="show-records" aria-labelledby="headingOne" class="collapse ">
+                                            <div class="card-body">
+                                                <a data-toggle="collapse" data-target="#back-to-search" aria-expanded="true" aria-controls="collapseOne" class="btn btn-primary text-center text-white">Back to Search</a>
+                                                <div style="margin-left: -35px;" class="container">
+                                                        <div class="row">
+                                                            <div class="col-lg-12">
+                                                                <div class="main-card card">
+                                                                    <div class="card-body">
+                                                                        
+                                                                        <div class="table-responsive">
+                                                                            <table style="font-size: 10px;" class="table">
+                                                                                <thead>
+                                                                                    <tr>
+                                                                                        <th>Slct all<input type="checkbox" onclick="toggle(this);" /></th>
+                                                                                        <th>Price</th>
+                                                                                        <th>Inyrd</th>
+                                                                                        <th>Rsrv</th>
+                                                                                        <th>Sure</th>
+                                                                                        <th>Sold</th>
+                                                                                        <th>Shok</th>
+                                                                                        <th>Shinv</th>
+                                                                                        <th>Bl</th>
+                                                                                        <th>RLrq</th>
+                                                                                        <th>RLok</th>
+                                                                                        <th>RL</th>
+                                                                                    
+                                                                                        <th>Crfct</th>
+                                                                                        <th>Dhl</th>
+                                                                                        <th>Rec#</th>
+                                                                                        <th>Pics</th>
+                                                                                        <th>Kbtsu</th>
+                                                                                        <th>Chassis&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+                                                                                        <th>Make</th>
+                                                                                        <th>Model</th>
+                                                                                        <th>Year</th>
+                                                                                        <th>Mth</th>
+                                                                                        <th>Color</th>
+                                                                                        <th>Sft</th>
+                                                                                        <th>Feul</th>
+                                                                                        <th>Door</th>
+                                                                                        <th>CC</th>
+                                                                                        <th style="text-align: center;">Opt.</th>
+                                                                                        <th>FOB</th>
+                                                                                        <th>Grd</th>
+                                                                                        <th>Mileage</th>
+                                                                                    </tr>
+                                                                                    
+                                                                                </thead>
+                                                                                <tbody>
+                                                                                    <?php
+                                                                                    $queryca=mysqli_query($connection,"select * from ats_car_stock");
+
+                                                                                    
+                                                                                        while($rowca=mysqli_fetch_array($queryca))
+                                                                                        {
+                                                                                        ?>
+                                                                                    <tr>
+                                                                                       
+                                                                                        <td><input type="checkbox" /></td>
+                                                                                        <td style="color: #ff9900; font-weight: bolder; background: wheat; "><?php echo $rowca[28]?></td>
+                                                                                        <td style="color: #ff9900; font-weight: bolder; background: wheat; ">&checkmark;</td>
+                                                                                        <td style="color: #ff9900; font-weight: bolder; background: wheat; ">&checkmark;</td>
+                                                                                        <td style="color: #ff9900; font-weight: bolder; background: wheat; ">&checkmark;</td>
+                                                                                        <td style="color: #ff9900; font-weight: bolder; background: wheat; ">&checkmark;</td>
+                                                                                        <td style="color: #ff9900; font-weight: bolder; background: wheat; ">&checkmark;</td>
+                                                                                        <td style="color: #ff9900; font-weight: bolder; background: wheat; ">&checkmark;</td>
+                                                                                        <td style="color: #ff9900; font-weight: bolder; background: wheat; ">&checkmark;</td>
+                                                                                        <td style="color: #ff9900; font-weight: bolder; background: wheat; ">&checkmark;</td>
+                                                                                        <td style="color: #ff9900; font-weight: bolder; background: wheat; ">&checkmark;</td>
+                                                                                        <td style="color: #ff9900; font-weight: bolder; background: wheat; ">&checkmark;</td>
+                                                                                        <td style="color: #ff9900; font-weight: bolder; background: wheat; ">&checkmark;</td>
+                                                                                        <td style="color: #ff9900; font-weight: bolder; background: wheat; ">&checkmark;</td>
+                                                                                        
+                                                                                        <td><?php echo $rowca[1]?></td>
+                                                                                        <td>5</td>
+                                                                                        <td><?php echo $rowca[14]?></td>
+                                                                                        <td><?php echo $rowca[2]?></td>
+                                                                                        <td><?php echo $rowca[3]?></td>
+                                                                                        <td><?php echo $rowca[4]?></td>
+                                                                                        <td><?php echo $rowca[6]?></td>
+                                                                                        <td>--</td>
+                                                                                        <td><?php echo $rowca[8]?></td>
+                                                                                        <td><?php echo $rowca[9]?></td>
+                                                                                        <td><?php echo $rowca[10]?></td>
+                                                                                        <td><?php echo $rowca[11]?></td>
+                                                                                        <td><?php echo $rowca[13]?></td>
+                                                                                        <td><?php echo $rowca[32] .",".$rowca[34]?></td>
+                                                                                        <td><?php echo $rowca[51]?></td>
+                                                                                        <td><?php echo $rowca[12]?></td>
+                                                                                        <td><?php echo $rowca[17]?></td>
+                                                                                    </tr>
+                                                                                <?php }?>
+                                                                                </tbody>
+                                                                            </table>
+                                                                        </div>
+                                                                    </div>
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                    </div>
                                                 </div>
                                             </div> 
-                                        </div> -->
+                                        </div>
                                     </div>  
                                 </div>
                             </div>
@@ -693,32 +654,34 @@ include("connection_db.php");
                     </div>
                 </div>
             </div>
-<script>
-    function getState(val) {
-    // alert(val);
-        $.ajax({
-        type: "POST",
-        url: "regiondropdown.php",
-        data:'make_id='+val,
-        success: function(data){
-            $("#model-list").html(data);
-        }
-        });
-    }
+            <script>
+function getState(val) {
+   // alert(val);
+	$.ajax({
+	type: "POST",
+	url: "regiondropdown.php",
+	data:'make_id='+val,
+	success: function(data){
+		$("#model-list").html(data);
+	}
+	});
+}
 </script>
-<?php
+            <?php
 include("bottom.php");
-?>      
+?>
+        
 <script>
-        function toggle(source) {
-            var checkboxes = document.querySelectorAll('input[type="checkbox"]');
-            for (var i = 0; i < checkboxes.length; i++) {
-                if (checkboxes[i] != source)
-                    checkboxes[i].checked = source.checked;
-            }
-        }
-        $(document).on('ready', function () {
-            // initialization of daterangepicker
-            $('.js-daterangepicker').daterangepicker();
-        }); 
+            function toggle(source) {
+    var checkboxes = document.querySelectorAll('input[type="checkbox"]');
+    for (var i = 0; i < checkboxes.length; i++) {
+        if (checkboxes[i] != source)
+            checkboxes[i].checked = source.checked;
+    }
+}
+$(document).on('ready', function () {
+      // initialization of daterangepicker
+      $('.js-daterangepicker').daterangepicker();
+    });
+           
 </script>

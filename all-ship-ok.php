@@ -1,7 +1,7 @@
 <?php
 include("top.php");
 include("connection_db.php");
-$query_reserved=mysqli_query($connection,"select * from ats_stock_reservation");
+$query_reserved=mysqli_query($connection,"select * from ats_stock_reservation   ORDER BY id DESC");
 
 ?>
             

@@ -16,16 +16,22 @@ include("connection_db.php");
                                             <div class="col-sm-2">
                                                 <label style="font-weight: bold; margin-top: 5px;" class="form-control-label">Dealership Name</label>
                                             </div>
-                                            <div class="col-sm-3">  
-                                                <input name="get_customer_name" id="get_customer_name" style="margin-left: -60px;"  type="text" class="form-control form-control-sm" onkeyup="myFunction()">
+                                            <div class="col-sm-2">  
+                                                <input name="get_customer_name" id="get_customer_name"   type="text" class="form-control form-control-sm" onkeyup="myFunction()">
                                             </div>
                                             <div class="col-sm-2">
                                                 <label style="font-weight: bold; margin-top: 5px;" class="form-control-label">Country</label>
                                             </div>
-                                            <div class="col-sm-3">
-                                                <input name="get_customer_email" id="get_customer_email" style="margin-left: -120px;"  type="text" class="form-control form-control-sm" onkeyup="myFunction1()">
+                                            <div class="col-sm-2">
+                                                <input name="get_customer_email" id="get_customer_email"   type="text" class="form-control form-control-sm" onkeyup="myFunction1()">
                                             </div>
-                                            <div  class="col-sm-2">
+                                            <div class="col-sm-2">
+                                                <label style="font-weight: bold; margin-top: 5px;" class="form-control-label">Sell Person</label>
+                                            </div>
+                                            <div class="col-sm-2">
+                                                <input name="get_agent" id="get_agent"  type="text" class="form-control form-control-sm" onkeyup="myFunction2()">
+                                            </div>
+                                            <div  class="col-sm-1">
                                                 <input type="reset" name="stock_add_btn" class="mb-2 mr-2 btn btn-gradient-primary btn-block" value="Refresh"> 
                                             </div>
                                         </div>    
@@ -64,7 +70,7 @@ include("connection_db.php");
                                                                 <?php
                                                                     
 
-                                                                    $query = mysqli_query($connection,"select * from ats_customer");
+                                                                    $query = mysqli_query($connection,"select * from ats_customer ORDER BY ats_customer_id DESC");
                                                                     $count =mysqli_num_rows($query);
                                                                     if($count > 0)
                                                                     {
@@ -217,6 +223,28 @@ function myFunction1() {
   tr = table.getElementsByTagName("tr");
   for (i = 0; i < tr.length; i++) {
     td = tr[i].getElementsByTagName("td")[5];
+    if (td) {
+      txtValue = td.textContent || td.innerText;
+      if (txtValue.toUpperCase().indexOf(filter) > -1) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    }       
+  }
+}
+</script>
+<script>
+function myFunction2() {
+    
+  var input, filter, table, tr, td, i, txtValue;
+  input = document.getElementById("get_agent");
+ 
+  filter = input.value.toUpperCase();
+  table = document.getElementById("myTable");
+  tr = table.getElementsByTagName("tr");
+  for (i = 0; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td")[4];
     if (td) {
       txtValue = td.textContent || td.innerText;
       if (txtValue.toUpperCase().indexOf(filter) > -1) {

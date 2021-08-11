@@ -1,8 +1,8 @@
 
 <?php
 include("top.php");
-include("connection_db.php");
-$query=mysqli_query($connection,"select * from ats_employee");
+include("connection_db.php"); 
+$query=mysqli_query($connection,"select * from ats_employee  ORDER BY ats_employee_id DESC");
 
 ?>
             <div class="app-main__outer">

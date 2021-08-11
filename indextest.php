@@ -2,31 +2,198 @@
 include("top.php");
 include("connection_db.php");
 $query="select * from ats_car_stocK WHERE ";
-if(trim($_POST['get_stock_rec_no']))
-{
-    $query.="ats_car_stock_rec_no LIKE '".$_POST['get_stock_rec_no']."' ";
+if(trim($_POST['get_stock_rec_no']) && trim($_POST['stock_agent_name']) && trim($_POST['get_stock_customer_name']) ) {
+    // $query.="AND ats_car_stock_kobutsu LIKE '".$_POST['get_stock_kobutsu']."' ";
+     $customer_sellc=mysqli_query($connection,"select recordno from ats_stock_reservation where agent_name='".$_POST['stock_agent_name']."' AND customer='".$_POST['get_stock_customer_name']."'");
+     $projectsc = array();
+     while($arrayuasc=mysqli_fetch_array($customer_sellc))
+     {
+         
+     array_push($projectsc,$arrayuasc[0]);
+     
+     }
+     
+    
+     $recno=$_POST['get_stock_rec_no'];
+     if (in_array($recno, $projectsc))
+     
+ {
+         
+  
+     $customerid = implode(',', $projectsc);
+      $query.="ats_car_stock_rec_no in ($customerid) ";
+ }
+     
+ 
+ 
+ } 
+ elseif(trim($_POST['get_stock_kobutsu']) && trim($_POST['stock_agent_name']) && trim($_POST['get_stock_customer_name']) && empty($_POST['get_stock_rec_no'])) {
+    // $query.="AND ats_car_stock_kobutsu LIKE '".$_POST['get_stock_kobutsu']."' ";
+     $customer_sellc=mysqli_query($connection,"select recordno from ats_stock_reservation where agent_name='".$_POST['stock_agent_name']."' AND customer='".$_POST['get_stock_customer_name']."'");
+     $projectsc = array();
+     while($arrayuasc=mysqli_fetch_array($customer_sellc))
+     {
+         
+     array_push($projectsc,$arrayuasc[0]);
+     
+     }
+     
+    
+    
+         
+  
+     $customerid = implode(',', $projectsc);
+      $query.="ats_car_stock_rec_no in ($customerid) ";
+ 
+     
+ 
+ 
+ }
+ elseif(trim($_POST['get_stock_kobutsu']) && trim($_POST['stock_agent_name']) && trim($_POST['get_stock_customer_name'])&& trim($_POST['get_stock_rec_no']) ) {
+    // $query.="AND ats_car_stock_kobutsu LIKE '".$_POST['get_stock_kobutsu']."' ";
+     $customer_sellc=mysqli_query($connection,"select recordno from ats_stock_reservation where agent_name='".$_POST['stock_agent_name']."' AND customer='".$_POST['get_stock_customer_name']."'");
+     $projectsc = array();
+     while($arrayuasc=mysqli_fetch_array($customer_sellc))
+     {
+         
+     array_push($projectsc,$arrayuasc[0]);
+     
+     }
+     
+    
+    
+         
+     $recno1=$_POST['get_stock_rec_no'];
+     if (in_array($recno1, $projectsc))
+     
+ {
+     $customerid = implode(',', $projectsc);
+      $query.="ats_car_stock_rec_no in ($customerid) ";
+ 
+ }
+ 
+ 
+ }
+ if(trim($_POST['get_stock_kobutsu']) && trim($_POST['stock_agent_name']) && trim($_POST['get_stock_customer_name'])&& trim($_POST['get_stock_rec_no'])&& trim($_POST['get_stock_chassis_id']) ) {
+    // $query.="AND ats_car_stock_kobutsu LIKE '".$_POST['get_stock_kobutsu']."' ";
+     $customer_sellc=mysqli_query($connection,"select recordno from ats_stock_reservation where agent_name='".$_POST['stock_agent_name']."' AND customer='".$_POST['get_stock_customer_name']."'");
+     $projectsc = array();
+     while($arrayuasc=mysqli_fetch_array($customer_sellc))
+     {
+         
+     array_push($projectsc,$arrayuasc[0]);
+     
+     }
+     
+    
+    
+         
+     
+     $customerid = implode(',', $projectsc);
+      $query.="AND ats_car_stock_chassic_no LIKE '%".$_POST['get_stock_chassis_id']."%' ";
+ 
+ 
+ 
+ 
+ } 
+elseif(trim($_POST['stock_agent_name']) && trim($_POST['get_stock_customer_name']) && empty($_POST['get_stock_rec_no'])) {
+   // $query.="AND ats_car_stock_kobutsu LIKE '".$_POST['get_stock_kobutsu']."' ";
+    
+    $customer_sellc=mysqli_query($connection,"select  recordno,customer from ats_stock_reservation where agent_name='".$_POST['stock_agent_name']."' AND customer='".$_POST['get_stock_customer_name']."'");
+    $projectsc = array();
+    while($arrayuasc=mysqli_fetch_array($customer_sellc))
+    {
+        
+    array_push($projectsc,$arrayuasc[0]);
+    
+    }
+    
+   
+    
+ 
+    $customerid = implode(',', $projectsc);
+     $query.="ats_car_stock_rec_no in ($customerid) ";
+  
+    
+
+
 }
-if(trim($_POST['get_stock_rec_no']) && trim($_POST['get_stock_kobutsu'])) {
+elseif(trim($_POST['get_stock_rec_no']) && trim($_POST['stock_agent_name'] ))
+{
+            $customer_sell=mysqli_query($connection,"select distinct recordno from ats_stock_reservation where agent_name='".$_POST['stock_agent_name']."'");
+            $projects = array();
+            while($arrayuas=mysqli_fetch_array($customer_sell))
+            {
+                
+            array_push($projects,$arrayuas[0]);
+            
+            }
+            
+            $recno=$_POST['get_stock_rec_no'];
+            if (in_array($recno, $projects))
+            
+        {
+            
+            $query.="ats_car_stock_rec_no LIKE '%".$_POST['get_stock_rec_no']."%' ";
+            echo "found";
+        
+        }
+       
+        
+   
+  
+}
+elseif(trim($_POST['stock_agent_name']) )
+{
+    $customer_sell=mysqli_query($connection,"select distinct recordno from ats_stock_reservation where agent_name='".$_POST['stock_agent_name']."'");
+    $projects = array();
+    while($arrayuas=mysqli_fetch_array($customer_sell))
+    {
+        array_push($projects,$arrayuas[0]);
+
+    }
+    $usersStr = implode(',', $projects);
+    $query.="ats_car_stock_rec_no in ($usersStr) ";
+}
+
+elseif(trim($_POST['get_stock_rec_no']))
+{
+    $query.="ats_car_stock_rec_no LIKE '%".$_POST['get_stock_rec_no']."%' ";
+}
+
+if(trim($_POST['stock_agent_name']) && empty($_POST['get_stock_rec_no']) && trim($_POST['get_stock_kobutsu'])) {
+    $query.="AND ats_car_stock_kobutsu LIKE '".$_POST['get_stock_kobutsu']."' ";
+} 
+
+elseif(trim($_POST['get_stock_rec_no']) && trim($_POST['get_stock_kobutsu'])) {
     $query.="AND ats_car_stock_kobutsu LIKE '".$_POST['get_stock_kobutsu']."' ";
 }
 elseif(trim($_POST['get_stock_kobutsu']))
 {
     $query.="ats_car_stock_kobutsu LIKE '".$_POST['get_stock_kobutsu']."' ";
 }
-if(trim($_POST['get_stock_chassis_id']) && trim($_POST['get_stock_kobutsu']) ) {
+if(trim($_POST['get_stock_chassis_id']) && trim($_POST['get_stock_rec_no']) && trim($_POST['get_stock_kobutsu']) ) {
        $query.="AND ats_car_stock_chassic_no LIKE '".$_POST['get_stock_chassis_id']."' ";
    }
 elseif(trim($_POST['get_stock_chassis_id']) && trim($_POST['get_stock_rec_no']) ) {
     $query.="AND ats_car_stock_chassic_no LIKE '".$_POST['get_stock_chassis_id']."' ";
 }
+elseif(trim($_POST['get_stock_chassis_id']) && trim($_POST['stock_agent_name']) ) {
+    $query.="AND ats_car_stock_chassic_no LIKE '%".$_POST['get_stock_chassis_id']."%' ";
+}
 elseif(trim($_POST['get_stock_chassis_id']) ) {
     $query.="ats_car_stock_chassic_no LIKE '".$_POST['get_stock_chassis_id']."' ";
 }
+
 if(trim($_POST['get_stock_make'])  && trim($_POST['get_stock_chassis_id']))
 {
     $query.="AND ats_car_stock_make LIKE '".$_POST['get_stock_make']."' ";
 }
 elseif(trim($_POST['get_stock_make'])  && trim($_POST['get_stock_kobutsu']))
+{
+    $query.="AND ats_car_stock_make LIKE '".$_POST['get_stock_make']."' ";
+}
+elseif(trim($_POST['get_stock_make'])  && trim($_POST['stock_agent_name']))
 {
     $query.="AND ats_car_stock_make LIKE '".$_POST['get_stock_make']."' ";
 }
@@ -111,6 +278,238 @@ if(trim($_POST['get_stock_voyage']) || trim($_POST['get_stock_vessel_name']) || 
 }
 elseif(trim($_POST['get_stock_bl_no']) ) {
     $query.="ats_car_stock_bl_number LIKE '".$_POST['get_stock_bl_no']."' ";
+}
+if(trim($_POST['get_stock_buying_date']))
+{
+
+    $val1=$_POST['get_stock_buying_date'];
+  
+   
+    if($val1=="Yes")
+    {
+    $query=" select * from ats_car_stocK WHERE ats_car_stock_buying_price <>'' ";
+    }
+    else
+    {
+    $query="select * from ats_car_stocK WHERE ats_car_stock_buying_price ='' ";
+    }
+   
+}
+if(trim($_POST['get_stock_inyard_date']))
+{
+
+    $val2=$_POST['get_stock_inyard_date'];
+  
+   
+    if($val2=="Yes")
+    {
+    $query=" select * from ats_car_stocK WHERE ats_car_stock_inyard_date <>'' ";
+    }
+    else
+    {
+    $query="select * from ats_car_stocK WHERE ats_car_stock_inyard_date ='' ";
+    }
+   
+}
+if(trim($_POST['get_stock_reserve_date']))
+{
+
+    $val3=$_POST['get_stock_reserve_date'];
+  
+   
+    if($val3=="Yes")
+    {
+    $query=" select * from ats_car_stocK WHERE ats_car_stock_reserve_date	 <>'' ";
+    }
+    else
+    {
+    $query="select * from ats_car_stocK WHERE ats_car_stock_reserve_date	 ='' ";
+    }
+   
+}
+if(trim($_POST['get_stock_sure_ok_date']))
+{
+
+    $val4=$_POST['get_stock_sure_ok_date'];
+  
+   
+    if($val4=="Yes")
+    {
+    $query=" select * from ats_car_stocK WHERE ats_car_stock_sure_ok_date	 <>'' ";
+    }
+    else
+    {
+    $query="select * from ats_car_stocK WHERE ats_car_stock_sure_ok_date	 ='' ";
+    }
+   
+}
+if(trim($_POST['get_stock_sure_ok_date']))
+{
+
+    $val4=$_POST['get_stock_sure_ok_date'];
+  
+   
+    if($val4=="Yes")
+    {
+    $query=" select * from ats_car_stocK WHERE ats_car_stock_sure_ok_date	 <>'' ";
+    }
+    else
+    {
+    $query="select * from ats_car_stocK WHERE ats_car_stock_sure_ok_date	 ='' ";
+    }
+   
+}
+if(trim($_POST['get_stock_payment_status']))
+{
+
+    $val4=$_POST['get_stock_payment_status'];
+  
+   
+    if($val4=="Yes")
+    {
+        $payment=mysqli_query($connection,"select recordno from ats_stock_reservation where reservedpaymentstatus='CONFIRMED'");
+        $payments1 = array();
+        while($arraypay=mysqli_fetch_array($payment))
+        {
+            
+        array_push($payments1,$arraypay[0]);
+        
+        }
+    
+        $paymentid = implode(',', $payments1);
+         $query="select * from ats_car_stocK WHERE ats_car_stock_rec_no in ($paymentid) ";
+    
+    }
+    else
+    {
+        $payment=mysqli_query($connection,"select recordno from ats_stock_reservation where reservedpaymentstatus='NOT_CONFIRMED'");
+        $payments1 = array();
+        while($arraypay=mysqli_fetch_array($payment))
+        {
+            
+        array_push($payments1,$arraypay[0]);
+        
+        }
+    
+        $paymentid = implode(',', $payments1);
+         $query="select * from ats_car_stocK WHERE ats_car_stock_rec_no in ($paymentid) ";
+    }
+   
+}
+if(trim($_POST['get_stock_ship_ok_date']))
+{
+
+    $val5=$_POST['get_stock_ship_ok_date'];
+  
+   
+    if($val5=="Yes")
+    {
+    $query=" select * from ats_car_stocK WHERE ats_car_stock_ship_ok_date<>'' ";
+    }
+    else
+    {
+    $query="select * from ats_car_stocK WHERE ats_car_stock_ship_ok_date='' ";
+    }
+}
+if(trim($_POST['get_stock_ship_ok_date']))
+{
+
+    $val5=$_POST['get_stock_ship_ok_date'];
+  
+   
+    if($val5=="Yes")
+    {
+    $query=" select * from ats_car_stocK WHERE ats_car_stock_ship_ok_date<>'' ";
+    }
+    else
+    {
+    $query="select * from ats_car_stocK WHERE ats_car_stock_ship_ok_date='' ";
+    }
+} 
+if(trim($_POST['get_stock_shipping_order_file']))
+{
+
+    $val6=$_POST['get_stock_shipping_order_file'];
+  
+   
+    if($val6=="Yes")
+    {
+    $query=" select * from ats_car_stocK WHERE ats_car_stock_ship_order_file<>'' ";
+    }
+    else
+    {
+    $query="select * from ats_car_stocK WHERE ats_car_stock_ship_order_file='' ";
+    }
+} 
+if(trim($_POST['get_stock_bl_date']))
+{
+
+    $val7=$_POST['get_stock_bl_date'];
+  
+   
+    if($val7=="Yes")
+    {
+    $query=" select * from ats_car_stocK WHERE ats_car_stock_bl_date<>'' ";
+    }
+    else
+    {
+    $query="select * from ats_car_stocK WHERE ats_car_stock_bl_date='' ";
+    }
+}
+if(trim($_POST['get_stock_release_ok_date']))
+{
+
+    $val8=$_POST['get_stock_release_ok_date'];
+  
+   
+    if($val8=="Yes")
+    {
+    $query=" select * from ats_car_stocK WHERE ats_car_stock_release_ok_date<>'' ";
+    }
+    else
+    {
+    $query="select * from ats_car_stocK WHERE ats_car_stock_release_ok_date='' ";
+    }
+}
+if(trim($_POST['get_stock_buying_date_from']) && trim($_POST['get_stock_buying_date_till']))
+{
+    $val10=$_POST['get_stock_buying_date_from'];
+    $val11=$_POST['get_stock_buying_date_till'];
+    $val101= date("Y-m-d", strtotime($val10));
+    $val102= date("Y-m-d", strtotime($val11));
+
+    $query="select * from ats_car_stocK WHERE ats_car_stock_buying_date	BETWEEN '$val101' AND '$val102' ";
+   
+}
+if(trim($_POST['get_stock_reserve_ok_date_from']) && trim($_POST['get_stock_reserve_ok_date_till']))
+{
+    $val11=$_POST['get_stock_reserve_ok_date_from'];
+    $val12=$_POST['get_stock_reserve_ok_date_till'];
+    $val121= date("Y-m-d", strtotime($val11));
+    $val122= date("Y-m-d", strtotime($val12));
+
+    $query="select * from ats_car_stocK WHERE ats_car_stock_reserve_date BETWEEN '$val121' AND '$val122' ";
+   
+}
+if(trim($_POST['get_stock_ship_ok_date_from']) && trim($_POST['get_stock_ship_ok_date_from']))
+{
+    $val13=$_POST['get_stock_ship_ok_date_from'];
+    $val14=$_POST['get_stock_ship_ok_date_till'];
+    $val131= date("Y-m-d", strtotime($val13));
+    $val142= date("Y-m-d", strtotime($val14));
+
+    $query="select * from ats_car_stocK WHERE ats_car_stock_ship_ok_date BETWEEN '$val121' AND '$val122' ";
+   
+}
+if(trim($_POST['get_stock_release_ok_date_from']) && trim($_POST['get_stock_release_ok_date_till']))
+{
+    $val15=$_POST['get_stock_release_ok_date_from'];
+    $val16=$_POST['get_stock_release_ok_date_till'];
+    $val151= date("Y-m-d", strtotime($val15));
+    $val162= date("Y-m-d", strtotime($val16));
+
+    $query="select * from ats_car_stocK WHERE ats_car_stock_release_ok_date BETWEEN '$val151' AND '$val161' ";
+   
 }
 $queryca=mysqli_query($connection,$query);
 ?>

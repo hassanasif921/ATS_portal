@@ -54,7 +54,7 @@ include("connection_db.php");
                                                                 </thead>
                                                                 <tbody>
                                                                     <?php 
-                                                                    $query="select * from ats_vendor";
+                                                                    $query="select * from ats_vendor ORDER BY ats_vendor_id	 DESC";
                                                                     $result=mysqli_query($connection,$query);
                                                                     while($row=mysqli_fetch_array($result))
                                                                     {

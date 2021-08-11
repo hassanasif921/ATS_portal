@@ -1,6 +1,18 @@
 <?php 
 session_start();
+include("connection_db.php");
+if(isset($_SESSION['user_id']))
+{
+    $userid=$_SESSION['user_id'];
 
+    $queryadmin=mysqli_fetch_row(mysqli_query($connection,"SELECT * FROM admin_details where admin_id='$userid'"));
+}
+if(isset($_SESSION['agents_id']))
+{
+    $agents_id=$_SESSION['agents_id'];
+
+    $queryagents=mysqli_fetch_row(mysqli_query($connection,"SELECT * FROM ats_employee where ats_employee_id='$agents_id'"));
+}
 ?>
 <div class="app-header header-shadow">
             <div class="app-header__logo">
@@ -456,8 +468,21 @@ session_start();
                                 <div class="widget-content-left">
                                     <div class="btn-group">
                                         <a data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="p-0 btn">
-                                            <img width="42" class="rounded-circle" src="assets/images/avatars/1.jpg" alt="">
+                                       <?php
+                                        if(isset($_SESSION['user_id']))
+                                        {
+                                            ?>
+                                            <img width="42" class="rounded-circle" src="data:image/jpeg;charset=utf8;base64,<?php echo base64_encode($queryadmin[4]); ?>" alt="">
                                             <i class="fa fa-angle-down ml-2 opacity-8"></i>
+                                        <?php 
+                                        }
+                                        elseif (isset($_SESSION['agents_id'])) {
+                                            ?>
+                                            <img width="42" class="rounded-circle" src="data:image/jpeg;charset=utf8;base64,<?php echo base64_encode($queryagents[18]); ?>" alt="">
+                                            <i class="fa fa-angle-down ml-2 opacity-8"></i>
+                                        <?php
+                                        }
+                                        ?>
                                         </a>
                                         <div tabindex="-1" role="menu" aria-hidden="true" class="rm-pointers dropdown-menu-lg dropdown-menu dropdown-menu-right">
                                             <div class="dropdown-menu-header">
@@ -465,18 +490,48 @@ session_start();
                                                     <div class="menu-header-image opacity-2" style="background-image: url('assets/images/dropdown-header/city3.jpg');"></div>
                                                     <div class="menu-header-content text-left">
                                                         <div class="widget-content p-0">
+                                                                 <?php
+                                                                    if(isset($_SESSION['user_id']))
+                                                                    {
+                                                                ?>
                                                             <div class="widget-content-wrapper">
+
                                                                 <div class="widget-content-left mr-3">
-                                                                    <img width="42" class="rounded-circle" src="assets/images/avatars/1.jpg" alt="">
+                                                                    <img width="42" class="rounded-circle" src="data:image/jpeg;charset=utf8;base64,<?php echo base64_encode($queryadmin[4]); ?>" alt="">
                                                                 </div>
+
                                                                 <div class="widget-content-left">
-                                                                    <div class="widget-heading">Alina Mcloughlin</div>
-                                                                    <div class="widget-subheading opacity-8">A short profile description</div>
+                                                                    <div class="widget-heading"><?php echo $queryadmin[3]?></div>
+                                                                    <div class="widget-subheading opacity-8">A short  description</div>
                                                                 </div>
                                                                 <div class="widget-content-right mr-2">
-                                                                    <button class="btn-pill btn-shadow btn-shine btn btn-focus">Logout</button>
+                                                                    <a class="btn-pill btn-shadow btn-shine btn btn-focus" href="logout.php">Logout</a>
                                                                 </div>
                                                             </div>
+                                                            <?php 
+                                                                }
+                                                            if(isset($_SESSION['agents_id']))
+                                                            {
+                                                                
+                                                                ?>
+                                                            <div class="widget-content-wrapper">
+
+                                                            <div class="widget-content-left mr-3">
+                                                                <img width="42" class="rounded-circle" src="data:image/jpeg;charset=utf8;base64,<?php echo base64_encode($queryagents[18]); ?>" alt="">
+                                                            </div>
+
+                                                            <div class="widget-content-left">
+                                                                <div class="widget-heading"><?php echo $queryagents[1]." ".$queryagents[2]." ".$queryagents[3]?></div>
+                                                                <div class="widget-subheading opacity-8"><?php echo $queryagents[62]?></div>
+                                                            </div>
+                                                            <div class="widget-content-right mr-2">
+                                                                <a class="btn-pill btn-shadow btn-shine btn btn-focus" href="logout.php">Logout</a>
+                                                            </div>
+                                                            </div>
+                                                                <?php 
+                                                            }   
+                                                            ?>
+
                                                         </div>
                                                     </div>
                                                 </div>
@@ -539,11 +594,28 @@ session_start();
                                         </div>
                                     </div>
                                 </div>
+                                <?php
+                                if(isset($_SESSION['user_id']))
+                                {
+                                ?>
                                 <div class="widget-content-left  ml-3 header-user-info">
-                                    <div class="widget-heading "style="color: black;"><?php echo $_SESSION["userName"]?> </div>
-                                    <div class="widget-subheading"> Customer Service | <?php echo $_SESSION["user_id"]?> </div>
+                                    <div class="widget-heading "style="color: black;"><?php echo $queryadmin[3]?> </div>
+                                    <div class="widget-subheading"> Customer Service | <?php echo $queryadmin[5]?> </div>
                                 </div>
-                                
+                                <?php 
+                                }
+                                ?>
+                                <?php
+                                if(isset($_SESSION['agents_id']))
+                                {
+                                ?>
+                                <div class="widget-content-left  ml-3 header-user-info">
+                                    <div class="widget-heading "style="color: black;"><?php echo $queryagents[1]." ".$queryagents[2]." ".$queryagents[3]?></div>
+                                    <div class="widget-subheading"> <?php echo $queryagents[0]?> | <?php echo $queryagents[62]?> </div>
+                                </div>
+                                <?php 
+                                }
+                                ?>
                             </div>
                         </div>
                     </div>       
