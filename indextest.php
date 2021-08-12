@@ -145,7 +145,9 @@ elseif(trim($_POST['get_stock_rec_no']) && trim($_POST['stock_agent_name'] ))
 }
 elseif(trim($_POST['stock_agent_name']) )
 {
-    $customer_sell=mysqli_query($connection,"select distinct recordno from ats_stock_reservation where agent_name='".$_POST['stock_agent_name']."'");
+    if(empty($_POST['stock_all_agent'])){
+    $customer_sell1="select distinct recordno from ats_stock_reservation where agent_name='".$_POST['stock_agent_name']."'";
+    $customer_sell=mysqli_query($connection,$customer_sell1);
     $projects = array();
     while($arrayuas=mysqli_fetch_array($customer_sell))
     {
@@ -153,7 +155,10 @@ elseif(trim($_POST['stock_agent_name']) )
 
     }
     $usersStr = implode(',', $projects);
-    $query.="ats_car_stock_rec_no in ($usersStr) ";
+   
+        $query.="ats_car_stock_rec_no in ($usersStr) ";
+    }
+   
 }
 
 elseif(trim($_POST['get_stock_rec_no']))
@@ -184,7 +189,122 @@ elseif(trim($_POST['get_stock_chassis_id']) && trim($_POST['stock_agent_name']) 
 elseif(trim($_POST['get_stock_chassis_id']) ) {
     $query.="ats_car_stock_chassic_no LIKE '".$_POST['get_stock_chassis_id']."' ";
 }
+if(trim($_POST['stock_all_agent']) && trim($_POST['stock_agent_name'])){
+    $valagent=$_POST['stock_all_agent'];
+   
+    if($valagent=='AllCar')
+    {
+        $query="select * from ats_car_stock";
+    }
+    elseif($valagent=='AllReserved')
+    {
+        $customer_sell1="select distinct recordno from ats_stock_reservation where agent_name='".$_POST['stock_agent_name']."'";
+        $reserved=mysqli_query($connection,$customer_sell1);
+        $arrayreserved = array();
+        while($arrayres=mysqli_fetch_array($reserved))
+        {
+            
+        array_push($arrayreserved,$arrayres[0]);
+        
+        }
+       
+        $reserveid = implode(',', $arrayreserved);
+        $query.="ats_car_stock_rec_no in ($reserveid) ";
+        echo $query;
+    
+    }
+    elseif($valagent=='AllSold')
+    {
+        $customer_sell1="select distinct recordno from ats_stock_reservation where agent_name='".$_POST['stock_agent_name']."' AND reservedpaymentstatus='CONFIRMED'  ";
 
+    
+        $reserved=mysqli_query($connection,$customer_sell1);
+        $arrayreserved = array();
+        while($arrayres=mysqli_fetch_array($reserved))
+        {
+            
+        array_push($arrayreserved,$arrayres[0]);
+        
+        }
+       
+        $reserveid = implode(',', $arrayreserved);
+        $query.="ats_car_stock_rec_no in ($reserveid) ";
+        
+    
+    }
+    elseif($valagent=='AllPaid')
+    {
+        $reserved=mysqli_query($connection,"select recordno from ats_stock_reservation Where reservedpaymentstatus='CONFIRMED' AND payment_status <> '' AND agent_name='".$_POST['stock_agent_name']."'");
+        $arrayreserved = array();
+        while($arrayres=mysqli_fetch_array($reserved))
+        {
+            
+        array_push($arrayreserved,$arrayres[0]);
+        
+        }
+        
+        $reserveid = implode(',', $arrayreserved);
+         $query.="ats_car_stock_rec_no in ($reserveid) ";
+    
+    }
+}
+elseif(trim($_POST['stock_all_agent']))
+{
+
+    $valagent=$_POST['stock_all_agent'];
+   
+    if($valagent=='AllCar')
+    {
+        $query="select * from ats_car_stock";
+    }
+    elseif($valagent=='AllReserved')
+    {
+        $reserved=mysqli_query($connection,"select recordno from ats_stock_reservation");
+        $arrayreserved = array();
+        while($arrayres=mysqli_fetch_array($reserved))
+        {
+            
+        array_push($arrayreserved,$arrayres[0]);
+        
+        }
+        
+        $reserveid = implode(',', $arrayreserved);
+         $query.="ats_car_stock_rec_no in ($reserveid) ";
+    
+    }
+    elseif($valagent=='AllSold')
+    {
+        $reserved=mysqli_query($connection,"select recordno from ats_stock_reservation Where reservedpaymentstatus='CONFIRMED' AND payment_status=''");
+        $arrayreserved = array();
+        while($arrayres=mysqli_fetch_array($reserved))
+        {
+            
+        array_push($arrayreserved,$arrayres[0]);
+        
+        }
+        
+        $reserveid = implode(',', $arrayreserved);
+         $query.="ats_car_stock_rec_no in ($reserveid) ";
+    
+    }
+    elseif($valagent=='AllPaid')
+    {
+        $reserved=mysqli_query($connection,"select recordno from ats_stock_reservation Where reservedpaymentstatus='CONFIRMED' AND payment_status <> ''");
+        $arrayreserved = array();
+        while($arrayres=mysqli_fetch_array($reserved))
+        {
+            
+        array_push($arrayreserved,$arrayres[0]);
+        
+        }
+        
+        $reserveid = implode(',', $arrayreserved);
+         $query.="ats_car_stock_rec_no in ($reserveid) ";
+    
+    }
+
+   
+}
 if(trim($_POST['get_stock_make'])  && trim($_POST['get_stock_chassis_id']))
 {
     $query.="AND ats_car_stock_make LIKE '".$_POST['get_stock_make']."' ";

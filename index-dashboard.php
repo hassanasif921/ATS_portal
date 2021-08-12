@@ -296,10 +296,11 @@ include("connection_db.php");
                                 </div>
                                 <div class="col-sm-2 ">
                                 <select style="margin-left: 50%;" name="stock_all_agent" id="stock_all_agent" class="form-control form-control-sm">
-                                        <option value="All Cars">All Cars</option>
-                                        <option value="All Reserved">All Reserved</option>
-                                        <option value="All Sold">All Sold</option>
-                                        <option value="All Paid">All Paid</option>
+                                <option value=""></option>
+                                <option value="AllCar">All Car</option>
+                                        <option value="AllReserved">All Reserved</option>
+                                        <option value="AllSold">All Sold</option>
+                                        <option value="AllPaid">All Paid</option>
                                     </select>
                                 </div>
                             </div> 
@@ -494,7 +495,7 @@ include("connection_db.php");
                                                         <div style="margin-left: -2.5%;" class="col-md-1 ">
                                                             <label style="padding: 5px;" class="input-group-text">InYard</label> 
                                                             <select name="get_stock_inyard_date" id="get_stock_inyard_date" class="form-control form-control-sm">
-                                                                <option>--</option>
+                                                                <option value="">Select</option>
                                                                 <option value="Yes">YES</option>
                                                                 <option value="No">NO</option>
                                                             </select>
@@ -502,7 +503,7 @@ include("connection_db.php");
                                                         <div style="margin-left: -2.5%;" class="col-md-1 ">
                                                             <label style="padding: 5px;" class="input-group-text">Rsrv</label> 
                                                             <select name="get_stock_reserve_date" id="get_stock_reserve_date" class="form-control form-control-sm">
-                                                                <option>--</option>
+                                                                <option value="">Select</option>
                                                                 <option value="Yes">YES</option>
                                                                 <option value="No">NO</option>
                                                             </select>
@@ -510,7 +511,7 @@ include("connection_db.php");
                                                         <div style="margin-left: -2.5%;" class="col-md-1 ">
                                                             <label style="padding: 5px;" class="input-group-text">Sure</label>
                                                             <select name="get_stock_sure_ok_date" id="get_stock_sure_ok_date" class="form-control form-control-sm">
-                                                                <option>--</option>
+                                                                <option value="">Select</option>
                                                                 <option value="Yes">YES</option>
                                                                 <option value="No">NO</option>
                                                             </select>
@@ -518,7 +519,7 @@ include("connection_db.php");
                                                         <div style="margin-left: -2.5%;" class="col-md-1 ">
                                                             <label style="padding: 5px;" class="input-group-text">Sold</label> 
                                                             <select name="get_stock_sold_date" id="get_stock_sold_date" class="form-control form-control-sm">
-                                                                <option>--</option>
+                                                                <option value="">Select</option>
                                                                 <option value="Yes">YES</option>
                                                                 <option value="No">NO</option>
                                                             </select>
@@ -526,7 +527,7 @@ include("connection_db.php");
                                                         <div style="margin-left: -2.5%;" class="col-md-1 ">
                                                             <label style="padding: 5px;" class="input-group-text">Paid</label> 
                                                             <select name="get_stock_payment_status" id="get_stock_payment_status" class="form-control form-control-sm">
-                                                                <option>--</option>
+                                                                <option value="">Select</option>
                                                                 <option value="Yes">YES</option>
                                                                 <option value="No">NO</option>
                                                             </select>
@@ -534,7 +535,7 @@ include("connection_db.php");
                                                         <div style="margin-left: -2.5%;" class="col-md-1 ">
                                                             <label style="padding: 5px;" class="input-group-text">ShipOK</label> 
                                                             <select name="get_stock_ship_ok_date" id="stock_ship_ok_date" class="form-control form-control-sm">
-                                                                <option>--</option>
+                                                                <option value="">Select</option>
                                                                 <option value="Yes">YES</option>
                                                                 <option value="No">NO</option>
                                                             </select>
@@ -542,7 +543,7 @@ include("connection_db.php");
                                                         <div style="margin-left: -2.5%;" class="col-md-1">
                                                             <label style="padding: 5px;" class="input-group-text">S/O</label> 
                                                             <select name="get_stock_shipping_order_file" id="get_stock_shipping_order_file" class="form-control form-control-sm">
-                                                                <option>--</option>
+                                                                <option value="">Select</option>
                                                                 <option value="Yes">YES</option>
                                                                 <option value="No">NO</option>
                                                             </select>
@@ -550,7 +551,7 @@ include("connection_db.php");
                                                         <div style="margin-left: -2.5%;" class="col-md-1">
                                                             <label style="padding: 5px;" class="input-group-text">B/L</label> 
                                                             <select name="get_stock_bl_date" id="get_stock_bl_date" class="form-control form-control-sm">
-                                                                <option>--</option>
+                                                                <option value="">Select</option>
                                                                 <option value="Yes">YES</option>
                                                                 <option value="No">NO</option>
                                                             </select>
@@ -558,7 +559,7 @@ include("connection_db.php");
                                                         <div style="margin-left: -2.5%;" class="col-md-1">
                                                             <label style="padding: 5px;" class="input-group-text">Rel-req</label> 
                                                             <select name="get_stock_rel_date" id="get_stock_rel_date" class="form-control form-control-sm">
-                                                                <option>--</option>
+                                                                <option value="">Select</option>
                                                                 <option value="Yes">YES</option>
                                                                 <option value="No">NO</option>
                                                             </select>
@@ -566,7 +567,7 @@ include("connection_db.php");
                                                         <div style="margin-left: -2.5%;" class="col-md-1 ">
                                                             <label style="padding: 5px;" class="input-group-text">Rel OK</label> 
                                                             <select name="get_stock_release_ok_date" id="get_stock_release_ok_date" class="form-control form-control-sm">
-                                                                <option>--</option>
+                                                                <option value="">Select</option>
                                                                 <option value="Yes">YES</option>
                                                                 <option value="No">NO</option>
                                                             </select>
@@ -574,7 +575,7 @@ include("connection_db.php");
                                                         <div style="margin-left: -2.5%;" class="col-md-1 ">
                                                             <label style="padding: 5px;" class="input-group-text">Rel</label> 
                                                             <select name="get_stock_dhl_date" id="get_stock_dhl_date" class="form-control form-control-sm">
-                                                                <option>--</option>
+                                                                <option value="">Select</option>
                                                                 <option value="Yes">YES</option>
                                                                 <option value="No">NO</option>
                                                             </select>

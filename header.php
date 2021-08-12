@@ -13,6 +13,12 @@ if(isset($_SESSION['agents_id']))
 
     $queryagents=mysqli_fetch_row(mysqli_query($connection,"SELECT * FROM ats_employee where ats_employee_id='$agents_id'"));
 }
+if(isset($_SESSION['vendor_id']))
+{
+    $vendor_id=$_SESSION['vendor_id'];
+
+    $queryvendor=mysqli_fetch_row(mysqli_query($connection,"SELECT * FROM ats_vendor where ats_vendor_id ='$vendor_id'"));
+}
 ?>
 <div class="app-header header-shadow">
             <div class="app-header__logo">
@@ -482,6 +488,12 @@ if(isset($_SESSION['agents_id']))
                                             <i class="fa fa-angle-down ml-2 opacity-8"></i>
                                         <?php
                                         }
+                                        elseif (isset($_SESSION['vendor_id'])) {
+                                            ?>
+                                            <img width="42" class="rounded-circle" src="data:image/jpeg;charset=utf8;base64,<?php echo base64_encode($queryagents[18]); ?>" alt="">
+                                            <i class="fa fa-angle-down ml-2 opacity-8"></i>
+                                        <?php
+                                        }
                                         ?>
                                         </a>
                                         <div tabindex="-1" role="menu" aria-hidden="true" class="rm-pointers dropdown-menu-lg dropdown-menu dropdown-menu-right">
@@ -508,7 +520,27 @@ if(isset($_SESSION['agents_id']))
                                                                     <a class="btn-pill btn-shadow btn-shine btn btn-focus" href="logout.php">Logout</a>
                                                                 </div>
                                                             </div>
+                                                            <?php
+                                                                    }
+                                                                    if(isset($_SESSION['vendor_id']))
+                                                                    {
+                                                                ?>
+                                                            <div class="widget-content-wrapper">
+
+                                                                <div class="widget-content-left mr-3">
+                                                                    <img width="42" class="rounded-circle" src="assets/images/avatars/1.jpeg" alt="">
+                                                                </div>
+
+                                                                <div class="widget-content-left">
+                                                                    <div class="widget-heading"><?php echo $queryvendor[3]?></div>
+                                                                    <div class="widget-subheading opacity-8">A short  description</div>
+                                                                </div>
+                                                                <div class="widget-content-right mr-2">
+                                                                    <a class="btn-pill btn-shadow btn-shine btn btn-focus" href="logout.php">Logout</a>
+                                                                </div>
+                                                            </div>
                                                             <?php 
+                                                                
                                                                 }
                                                             if(isset($_SESSION['agents_id']))
                                                             {
@@ -601,6 +633,17 @@ if(isset($_SESSION['agents_id']))
                                 <div class="widget-content-left  ml-3 header-user-info">
                                     <div class="widget-heading "style="color: black;"><?php echo $queryadmin[3]?> </div>
                                     <div class="widget-subheading"> Customer Service | <?php echo $queryadmin[5]?> </div>
+                                </div>
+                                <?php 
+                                }
+                                ?>
+                                 <?php
+                                if(isset($_SESSION['vendor_id']))
+                                {
+                                ?>
+                                <div class="widget-content-left  ml-3 header-user-info">
+                                    <div class="widget-heading "style="color: black;"><?php echo $queryvendor[2]?> </div>
+                                    <div class="widget-subheading"> <?php echo $queryvendor[4]?> <?php echo $queryvendor[65]?> </div>
                                 </div>
                                 <?php 
                                 }
