@@ -9,16 +9,15 @@ $queryupdateregion=mysqli_query($connection,"select * from regions");
 $next=0;
 if (isset($_POST["btnsubmit"])) {
     
-    
-//   if(isset($_POST["emp_id_ag"])){
-//     echo '<script language="javascript">';
-//     echo 'alert("Please Upload Employee Id")';
-//     echo '</script>';
-//     $emp_id_ag = $_POST["emp_id_ag"];
-//   }
-//   else{
-    
-//   }
+    //   if(isset($_POST["emp_id_ag"])){
+    //     echo '<script language="javascript">';
+    //     echo 'alert("Please Upload Employee Id")';
+    //     echo '</script>';
+    //     $emp_id_ag = $_POST["emp_id_ag"];
+    //   }
+    //   else{
+        
+    //   }
     $emp_first_name = $_POST["emp_first_name"];
     $emp_middle_name = $_POST["emp_middle_name"];
     $emp_last_name = $_POST["emp_last_name"];
@@ -396,19 +395,19 @@ if(is_uploaded_file($_FILES['emp_passport_image']['tmp_name'])){
                                                             </div>
                                                             <div class="col-md-3">
                                                                 <div class="position-relative form-group">
-                                                                    <label >Phone Number</label>
+                                                                    <label>Phone Number</label>
                                                                     <input name="emp_phone" id="emp_phone" placeholder="0312-3456789" type="number" class="form-control" value="<?php echo $rowemp['ats_employee_phoneNumber'] ?>">
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-3">
                                                                 <div class="position-relative form-group">
-                                                                    <label >Cell Phone Number</label>
+                                                                    <label>Cell Phone Number</label>
                                                                     <input name="emp_cell_phone" id="emp_cell_phone" placeholder="0312-3456789" type="number" class="form-control" value="<?php echo $rowemp['ats_employee_cellPhoneNumber'] ?>">
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-3">
                                                                 <div class="position-relative form-group">
-                                                                    <label >Alternate Number</label>
+                                                                    <label>Alternate Number</label>
                                                                     <input name="emp_alt_phone" id="emp_alt_phone" placeholder="0312-3456789" type="number" class="form-control" value="<?php echo $rowemp['ats_employee_alternateNumber'] ?>">
                                                                 </div>
                                                             </div>
@@ -445,7 +444,7 @@ if(is_uploaded_file($_FILES['emp_passport_image']['tmp_name'])){
                                                             </div>
                                                             <div class="col-md-4">
                                                                 <div class="position-relative form-group">
-                                                                    <label >Email</label>
+                                                                    <label>Email</label>
                                                                     <input name="emp_email" id="emp_email" type="email" placeholder="someone@abc.com" class="form-control" value="<?php echo $rowemp['ats_employee_email'] ?>" onkeyup="sync()">
                                                                 </div>
                                                             </div>

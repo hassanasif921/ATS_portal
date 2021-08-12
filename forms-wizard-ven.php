@@ -53,37 +53,18 @@ if (isset($_POST["next-btn22"])) {
     $ven_createdAt = time();
     $ven_updatedBy =
     $ven_updatedAt = time();
-            $insert = "insert into ats_wizard_ven(ats_vendor_bussiness_name,ats_vendor_bussiness_location,ats_vendor_company_registeration_number,ats_vendor_country,ats_vendor_city,ats_vendor_zip_code,ats_vendor_street,
-            ats_vendor_building,ats_vendor_suite_no,ats_vendor_number,ats_vendor_primary_contact_first_name,ats_vendor_primary_contact_middle_name,ats_vendor_primary_contact_last_name,
-            ats_vendor_bussiness_logo,ats_vendor_bussiness_website, ats_vendor_citizenship_country,ats_vendor_birth_country,ats_vendor_dob,ats_vendor_passport_number, ats_vendor_passport_expiry,ats_vendor_bussiness_role,ats_vendor_bank_name_for_us,ats_vendor_bank_address_for_us, ats_vendor_bank_country_for_us,ats_vendor_bank_branch_name_for_us,
-            ats_vendor_branch_code_for_us,ats_vendor_account_holder_for_us,ats_vendor_account_number_for_us,ats_vendor_swift_code_for_us,ats_vendor_bank_name_for_yen,ats_vendor_bank_address_for_yen,ats_vendor_bank_country_for_yen ,ats_vendor_branch_name_for_yen ,ats_vendor_branch_code_for_yen,
-            ats_vendor_account_title_for_yen,ats_vendor_account_number_for_yen,ats_vendor_account_type_for_yen , ats_vendor_incorporation_certificate, ats_vendor_national_identity_image,
-            ats_vendor_status ,ats_vendor_createdBy ,ats_vendor_createdAt,ats_vendor_updatedBy,ats_vendor_updatedAt) 
-            values('$ven_business_name','$ven_business_address','$ven_business_reg_no','$ven_country',
-            '$ven_city', '$ven_zip_code','$ven_street','$ven_building','$ven_suit_no','$ven_phone', '$ven_btn_send_otp',
-            '$ven_otp','$ven_btn_submit_otp','$ven_primary_f_name','$ven_primary_m_name','$ven_primary_l_name',
-            '$ven_business_logo','$ven_website_url','$ven_country_citizenship',
-            '$ven_country_of_birth','$ven_date_of_birth',
-            '$ven_national_identity','$ven_id_expiration_date',
-            '$ven_accept_and_checked_address','$ven_accept_and_checked_number',
-            '$ven_accept_and_checked_name','$ven_accept_and_ownership_of_business',
-            '$ven_name_of_bank','$ven_address_of_bank',
-            '$ven_country_of_bank','$ven_name_of_bank_branch','$ven_bank_branch_code' ,
-            '$ven_bank_account_tittle','$ven_bank_account_no','$ven_bank_swift_code','$ven_name_of_bank_locally', '$ven_address_of_bank_locally',
-            '$ven_country_of_bank_locally','$ven_name_of_bank_branch_jp_locally',
-            '$ven_bank_branch_code_locally','$ven_bank_account_tittle_jp_locally',
-            '$ven_bank_account_no_locally','$ven_bank_account_type_locally', 
-            '$ven_incorporation_certificate','$ven_national_identity_image','$ven_status','$ven_createdBy','$ven_createdAt','$ven_updatedBy','$ven_updatedAt')";
-            $query = mysqli_query($connection,$insert);
-            if ($query)
-            {
-                echo '<script type="text/javascript"> alert("Employee Register Successfully")</script>';
-                echo '<script language="javascript">window.location.href ="employee-records.php"</script>';
-            }
-            else
-            {
-                echo '<script type="text/javascript"> alert("Employee Not Register")</script>';
-            }}
+    $insert = "insert into ats_wizard_ven(ats_vendor_bussiness_name,ats_vendor_bussiness_location,ats_vendor_company_registeration_number,ats_vendor_country,ats_vendor_city,ats_vendor_zip_code,ats_vendor_street,ats_vendor_building,ats_vendor_suite_no,ats_vendor_number,ats_vendor_primary_contact_first_name,ats_vendor_primary_contact_middle_name,ats_vendor_primary_contact_last_name,ats_vendor_bussiness_logo,ats_vendor_bussiness_website, ats_vendor_citizenship_country,ats_vendor_birth_country,ats_vendor_dob,ats_vendor_passport_number, ats_vendor_passport_expiry,ats_vendor_bussiness_role,ats_vendor_bank_name_for_us,ats_vendor_bank_address_for_us, ats_vendor_bank_country_for_us,ats_vendor_bank_branch_name_for_us,ats_vendor_branch_code_for_us,ats_vendor_account_holder_for_us,ats_vendor_account_number_for_us,ats_vendor_swift_code_for_us,ats_vendor_bank_name_for_yen,ats_vendor_bank_address_for_yen,ats_vendor_bank_country_for_yen ,ats_vendor_branch_name_for_yen ,ats_vendor_branch_code_for_yen,ats_vendor_account_title_for_yen,ats_vendor_account_number_for_yen,ats_vendor_account_type_for_yen , ats_vendor_incorporation_certificate, ats_vendor_national_identity_image,ats_vendor_status ,ats_vendor_createdBy ,ats_vendor_createdAt,ats_vendor_updatedBy,ats_vendor_updatedAt) values('$ven_business_name','$ven_business_address','$ven_business_reg_no','$ven_country','$ven_city','$ven_zip_code','$ven_street','$ven_building','$ven_suit_no','$ven_phone','$ven_btn_send_otp','$ven_otp','$ven_btn_submit_otp','$ven_primary_f_name','$ven_primary_m_name','$ven_primary_l_name','$ven_business_logo','$ven_website_url','$ven_country_citizenship','$ven_country_of_birth','$ven_date_of_birth','$ven_national_identity','$ven_id_expiration_date','$ven_accept_and_checked_address','$ven_accept_and_checked_number','$ven_accept_and_checked_name','$ven_accept_and_ownership_of_business','$ven_name_of_bank','$ven_address_of_bank','$ven_country_of_bank','$ven_name_of_bank_branch','$ven_bank_branch_code','$ven_bank_account_tittle','$ven_bank_account_no','$ven_bank_swift_code','$ven_name_of_bank_locally', '$ven_address_of_bank_locally','$ven_country_of_bank_locally','$ven_name_of_bank_branch_jp_locally','$ven_bank_branch_code_locally','$ven_bank_account_tittle_jp_locally','$ven_bank_account_no_locally','$ven_bank_account_type_locally','$ven_incorporation_certificate','$ven_national_identity_image','$ven_status','$ven_createdBy','$ven_createdAt','$ven_updatedBy','$ven_updatedAt')";
+    $query = mysqli_query($connection,$insert);
+    if ($query)
+    {
+        echo '<script type="text/javascript"> alert("Vendor Register Successfully")</script>';
+        echo '<script language="javascript">window.location.href ="vend_search.php"</script>';
+    }
+    else
+    {
+        echo '<script type="text/javascript"> alert("Vendor Not Register")</script>';
+    }
+}
 ?>
 
 <!doctype html>
@@ -102,25 +83,20 @@ if (isset($_POST["next-btn22"])) {
     <link rel="stylesheet" href="https://cdn.linearicons.com/free/1.0.0/icon-font.min.css">
     <link rel="stylesheet"href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/css/intlTelInput.css"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
-    crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/emojionearea/3.4.1/emojionearea.css" rel="stylesheet" />
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
     <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/emojionearea/3.4.1/emojionearea.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
-    
-    
-   
 </head>
 
 <body>
     <div class="app-container app-theme-white body-tabs-shadow fixed-header fixed-sidebar">
         <div class="app-header header-shadow">
             <div class="app-header__logo">
-                <div class="logo-src btn-hover-shine"></div>
-                
+                <div class="logo-src btn-hover-shine"></div>    
             </div>
             <div class="app-header__content">
                 <div class="app-header-right">
@@ -162,62 +138,60 @@ if (isset($_POST["next-btn22"])) {
                                 </button>
                             </div>
                         </div>
-                        </div>
+                    </div>
                 </div>
             </div>
         </div>        
-        <div class=" ">
+        <div class="">
             <div style="margin-top: 5%;" id="tab-content-2" role="tabpanel">
                 <div class="main-card mb-3 card">
                     <div class="card-body">
                         <form action="" method="post" onsubmit="validateVendorForm();">
-                        <div id="smartwizard3" class="forms-wizard-vertical">
-                            <ul class="forms-wizard">
-                                <li>
-                                    <a href="#step-122">
-                                        <em>1</em><span>Business Information</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#step-222">
-                                        <em>2</em><span>Contact Person Information</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#step-322">
-                                        <em>3</em><span>Bank Informations</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#step-422">
-                                        <em>4</em><span>Identity Verification</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#step-522">
-                                        <em>5</em><span>Finish Wizard</span>
-                                    </a>
-                                </li>
-                            </ul>
-                            <div class="form-wizard-content container">
-                                
+                            <div id="smartwizard3" class="forms-wizard-vertical">
+                                <ul class="forms-wizard">
+                                    <li>
+                                        <a href="#step-122">
+                                            <em>1</em><span>Business Information</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#step-222">
+                                            <em>2</em><span>Contact Person Information</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#step-322">
+                                            <em>3</em><span>Bank Informations</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#step-422">
+                                            <em>4</em><span>Identity Verification</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#step-522">
+                                            <em>5</em><span>Finish Wizard</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                                <div class="form-wizard-content container">
                                     <div id="step-122">
                                         <div class="card-body row">
                                             <div class="col-md-4 form-group">
-                                                <label style="font-weight: bold;"  ><span class="text-danger">* </span>Business Name</label>
-                                                <input type="text" name="ven_business_name" id="ven_business_name" class="form-control" required>
-                                                
+                                                <label style="font-weight: bold;"><span class="text-danger">* </span>Business Name</label>
+                                                <input type="text" name="ven_business_name" id="ven_business_name" class="form-control" required>    
                                             </div>
                                             <div class="col-md-4 position-relative form-group">
-                                                <label style="font-weight: bold;" ><span class="text-danger">* </span>Business Location</label>
+                                                <label style="font-weight: bold;"><span class="text-danger">* </span>Business Location</label>
                                                 <input type="text" name="ven_business_address" id="ven_business_address" class=" form-control" required>
                                             </div>
                                             <div class="col-md-4 position-relative form-group">
-                                                <label style="font-weight: bold;" ><span class="text-danger">* </span>Company Registration No.</label>
+                                                <label style="font-weight: bold;"><span class="text-danger">* </span>Company Registration No.</label>
                                                 <input type="text" class=" form-control" name="ven_business_reg_no" id="ven_business_reg_no" required>
-                                                </div>
+                                            </div>
                                             <div class="col-md-12">
-                                                <label style="font-weight: bold;"  class="text-dark"><span class="text-danger">* </span>Business Address</label>
+                                                <label style="font-weight: bold;" class="text-dark"><span class="text-danger">* </span>Business Address</label>
                                                 <div class="alert alert-secondary fade show" role="alert"><i style="font-size: 15px;" class="fa fa-exclamation-circle"></i>&nbsp; &nbsp; &nbsp;We may verify this address, Make sure your address is entered correctly.</div>
                                             </div>
                                             <div class="col-md-4 position-relative form-group">
@@ -473,7 +447,7 @@ if (isset($_POST["next-btn22"])) {
                                                 </select>
                                             </div>
                                             <div class="col-md-4 position-relative form-group">
-                                                <input type="text" class=" form-control" name="ven_city" id="ven_city"  placeholder="City / Town" required>
+                                                <input type="text" class=" form-control" name="ven_city" id="ven_city" placeholder="City / Town" required>
                                             </div>
                                             <div class="col-md-4 position-relative form-group">
                                                 <input type="text" class=" form-control" name="ven_zip_code" id="ven_zip_code" placeholder="ZIP / Postal Code" required>
@@ -493,23 +467,23 @@ if (isset($_POST["next-btn22"])) {
                                             </div>
                                             <div class="divider"></div>
                                             <div style="text-align: left;" class="col-md-12">
-                                                <label style="font-weight: bold;" >Recieve PIN through</label><br/>
-                                                <input type="radio" name="ven_opt" id="ven_opt_sms" >&nbsp;SMS
+                                                <label style="font-weight: bold;">Recieve PIN through</label><br/>
+                                                <input type="radio" name="ven_opt" id="ven_opt_sms">&nbsp;SMS
                                                 &nbsp; &nbsp; &nbsp;
-                                                <input type="radio" name="ven_opt" id="ven_opt_call" >&nbsp;CALL
+                                                <input type="radio" name="ven_opt" id="ven_opt_call">&nbsp;CALL
                                             </div>
                                             <div class="col-md-6 ">
-                                                <label ><span class="text-danger">* </span>Phone number for verification</label>
+                                                <label><span class="text-danger">* </span>Phone number for verification</label>
                                                 <div class="input-group">
                                                     <input type="tel" name="ven_phone" id="ven_phone" class="form-control" required>
                                                     <div class="input-group-append">
-                                                    <a name="ven_opt_call" id="ven_opt_call" class="btn btn-primary text-white"  >Send / Call</a>
+                                                    <a name="ven_opt_call" id="ven_opt_call" class="btn btn-primary text-white">Send / Call</a>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="divider"></div>
                                             <div class="col-md-4 position-relative form-group">
-                                                <label style="font-weight: bold;" ><span class="text-danger">* </span>Enter OTP</label>
+                                                <label style="font-weight: bold;"><span class="text-danger">* </span>Enter OTP</label>
                                                 <div class="input-group">
                                                     <input type="text" name="ven_otp" id="ven_otp" class="form-control" required>
                                                     <div class="input-group-append">
@@ -521,7 +495,7 @@ if (isset($_POST["next-btn22"])) {
                                                 <label style="font-weight: bold;"><span class="text-danger">* </span>Primary Contact Person</label><br/>
                                             </div>
                                             <div class="col-md-4 position-relative form-group">
-                                                <input type="text" class="form-control"  name="ven_primary_f_name" id="ven_primary_f_name" placeholder="First name ">
+                                                <input type="text" class="form-control" name="ven_primary_f_name" id="ven_primary_f_name" placeholder="First name ">
                                             </div>
                                             <div class="col-md-4 position-relative form-group">
                                                 <input type="text" class=" form-control" name="ven_primary_m_name" id="ven_primary_m_name" placeholder="Middle name ">
@@ -533,7 +507,7 @@ if (isset($_POST["next-btn22"])) {
                                                 <div class="image-upload">
                                                     <label style="font-weight: bold;" class="form-control-label">Business Logo</label>
                                                         <label style="cursor: pointer;">
-                                                        <input type="file" accept="image/*" name="ven_business_logo" id="ven_business_logo"  />
+                                                        <input type="file" accept="image/*" name="ven_business_logo" id="ven_business_logo"/>
                                                     </label>
                                                 </div>
                                                 <p style="font-size:12px; color:black;">Upload png, jpg and jpeg files.</p>
@@ -553,7 +527,7 @@ if (isset($_POST["next-btn22"])) {
                                                 <div data-parent="#accordion" id="collapseTwo" class="collapse show">
                                                     <div class="card-body row">
                                                         <div class="col-md-4">
-                                                            <label style="font-weight: bold;"  class="text-dark">Country of citizenship</label>
+                                                            <label style="font-weight: bold;" class="text-dark">Country of citizenship</label>
                                                             <select name="ven_country_citizenship" id="ven_country_citizenship" class="form-control" required>
                                                                 <option value="---">Select Country...</option>
                                                                 <option value="AF">Afghanistan</option>
@@ -804,8 +778,7 @@ if (isset($_POST["next-btn22"])) {
                                                                 <option value="ZM">Zambia</option>
                                                                 <option value="ZW">Zimbabwe</option>
                                                             </select>
-                                                        </div>
-                                                        
+                                                        </div>    
                                                         <div class="col-md-4 position-relative form-group">
                                                             <label style="font-weight: bold;" class="text-dark">Country of birth</label>
                                                             <select name="ven_country_of_birth" id="ven_country_of_birth" class="form-control" required>
@@ -1061,23 +1034,21 @@ if (isset($_POST["next-btn22"])) {
                                                         </div>
                                                         <div class="col-md-4 position-relative form-group">
                                                             <label style="font-weight: bold;" class="text-dark">Date of birth</label>        
-                                                            <input type="date" class="form-control" name="ven_date_of_birth" id="ven_country_of_birth"  value=""/>
-                                                               
+                                                            <input type="date" class="form-control" name="ven_date_of_birth" id="ven_country_of_birth" value=""/>       
                                                         </div>
                                                         <div class="col-md-6 position-relative form-group">
                                                             <label style="font-weight: bold;" class="text-dark">National Identity / Passport Number</label>        
-                                                            <input type="number" class="form-control" name="ven_national_identity" id="ven_national_identity" placeholder="National Identity / Passport Number"/>
-                                                               
+                                                            <input type="number" class="form-control" name="ven_national_identity" id="ven_national_identity" placeholder="National Identity / Passport Number"/>       
                                                         </div>
                                                         <div class="col-md-6 position-relative form-group">
-                                                            <label style="font-weight: bold;"  class="text-dark">Expiration Date</label>        
+                                                            <label style="font-weight: bold;" class="text-dark">Expiration Date</label>        
                                                             <input type="date" class="form-control" id="ven_id_expiration_date" name="ven_id_expiration_date" value="10/24/1984"/> 
                                                         </div>
                                                         <div class="col-md-12 form-group">
-                                                            <label style="font-weight: bold;"  class="text-dark">Residential address</label><br/>        
+                                                            <label style="font-weight: bold;" class="text-dark">Residential address</label><br/>        
                                                             <input type="radio" class="" id="ven_accept_and_checked_address" name="ven_accept_and_checked_address" /> ABC, Karachi, Pakistan ABC, Karachi, Pakistan
                                                             <br/>
-                                                            <div id="accordion_address" >
+                                                            <div id="accordion_address">
                                                                 <div style="background: transparent; box-shadow: none;" class="card">
                                                                     <div id="headingOne1" class="clk">
                                                                         <a href="" data-toggle="collapse" data-target="#collapseOne1" aria-expanded="true" aria-controls="collapseOne" class="text-left m-0 p-0 btn btn-link btn-block">
@@ -1339,7 +1310,7 @@ if (isset($_POST["next-btn22"])) {
                                                                                 </select>
                                                                             </div>
                                                                             <div class="col-md-4 position-relative form-group">
-                                                                                <input type="text" class=" form-control" name="ven_city_2" id="ven_city_2"  placeholder="City / Town" required>
+                                                                                <input type="text" class=" form-control" name="ven_city_2" id="ven_city_2" placeholder="City / Town" required>
                                                                             </div>
                                                                             <div class="col-md-4 position-relative form-group">
                                                                                 <input type="text" class=" form-control" name="ven_zip_code_2" id="ven_zip_code_2" placeholder="ZIP / Postal Code" required>
@@ -1359,20 +1330,20 @@ if (isset($_POST["next-btn22"])) {
                                                             </div>  
                                                         </div>
                                                         <div class="col-md-12 position-relative form-group">
-                                                            <label style="font-weight: bold;"  class="text-dark">Mobile number</label><br/>        
+                                                            <label style="font-weight: bold;" class="text-dark">Mobile number</label><br/>        
                                                             <input type="radio" class="" name="ven_accept_and_checked_number" id="ven_accept_and_checked_number" value=""/> +92376378634
                                                             <br/>
-                                                            <div id="accordion_number" >
+                                                            <div id="accordion_number">
                                                                 <div style="background: transparent; box-shadow: none;" class="card">
                                                                     <div id="headingOne2" class="clk">
                                                                         <a href="" data-toggle="collapse" data-target="#collapseOne2" aria-expanded="true" aria-controls="collapseOne2" class="text-left m-0 p-0 btn btn-link btn-block">
-                                                                        <i class="fa fa-plus-circle"></i> Add another Number
+                                                                            <i class="fa fa-plus-circle"></i> Add another Number
                                                                         </a>
                                                                     </div>
                                                                     <div data-parent="#accordion_number" id="collapseOne2" aria-labelledby="headingOne2" class="collapse ">
                                                                         <div class="card-body row">
                                                                             <div style="text-align: left;" class="col-md-12">
-                                                                                <label style="font-weight: bold;" >Recieve PIN through</label><br/>
+                                                                                <label style="font-weight: bold;">Recieve PIN through</label><br/>
                                                                                 <input type="radio" name="ven_opt_sms_2" id="ven_opt_sms_2" required>&nbsp;SMS
                                                                                 &nbsp; &nbsp; &nbsp;
                                                                                 <input type="radio" name="ven_opt_call_2" id="ven_opt_call_2" required>&nbsp;CALL
@@ -1382,17 +1353,17 @@ if (isset($_POST["next-btn22"])) {
                                                                                 <div class="input-group">
                                                                                     <input type="tel" name="ven_phone_2" id="ven_phone_2" placeholder="Enter Your Phone" class="form-control" required>
                                                                                     <div class="input-group-append">
-                                                                                        <a name="ven_btn_send_otp_2" id="ven_btn_send_otp_2" class="btn btn-primary text-white" value=""  >Send / Call</a>
+                                                                                        <a name="ven_btn_send_otp_2" id="ven_btn_send_otp_2" class="btn btn-primary text-white" value="">Send / Call</a>
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
                                                                             <div class="divider"></div>
                                                                             <div class="col-md-4 position-relative form-group">
-                                                                                <label style="font-weight: bold;" ><span class="text-danger">* </span>Enter OTP</label>
+                                                                                <label style="font-weight: bold;"><span class="text-danger">* </span>Enter OTP</label>
                                                                                 <div class="input-group">
                                                                                     <input type="text" name="ven_otp_2" id="ven_otp_2" class="form-control" required>
                                                                                     <div class="input-group-append">
-                                                                                    <a class="btn btn-info text-white" name="ven_btn_submit_otp_2" id="ven_btn_submit_otp_2">Submit</a>
+                                                                                        <a class="btn btn-info text-white" name="ven_btn_submit_otp_2" id="ven_btn_submit_otp_2">Submit</a>
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
@@ -1402,14 +1373,14 @@ if (isset($_POST["next-btn22"])) {
                                                             </div> 
                                                         </div>
                                                         <div class="col-md-12 position-relative form-group">
-                                                            <label style="font-weight: bold;"  class="text-dark">Your name</label><br/>        
+                                                            <label style="font-weight: bold;" class="text-dark">Your name</label><br/>        
                                                             <input type="checkbox" class="" name="ven_accept_and_checked_name" id="ven_accept_and_checked_name" value=""/> is beneficial owner of the business
                                                             <br/>
                                                             <input type="checkbox" class="" name="ven_accept_and_checked_business" id="ven_accept_and_checked_business" value=""/> is a legal representative of the business
                                                         </div>
                                                         <div class="col-md-12 position-relative form-group">
                                                             <label style="font-weight: bold;" class="text-dark">I have added all the Beneficial Owner of the Business.</label><br/>        
-                                                            <input type="radio" class="" name="ven_accept_and_ownership_of_business" id="ven_accept_and_ownership_of_business_yes"  value="YES"/> YES
+                                                            <input type="radio" class="" name="ven_accept_and_ownership_of_business" id="ven_accept_and_ownership_of_business_yes" value="YES"/> YES
                                                             &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
                                                             <input type="radio" class="" name="ven_accept_and_ownership_of_business" id="ven_accept_and_ownership_of_business_no" value="NO"/> NO
                                                         </div>
@@ -1430,7 +1401,7 @@ if (isset($_POST["next-btn22"])) {
                                                             <h4>For US $ / &yen; Yen INTERNATIONAL Transfers only</h4>
                                                         </div>
                                                         <div class="col-md-4">
-                                                            <label style="font-weight: bold;"  class="text-dark">Name of Bank</label>
+                                                            <label style="font-weight: bold;" class="text-dark">Name of Bank</label>
                                                             <select name="ven_name_of_bank" class="form-control" id="ven_name_of_bank">
                                                             <option value="---">Select Country...</option>
                                                                 <option value="AF">Afghanistan</option>
@@ -1684,12 +1655,11 @@ if (isset($_POST["next-btn22"])) {
                                                         </div>
                                                         <br/>
                                                         <div class="col-md-8 position-relative form-group">
-                                                            <label style="font-weight: bold;"  class="text-dark">Bank Address</label>        
-                                                            <input type="text" class="form-control" name="ven_address_of_bank" id="ven_address_of_bank" placeholder="Bank Address" />
-                                                               
+                                                            <label style="font-weight: bold;" class="text-dark">Bank Address</label>        
+                                                            <input type="text" class="form-control" name="ven_address_of_bank" id="ven_address_of_bank" placeholder="Bank Address" />       
                                                         </div>
                                                         <div class="col-md-4 position-relative form-group">
-                                                            <label style="font-weight: bold;"  class="text-dark">Country</label>
+                                                            <label style="font-weight: bold;" class="text-dark">Country</label>
                                                             <select name="ven_country_of_bank" id="ven_country_of_bank" class="form-control" required>
                                                                 <option value="---">Select Country...</option>
                                                                 <option value="AF">Afghanistan</option>
@@ -1942,44 +1912,39 @@ if (isset($_POST["next-btn22"])) {
                                                             </select>
                                                         </div>
                                                         <div class="col-md-4 position-relative form-group">
-                                                            <label style="font-weight: bold;"  class="text-dark">Branch Name</label>        
+                                                            <label style="font-weight: bold;" class="text-dark">Branch Name</label>        
                                                             <input type="text" class="form-control" name="ven_name_of_bank_branch" id="ven_name_of_bank_branch" placeholder="Branch Name" />
                                                                
                                                         </div>
                                                         <div class="col-md-4 position-relative form-group">
-                                                            <label style="font-weight: bold;"  class="text-dark">Branch Code</label>        
-                                                            <input type="text" class="form-control" name="ven_bank_branch_code" id="ven_bank_branch_code" placeholder="Branch Code" />
-                                                               
+                                                            <label style="font-weight: bold;" class="text-dark">Branch Code</label>        
+                                                            <input type="text" class="form-control" name="ven_bank_branch_code" id="ven_bank_branch_code" placeholder="Branch Code" />       
                                                         </div>
                                                         <div class="col-md-4 position-relative form-group">
-                                                            <label style="font-weight: bold;"  class="text-dark">Account Tittle</label>        
-                                                            <input type="text" class="form-control" name="ven_bank_account_tittle" id="ven_bank_account_tittle"  placeholder="Name as on bank documents" />
-                                                               
-                                                        </div>
-                                                        
+                                                            <label style="font-weight: bold;" class="text-dark">Account Tittle</label>        
+                                                            <input type="text" class="form-control" name="ven_bank_account_tittle" id="ven_bank_account_tittle" placeholder="Name as on bank documents" />       
+                                                        </div>    
                                                         <div class="col-md-4 position-relative form-group">
                                                             <label style="font-weight: bold;" class="text-dark">Account Number</label><br/>        
                                                             <input type="number" class="form-control" name="ven_bank_account_no" id="ven_bank_account_no" value="" placeholder="Account No."/>
                                                         </div>
                                                         <div class="col-md-4 position-relative form-group">
-                                                            <label style="font-weight: bold;"  class="text-dark">Swift Code</label><br/>        
+                                                            <label style="font-weight: bold;" class="text-dark">Swift Code</label><br/>        
                                                             <input type="text" class="form-control" name="ven_bank_swift_code" id="ven_bank_swift_code" value="" placeholder="Swift Code"/>
                                                         </div>
                                                         <div class="col-md-12">
-                                                            <h4 >For YEN JAPAN DOMESTIC Transfers only</h4>
-                                                        </div>
-                                                       
+                                                            <h4>For YEN JAPAN DOMESTIC Transfers only</h4>
+                                                        </div>   
                                                         <div style="text-align: left;" class="col-md-12">
                                                             <label class="text-danger">Do you have domestic / local Japanese Account in this Same Bank?&nbsp; &nbsp;</label>
                                                             <input type="radio" class="radio" name="ven_same_bank_account" id="ven_same_bank_account_yes">&nbsp;YES
                                                             &nbsp; &nbsp;
                                                             <input type="radio" class="radio" name="ven_same_bank_account" id="ven_same_bank_account_no">&nbsp;NO
                                                         </div>
-                                            
                                                         <div class="col-md-4">
                                                             <label style="font-weight: bold;" class="text-dark">Name of Bank</label>
                                                             <select name="country" class="form-control" name="ven_name_of_bank_locally" id="ven_name_of_bank_locally">
-                                                            <option value="---">Select Country...</option>
+                                                                <option value="---">Select Country...</option>
                                                                 <option value="AF">Afghanistan</option>
                                                                 <option value="AL">Albania</option>
                                                                 <option value="DZ">Algeria</option>
@@ -2232,11 +2197,11 @@ if (isset($_POST["next-btn22"])) {
                                                         <br/>
                                                         <br/>
                                                         <div class="col-md-8 position-relative form-group">
-                                                            <label style="font-weight: bold;"  class="text-dark">Bank Address</label>        
+                                                            <label style="font-weight: bold;" class="text-dark">Bank Address</label>        
                                                             <input type="text" class="form-control" name="ven_address_of_bank_locally" id="ven_address_of_bank_locally" placeholder="Bank Address"/>   
                                                         </div>
                                                         <div class="col-md-4 position-relative form-group">
-                                                            <label style="font-weight: bold;"  class="text-dark">Country</label>
+                                                            <label style="font-weight: bold;" class="text-dark">Country</label>
                                                             <select name="ven_country_of_bank_locally" id="ven_country_of_bank_locally" class="form-control" required>
                                                                 <option value="---">Select Country...</option>
                                                                 <option value="AF">Afghanistan</option>
@@ -2489,49 +2454,46 @@ if (isset($_POST["next-btn22"])) {
                                                             </select>
                                                         </div>
                                                         <div class="col-md-4 position-relative form-group">
-                                                            <label style="font-weight: bold;"  class="text-dark">Branch Name (JP)</label>        
+                                                            <label style="font-weight: bold;" class="text-dark">Branch Name (JP)</label>        
                                                             <input type="text" class="form-control" name="ven_name_of_bank_branch_jp_locally" id="ven_name_of_bank_branch_jp_locally" placeholder="支店名" />
                                                                
                                                         </div>
                                                         <div class="col-md-4 position-relative form-group">
                                                             <label style="font-weight: bold;" class="text-dark">Branch Code</label>        
-                                                            <input type="text" class="form-control" name="ven_bank_branch_code_locally" id="ven_bank_branch_code_locally" placeholder="Branch Code" />
-                                                               
+                                                            <input type="text" class="form-control" name="ven_bank_branch_code_locally" id="ven_bank_branch_code_locally" placeholder="Branch Code" />       
                                                         </div>
                                                         <div class="col-md-4 position-relative form-group">
                                                             <label style="font-weight: bold;" class="text-dark">Account Tittle (JP)</label>        
                                                             <input type="text" class="form-control" name="ven_bank_account_tittle_jp_locally" id="ven_bank_account_tittle_jp_locally" placeholder="アカウントのタイトル" />
-                                                        </div>
-                                                        
+                                                        </div>    
                                                         <div class="col-md-4 position-relative form-group">
-                                                            <label style="font-weight: bold;"  class="text-dark">Account Number</label><br/>        
+                                                            <label style="font-weight: bold;" class="text-dark">Account Number</label><br/>        
                                                             <input type="number" class="form-control" name="ven_bank_account_no_locally" id="ven_bank_account_no_locally" value="" placeholder="Account No."/>
                                                         </div>
                                                         <div class="col-md-4 position-relative form-group">
-                                                            <label style="font-weight: bold;"  class="text-dark">Account Type</label><br/>        
+                                                            <label style="font-weight: bold;" class="text-dark">Account Type</label><br/>        
                                                             <input type="text" class="form-control" name="ven_bank_account_type_locally" id="ven_bank_account_type_locally" value="" placeholder="Swift Code"/>
                                                         </div>
                                                         <div class="col-md-12">
                                                             <h4>Other Information</h4>
                                                         </div>
                                                         <div class="col-md-12">
-                                                            <h6>Intermidiary Bank Information (Correspondence Bank)</h6>
-                                                           
-                                                            <div id="accordion_intermeidiary_bank" >
+                                                            <h6>Intermidiary Bank Information (Correspondence Bank)</h6>   
+                                                            <div id="accordion_intermeidiary_bank">
                                                                 <div style="background: transparent; box-shadow: none;" class="card">
                                                                     <div id="headingOne2" class="">
                                                                         <a href="" class="text-info" data-toggle="collapse" data-target="#collapseOne-intermidiary" aria-expanded="true" aria-controls="collapseOne2" class="text-left m-0 p-0 btn btn-link btn-block">
                                                                             + Enter Intermidiary Details
                                                                         </a>
                                                                     </div>
-                                                                    <div  data-parent="#accordion_intermeidiary_bank" id="collapseOne-intermidiary" aria-labelledby="headingOne2" class="collapse ">
+                                                                    <div data-parent="#accordion_intermeidiary_bank" id="collapseOne-intermidiary" aria-labelledby="headingOne2" class="collapse ">
                                                                         <div class="card-body row">
                                                                             <div class="col-md-12 form-group">
                                                                                 <input type="radio" class="" id="ven_same_details_for_intermidiary" name="ven_same_details_for_intermidiary" /> Same as US $ / ¥ Yen INTERNATIONAL Transfers?
                                                                                 <br/>
                                                                             </div>
                                                                             <div class="col-md-4">
-                                                                                <label style="font-weight: bold;"  class="text-dark">Name of Bank</label>
+                                                                                <label style="font-weight: bold;" class="text-dark">Name of Bank</label>
                                                                                 <select name="ven_name_of_bank_intermidiary" class="form-control" id="ven_name_of_bank_intermidiary">
                                                                                     <option value="---">Select Country...</option>
                                                                                     <option value="AF">Afghanistan</option>
@@ -2785,12 +2747,11 @@ if (isset($_POST["next-btn22"])) {
                                                                             </div>
                                                                             <br/>
                                                                             <div class="col-md-4 position-relative form-group">
-                                                                                <label style="font-weight: bold;"  class="text-dark">Bank Address</label>        
-                                                                                <input type="text" class="form-control" name="ven_address_of_bank_intermidiary" id="ven_address_of_bank_intermidiary" placeholder="Bank Address" />
-                                                                                   
+                                                                                <label style="font-weight: bold;" class="text-dark">Bank Address</label>        
+                                                                                <input type="text" class="form-control" name="ven_address_of_bank_intermidiary" id="ven_address_of_bank_intermidiary" placeholder="Bank Address" />       
                                                                             </div>
                                                                             <div class="col-md-4 position-relative form-group">
-                                                                                <label style="font-weight: bold;"  class="text-dark">Country</label>
+                                                                                <label style="font-weight: bold;" class="text-dark">Country</label>
                                                                                 <select name="ven_country_of_bank_intermidiary" id="ven_country_of_bank_intermidiary" class="form-control" required>
                                                                                     <option value="---">Select Country...</option>
                                                                                     <option value="AF">Afghanistan</option>
@@ -3043,31 +3004,27 @@ if (isset($_POST["next-btn22"])) {
                                                                                 </select>
                                                                             </div>
                                                                             <div class="col-md-4 position-relative form-group">
-                                                                                <label style="font-weight: bold;"  class="text-dark">Branch Name</label>        
-                                                                                <input type="text" class="form-control" name="ven_name_of_bank_branch_intermidiary" id="ven_name_of_bank_branch_intermidiary" placeholder="Branch Name" />
-                                                                                   
+                                                                                <label style="font-weight: bold;" class="text-dark">Branch Name</label>        
+                                                                                <input type="text" class="form-control" name="ven_name_of_bank_branch_intermidiary" id="ven_name_of_bank_branch_intermidiary" placeholder="Branch Name" />       
                                                                             </div>
                                                                             <div class="col-md-4 position-relative form-group">
-                                                                                <label style="font-weight: bold;"  class="text-dark">Branch Code</label>        
-                                                                                <input type="text" class="form-control" name="ven_bank_branch_code_intermidiary" id="ven_bank_branch_code_intermidiary" placeholder="Branch Code" />
-                                                                                   
+                                                                                <label style="font-weight: bold;" class="text-dark">Branch Code</label>        
+                                                                                <input type="text" class="form-control" name="ven_bank_branch_code_intermidiary" id="ven_bank_branch_code_intermidiary" placeholder="Branch Code" />       
                                                                             </div>
                                                                             <div class="col-md-4 position-relative form-group">
-                                                                                <label style="font-weight: bold;"  class="text-dark">Account Tittle</label>        
-                                                                                <input type="text" class="form-control" name="ven_bank_account_tittle_intermidiary" id="ven_bank_account_tittle_intermidiary"  placeholder="Name as on bank documents" />
-                                                                                   
-                                                                            </div>
-                                                                            
+                                                                                <label style="font-weight: bold;" class="text-dark">Account Tittle</label>        
+                                                                                <input type="text" class="form-control" name="ven_bank_account_tittle_intermidiary" id="ven_bank_account_tittle_intermidiary" placeholder="Name as on bank documents" />       
+                                                                            </div>    
                                                                             <div class="col-md-4 position-relative form-group">
                                                                                 <label style="font-weight: bold;" class="text-dark">Account Number</label><br/>        
                                                                                 <input type="number" class="form-control" name="ven_bank_account_no_intermidiary" id="ven_bank_account_no_intermidiary" value="" placeholder="Account No."/>
                                                                             </div>
                                                                             <div class="col-md-4 position-relative form-group">
-                                                                                <label style="font-weight: bold;"  class="text-dark">Swift Code</label><br/>        
+                                                                                <label style="font-weight: bold;" class="text-dark">Swift Code</label><br/>        
                                                                                 <input type="text" class="form-control" name="ven_bank_swift_code_intermidiary" id="ven_bank_swift_code_intermidiary" value="" placeholder="Swift Code"/>
                                                                             </div>
                                                                             <div class="col-md-4 position-relative form-group">
-                                                                                <label style="font-weight: bold;"  class="text-dark">Intermidiary Code</label><br/>        
+                                                                                <label style="font-weight: bold;" class="text-dark">Intermidiary Code</label><br/>        
                                                                                 <input type="text" class="form-control" name="ven_bank_intermidiary_code" id="ven_bank_intermidiary_code" value="" placeholder="Swift Code"/>
                                                                             </div>
                                                                         </div>
@@ -3076,7 +3033,7 @@ if (isset($_POST["next-btn22"])) {
                                                             </div> 
                                                             <br/>
                                                             <h6>PayPal Information</h6>
-                                                            <div id="accordion_paypal_info" >
+                                                            <div id="accordion_paypal_info">
                                                                 <div style="background: transparent; box-shadow: none;" class="card">
                                                                     <div id="headingOne2" class="">
                                                                         <a href="" class="text-info" data-toggle="collapse" data-target="#collapseOnepaypal_info" aria-expanded="true" aria-controls="collapseOne2" class="text-left m-0 p-0 btn btn-link btn-block">
@@ -3086,19 +3043,18 @@ if (isset($_POST["next-btn22"])) {
                                                                     <div  data-parent="#accordion_paypal_info" id="collapseOnepaypal_info" aria-labelledby="headingOne2" class="collapse ">
                                                                         <div class="card-body row">
                                                                             <div class="col-md-6 position-relative form-group">
-                                                                                <label style="font-weight: bold;"  class="text-dark">Full Name</label><br/>        
+                                                                                <label style="font-weight: bold;" class="text-dark">Full Name</label><br/>        
                                                                                 <input type="number" class="form-control" name="ven_fullName_paypal" id="ven_fullName_paypal" value="" placeholder="Full Name"/>
                                                                             </div>
                                                                             <div class="col-md-6 position-relative form-group">
-                                                                                <label style="font-weight: bold;"  class="text-dark">Email Address (For PayPal)</label><br/>        
+                                                                                <label style="font-weight: bold;" class="text-dark">Email Address (For PayPal)</label><br/>        
                                                                                 <input type="text" class="form-control" name="ven_email_for_paypal" id="ven_email_for_paypal" value="" placeholder="Email Address"/>
                                                                             </div>
                                                                         </div>
                                                                     </div>
                                                                 </div>
                                                             </div> 
-                                                        </div>
-                                                        
+                                                        </div>    
                                                     </div>
                                                 </div>
                                             </div>
@@ -3126,18 +3082,15 @@ if (isset($_POST["next-btn22"])) {
                                                                                     <i class="badge badge-dot badge-dot-xl badge-success"></i>
                                                                                 </span>
                                                                                 <div class="vertical-timeline-element-content bounce-in">
-                                                                                    <h4 class="timeline-title" id="ven_business_name_print">ABC School</h4>
-                                                                                   
+                                                                                    <h4 class="timeline-title" id="ven_business_name_print">ABC School</h4>   
                                                                                     <span class="vertical-timeline-element-date">Name</span>
                                                                                 </div>
                                                                             </div>
                                                                         </div>
                                                                         <div class="vertical-timeline-item vertical-timeline-element">
-                                                                            <div>
-                                                                                
+                                                                            <div>    
                                                                                 <div class="vertical-timeline-element-content bounce-in">
-                                                                                    <h4 class="timeline-title" id="ven_business_address_print"></h4>
-                                                                                    
+                                                                                    <h4 class="timeline-title" id="ven_business_address_print"></h4>    
                                                                                     <span class="vertical-timeline-element-date"> Address</span>
                                                                                 </div>
                                                                             </div>
@@ -3148,28 +3101,23 @@ if (isset($_POST["next-btn22"])) {
                                                                                     <i class="badge badge-dot badge-dot-xl badge-danger"></i>
                                                                                 </span>
                                                                                 <div class="vertical-timeline-element-content bounce-in">
-                                                                                    <h4 class="timeline-title" id="ven_phone_print"></h4>
-                                                                                    
+                                                                                    <h4 class="timeline-title" id="ven_phone_print"></h4>    
                                                                                     <span class="vertical-timeline-element-date">Phone</span>
                                                                                 </div>
                                                                             </div>
                                                                         </div>
                                                                         <div class="vertical-timeline-item vertical-timeline-element">
-                                                                            <div>
-                                                                                
+                                                                            <div>    
                                                                                 <div class="vertical-timeline-element-content bounce-in">
-                                                                                    <h4 class="timeline-title text-success" id="ven_email_print"></h4>
-                                                                                    
+                                                                                    <h4 class="timeline-title text-success" id="ven_email_print"></h4>    
                                                                                     <span class="vertical-timeline-element-date">Email</span>
                                                                                 </div>
                                                                             </div>
                                                                         </div>
                                                                         <div class="vertical-timeline-item vertical-timeline-element">
-                                                                            <div>
-                                                                               
+                                                                            <div>   
                                                                                 <div class="vertical-timeline-element-content bounce-in">
-                                                                                    <h4 class="timeline-title text-success" id="ven_business_reg_no_print"></h4>
-                                                                                    
+                                                                                    <h4 class="timeline-title text-success" id="ven_business_reg_no_print"></h4>   
                                                                                     <span class="vertical-timeline-element-date">Reg. No.</span>
                                                                                 </div>
                                                                             </div>
@@ -3180,21 +3128,16 @@ if (isset($_POST["next-btn22"])) {
                                                                                     <i class="badge badge-dot badge-dot-xl badge-success"></i>
                                                                                 </span>
                                                                                 <div class="vertical-timeline-element-content bounce-in">
-                                                                                    <h4 class="timeline-title" id="ven_website_url_print"></h4>
-                                                                                    
+                                                                                    <h4 class="timeline-title" id="ven_website_url_print"></h4>    
                                                                                     <span class="vertical-timeline-element-date">Website</span>
                                                                                 </div>
                                                                             </div>
                                                                         </div>
-                                                                        
-                                                                        
                                                                         <div class="vertical-timeline-item vertical-timeline-element">
                                                                             <div>
-                                                                                <div class="vertical-timeline-element-content bounce-in">
-                                                                                    
+                                                                                <div class="vertical-timeline-element-content bounce-in">    
                                                                                     <span style="margin-top: 1%;" class="vertical-timeline-element-date text-danger">Identify</span>
-                                                                                </div>
-                                                                                
+                                                                                </div>    
                                                                             </div>
                                                                             <input style="margin-left: 23%;" name="ven_incorporation_certificate" id="ven_incorporation_certificate" type="file">
                                                                         </div>
@@ -3217,18 +3160,15 @@ if (isset($_POST["next-btn22"])) {
                                                                                     <i class="badge badge-dot badge-dot-xl badge-success"></i>
                                                                                 </span>
                                                                                 <div class="vertical-timeline-element-content bounce-in">
-                                                                                    <h4 class="timeline-title" id="ven_name_print" ></h4>
-                                                                                   
+                                                                                    <h4 class="timeline-title" id="ven_name_print"></h4>   
                                                                                     <span class="vertical-timeline-element-date">Name</span>
                                                                                 </div>
                                                                             </div>
                                                                         </div>
                                                                         <div class="vertical-timeline-item vertical-timeline-element">
-                                                                            <div>
-                                                                                
+                                                                            <div>    
                                                                                 <div class="vertical-timeline-element-content bounce-in">
-                                                                                    <h4 class="timeline-title" id="ven_address_print"></h4>
-                                                                                    
+                                                                                    <h4 class="timeline-title" id="ven_address_print"></h4>    
                                                                                     <span class="vertical-timeline-element-date">Address</span>
                                                                                 </div>
                                                                             </div>
@@ -3239,35 +3179,29 @@ if (isset($_POST["next-btn22"])) {
                                                                                     <i class="badge badge-dot badge-dot-xl badge-danger"></i>
                                                                                 </span>
                                                                                 <div class="vertical-timeline-element-content bounce-in">
-                                                                                    <h4 class="timeline-title" id="ven_phone_2_print"></h4>
-                                                                                    
+                                                                                    <h4 class="timeline-title" id="ven_phone_2_print"></h4>   
                                                                                     <span class="vertical-timeline-element-date">Phone</span>
                                                                                 </div>
                                                                             </div>
                                                                         </div>
                                                                         <div class="vertical-timeline-item vertical-timeline-element">
-                                                                            <div>
-                                                                                
+                                                                            <div>   
                                                                                 <div class="vertical-timeline-element-content bounce-in">
-                                                                                    <h4 class="timeline-title text-success" id="ven_email_2_print" ></h4>
-                                                                                    
+                                                                                    <h4 class="timeline-title text-success" id="ven_email_2_print"></h4>   
                                                                                     <span class="vertical-timeline-element-date">Email</span>
                                                                                 </div>
                                                                             </div>
                                                                         </div>
                                                                         <div class="vertical-timeline-item vertical-timeline-element">
                                                                             <div>
-                                                                                <span class="vertical-timeline-element-icon bounce-in">
-                                                                                   
+                                                                                <span class="vertical-timeline-element-icon bounce-in">       
                                                                                 </span>
                                                                                 <div class="vertical-timeline-element-content bounce-in">
-                                                                                    <h4 class="timeline-title text-success" id="ven_national_identity_print"></h4>
-                                                                                    
+                                                                                    <h4 class="timeline-title text-success" id="ven_national_identity_print"></h4>    
                                                                                     <span class="vertical-timeline-element-date">ID/Passport</span>
                                                                                 </div>
                                                                             </div>
-                                                                        </div>
-                                                                        
+                                                                        </div>    
                                                                         <div class="vertical-timeline-item vertical-timeline-element">
                                                                             <div>
                                                                                 <div class="vertical-timeline-element-content bounce-in">
@@ -3295,7 +3229,7 @@ if (isset($_POST["next-btn22"])) {
                                                                                     <i class="badge badge-dot badge-dot-xl badge-success"></i>
                                                                                 </span>
                                                                                 <div class="vertical-timeline-element-content bounce-in">
-                                                                                    <h4 class="timeline-title" id="ven_name_of_bank_print" ></h4>
+                                                                                    <h4 class="timeline-title" id="ven_name_of_bank_print"></h4>
                                                                                     <span class="vertical-timeline-element-date">Name</span>
                                                                                 </div>
                                                                             </div>
@@ -3335,12 +3269,10 @@ if (isset($_POST["next-btn22"])) {
                                                                         </div>
                                                                         <div class="vertical-timeline-item vertical-timeline-element">
                                                                             <div>
-                                                                                <span class="vertical-timeline-element-icon bounce-in">
-                                                                                    
+                                                                                <span class="vertical-timeline-element-icon bounce-in">       
                                                                                 </span>
                                                                                 <div class="vertical-timeline-element-content bounce-in">
-                                                                                    <h4 class="timeline-title text-success" id="ven_name_of_bank_branch_print"></h4>
-                                                                                    
+                                                                                    <h4 class="timeline-title text-success" id="ven_name_of_bank_branch_print"></h4>    
                                                                                     <span class="vertical-timeline-element-date">Branch</span>
                                                                                 </div>
                                                                             </div>
@@ -3351,8 +3283,7 @@ if (isset($_POST["next-btn22"])) {
                                                                                     <i class="badge badge-dot badge-dot-xl badge-success"></i>
                                                                                 </span>
                                                                                 <div class="vertical-timeline-element-content bounce-in">
-                                                                                    <h4 class="timeline-title" id="ven_bank_swift_code" ></h4>
-                                                                                    
+                                                                                    <h4 class="timeline-title" id="ven_bank_swift_code"></h4>    
                                                                                     <span class="vertical-timeline-element-date">Swift Code</span>
                                                                                 </div>
                                                                             </div>
@@ -3368,8 +3299,7 @@ if (isset($_POST["next-btn22"])) {
                                                                                     <i class="badge badge-dot badge-dot-xl badge-success"></i>
                                                                                 </span>
                                                                                 <div class="vertical-timeline-element-content bounce-in">
-                                                                                    <h4 class="timeline-title" id="ven_name_of_bank_locally"></h4>
-                                                                                   
+                                                                                    <h4 class="timeline-title" id="ven_name_of_bank_locally"></h4>  
                                                                                     <span class="vertical-timeline-element-date">Name</span>
                                                                                 </div>
                                                                             </div>
@@ -3377,9 +3307,8 @@ if (isset($_POST["next-btn22"])) {
                                                                         <div class="vertical-timeline-item vertical-timeline-element">
                                                                             <div>
                                                                                 <div class="vertical-timeline-element-content bounce-in">
-                                                                                    <h4 class="timeline-title" id="ven_address_of_bank_locally"></h4>
-                                                                                    
-                                                                                    <span class="vertical-timeline-element-date" > Address</span>
+                                                                                    <h4 class="timeline-title" id="ven_address_of_bank_locally"></h4>   
+                                                                                    <span class="vertical-timeline-element-date"> Address</span>
                                                                                 </div>
                                                                             </div>
                                                                         </div>
@@ -3389,8 +3318,7 @@ if (isset($_POST["next-btn22"])) {
                                                                                     <i class="badge badge-dot badge-dot-xl badge-success"></i>
                                                                                 </span>
                                                                                 <div class="vertical-timeline-element-content bounce-in">
-                                                                                    <h4 class="timeline-title" id="ven_bank_account_tittle_jp_locally"></h4>
-                                                                                    
+                                                                                    <h4 class="timeline-title" id="ven_bank_account_tittle_jp_locally"></h4>   
                                                                                     <span class="vertical-timeline-element-date">Tittle (JP)</span>
                                                                                 </div>
                                                                             </div>
@@ -3401,20 +3329,17 @@ if (isset($_POST["next-btn22"])) {
                                                                                     <i class="badge badge-dot badge-dot-xl badge-success"></i>
                                                                                 </span>
                                                                                 <div class="vertical-timeline-element-content bounce-in">
-                                                                                    <h4 class="timeline-title" id="ven_bank_account_no_locally"></h4>
-                                                                                    
+                                                                                    <h4 class="timeline-title" id="ven_bank_account_no_locally"></h4>   
                                                                                     <span class="vertical-timeline-element-date">Account #</span>
                                                                                 </div>
                                                                             </div>
                                                                         </div>
                                                                         <div class="vertical-timeline-item vertical-timeline-element">
                                                                             <div>
-                                                                                <span class="vertical-timeline-element-icon bounce-in">
-                                                                                    
+                                                                                <span class="vertical-timeline-element-icon bounce-in">        
                                                                                 </span>
                                                                                 <div class="vertical-timeline-element-content bounce-in">
-                                                                                    <h4 class="timeline-title text-success" id="ven_name_of_bank_branch_jp_locally"></h4>
-                                                                                    
+                                                                                    <h4 class="timeline-title text-success" id="ven_name_of_bank_branch_jp_locally"></h4>    
                                                                                     <span class="vertical-timeline-element-date">Branch (JP)</span>
                                                                                 </div>
                                                                             </div>
@@ -3425,16 +3350,13 @@ if (isset($_POST["next-btn22"])) {
                                                                                     <i class="badge badge-dot badge-dot-xl badge-success"></i>
                                                                                 </span>
                                                                                 <div class="vertical-timeline-element-content bounce-in">
-                                                                                    <h4 class="timeline-title" id="ven_bank_account_type_locally"></h4>
-                                                                                    
+                                                                                    <h4 class="timeline-title" id="ven_bank_account_type_locally"></h4>   
                                                                                     <span class="vertical-timeline-element-date">Type</span>
                                                                                 </div>
                                                                             </div>
                                                                             <br/>
-                                                                        </div>
-                                                                        
-                                                                    </div>
-                                                                    
+                                                                        </div>   
+                                                                    </div>   
                                                                 </div>
                                                             </div>
                                                             <label>
@@ -3463,45 +3385,40 @@ if (isset($_POST["next-btn22"])) {
                                                 <button class="btn-shadow btn-wide btn btn-success btn-lg">Finish</button>
                                             </div>
                                         </div>
-                                    </div>
-                                   
+                                    </div>   
+                                </div>
                             </div>
-                        </div>
-                        <div class="divider"></div>
-                        <div class="clearfix">
-                            <input type="reset" id="reset-btn22" class="btn-shadow float-left btn btn-link" value="Reset">
-                            <input type="submit" id="next-btn22" name="next-btn22" onclick="display()" class="btn-shadow btn-wide float-right btn-pill btn-hover-shine btn btn-primary">
-                            <a id="prev-btn22" class="btn-shadow float-right btn-wide btn-pill mr-3  btn-hover-shine btn btn-outline-secondary">Previous</a>
-                        </div>
+                            <div class="divider"></div>
+                            <div class="clearfix">
+                                <input type="reset" id="reset-btn22" class="btn-shadow float-left btn btn-link" value="Reset">
+                                <input type="submit" id="next-btn22" name="next-btn22" onclick="display()" class="btn-shadow btn-wide float-right btn-pill btn-hover-shine btn btn-primary">
+                                <a id="prev-btn22" class="btn-shadow float-right btn-wide btn-pill mr-3  btn-hover-shine btn btn-outline-secondary">Previous</a>
+                            </div>
                         </form>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-     <div class="app-drawer-overlay d-none animated fadeIn"></div>
-     
-     <script type="text/javascript" src="assets/scripts/main.d810cf0ae7f39f28f336.js"></script></body>
+    <div class="app-drawer-overlay d-none animated fadeIn"></div>
+    <script type="text/javascript" src="assets/scripts/main.d810cf0ae7f39f28f336.js"></script></body>
     <script>
         ('.clk a').click(function(){
-        (this).find('i').toggleClass('fa-plus-circle fa-minus-circle')
+            (this).find('i').toggleClass('fa-plus-circle fa-minus-circle')
         });
         const phoneInputField = document.querySelector("#ven_phone_2");
-        const phoneInput = window.intlTelInput(phoneInputField, {
-          utilsScript:
-            "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js",
+        const phoneInput = window.intlTelInput(phoneInputField, { 
+            utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js",
         });
         function display(){
-        //Assigning the variable to the user input
+            //Assigning the variable to the user input
             var ven_primary_f_name = document.getElementById("ven_primary_f_name").value;
             var ven_primary_m_name = document.getElementById("ven_primary_m_name").value;
             var ven_primary_l_name = document.getElementById("ven_primary_l_name").value;
-
-        // to print the input here
-        document.getElementById("printhere").innerHTML = ven_primary_f_name + "&nbsp;" + ven_primary_m_name + "&nbsp;" +  ven_primary_l_name;
+            // to print the input here
+            document.getElementById("printhere").innerHTML = ven_primary_f_name + "&nbsp;" + ven_primary_m_name + "&nbsp;" +  ven_primary_l_name;
         }
         function validateVendorForm(){
-
             var ven_business_name = document.getElementById("ven_business_name");
             var ven_business_address = document.getElementById("ven_business_address");
             var ven_business_reg_no = document.getElementById("ven_business_reg_no");
@@ -3572,8 +3489,6 @@ if (isset($_POST["next-btn22"])) {
             else {
                 return true;
             }
-
         }
     </script>
-
 </html>

@@ -5,8 +5,6 @@ $id=$_GET['empid'];
 $query=mysqli_query($connection,"select * from ats_employee where ats_employee_id='".$id."'");
 $row=mysqli_fetch_assoc($query);
 ?>
-
-   
             <div class="app-main__outer">
                 <div class="app-main__inner">
                     <div class="tab-content">
@@ -26,15 +24,14 @@ $row=mysqli_fetch_assoc($query);
                                                             <?php 
                                                             
                                                             ?>
-                                                                <div data-parent="#accordion" id="collapseTwo"
-                                                                    class="collapse show">
+                                                                <div data-parent="#accordion" id="collapseTwo" class="collapse show">
                                                                     <div style="font-family: Arial, Helvetica, sans-serif; border: 3px solid #ff9900; " class="card mb-4">
                                                                             <div style="height: auto; padding-top: 1%; padding-bottom: 1%; background: linear-gradient(135deg, #ff9900 0%, #ffff 100%)" class="card-header">
-                                                                                <div  class="media flex-wrap w-100 align-items-center">
+                                                                                <div class="media flex-wrap w-100 align-items-center">
                                                                             
                                                                                     <img style="width: 80px; height: 90px; margin-left: -1%;" id="emp_passport_image_print"  src="data:image/jpg;charset=utf8;base64,<?php echo base64_encode($row['ats_employee_image']); ?>" /> 
 
-                                                                                    <div  class="media-body ml-3">
+                                                                                    <div class="media-body ml-3">
                                                                                         <label for="fname" style="color: white; margin-bottom: 0px; text-shadow: 3px 3px 7px #000;" ><?php echo $row['ats_employee_firstName']." ".$row['ats_employee_lastName'] ?><span></span></label><br/>
                                                                                         <label for="designation" style="margin-bottom: 0px;" id="emp_designation_print" ><span><?php echo $row['ats_employee_designation']?></span></label><br/>
                                                                                         <label for="emp_dept" style="margin-bottom: 0px;" id="emp_department_print" ><span><?php echo $row['ats_employee_department']?></span></label><br/>
@@ -321,7 +318,7 @@ $row=mysqli_fetch_assoc($query);
                                                                             <div style="text-align: center; margin-bottom: 1%">
                                                                                 <a onclick="window.print()" class="text-white btn btn-primary">Print</a>
                                                                                 <a class="text-white btn btn-success">Save as PDF</a>
-                                                                                <input type="submit"  class="btn-shadow btn-wide float-right btn-hover-shine btn btn-info" name="btnsubmit" onclick="myFunction()" value="ADD">
+                                                                                <input type="submit" class="btn-shadow btn-wide float-right btn-hover-shine btn btn-info" name="btnsubmit" onclick="myFunction()" value="ADD">
                                                                             </div>
                                                                     </div>
                                                                 </div>

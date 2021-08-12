@@ -1,6 +1,5 @@
 <!doctype html>
 <html lang="en">
-
 <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
 <head>
     <meta charset="utf-8">
@@ -13,7 +12,8 @@
     <meta name="description" content="ArchitectUI HTML Bootstrap 4 Dashboard Template">
     <!-- Disable tap highlight on IE -->
     <meta name="msapplication-tap-highlight" content="no">
-<link href="main.d810cf0ae7f39f28f336.css" rel="stylesheet"></head>
+<link href="main.d810cf0ae7f39f28f336.css" rel="stylesheet">
+</head>
 <body>
     <div class="app-container app-theme-white body-tabs-shadow">
         <div class="app-container">
@@ -26,7 +26,7 @@
                                 <div class="modal-header">
                                     <div class="h5 modal-title">Forgot your Password?
                                         <h6 class="mt-1 mb-0 opacity-8">
-                                            <span>Use  the form below to recover it.</span>
+                                            <span>Use the form below to recover it.</span>
                                         </h6>
                                     </div>
                                 </div>

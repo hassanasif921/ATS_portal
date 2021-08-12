@@ -20,16 +20,14 @@
     <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/emojionearea/3.4.1/emojionearea.js"></script>
-
     <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.js"></script>-->
     <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>-->
-    
 </head>
-
 <body>
     <div class="app-container app-theme-white body-tabs-shadow fixed-header fixed-sidebar">
         <?php
-        include("header.php");?>       
+            include("header.php");
+        ?>       
         <div class="app-main">
         <?php
-        include("sidebar.php");?>
+            include("sidebar.php");?>

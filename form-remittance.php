@@ -2,8 +2,7 @@
 include("top.php");
 include("connection_db.php");
 
-if (isset($_POST["btn_remittance_add"])) {
-
+if (isset($_POST["btn_remittance_add"])){
     $remittance_id_ag = $_POST["remittance_id_ag"];
     $remittance_agent_name = $_POST["remittance_agent_name"];
     $remittance_customer_name = $_POST["remittance_customer_name"];
@@ -20,20 +19,17 @@ if (isset($_POST["btn_remittance_add"])) {
     $remittance_created_at = time();
     $remittance_updated_at = time();
     $remittance_status = "active";
-
-    $insert = "insert into ats_remittance(ats_remittance_Remittance_ID,ats_remittance_agent_name,ats_remittance_customer_name,ats_remittance_country,ats_remittance_date,ats_remittance_sender_name,ats_remittance_amount,ats_remittance_currency,ats_remittance_con_rate,ats_remittance_vendor_name, ats_remittance_account,ats_remittance_tt_file,ats_remittance_confirmation_file,ats_remittance_created_at,ats_remittance_updated_at,ats_remittance_status)
-     values('$remittance_id_ag','$remittance_agent_name','$remittance_customer_name','$get_customer_country','$remittance_date','$remittance_sender_name','$remittance_amount','$remittance_currency','$remittance_currency_con_rate','$remittance_vendor_name','$remittance_account_number','$remittance_tt_file','$remittance_confirmation_file','$remittance_created_at','$remittance_updated_at','$remittance_status')";
-    
-     $query = mysqli_query($connection,$insert);
-     if ($query)
-     {
-         echo '<script type="text/javascript"> alert("Inserted Inserted !!!")</script>';
-         //echo '<script language="javascript">window.location.href ="form-amendment.php"</script>';
-     }
-     else
-     {
-         echo '<script type="text/javascript"> alert("Something Wrong :(")</script>';
-     }	  
+    $insert = "insert into ats_remittance(ats_remittance_Remittance_ID,ats_remittance_agent_name,ats_remittance_customer_name,ats_remittance_country,ats_remittance_date,ats_remittance_sender_name,ats_remittance_amount,ats_remittance_currency,ats_remittance_con_rate,ats_remittance_vendor_name, ats_remittance_account,ats_remittance_tt_file,ats_remittance_confirmation_file,ats_remittance_created_at,ats_remittance_updated_at,ats_remittance_status) values('$remittance_id_ag','$remittance_agent_name','$remittance_customer_name','$get_customer_country','$remittance_date','$remittance_sender_name','$remittance_amount','$remittance_currency','$remittance_currency_con_rate','$remittance_vendor_name','$remittance_account_number','$remittance_tt_file','$remittance_confirmation_file','$remittance_created_at','$remittance_updated_at','$remittance_status')";
+    $query = mysqli_query($connection,$insert);
+    if ($query)
+    {
+        echo '<script type="text/javascript"> alert("Inserted Inserted !!!")</script>';
+        //echo '<script language="javascript">window.location.href ="form-amendment.php"</script>';
+    }
+    else
+    {
+        echo '<script type="text/javascript"> alert("Something Wrong :(")</script>';
+    }	  
 }           
     
 ?>
@@ -112,8 +108,7 @@ if (isset($_POST["btn_remittance_add"])) {
                                         <div class="position-relative form-group">
                                             <label class="">Vendor Name</label>
                                             <select name="remittance_vendor_name" id="remittance_vendor_name" class="form-control">
-                                                <option>VendorTable</option>
-                                                
+                                                <option>VendorTable</option>    
                                             </select>
                                         </div>
                                     </div>
@@ -140,7 +135,7 @@ if (isset($_POST["btn_remittance_add"])) {
                     </div>
                 </div>
             </div>
-            <?php
+<?php
 include("bottom.php");
 ?>
         

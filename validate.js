@@ -1,74 +1,71 @@
 <form action="" method="POST" onsubmit="return validateProduct();">
 </form>
 
-function validateVendorForm() {
-            var ven_business_name = document.getElementById("ven_business_name");
-            var ven_business_address = document.getElementById("ven_business_address");
-            var ven_business_reg_no = document.getElementById("ven_business_reg_no");
-            var ven_country = document.getElementById("ven_country");
-            var ven_city = document.getElementById("ven_city");
-            var ven_zip_code = document.getElementById("ven_zip_code");
-            var ven_street = document.getElementById("ven_street");
-            var ven_building = document.getElementById("ven_building");
-            var ven_suit_no = document.getElementById("ven_suit_no");
-            var ven_accept_address = document.getElementById("ven_accept_address");
-            var ven_phone = document.getElementById("ven_phone");
-            var ven_primary_f_name = document.getElementById("ven_primary_f_name");
-            var ven_primary_m_name = document.getElementById("ven_primary_m_name");
-            var ven_primary_l_name = document.getElementById("ven_primary_l_name");
-            var ven_business_logo = document.getElementById("ven_business_logo");
-            var ven_website_url = document.getElementById("ven_accept_address");
-            var ven_country_citizenship = document.getElementById("ven_country_citizenship");
-            var ven_country_of_birth = document.getElementById("ven_country_of_birth");
-            var ven_date_of_birth = document.getElementById("ven_date_of_birth");
-            var ven_national_identity = document.getElementById("ven_national_identity");
-            var ven_id_expiration_date = document.getElementById("ven_id_expiration_date");
-            var ven_accept_and_checked_address = document.getElementById("ven_accept_and_checked_address");
-            var ven_country_2 = document.getElementById("ven_country_2");
-            var ven_city_2 = document.getElementById("ven_city_2");
-            var ven_zip_code_2 = document.getElementById("ven_zip_code_2");
-            var ven_street_2 = document.getElementById("ven_street_2");
-            var ven_building_2 = document.getElementById("ven_building_2");
-            var ven_suit_no_2 = document.getElementById("ven_suit_no_2");
-            var ven_phone_2 = document.getElementById("ven_phone_2");
-            var ven_accept_and_checked_name = document.getElementById("ven_accept_and_checked_name");
-            var ven_accept_and_checked_business = document.getElementById("ven_accept_and_checked_business");
-            var ven_name_of_bank = document.getElementById("ven_name_of_bank");
-            var ven_address_of_bank = document.getElementById("ven_address_of_bank");
-            var ven_country_of_bank = document.getElementById("ven_country_of_bank");
-            var ven_name_of_bank_branch = document.getElementById("ven_name_of_bank_branch");
-            var ven_bank_branch_code = document.getElementById("ven_bank_branch_code");
-            var ven_bank_account_tittle = document.getElementById("ven_bank_account_tittle");
-            var ven_bank_account_no = document.getElementById("ven_bank_account_no");
-            var ven_bank_swift_code = document.getElementById("ven_bank_swift_code");
-            var ven_name_of_bank_locally = document.getElementById("ven_name_of_bank_locally");
-            var ven_address_of_bank_locally = document.getElementById("ven_address_of_bank_locally");
-            var ven_country_of_bank_locally = document.getElementById("ven_country_of_bank_locally");
-            var ven_name_of_bank_branch_jp_locally = document.getElementById("ven_name_of_bank_branch");
-            var ven_bank_branch_code_locally = document.getElementById("ven_bank_branch_code_locally");
-            var ven_bank_account_tittle_jp_locally = document.getElementById("ven_bank_account_tittle");
-            var ven_bank_account_no_locally = document.getElementById("ven_bank_account_no");
-            var ven_bank_account_type_locally = document.getElementById("ven_bank_account_type_locally");
-            var ven_name_of_bank_intermidiary = document.getElementById("ven_name_of_bank_intermidiary");
-            var ven_address_of_bank_intermidiary = document.getElementById("ven_address_of_bank_intermidiary");
-            var ven_country_of_bank_intermidiary = document.getElementById("ven_country_of_bank_intermidiary");
-            var ven_name_of_bank_branch_intermidiary = document.getElementById("ven_name_of_bank_branch_intermidiary");
-            var ven_bank_branch_code_intermidiary = document.getElementById("ven_bank_branch_code_intermidiary");
-            var ven_bank_account_tittle_intermidiary = document.getElementById("ven_bank_account_tittle_intermidiary");
-            var ven_bank_account_no_intermidiary = document.getElementById("ven_bank_account_no_intermidiary");
-            var ven_bank_swift_code_intermidiary  = document.getElementById("ven_bank_swift_code_intermidiary");
-            var ven_bank_intermidiary_code = document.getElementById("ven_bank_intermidiary_code");
-            var ven_fullName_paypal  = document.getElementById("ven_fullName_paypal");
-            var ven_email_for_paypal = document.getElementById("ven_email_for_paypal");
-            var ven_incorporation_certificate  = document.getElementById("ven_incorporation_certificate");
-            var ven_national_identity_image = document.getElementById("ven_national_identity_image");
+    function validateVendorForm() {
+        var ven_business_name = document.getElementById("ven_business_name");
+        var ven_business_address = document.getElementById("ven_business_address");
+        var ven_business_reg_no = document.getElementById("ven_business_reg_no");
+        var ven_country = document.getElementById("ven_country");
+        var ven_city = document.getElementById("ven_city");
+        var ven_zip_code = document.getElementById("ven_zip_code");
+        var ven_street = document.getElementById("ven_street");
+        var ven_building = document.getElementById("ven_building");
+        var ven_suit_no = document.getElementById("ven_suit_no");
+        var ven_accept_address = document.getElementById("ven_accept_address");
+        var ven_phone = document.getElementById("ven_phone");
+        var ven_primary_f_name = document.getElementById("ven_primary_f_name");
+        var ven_primary_m_name = document.getElementById("ven_primary_m_name");
+        var ven_primary_l_name = document.getElementById("ven_primary_l_name");
+        var ven_business_logo = document.getElementById("ven_business_logo");
+        var ven_website_url = document.getElementById("ven_accept_address");
+        var ven_country_citizenship = document.getElementById("ven_country_citizenship");
+        var ven_country_of_birth = document.getElementById("ven_country_of_birth");
+        var ven_date_of_birth = document.getElementById("ven_date_of_birth");
+        var ven_national_identity = document.getElementById("ven_national_identity");
+        var ven_id_expiration_date = document.getElementById("ven_id_expiration_date");
+        var ven_accept_and_checked_address = document.getElementById("ven_accept_and_checked_address");
+        var ven_country_2 = document.getElementById("ven_country_2");
+        var ven_city_2 = document.getElementById("ven_city_2");
+        var ven_zip_code_2 = document.getElementById("ven_zip_code_2");
+        var ven_street_2 = document.getElementById("ven_street_2");
+        var ven_building_2 = document.getElementById("ven_building_2");
+        var ven_suit_no_2 = document.getElementById("ven_suit_no_2");
+        var ven_phone_2 = document.getElementById("ven_phone_2");
+        var ven_accept_and_checked_name = document.getElementById("ven_accept_and_checked_name");
+        var ven_accept_and_checked_business = document.getElementById("ven_accept_and_checked_business");
+        var ven_name_of_bank = document.getElementById("ven_name_of_bank");
+        var ven_address_of_bank = document.getElementById("ven_address_of_bank");
+        var ven_country_of_bank = document.getElementById("ven_country_of_bank");
+        var ven_name_of_bank_branch = document.getElementById("ven_name_of_bank_branch");
+        var ven_bank_branch_code = document.getElementById("ven_bank_branch_code");
+        var ven_bank_account_tittle = document.getElementById("ven_bank_account_tittle");
+        var ven_bank_account_no = document.getElementById("ven_bank_account_no");
+        var ven_bank_swift_code = document.getElementById("ven_bank_swift_code");
+        var ven_name_of_bank_locally = document.getElementById("ven_name_of_bank_locally");
+        var ven_address_of_bank_locally = document.getElementById("ven_address_of_bank_locally");
+        var ven_country_of_bank_locally = document.getElementById("ven_country_of_bank_locally");
+        var ven_name_of_bank_branch_jp_locally = document.getElementById("ven_name_of_bank_branch");
+        var ven_bank_branch_code_locally = document.getElementById("ven_bank_branch_code_locally");
+        var ven_bank_account_tittle_jp_locally = document.getElementById("ven_bank_account_tittle");
+        var ven_bank_account_no_locally = document.getElementById("ven_bank_account_no");
+        var ven_bank_account_type_locally = document.getElementById("ven_bank_account_type_locally");
+        var ven_name_of_bank_intermidiary = document.getElementById("ven_name_of_bank_intermidiary");
+        var ven_address_of_bank_intermidiary = document.getElementById("ven_address_of_bank_intermidiary");
+        var ven_country_of_bank_intermidiary = document.getElementById("ven_country_of_bank_intermidiary");
+        var ven_name_of_bank_branch_intermidiary = document.getElementById("ven_name_of_bank_branch_intermidiary");
+        var ven_bank_branch_code_intermidiary = document.getElementById("ven_bank_branch_code_intermidiary");
+        var ven_bank_account_tittle_intermidiary = document.getElementById("ven_bank_account_tittle_intermidiary");
+        var ven_bank_account_no_intermidiary = document.getElementById("ven_bank_account_no_intermidiary");
+        var ven_bank_swift_code_intermidiary  = document.getElementById("ven_bank_swift_code_intermidiary");
+        var ven_bank_intermidiary_code = document.getElementById("ven_bank_intermidiary_code");
+        var ven_fullName_paypal  = document.getElementById("ven_fullName_paypal");
+        var ven_email_for_paypal = document.getElementById("ven_email_for_paypal");
+        var ven_incorporation_certificate  = document.getElementById("ven_incorporation_certificate");
+        var ven_national_identity_image = document.getElementById("ven_national_identity_image");
             
-        if (productName.value === "" || productUnit.value === "" || productPrice.value === "" || productCategory
-            .value === "" || productImage.value === "" || productDescription.value === "") {
-            document.getElementById("alert").innerHTML =
-                "<div id='notify' class='failed'><i class='fa fa-times' onclick='hideAlert()'></i>Please Fill Out All Fields <i class='fa fa-exclamation-triangle'></i></div>";
+        if (productName.value === "" || productUnit.value === "" || productPrice.value === "" || productCategory.value === "" || productImage.value === "" || productDescription.value === "") {
+            document.getElementById("alert").innerHTML = "<div id='notify' class='failed'><i class='fa fa-times' onclick='hideAlert()'></i>Please Fill Out All Fields <i class='fa fa-exclamation-triangle'></i></div>";
             return false;
-
         } 
         else {
             return true;

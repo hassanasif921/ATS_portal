@@ -1,25 +1,24 @@
 <?php
 include("top.php");
 ?>
-
             <div class="app-main__outer">
                 <div class="app-main__inner p-0">
                     <div class="app-inner-layout chat-layout">
-                        <div  style="margin-top: -1.2%; box-shadow: none; " class="app-inner-layout__wrapper row-fluid no-gutters">
+                        <div style="margin-top: -1.2%; box-shadow: none;" class="app-inner-layout__wrapper row-fluid no-gutters">
                             <div class="tab-content app-inner-layout__content card">
                                 <div style="box-shadow: none;" class="container card">
                                     <form action="" method="">    
                                         <div style="background:darkgray; padding-top: 2%; padding-bottom: 0.5%;" class="row">
                                             <div class="col-sm-2">
-                                                <label style=" font-weight: bold; margin-top: 5px;" class="form-control-label">Agent Name</label>
+                                                <label style="font-weight: bold; margin-top: 5px;" class="form-control-label">Agent Name</label>
                                             </div>
-                                            <div style="margin-left: -8%; "class="col-sm-1">
+                                            <div style="margin-left: -8%;" class="col-sm-1">
                                                 <select style="width: 160px;" name="get_all_reserved_reports_agent_name" id="get_all_reserved_reports_agent_name" type="text" class="form-control form-control-sm">
                                                     <option>Employee Table</option>
                                                 </select>
                                             </div>
                                             <div style="margin-left: 8%;" class="col-sm-2">
-                                                <label style=" font-weight: bold; margin-top: 5px;" class="form-control-label">Customer Name</label>
+                                                <label style="font-weight: bold; margin-top: 5px;" class="form-control-label">Customer Name</label>
                                             </div>
                                             <div style="margin-left: -6%;" class="col-sm-1 ">
                                                 <select style="width: 160px;" name="get_all_reserved_reports_customer_name" id="get_all_reserved_reports_customer_name" type="text" class="form-control form-control-sm">
@@ -30,7 +29,7 @@ include("top.php");
                                                 <label style=" font-weight: bold; margin-top: 5px;" class="form-control-label">Country</label>
                                             </div>
                                             <div style="margin-left: -2%;" class="col-sm-2">
-                                                <select  name="get_all_reserved_reports_country_name" id="get_all_reserved_reports_country_name" required class="form-control form-control-sm">
+                                                <select name="get_all_reserved_reports_country_name" id="get_all_reserved_reports_country_name" required class="form-control form-control-sm">
                                                     <option value="---">Select Country...</option>
                                                     <option value="AF">Afghanistan</option>
                                                     <option value="AL">Albania</option>
@@ -283,56 +282,52 @@ include("top.php");
                                             </div>
                                             <div class="col-sm-3">
                                                 <input style="width:100px;" type="reset" name="btn_reset" class="mb-2 mr-2 btn btn-gradient-primary" value="Refresh"> 
-                                                <input style="width: 100px;" type="submit" name="btn_all_reserved_reports_search" id="btn_all_reserved_reports_search" class="mb-2 mr-2 btn btn-gradient-success   " value="Search"> 
+                                                <input style="width: 100px;" type="submit" name="btn_all_reserved_reports_search" id="btn_all_reserved_reports_search" class="mb-2 mr-2 btn btn-gradient-success" value="Search"> 
                                             </div>
                                             <div class="col-sm-2"></div>
-                                            <div  class="col-sm-2">
-                                                <label style=" font-weight: bold; " class="form-control-label col-form-label">Select Date</label>
+                                            <div class="col-sm-2">
+                                                <label style="font-weight: bold;" class="form-control-label col-form-label">Select Date</label>
                                             </div>
-                                            <div  class="col-sm-6">
-                                                <input style="margin-left: -89px;" name="get_all_reserved_reports_date" id="get_all_reserved_reports_date" class="form-control form-control-sm js-daterangepicker"  >
+                                            <div class="col-sm-6">
+                                                <input style="margin-left: -89px;" name="get_all_reserved_reports_date" id="get_all_reserved_reports_date" class="form-control form-control-sm js-daterangepicker">
                                             </div>
                                             <div class="col-sm-2"></div>    
                                         </div>     
                                     </form>
                                 </div>
-                                <div style="background-color: gray; height: 1px; "></div>
-                                <div style="margin-left: -19px;" class="container">
+                                <div style="background-color: gray; height: 1px;"></div>
+                                <div style="margin-left: -71px;" class="container">
                                     <h5 class="text-center mt-2 text-primary">All Reserved Reports</h5>
                                     <div class="row">
-                                        <div class="col-lg-12">
-                                            <div class="main-card  card">
+                                        <div style="margin-left:6.5%;" class="col-lg-12">
+                                            <div class="main-card card">
                                                 <div class="card-body">
                                                     <div class="table-responsive">
-                                                        <table style="font-size: 8px;" class="table">
+                                                        <table class="table">
                                                             <thead>
-                                                                <tr>
-                                                                    <th>Slct all<input type="checkbox" onclick="toggle(this);" /></th>
+                                                                <tr class="text-center">
+                                                                    <th>Select all<br/><input type="checkbox" onclick="toggle(this);"/></th>
                                                                     <th>Rec#</th>
-                                                                    <th>Kbtsu</th>
-                                                                    <th>Chassis&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+                                                                    <th>Kubutsu</th>
+                                                                    <th>Chassis</th>
                                                                     <th>Make</th>
                                                                     <th>Model</th>
                                                                     <th>Year</th>
-                                                                    <th>Mth</th>
+                                                                    <th>Month</th>
                                                                     <th>Color</th>
-                                                                    <th>Sft</th>
+                                                                    <th>Shift</th>
                                                                     <th>Feul</th>
                                                                     <th>Door</th>
                                                                     <th>CC</th>
-                                                                    <th style="text-align: center;">Opt.</th>
+                                                                    <th>Option</th>
                                                                     <th>FOB</th>
-                                                                    <th>Grd</th>
-                                                                    <th>Mileage</th>
-                                                                    <th>FOB</th>
-                                                                    <th>Grd</th>
-                                                                    <th>FOB</th>
-                                                                    <th>Grd</th>
+                                                                    <th>Grade</th>
+                                                                    <th>Mileage</th>   
                                                                 </tr>
                                                             </thead>
                                                             <tbody>
                                                                 <tr>
-                                                                    <td><input type="checkbox" /></td>
+                                                                    <td><input type="checkbox"/></td>
                                                                     <td>4321</td>
                                                                     <td>KEN</td>
                                                                     <td>BHJ-25465456</td>
@@ -386,3 +381,12 @@ include("top.php");
 <?php
 include("bottom.php");
 ?>   
+<script>
+    function toggle(source) {
+        var checkboxes = document.querySelectorAll('input[type="checkbox"]');
+        for (var i = 0; i < checkboxes.length; i++) {
+            if (checkboxes[i] != source)
+                checkboxes[i].checked = source.checked;
+        }
+    }  
+</script>

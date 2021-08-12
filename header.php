@@ -1,8 +1,7 @@
 <?php 
-session_start();
-
+// session_start();
 ?>
-<div class="app-header header-shadow">
+        <div class="app-header header-shadow">
             <div class="app-header__logo">
                 <div class="logo-src"></div>
                 <div class="header__pane ml-auto">
@@ -35,8 +34,7 @@ session_start();
             </div>    
             <div class="app-header__content">
                 <div class="app-header-left">
-                    <ul class="header-megamenu nav">
-                        
+                    <ul class="header-megamenu nav">    
                         <li class="dropdown nav-item">
                             <a aria-haspopup="true" data-toggle="dropdown" class="nav-link" aria-expanded="false">
                                 <i class="nav-link-icon lnr lnr-cog"></i> Projects&nbsp;
@@ -76,12 +74,10 @@ session_start();
                                 </button>
                             </div>
                         </li>
-                    </ul>
-                          
+                    </ul>          
                 </div>
                 <div class="app-header-right">
                     <div class="header-dots">
-                     
                         <div class="search-wrapper">
                             <div class="input-holder">
                                 <input type="text" class="search-input" placeholder="Type to search">
@@ -90,16 +86,14 @@ session_start();
                             <button class="close"></button>
                         </div>
                         <div class="dropdown">
-                            <button type="button" aria-haspopup="true" aria-expanded="false" data-toggle="dropdown"
-                                class="p-0 mr-2 btn btn-link">
+                            <button type="button" aria-haspopup="true" aria-expanded="false" data-toggle="dropdown" class="p-0 mr-2 btn btn-link">
                                 <span class="icon-wrapper icon-wrapper-alt rounded-circle">
                                     <span class="icon-wrapper-bg bg-danger"></span>
                                     <i class="icon text-danger icon-anim-pulse ion-android-notifications"></i>
                                     <span class="badge badge-dot badge-dot-sm badge-danger">Notifications</span>
                                 </span>
                             </button>
-                            <div tabindex="-1" role="menu" aria-hidden="true"
-                                class="dropdown-menu-xl rm-pointers dropdown-menu dropdown-menu-right">
+                            <div tabindex="-1" role="menu" aria-hidden="true" class="dropdown-menu-xl rm-pointers dropdown-menu dropdown-menu-right">
                                 <div class="dropdown-menu-header mb-0">
                                     <div class="dropdown-menu-header-inner bg-deep-blue">
                                         <div class="menu-header-image opacity-1" style="background-image: url('assets/images/dropdown-header/city3.jpg');"></div>
@@ -357,8 +351,7 @@ session_start();
                                                                 </span>
                                                                 <div class="vertical-timeline-element-content bounce-in">
                                                                     <h4 class="timeline-title">Build the production release</h4>
-                                                                    <p>Lorem ipsum dolor sit amit,consectetur eiusmdd tempor incididunt ut
-                                                                        labore et dolore magna elit enim at minim veniam quis nostrud
+                                                                    <p>Lorem ipsum dolor sit amit,consectetur eiusmdd tempor incididunt ut labore et dolore magna elit enim at minim veniam quis nostrud
                                                                     </p>
                                                                     <span class="vertical-timeline-element-date"></span>
                                                                 </div>
@@ -420,7 +413,7 @@ session_start();
                                     <div class="dropdown-menu-header-inner pt-4 pb-4 bg-focus">
                                         <div class="menu-header-image opacity-05" style="background-image: url('assets/images/dropdown-header/city2.jpg');"></div>
                                         <div class="menu-header-content text-center text-white">
-                                            <h6 class="menu-header-subtitle mt-0"> Choose Language</h6>
+                                            <h6 class="menu-header-subtitle mt-0">Choose Language</h6>
                                         </div>
                                     </div>
                                 </div>
@@ -443,13 +436,11 @@ session_start();
                                     <span class="mr-3 opacity-8 flag large DE"></span> Germany
                                 </button>
                                 <button type="button" tabindex="0" class="dropdown-item">
-                                    <span class="mr-3 opacity-8 flag large IT"></span> Italy11
+                                    <span class="mr-3 opacity-8 flag large IT"></span> Italy
                                 </button>
                             </div>
-                        </div>
-                        
-                    </div>
-                    
+                        </div>    
+                    </div>    
                     <div class="header-btn-lg pr-0">
                         <div class="widget-content p-0">
                             <div class="widget-content-wrapper">
@@ -484,66 +475,49 @@ session_start();
                                             <div class="scroll-area-xs" style="height: 150px;">
                                                 <div class="scrollbar-container ps">
                                                     <ul class="nav flex-column">
-                                                        <li class="nav-item-header nav-item">Activity</li>
+                                                        <li class="nav-item-header nav-item">My Account</li>
                                                         <li class="nav-item">
-                                                            <a href="javascript:void(0);" class="nav-link">Chat
-                                                                <div class="ml-auto badge badge-pill badge-info">8</div>
+                                                            <a href="javascript:void(0);" class="nav-link">Edit Profile
+                                                                <!-- <div class="ml-auto badge badge-pill badge-info">8</div> -->
                                                             </a>
                                                         </li>
                                                         <li class="nav-item">
                                                             <a href="javascript:void(0);" class="nav-link">Recover Password</a>
                                                         </li>
-                                                        <li class="nav-item-header nav-item">My Account
-                                                        </li>
+                                                        
                                                         <li class="nav-item">
-                                                            <a href="javascript:void(0);" class="nav-link">Settings
-                                                                <div class="ml-auto badge badge-success">New</div>
+                                                            <a href="javascript:void(0);" class="nav-link">My Bank    
                                                             </a>
                                                         </li>
-                                                        <li class="nav-item">
+                                                        <!-- <li class="nav-item">
                                                             <a href="javascript:void(0);" class="nav-link">Messages
                                                                 <div class="ml-auto badge badge-warning">512</div>
                                                             </a>
                                                         </li>
                                                         <li class="nav-item">
                                                             <a href="javascript:void(0);" class="nav-link">Logs</a>
-                                                        </li>
+                                                        </li> -->
                                                     </ul>
                                                 </div>
                                             </div>
-                                            <ul class="nav flex-column">
+                                            <!-- <ul class="nav flex-column">
                                                 <li class="nav-item-divider mb-0 nav-item"></li>
                                             </ul>
-                                            <div class="grid-menu grid-menu-2col">
-                                                <div class="no-gutters row">
-                                                    <div class="col-sm-6">
-                                                        <button class="btn-icon-vertical btn-transition btn-transition-alt pt-2 pb-2 btn btn-outline-warning">
-                                                            <i class="pe-7s-chat icon-gradient bg-amy-crisp btn-icon-wrapper mb-2"></i> Message Inbox
-                                                        </button>
-                                                    </div>
-                                                    <div class="col-sm-6">
-                                                        <button class="btn-icon-vertical btn-transition btn-transition-alt pt-2 pb-2 btn btn-outline-danger">
-                                                            <i class="pe-7s-ticket icon-gradient bg-love-kiss btn-icon-wrapper mb-2"></i>
-                                                            <b>Support Tickets</b>
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                            
                                             <ul class="nav flex-column">
                                                 <li class="nav-item-divider nav-item">
                                                 </li>
                                                 <li class="nav-item-btn text-center nav-item">
-                                                    <button class="btn-wide btn btn-primary btn-sm"> Open Messages </button>
+                                                    <button class="btn-wide btn btn-primary btn-sm">Open Messages</button>
                                                 </li>
-                                            </ul>
+                                            </ul> -->
                                         </div>
                                     </div>
                                 </div>
                                 <div class="widget-content-left  ml-3 header-user-info">
-                                    <div class="widget-heading "style="color: black;"><?php echo $_SESSION["userName"]?> </div>
-                                    <div class="widget-subheading"> Customer Service | <?php echo $_SESSION["user_id"]?> </div>
-                                </div>
-                                
+                                    <div class="widget-heading" style="color: black;"><?php//echo $_SESSION["userName"]?> </div>
+                                    <div class="widget-subheading">Customer Service | <?php//echo $_SESSION["user_id"]?> </div>
+                                </div>    
                             </div>
                         </div>
                     </div>       
@@ -617,7 +591,7 @@ session_start();
                         <h3 class="themeoptions-heading">
                             <div> Header Options </div>
                             <button type="button" class="btn-pill btn-shadow btn-wide ml-auto btn btn-focus btn-sm switch-header-cs-class" data-class="">
-                                Restore Default
+                                Restore Default nb
                             </button>
                         </h3>
                         <div class="p-3">
@@ -673,8 +647,7 @@ session_start();
                             </button>
                         </h3>
                         <div class="p-3">
-                            <ul class="list-group">
-                                
+                            <ul class="list-group">    
                                 <li class="list-group-item">
                                     <h5 class="pb-2">Choose Color Scheme</h5>
                                     <div class="theme-settings-swatches">
@@ -717,7 +690,7 @@ session_start();
                                         <div class="swatch-holder bg-happy-green switch-sidebar-cs-class" data-class="bg-happy-green sidebar-text-light"></div>
                                     </div>
                                 </li>
-                                </ul>
+                            </ul>
                         </div>
                         <h3 class="themeoptions-heading">
                             <div>Main Content Options</div>

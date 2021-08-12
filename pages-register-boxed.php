@@ -48,7 +48,7 @@
                                         </div>
                                         <div class="col-md-12">
                                             <div class="position-relative form-group">
-                                                <input name="password"  id="examplePassword" placeholder="Password here..." type="password"  class="form-control">
+                                                <input name="password" id="examplePassword" placeholder="Password here..." type="password"  class="form-control">
                                             </div>
                                         </div>
                                         <div class="col-md-12">
