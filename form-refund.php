@@ -1,41 +1,33 @@
 <?php
 include("top.php");
 include("connection_db.php");
-
-if (isset($_POST["btn_refund"])) {
-    $get_remittance_refund_id_ag = $_POST["get_remittance_refund_id_ag"];
-    $get_remittance_refund_agent_name = $_POST["get_remittance_refund_agent_name"];
-    $refund_amount = $_POST["refund_amount"];
-    $get_remittance_refund_customer_name = $_POST["get_remittance_refund_customer_name"];
-    $get_remittance_refund_sender_name = $_POST["get_remittance_refund_sender_name"];
-    $refund_bank_name = $_POST["refund_bank_name"];
-    $refund_branch_name = $_POST["refund_branch_name"];
-    $refund_account_tittle = $_POST["refund_account_tittle"];
-    $refund_bank_address = $_POST["refund_bank_address"];
-    $refund_swift_code = $_POST["refund_swift_code"];
-    $refund_memo_notify = $_POST["refund_memo_notify"];
-    $refund_created_at = time();
-    $refund_updated_at = time();
-    $refund_status = "active";
-    
-    $insert = "insert into ats_refund(ats_refund_Remittance_ID,ats_refund_agent_name,ats_refund_refund_amount,ats_refund_customer_name,ats_refund_sender_name,
-    ats_refund_bank_name,ats_refund_branch_name,ats_refund_aco_title,ats_refund_bank_address,ats_refund_swift_code,ats_refund_memo_notify,ats_refund_created_at,ats_refund_updated_at,ats_refund_status)
-     values('$get_remittance_refund_id_ag','$get_remittance_refund_agent_name',
-     '$refund_amount','$get_remittance_refund_customer_name','$get_remittance_refund_sender_name',
-     '$refund_bank_name','$refund_branch_name','$refund_account_tittle',
-     '$refund_bank_address','$refund_swift_code','$refund_memo_notify','$refund_created_at','$refund_updated_at','$refund_status')";
-    $query = mysqli_query($connection,$insert);
-    if ($query)
-    {
-        echo '<script type="text/javascript"> alert("Employee Register Successfully")</script>';
-        //echo '<script language="javascript">window.location.href ="employee-records.php"</script>';
-    }
-    else
-    {
-        echo '<script type="text/javascript"> alert("Employee Not Register")</script>';
-    }	}
-   
-   
+    if (isset($_POST["btn_refund"])) {
+        $get_remittance_refund_id_ag = $_POST["get_remittance_refund_id_ag"];
+        $get_remittance_refund_agent_name = $_POST["get_remittance_refund_agent_name"];
+        $refund_amount = $_POST["refund_amount"];
+        $get_remittance_refund_customer_name = $_POST["get_remittance_refund_customer_name"];
+        $get_remittance_refund_sender_name = $_POST["get_remittance_refund_sender_name"];
+        $refund_bank_name = $_POST["refund_bank_name"];
+        $refund_branch_name = $_POST["refund_branch_name"];
+        $refund_account_tittle = $_POST["refund_account_tittle"];
+        $refund_bank_address = $_POST["refund_bank_address"];
+        $refund_swift_code = $_POST["refund_swift_code"];
+        $refund_memo_notify = $_POST["refund_memo_notify"];
+        $refund_created_at = time();
+        $refund_updated_at = time();
+        $refund_status = "active";
+        $insert = "insert into ats_refund(ats_refund_Remittance_ID,ats_refund_agent_name,ats_refund_refund_amount,ats_refund_customer_name,ats_refund_sender_name,ats_refund_bank_name,ats_refund_branch_name,ats_refund_aco_title,ats_refund_bank_address,ats_refund_swift_code,ats_refund_memo_notify,ats_refund_created_at,ats_refund_updated_at,ats_refund_status)values('$get_remittance_refund_id_ag','$get_remittance_refund_agent_name','$refund_amount','$get_remittance_refund_customer_name','$get_remittance_refund_sender_name','$refund_bank_name','$refund_branch_name','$refund_account_tittle','$refund_bank_address','$refund_swift_code','$refund_memo_notify','$refund_created_at','$refund_updated_at','$refund_status')";
+        $query = mysqli_query($connection,$insert);
+        if ($query)
+        {
+            echo '<script type="text/javascript"> alert("Employee Register Successfully")</script>';
+            //echo '<script language="javascript">window.location.href ="employee-records.php"</script>';
+        }
+        else
+        {
+            echo '<script type="text/javascript"> alert("Employee Not Register")</script>';
+        }	
+    }   
 ?>
             <div class="app-main__outer">
                 <div class="app-main__inner p-0">
@@ -63,7 +55,7 @@ if (isset($_POST["btn_refund"])) {
                                     <div class="col-md-2" id="agent">
                                         <div class="position-relative form-group">
                                             <label class="">Agent Name</label>
-                                            <select name="get_remittance_refund_agent_name" id="get_remittance_refund_agent_name"   class="form-control">
+                                            <select name="get_remittance_refund_agent_name" id="get_remittance_refund_agent_name" class="form-control">
                                                 <option value="33">Agent / User Table</option>
                                             </select> 
                                         </div>
@@ -82,16 +74,12 @@ if (isset($_POST["btn_refund"])) {
                                                 <?php
                                                     $query = mysqli_query($connection,"select ats_customer_dealership_name from ats_customer");
                                                     $count = mysqli_num_rows($query);
-                                                    while($row = mysqli_fetch_array($query))
-                                                        {
+                                                    while($row = mysqli_fetch_array($query)){
                                                 ?>
-                                                            <option value="<?php echo($row['ats_customer_dealership_name'])?>">
-                                                                <?php echo($row['ats_customer_dealership_name'])?>
-                                                            </option>
+                                                <option value="<?php echo($row['ats_customer_dealership_name'])?>"><?php echo($row['ats_customer_dealership_name'])?></option>
                                                 <?php
-                                                        }                                             
-                                                ?> 
-                                                                         
+                                                    }                                             
+                                                ?>                             
                                             </select>
                                         </div>
                                     </div>
@@ -187,16 +175,15 @@ if (isset($_POST["btn_refund"])) {
         var refund_bank_address = document.getElementById("refund_bank_address");
         var refund_swift_code = document.getElementById("refund_swift_code");
         var refund_memo_notify = document.getElementById("refund_memo_notify");
-
         if (refund_remittance_id.value == "" || refund_agent_name.value == "" || refund_amount.value == "" || refund_customer_name.value == "" || refund_sender_name.value == "" || refund_bank_name.value == "" || refund_branch_name.value == "" || refund_account_tittle.value == "" || refund_bank_address.value == "" || refund_swift_code.value == "" || refund_memo_notify.value == "") {
-         alert("Please Fill Out All Fields");
+            alert("Please Fill Out All Fields");
             return false;
 
-        } else {
+        } 
+        else {
             return true;
         }
     }
-
 </script>  
 <?php
 include("bottom.php");

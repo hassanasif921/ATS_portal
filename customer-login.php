@@ -29,7 +29,6 @@ if(isset($_POST["btn_login"]))
 ?>
 <!doctype html>
 <html lang="en">
-
 <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
 <head>
     <meta charset="utf-8">
@@ -40,13 +39,13 @@ if(isset($_POST["btn_login"]))
     <!-- Disable tap highlight on IE -->
     <meta name="msapplication-tap-highlight" content="no">
     <link href="assets/images/logo-fav.png" rel="icon">
-<link href="main.d810cf0ae7f39f28f336.css" rel="stylesheet">
-<link rel="stylesheet" href="https://cdn.linearicons.com/free/1.0.0/icon-font.min.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
-crossorigin="anonymous"></script>
-<link href="https://cdnjs.cloudflare.com/ajax/libs/emojionearea/3.4.1/emojionearea.css" rel="stylesheet" />
-<script src="https://cdnjs.cloudflare.com/ajax/libs/emojionearea/3.4.1/emojionearea.js"></script>    
+    <link href="main.d810cf0ae7f39f28f336.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.linearicons.com/free/1.0.0/icon-font.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
+    crossorigin="anonymous"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/emojionearea/3.4.1/emojionearea.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/emojionearea/3.4.1/emojionearea.js"></script>    
 </head>
 
 <body>
@@ -122,9 +121,9 @@ crossorigin="anonymous"></script>
                                     </div>
                                     <div class="divider row"></div>
                                     <div class="d-flex align-items-center">
-                                    <label style="color:red;" ><?php //echo $result ?></label>
+                                    <label style="color:red;"><?php //echo $result ?></label>
                                         <div class="ml-auto">
-                                            <input type="submit" name="btn_login" id="btn_login" style="background-color: #ff9900; border-style: none;" class="btn btn-primary btn-lg" value="Login" >
+                                            <input type="submit" name="btn_login" id="btn_login" style="background-color: #ff9900; border-style: none;" class="btn btn-primary btn-lg" value="Login">
                                         </div>
                                     </div>
                                 </form>

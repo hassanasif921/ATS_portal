@@ -14,9 +14,7 @@ if (isset($_POST["btn_post"])) {
     $post_updatedAt = time();
     $post_updatedBy="demo";
     $post_status = "active";
-
     $insert = "insert into ats_post(ats_post_privacy,ats_post_username,ats_post_designation,ats_post_heading,ats_post_description,ats_post_image,ats_post_createdBy,ats_post_createdAt,ats_post_updatedBy,ats_post_updatedAt,ats_post_status) values('$post_privacy','$get_post_emp_fullname','$post_designation','$post_heading','$post_description','$post_image','$post_createdAt','$post_createdBy','$post_updatedAt','$post_updatedBy','$post_status')";
-   
     $query = mysqli_query($connection,$insert);
     if ($query)
     {
@@ -49,8 +47,7 @@ if (isset($_POST["btn_post"])) {
                                     <a role="tab" data-toggle="tab" class="nav-link" href="#dashboard-statstics" aria-selected="false">
                                         <span>Statistics</span>
                                     </a>
-                                </li>
-                                
+                                </li>    
                                 <li class="nav-item">
                                     <a role="tab" data-toggle="tab" class="nav-link" href="#dashboard-ranking" aria-selected="false">
                                         <span>Ranking</span>
@@ -59,232 +56,224 @@ if (isset($_POST["btn_post"])) {
                             </ul>
                         </div>
                         <div class="app-inner-layout__wrapper row-fluid no-gutters">
-                            <div style="background: transparent; box-shadow: none;" class="tab-content col-md-10 app-inner-layout__content card" >
-                                <div style=" background: transparent; box-shadow: none;" id="dashboard-home" role="tabpanel"  class="tab-pane active container card">
+                            <div style="background: transparent; box-shadow: none;" class="tab-content col-md-10 app-inner-layout__content card">
+                                <div style=" background: transparent; box-shadow: none;" id="dashboard-home" role="tabpanel" class="tab-pane active container card">
                                     <div>
                                         <h4 style="margin-left:5px; margin-top:2%;">Create Post</h4>
-                                        <input style="color: black; border-radius: 20px;"  data-toggle="modal" data-target="#exampleModalLong" class="form-control mr-sm-2"  placeholder="Create a New Post Here..">
+                                        <input style="color: black; border-radius: 20px;" data-toggle="modal" data-target="#exampleModalLong" class="form-control mr-sm-2" placeholder="Create a New Post Here..">
                                     </div>
                                     <div style=" background: white;  margin-top:30px;  padding-bottom:10px; margin-bottom:50px;">
-                                     <?php
-                                          
-
-                                          $query = mysqli_query($connection,"select * from ats_post");
-                                          $count =mysqli_num_rows($query);
-                                          if($count > 0)
-                                          {
-                                              while($row = mysqli_fetch_array($query))
-                                              {	    				   
-                                    ?>                         
-                                        <div style="padding-top:3%; color: black; " class="container">
+                                        <?php
+                                            $query = mysqli_query($connection,"select * from ats_post");
+                                            $count =mysqli_num_rows($query);
+                                            if($count > 0){
+                                                while($row = mysqli_fetch_array($query)){	    				   
+                                        ?>                         
+                                        <div style="padding-top:3%; color: black;" class="container">
                                             <img class="user-avatar rounded-circle" style="width: 55px;" id="get_post_emp_passport_image" name="get_post_emp_passport_image" src="assets/images/avatars/1.jpg" alt="User Avatar">
-                                            <label style="font-weight: bold;  margin-left:10px; margin-top:-10px;" name="get_post_emp_fullname" id="get_post_emp_fullname" ><?php echo $row["ats_post_username"] ?><br/>
+                                            <label style="font-weight: bold;  margin-left:10px; margin-top:-10px;" name="get_post_emp_fullname" id="get_post_emp_fullname"><?php echo $row["ats_post_username"] ?><br/>
                                             </label>
                                             <p style="margin-left:70px;  font-size:12px; margin-top:-22px;" name="get_post_privacy" id="get_post_privacy"><?php echo $row["ats_post_privacy"] ?>  <i class="fa fa-globe"></i></p>
                                             <h2 style=" margin-top:3.5%;" name="get_post_heading" id="get_post_heading"><?php echo $row["ats_post_heading"] ?></h2>
                                             <h6 id="get_post_date" name="get_post_date"> Dec 7, 2017</h6>
                                             <p style="padding-bottom:2%; padding-top:5%;" name="get_post_description" id="get_post_description"><?php echo $row["ats_post_description"] ?></p>
                                             <div style="margin-bottom:2%" class="row">
-                                                    <div style="margin-left:7px;" class="col-md-6">
-                                                        <img style="width:300px; height:260px;" name="get_post_image1" id="get_post_image1" src="assets/images/logo-inverse.png">
-                                                    </div>
-                                                    <div style="margin-left:-20px;" class="col-md-3">
-                                                        <img style="width:150px; height:130px;" name="get_post_image2" id="get_post_image2" src="assets/images/logo-inverse.png">
-                                                        <img style="width:150px; margin-top:1px; height:130px;" name="get_post_image3" id="get_post_image3" src="assets/images/logo-inverse.png">
-                                                    </div>
-                                                    <div style="margin-left:-10px;" class="col-md-3">
-                                                        <img style="width:150px; height:130px;" name="get_post_image4" id="get_post_image4" src="assets/images/logo-inverse.png">
-                                                        <img style="width:150px; margin-top:1px; height:130px;" name="get_post_image5" id="get_post_image5" src="assets/images/logo-inverse.png">
-                                                    </div>
-                                                             
-                                                    <label class="like-share" style="margin-left:3.5%; "><a><i class="fa fa-thumbs-up"></i><span name="get_post_total_likes" id="get_post_total_likes"> 56</span> Likes</a></label>
-                                                    <label class="like-share" style="margin-left:67%;  float:right;"><a><i class="fa fa-comments"></i><span name="get_post_total_comments" id="get_post_total_comments"> 56</span> Comments</a></label>
+                                                <div style="margin-left:7px;" class="col-md-6">
+                                                    <img style="width:300px; height:260px;" name="get_post_image1" id="get_post_image1" src="assets/images/logo-inverse.png">
+                                                </div>
+                                                <div style="margin-left:-20px;" class="col-md-3">
+                                                    <img style="width:150px; height:130px;" name="get_post_image2" id="get_post_image2" src="assets/images/logo-inverse.png">
+                                                    <img style="width:150px; margin-top:1px; height:130px;" name="get_post_image3" id="get_post_image3" src="assets/images/logo-inverse.png">
+                                                </div>
+                                                <div style="margin-left:-10px;" class="col-md-3">
+                                                    <img style="width:150px; height:130px;" name="get_post_image4" id="get_post_image4" src="assets/images/logo-inverse.png">
+                                                    <img style="width:150px; margin-top:1px; height:130px;" name="get_post_image5" id="get_post_image5" src="assets/images/logo-inverse.png">
+                                                </div>             
+                                                <label class="like-share" style="margin-left:3.5%;"><a><i class="fa fa-thumbs-up"></i><span name="get_post_total_likes" id="get_post_total_likes"> 56</span> Likes</a></label>
+                                                <label class="like-share" style="margin-left:67%;  float:right;"><a><i class="fa fa-comments"></i><span name="get_post_total_comments" id="get_post_total_comments"> 56</span> Comments</a></label>
                                             </div>
                                             <form id="signupForm" method="post" action="#">
                                             <div style=" margin-bottom:px;" class="row like-share">
-                                                <div style="text-align: center; color:#ff9900; font-size: 24px; border-right: 1px solid black; border-top: 1px solid black; border-bottom: 1px solid black;"  class="col-md-6 "><button name="btn_post_like" id="btn_post_like" style="background: transparent; cursor: pointer; border-style:none; " type="submit"><i style="color: #ff9900" class="fa fa-thumbs-up"></i></button></div>
-                                                <div style="text-align: center;  font-size: 24px; border-top: 1px solid black; border-bottom: 1px solid black;"  class="col-md-6"><button  name="btn_write_comment" id="btn_write_comment" style=" background: transparent; cursor: pointer; border-style:none; " type="submit"><i style="color: #ff9900" class="fa fa-comments"></i></button></div>
-                                                
+                                                <div style="text-align: center; color:#ff9900; font-size: 24px; border-right: 1px solid black; border-top: 1px solid black; border-bottom: 1px solid black;" class="col-md-6 "><button name="btn_post_like" id="btn_post_like" style="background: transparent; cursor: pointer; border-style:none;" type="submit"><i style="color: #ff9900" class="fa fa-thumbs-up"></i></button></div>
+                                                <div style="text-align: center;  font-size: 24px; border-top: 1px solid black; border-bottom: 1px solid black;" class="col-md-6"><button  name="btn_write_comment" id="btn_write_comment" style=" background: transparent; cursor: pointer; border-style:none;" type="submit"><i style="color: #ff9900" class="fa fa-comments"></i></button></div>
                                                 <div class="col-sm-1">
-                                                <img class="user-avatar rounded-circle" style="width:50px;  margin-top:7px; height:45px;" name="get_comment_emp_passport_image" id="get_comment_emp_passport_image" src="assets/images/avatars/4.jpg" alt="User Avatar">
+                                                    <img class="user-avatar rounded-circle" style="width:50px;  margin-top:7px; height:45px;" name="get_comment_emp_passport_image" id="get_comment_emp_passport_image" src="assets/images/avatars/4.jpg" alt="User Avatar">
                                                 </div>
                                                 <div style="margin-top:2%;" class="col-sm-10">
-                                                <input style="color: black; border-radius: 7px;" class="form-control" type="text" id="comments_for_post" required placeholder="Write Comment Here..">
+                                                    <input style="color: black; border-radius: 7px;" class="form-control" type="text" id="comments_for_post" required placeholder="Write Comment Here..">
                                                 </div>
                                                 <div class="col-sm-1">
-                                                <button style=" background: #ff9900; margin-left: -10px; margin-top:13px; border-style:none; border-radius: 7px;" id="btn_submit_comment" name="btn_submit_comment" type="button" class="btn btn-primary"><i style="font-size: 20px;" class="fa fa-location-arrow"></i></button>
-                                                </div>
-                                                
+                                                    <button style=" background: #ff9900; margin-left: -10px; margin-top:13px; border-style:none; border-radius: 7px;" id="btn_submit_comment" name="btn_submit_comment" type="button" class="btn btn-primary"><i style="font-size: 20px;" class="fa fa-location-arrow"></i></button>
+                                                </div>    
                                             </div>
                                             </form>
                                         </div>
                                         <?php
-                                               }
-                                          }
+                                                }
+                                            }
                                         ?>
                                     </div>
                                 </div>
-                                
-                                <div id="dashboard-overview" role="tabpanel"  class="tab-pane container card">
-                                        <div style="padding-top:3%;" class="row">
-                                            <div class="col-md-4">
-                                                <div class="card mb-3 widget-chart widget-chart2 bg-warm-flame text-left">
-                                                    <div class="widget-chat-wrapper-outer">
-                                                        <div class="widget-chart-content text-white">
-                                                            <div class="widget-chart-flex">
-                                                                <div class="widget-title">Sales</div>
-                                                                <div class="widget-subtitle text-white">Monthly Goals</div>
+                                <div id="dashboard-overview" role="tabpanel" class="tab-pane container card">
+                                    <div style="padding-top:3%;" class="row">
+                                        <div class="col-md-4">
+                                            <div class="card mb-3 widget-chart widget-chart2 bg-warm-flame text-left">
+                                                <div class="widget-chat-wrapper-outer">
+                                                    <div class="widget-chart-content text-white">
+                                                        <div class="widget-chart-flex">
+                                                            <div class="widget-title">Sales</div>
+                                                            <div class="widget-subtitle text-white">Monthly Goals</div>
+                                                        </div>
+                                                        <div class="widget-chart-flex">
+                                                            <div class="widget-numbers">
+                                                                <small>$</small>
+                                                                1283
                                                             </div>
-                                                            <div class="widget-chart-flex">
-                                                                <div class="widget-numbers">
-                                                                    <small>$</small>
-                                                                    1283
-                                                                </div>
-                                                                <div class="widget-description ml-auto text-white">
-                                                                    <i class="fa fa-angle-up "></i>
-                                                                    <span class="pl-1">175.5%</span>
-                                                                </div>
+                                                            <div class="widget-description ml-auto text-white">
+                                                                <i class="fa fa-angle-up "></i>
+                                                                <span class="pl-1">175.5%</span>
                                                             </div>
                                                         </div>
-                                                        <div class="widget-progress-wrapper">
-                                                            <div class="progress-bar-sm progress-bar-animated-alt progress">
-                                                                <div class="progress-bar bg-success" role="progressbar" aria-valuenow="65"
-                                                                    aria-valuemin="0" aria-valuemax="100" style="width: 65%;">
-                                                                </div>
+                                                    </div>
+                                                    <div class="widget-progress-wrapper">
+                                                        <div class="progress-bar-sm progress-bar-animated-alt progress">
+                                                            <div class="progress-bar bg-success" role="progressbar" aria-valuenow="65"
+                                                                aria-valuemin="0" aria-valuemax="100" style="width: 65%;">
                                                             </div>
-                                                            <div class="progress-sub-label text-white">YoY Growth</div>
                                                         </div>
+                                                        <div class="progress-sub-label text-white">YoY Growth</div>
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-md-4">
-                                                <div class="card mb-3 widget-chart widget-chart2 bg-tempting-azure text-left">
-                                                    <div class="widget-chat-wrapper-outer">
-                                                        <div class="widget-chart-content text-dark">
-                                                            <div class="widget-chart-flex">
-                                                                <div class="widget-title">Profiles</div>
-                                                                <div class="widget-subtitle text-dark">Active Users</div>
-                                                            </div>
-                                                            <div class="widget-chart-flex">
-                                                                <div class="widget-numbers">368</div>
-                                                                <div class="widget-description ml-auto text-dark">
-                                                                    <span class="pr-1">66.5%</span>
-                                                                    <i class="fa fa-arrow-left "></i>
-                                                                </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="card mb-3 widget-chart widget-chart2 bg-tempting-azure text-left">
+                                                <div class="widget-chat-wrapper-outer">
+                                                    <div class="widget-chart-content text-dark">
+                                                        <div class="widget-chart-flex">
+                                                            <div class="widget-title">Profiles</div>
+                                                            <div class="widget-subtitle text-dark">Active Users</div>
+                                                        </div>
+                                                        <div class="widget-chart-flex">
+                                                            <div class="widget-numbers">368</div>
+                                                            <div class="widget-description ml-auto text-dark">
+                                                                <span class="pr-1">66.5%</span>
+                                                                <i class="fa fa-arrow-left "></i>
                                                             </div>
                                                         </div>
-                                                        <div class="widget-progress-wrapper">
-                                                            <div class="progress-bar-sm progress-bar-animated-alt progress">
-                                                                <div class="progress-bar bg-danger" role="progressbar" aria-valuenow="85"
-                                                                    aria-valuemin="0" aria-valuemax="100" style="width: 85%;">
-                                                                </div>
+                                                    </div>
+                                                    <div class="widget-progress-wrapper">
+                                                        <div class="progress-bar-sm progress-bar-animated-alt progress">
+                                                            <div class="progress-bar bg-danger" role="progressbar" aria-valuenow="85"
+                                                                aria-valuemin="0" aria-valuemax="100" style="width: 85%;">
                                                             </div>
-                                                            <div class="progress-sub-label">Monthly Subscribers</div>
                                                         </div>
+                                                        <div class="progress-sub-label">Monthly Subscribers</div>
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-md-4">
-                                                <div class="card mb-3 widget-chart widget-chart2 bg-plum-plate text-left">
-                                                    <div class="widget-chat-wrapper-outer">
-                                                        <div class="widget-chart-content text-white">
-                                                            <div class="widget-chart-flex">
-                                                                <div class="widget-title">Clients</div>
-                                                                <div class="widget-subtitle text-white opacity-7">Returning</div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="card mb-3 widget-chart widget-chart2 bg-plum-plate text-left">
+                                                <div class="widget-chat-wrapper-outer">
+                                                    <div class="widget-chart-content text-white">
+                                                        <div class="widget-chart-flex">
+                                                            <div class="widget-title">Clients</div>
+                                                            <div class="widget-subtitle text-white opacity-7">Returning</div>
+                                                        </div>
+                                                        <div class="widget-chart-flex">
+                                                            <div class="widget-numbers">87
+                                                                <small>%</small>                                                                
                                                             </div>
-                                                            <div class="widget-chart-flex">
-                                                                <div class="widget-numbers">87
-                                                                    <small>%</small>
-                                                                </div>
-                                                                <div class="widget-description ml-auto text-white"><span class="pr-1">45</span>
-                                                                    <i class="fa fa-angle-up "></i>
-                                                                </div>
+                                                            <div class="widet-description ml-auto text-white"><span class="pr-1">45</span>
+                                                                <i class="fa fa-angle-up "></i>
                                                             </div>
                                                         </div>
-                                                        <div class="widget-progress-wrapper">
-                                                            <div class="progress-bar-sm progress-bar-animated progress">
-                                                                <div class="progress-bar bg-warning" role="progressbar" aria-valuenow="47"
-                                                                    aria-valuemin="0" aria-valuemax="100" style="width: 47%;">
-                                                                </div>
+                                                    </div>
+                                                    <div class="widget-progress-wrapper">
+                                                        <div class="progress-bar-sm progress-bar-animated progress">
+                                                            <div class="progress-bar bg-warning" role="progressbar" aria-valuenow="47"
+                                                                aria-valuemin="0" aria-valuemax="100" style="width: 47%;">
                                                             </div>
-                                                            <div class="progress-sub-label text-white">Successful Payments</div>
                                                         </div>
+                                                        <div class="progress-sub-label text-white">Successful Payments</div>
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-md-4">
-                                                <div class="card mb-3 widget-chart widget-chart2 bg-mixed-hopes text-left">
-                                                    <div class="widget-chat-wrapper-outer">
-                                                        <div class="widget-chart-content text-white">
-                                                            <div class="widget-chart-flex">
-                                                                <div class="widget-title">Reports</div>
-                                                                <div class="widget-subtitle text-white">Bugs Fixed</div>
-                                                            </div>
-                                                            <div class="widget-chart-flex">
-                                                                <div class="widget-numbers text-warning">1621</div>
-                                                                <div class="widget-description ml-auto text-white">
-                                                                    <i class="fa fa-arrow-right "></i>
-                                                                    <span class="pl-1">27.2%</span>
-                                                                </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="card mb-3 widget-chart widget-chart2 bg-mixed-hopes text-left">
+                                                <div class="widget-chat-wrapper-outer">
+                                                    <div class="widget-chart-content text-white">
+                                                        <div class="widget-chart-flex">
+                                                            <div class="widget-title">Reports</div>
+                                                            <div class="widget-subtitle text-white">Bugs Fixed</div>
+                                                        </div>
+                                                        <div class="widget-chart-flex">
+                                                            <div class="widget-numbers text-warning">1621</div>
+                                                            <div class="widget-description ml-auto text-white">                                                                    
+                                                                <i class="fa fa-arrow-right "></i>
+                                                                <span class="pl-1">27.2%</span>
                                                             </div>
                                                         </div>
-                                                        <div class="widget-progress-wrapper">
-                                                            <div class="progress-bar-sm progress-bar-animated-alt progress">
-                                                                <div class="progress-bar bg-primary" role="progressbar" aria-valuenow="91"
-                                                                    aria-valuemin="0" aria-valuemax="100" style="width: 91%;">
-                                                                </div>
+                                                    </div>
+                                                    <div class="widget-progress-wrapper">
+                                                        <div class="progress-bar-sm progress-bar-animated-alt progress">
+                                                            <div class="progress-bar bg-primary" role="progressbar" aria-valuenow="91"
+                                                                aria-valuemin="0" aria-valuemax="100" style="width: 91%;">
                                                             </div>
-                                                            <div class="progress-sub-label text-white">Severe Reports</div>
                                                         </div>
+                                                        <div class="progress-sub-label text-white">Severe Reports</div>
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-md-4">
-                                                <div class="card mb-3 widget-chart widget-chart2 bg-slick-carbon text-left">
-                                                    <div class="widget-chat-wrapper-outer">
-                                                        <div class="widget-chart-content text-white">
-                                                            <div class="widget-chart-flex">
-                                                                <div class="widget-title opacity-5">Sales</div>
-                                                                <div class="widget-subtitle opacity-5 text-white">Monthly Goals</div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="card mb-3 widget-chart widget-chart2 bg-slick-carbon text-left">
+                                                <div class="widget-chat-wrapper-outer">
+                                                    <div class="widget-chart-content text-white">
+                                                        <div class="widget-chart-flex">
+                                                            <div class="widget-title opacity-5">Sales</div>
+                                                            <div class="widget-subtitle opacity-5 text-white">Monthly Goals</div>
+                                                        </div>
+                                                        <div class="widget-chart-flex">
+                                                            <div class="widget-numbers">
+                                                                <small>$</small>
+                                                                1283
                                                             </div>
-                                                            <div class="widget-chart-flex">
-                                                                <div class="widget-numbers">
-                                                                    <small>$</small>
-                                                                    1283
-                                                                </div>
-                                                                <div class="widget-description ml-auto text-white">
-                                                                    <i class="fa fa-angle-up "></i>
-                                                                    <span class="pl-1">175.5%</span>
-                                                                </div>
+                                                            <div class="widget-description ml-auto text-white">
+                                                                <i class="fa fa-angle-up "></i>
+                                                                <span class="pl-1">175.5%</span>
                                                             </div>
                                                         </div>
-                                                        <div class="widget-progress-wrapper">
-                                                            <div class="progress-bar-sm progress-bar-animated-alt progress">
-                                                                <div class="progress-bar bg-warning" role="progressbar" aria-valuenow="65"
-                                                                    aria-valuemin="0" aria-valuemax="100" style="width: 65%;">
-                                                                </div>
+                                                    </div>
+                                                    <div class="widget-progress-wrapper">
+                                                        <div class="progress-bar-sm progress-bar-animated-alt progress">
+                                                            <div class="progress-bar bg-warning" role="progressbar" aria-valuenow="65"
+                                                                aria-valuemin="0" aria-valuemax="100" style="width: 65%;">
                                                             </div>
-                                                            <div class="progress-sub-label text-white">YoY Growth</div>
                                                         </div>
+                                                        <div class="progress-sub-label text-white">YoY Growth</div>
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-md-4">
-                                                <div class="card mb-3 widget-chart widget-chart2 bg-asteroid text-left">
-                                                    <div class="widget-chat-wrapper-outer">
-                                                        <div class="widget-chart-content text-white">
-                                                            <div class="widget-chart-flex">
-                                                                <div class="widget-title opacity-5">Payments</div>
-                                                                <div class="widget-subtitle opacity-5 text-white">Totals</div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="card mb-3 widget-chart widget-chart2 bg-asteroid text-left">
+                                                <div class="widget-chat-wrapper-outer">
+                                                    <div class="widget-chart-content text-white">
+                                                        <div class="widget-chart-flex">
+                                                            <div class="widget-title opacity-5">Payments</div>
+                                                            <div class="widget-subtitle opacity-5 text-white">Totals</div>
+                                                        </div>
+                                                        <div class="widget-chart-flex">
+                                                            <div class="widget-numbers">
+                                                                <small>$</small>
+                                                                653
                                                             </div>
-                                                            <div class="widget-chart-flex">
-                                                                <div class="widget-numbers">
-                                                                    <small>$</small>
-                                                                    653
-                                                                </div>
-                                                                <div class="widget-description ml-auto text-white">
-                                                                    <i class="fa fa-angle-up "></i>
-                                                                    <span class="pl-1">$4596</span></div>
+                                                            <div class="widget-description ml-auto text-white">
+                                                                <i class="fa fa-angle-up "></i>
+                                                                <span class="pl-1">$4596</span></div>
                                                             </div>
                                                         </div>
                                                         <div class="widget-progress-wrapper">
@@ -298,14 +287,12 @@ if (isset($_POST["btn_post"])) {
                                                     </div>
                                                 </div>
                                             </div>
-
                                             <div style="padding:3%;" class="main-card mb-3 card">
                                                 <div class="card-header">
                                                     <div class="card-header-title font-size-lg text-capitalize font-weight-normal">Company Agents Status
                                                     </div>
                                                     <div class="btn-actions-pane-right">
-                                                        <button type="button" id="PopoverCustomT-1"
-                                                            class="btn-icon btn-wide btn-outline-2x btn btn-outline-focus btn-sm">
+                                                        <button type="button" id="PopoverCustomT-1" class="btn-icon btn-wide btn-outline-2x btn btn-outline-focus btn-sm">
                                                             Actions Menu
                                                             <span class="pl-2 align-middle opactiy-7">
                                                                 <i class="fa fa-angle-down"></i>
@@ -500,9 +487,10 @@ if (isset($_POST["btn_post"])) {
                                                     </button>
                                                 </div>
                                             </div>
-                                        </div>  
+                                        </div>
+                                      
                                 </div>
-                                <div id="dashboard-statstics" role="tabpanel"  class="tab-pane container card">
+                                <div id="dashboard-statstics" role="tabpanel" class="tab-pane container card">
                                     <div style="padding-top:3%;" class="row">
                                         <div class="container card">
                                             <div class="tabs-lg-alternate card-header">
@@ -631,11 +619,9 @@ if (isset($_POST["btn_post"])) {
                                                         </div>
                                                         <div class="btn-actions-pane-right text-capitalize">
                                                             <div class="btn-group dropdown">
-                                                                <button type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
-                                                                    class="btn-wide mr-1 dropdown-toggle btn btn-outline-focus btn-sm">Options
+                                                                <button type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="btn-wide mr-1 dropdown-toggle btn btn-outline-focus btn-sm">Options
                                                                 </button>
-                                                                <div tabindex="-1" role="menu" aria-hidden="true"
-                                                                    class="dropdown-menu-lg rm-pointers dropdown-menu dropdown-menu-right">
+                                                                <div tabindex="-1" role="menu" aria-hidden="true" class="dropdown-menu-lg rm-pointers dropdown-menu dropdown-menu-right">
                                                                     <div class="dropdown-menu-header">
                                                                         <div class="dropdown-menu-header-inner bg-primary">
                                                                             <div class="menu-header-image"
@@ -693,10 +679,8 @@ if (isset($_POST["btn_post"])) {
                                                         <div class="actions-icon-btn mx-auto">
                                                             <div>
                                                                 <div role="group" class="btn-group-lg btn-group nav">
-                                                                    <button type="button" data-toggle="tab" href="#tab-content-income"
-                                                                        class="btn-pill pl-3 active btn btn-focus">Income</button>
-                                                                    <button type="button" data-toggle="tab" href="#tab-content-expenses"
-                                                                        class="btn-pill pr-3  btn btn-focus">Expenses</button>
+                                                                    <button type="button" data-toggle="tab" href="#tab-content-income" class="btn-pill pl-3 active btn btn-focus">Income</button>
+                                                                    <button type="button" data-toggle="tab" href="#tab-content-expenses" class="btn-pill pr-3  btn btn-focus">Expenses</button>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -775,8 +759,7 @@ if (isset($_POST["btn_post"])) {
                                                                     ArchitectUI</h6>
                                                                 <div class="mt-3 row">
                                                                     <div class="col-sm-12 col-md-6">
-                                                                        <div
-                                                                            class="card-hover-shadow-2x mb-sm-3 mb-md-0 widget-chart widget-chart2 bg-premium-dark text-left card">
+                                                                        <div class="card-hover-shadow-2x mb-sm-3 mb-md-0 widget-chart widget-chart2 bg-premium-dark text-left card">
                                                                             <div class="widget-chart-content text-white">
                                                                                 <div class="widget-chart-flex">
                                                                                     <div class="widget-title">Sales</div>
@@ -799,8 +782,7 @@ if (isset($_POST["btn_post"])) {
                                                                         </div>
                                                                     </div>
                                                                     <div class="col-sm-12 col-md-6">
-                                                                        <div
-                                                                            class="card-hover-shadow-2x widget-chart widget-chart2 bg-premium-dark text-left card">
+                                                                        <div class="card-hover-shadow-2x widget-chart widget-chart2 bg-premium-dark text-left card">
                                                                             <div class="widget-chart-content text-white">
                                                                                 <div class="widget-chart-flex">
                                                                                     <div class="widget-title">Clients</div>
@@ -834,12 +816,10 @@ if (isset($_POST["btn_post"])) {
                                                     <div class="card-header-title font-size-lg text-capitalize font-weight-normal">Total Sales</div>
                                                     <div class="btn-actions-pane-right text-capitalize actions-icon-btn">
                                                         <div class="btn-group dropdown">
-                                                            <button type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
-                                                                class="btn-icon btn-icon-only btn btn-link">
+                                                            <button type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="btn-icon btn-icon-only btn btn-link">
                                                                 <i class="lnr-cog btn-icon-wrapper"></i>
                                                             </button>
-                                                            <div tabindex="-1" role="menu" aria-hidden="true"
-                                                                class="dropdown-menu-right rm-pointers dropdown-menu-shadow dropdown-menu-hover-link dropdown-menu">
+                                                            <div tabindex="-1" role="menu" aria-hidden="true" class="dropdown-menu-right rm-pointers dropdown-menu-shadow dropdown-menu-hover-link dropdown-menu">
                                                                 <h6 tabindex="-1" class="dropdown-header">Header</h6>
                                                                 <button type="button" tabindex="0" class="dropdown-item">
                                                                     <i class="dropdown-icon lnr-inbox"></i><span>Menus</span>
@@ -931,9 +911,9 @@ if (isset($_POST["btn_post"])) {
                                         </div>
                                     </div>
                                 </div>
-                                <div id="dashboard-ranking" role="tabpanel"  class="tab-pane container card">
+                                <div id="dashboard-ranking" role="tabpanel" class="tab-pane container card">
                                     <div style="padding-top:3%;" class="row">
-                                        <div class="col-md-12 ">
+                                        <div class="col-md-12">
                                             <div class="card-shadow-primary card-border mb-3 card">
                                                 <div class="dropdown-menu-header">
                                                     <div class="dropdown-menu-header-inner bg-primary">
@@ -992,8 +972,7 @@ if (isset($_POST["btn_post"])) {
                                                             <div class="no-gutters row">
                                                                 <div class="col-sm-12">
                                                                     <div class="p-1">
-                                                                        <button type="button"
-                                                                            class="btn-transition-text btn-transition btn-transition-alt pt-2 pb-2 btn btn-outline-warning">
+                                                                        <button type="button" class="btn-transition-text btn-transition btn-transition-alt pt-2 pb-2 btn btn-outline-warning">
                                                                             <span class="text-uppercase font-weight-bold">Block Button Maybe?</span>
                                                                         </button>
                                                                     </div>
@@ -1017,8 +996,7 @@ if (isset($_POST["btn_post"])) {
                                                                 aria-expanded="false" class="btn-icon btn-icon-only btn btn-link">
                                                                 <i class="pe-7s-menu btn-icon-wrapper"></i>
                                                             </button>
-                                                            <div tabindex="-1" role="menu" aria-hidden="true"
-                                                                class="dropdown-menu-shadow dropdown-menu-hover-link dropdown-menu">
+                                                            <div tabindex="-1" role="menu" aria-hidden="true" class="dropdown-menu-shadow dropdown-menu-hover-link dropdown-menu">
                                                                 <h6 tabindex="-1" class="dropdown-header">Header</h6>
                                                                 <button type="button" tabindex="0" class="dropdown-item">
                                                                     <i class="dropdown-icon lnr-inbox"> </i><span>Menus</span>
@@ -1260,8 +1238,7 @@ if (isset($_POST["btn_post"])) {
                                                             <button data-toggle="dropdown" type="button" aria-haspopup="true"
                                                                 aria-expanded="false" class="btn-icon btn-icon-only btn btn-link">
                                                                 <i class="pe-7s-menu btn-icon-wrapper"></i></button>
-                                                            <div tabindex="-1" role="menu" aria-hidden="true"
-                                                                class="dropdown-menu-shadow dropdown-menu-hover-link dropdown-menu">
+                                                            <div tabindex="-1" role="menu" aria-hidden="true" class="dropdown-menu-shadow dropdown-menu-hover-link dropdown-menu">
                                                                 <h6 tabindex="-1" class="dropdown-header">Header</h6>
                                                                 <button type="button" tabindex="0" class="dropdown-item">
                                                                     <i class="dropdown-icon lnr-inbox"> </i><span>Menus</span>
@@ -1739,8 +1716,7 @@ if (isset($_POST["btn_post"])) {
                                         
                                     </div>
                                     
-                                </div>
-                                
+                                </div>    
                             </div>
                             <div style="box-shadow: none;" class="app-inner-layout bg-transparent card ">
                                 <div style="margin-top: -4.6%;" class="p-3 scrollbar-sidebar">
@@ -1803,8 +1779,7 @@ if (isset($_POST["btn_post"])) {
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    
+                                    </div>    
                                     <div style="box-shadow: none;" class="mb-3 card">
                                     <div class="card-header-tab card-header">
                                         <div class="card-header-title font-size-lg text-capitalize font-weight-normal">
@@ -1871,8 +1846,7 @@ if (isset($_POST["btn_post"])) {
                                                                     </div>
                                                                     <div class="vertical-timeline-item dot-success vertical-timeline-element">
                                                                         <div><span class="vertical-timeline-element-icon bounce-in"></span>
-                                                                            <div
-                                                                                class="vertical-timeline-element-content bounce-in">
+                                                                            <div class="vertical-timeline-element-content bounce-in">
                                                                                 <h4 class="timeline-title">Build the production
                                                                                     release
                                                                                     <span class="badge badge-danger ml-2">NEW</span>
@@ -1892,44 +1866,37 @@ if (isset($_POST["btn_post"])) {
                                                                                                 <img src="assets/images/avatars/1.jpg" alt="">
                                                                                             </div>
                                                                                         </div>
-                                                                                        <div
-                                                                                            class="avatar-icon-wrapper avatar-icon-sm">
+                                                                                        <div class="avatar-icon-wrapper avatar-icon-sm">
                                                                                             <div class="avatar-icon">
                                                                                                 <img src="assets/images/avatars/2.jpg"alt="">
                                                                                             </div>
                                                                                         </div>
-                                                                                        <div
-                                                                                            class="avatar-icon-wrapper avatar-icon-sm">
+                                                                                        <div class="avatar-icon-wrapper avatar-icon-sm">
                                                                                             <div class="avatar-icon">
                                                                                                 <img src="assets/images/avatars/3.jpg" alt="">
                                                                                             </div>
                                                                                         </div>
-                                                                                        <div
-                                                                                            class="avatar-icon-wrapper avatar-icon-sm">
+                                                                                        <div class="avatar-icon-wrapper avatar-icon-sm">
                                                                                             <div class="avatar-icon">
                                                                                                 <img src="assets/images/avatars/4.jpg" alt="">
                                                                                             </div>
                                                                                         </div>
-                                                                                        <div
-                                                                                            class="avatar-icon-wrapper avatar-icon-sm">
+                                                                                        <div class="avatar-icon-wrapper avatar-icon-sm">
                                                                                             <div class="avatar-icon">
                                                                                                 <img src="assets/images/avatars/5.jpg" alt="">
                                                                                             </div>
                                                                                         </div>
-                                                                                        <div
-                                                                                            class="avatar-icon-wrapper avatar-icon-sm">
+                                                                                        <div class="avatar-icon-wrapper avatar-icon-sm">
                                                                                             <div class="avatar-icon">
                                                                                                 <img src="assets/images/avatars/9.jpg" alt="">
                                                                                             </div>
                                                                                         </div>
-                                                                                        <div
-                                                                                            class="avatar-icon-wrapper avatar-icon-sm">
+                                                                                        <div class="avatar-icon-wrapper avatar-icon-sm">
                                                                                             <div class="avatar-icon">
                                                                                                 <img src="assets/images/avatars/7.jpg" alt="">
                                                                                             </div>
                                                                                         </div>
-                                                                                        <div
-                                                                                            class="avatar-icon-wrapper avatar-icon-sm">
+                                                                                        <div class="avatar-icon-wrapper avatar-icon-sm">
                                                                                             <div class="avatar-icon">
                                                                                                 <img src="assets/images/avatars/8.jpg" alt="">
                                                                                             </div>
@@ -1965,8 +1932,7 @@ if (isset($_POST["btn_post"])) {
                                                                         <div>
                                                                             <span class="vertical-timeline-element-icon bounce-in"></span>
                                                                             <div class="vertical-timeline-element-content bounce-in">
-                                                                                <p>Yet another one, at <span
-                                                                                        class="text-success">15:00 PM</span></p>
+                                                                                <p>Yet another one, at <span class="text-success">15:00 PM</span></p>
                                                                                 <span class="vertical-timeline-element-date"></span>
                                                                             </div>
                                                                         </div>
@@ -2166,14 +2132,14 @@ aria-hidden="true">
             <div class="modal-header">
                 <div style="margin-left:-1px;" class="container">
                     <h5 class="modal-title" id="exampleModalLong">Create a Post</h5>
-                    <select style="font-size: 11px; height: 19px; padding: 0px; width:55px;" name="post_privacy" id="post_privacy"  class="form-control">
+                    <select style="font-size: 11px; height: 19px; padding: 0px; width:55px;" name="post_privacy" id="post_privacy" class="form-control">
                         <option value="public">Public</option>
                         <option value="users">Users</option> 
                         <option value="vendors">Vendors</option> 
                         <option value="custom">Custom</option> 
                     </select> 
 
-                    <a style="margin-top:-10%; " class="close" data-dismiss="modal" aria-label="Close">
+                    <a style="margin-top:-10%;" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </a>
                 </div>
@@ -2192,7 +2158,7 @@ aria-hidden="true">
                         <label for="file" style="cursor: pointer;">
                         <i style="font-size: 35px" class="fa fa-picture-o"></i>
                         </label>
-                        <input type="file" multiple accept="image/*" name="post_image" id="file"  onchange="loadFile(event)" style="display: none;"/>
+                        <input type="file" multiple accept="image/*" name="post_image" id="file" onchange="loadFile(event)" style="display: none;"/>
                     </div>
                     <p><img id="output" width="80"/></p>
                     <p style="font-size:12px; margin-top: -15px; color:black;">Upload Your Pictures</p>
@@ -2200,7 +2166,7 @@ aria-hidden="true">
             </div>
             <div class="modal-footer">
                 <a type="button" class="btn btn-secondary text-white" data-dismiss="modal">Cancel</a>
-                <input style="background: #ff9900; border-style: none;" type="submit" value="POST" id="btn_post" name="btn_post"  class="btn btn-primary">
+                <input style="background: #ff9900; border-style: none;" type="submit" value="POST" id="btn_post" name="btn_post" class="btn btn-primary">
             </div>
         </div>
     </form>

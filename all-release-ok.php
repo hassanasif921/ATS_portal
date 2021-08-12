@@ -322,12 +322,12 @@ $query_reserved=mysqli_query($connection,"select * from ats_stock_reservation  O
                                         </div>     
                                 </form>
                                 </div>
-                                <div style="background-color: gray; height: 1px; "></div>
-                                <div style="margin-left: -19px;" class="container">
+                                <div style="background-color: gray; height: 1px;"></div>
+                                <div style="margin-left: -71px;" class="container">
                                     <h5 class="text-center mt-2 text-primary">All Release OK Cars</h5>
                                     <div class="row">
-                                        <div class="col-lg-12">
-                                            <div class="main-card  card">
+                                        <div style="margin-left:6.5%;" class="col-lg-12">
+                                            <div class="main-card card">
                                                 <div class="card-body">
                                                     <div class="table-responsive" id="table">
                                                     <table style="font-size: 8px;" class="table" id="myTable">
@@ -344,9 +344,9 @@ $query_reserved=mysqli_query($connection,"select * from ats_stock_reservation  O
                                                                     <th>Make</th>
                                                                     <th>Model</th>
                                                                     <th>Year</th>
-                                                                    <th>Mth</th>
+                                                                    <th>Month</th>
                                                                     <th>Color</th>
-                                                                    <th>Sft</th>
+                                                                    <th>Shift</th>
                                                                     <th>Feul</th>
                                                                     <th>Door</th>
                                                                     <th>CC</th>

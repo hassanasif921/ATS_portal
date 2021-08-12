@@ -65,18 +65,18 @@ $resultsell=mysqli_query($connection,"select * from ats_sell_person");
                                         </div>         
                                     </form>
                                 </div>
-                                <div style="background-color: gray;  height: 1px; "></div>
+                                <div style="background-color: gray; height: 1px;"></div>
                                 <div class="card-body">
                                     <div class="container">
                                         <div class="row">
                                             <div class="col-lg-12">
-                                                <div class="main-card  card">
+                                                <div class="main-card card">
                                                     <div class="card-body">
                                                         <div style="height: 400px;" class="table-responsive" id="table">
                                                             <table class="table table-hover">
                                                                 <thead>
-                                                                    <tr>
-                                                                        <th>Select all <input  type="checkbox" onclick="toggle(this);" /></th>
+                                                                    <tr class="text-center">
+                                                                        <th>Select all<br/><input type="checkbox" onclick="toggle(this);" /></th>
                                                                         <th>Remittance ID #</th>
                                                                         <th>Agent Name</th>
                                                                         <th>Customer Name</th>
@@ -147,23 +147,21 @@ $resultsell=mysqli_query($connection,"select * from ats_sell_person");
                     </div>
                 </div>
             </div>
-            <?php
+<?php
 include("bottom.php");
 ?>        
-
 <script>
-            function toggle(source) {
-    var checkboxes = document.querySelectorAll('input[type="checkbox"]');
-    for (var i = 0; i < checkboxes.length; i++) {
-        if (checkboxes[i] != source)
-            checkboxes[i].checked = source.checked;
+    function toggle(source) {
+        var checkboxes = document.querySelectorAll('input[type="checkbox"]');
+        for (var i = 0; i < checkboxes.length; i++) {
+            if (checkboxes[i] != source)
+                checkboxes[i].checked = source.checked;
+        }
     }
-}
-$(document).on('ready', function () {
+    $(document).on('ready', function () {
       // initialization of daterangepicker
       $('.js-daterangepicker').daterangepicker();
     });
-           
 </script>
 
            

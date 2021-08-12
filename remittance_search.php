@@ -77,11 +77,11 @@ $resultsell=mysqli_query($connection,"select * from ats_sell_person");
                                                         <div class="table-responsive" id="table">
                                                             <table class="table table-hover">
                                                                 <thead>
-                                                                    <tr>
-                                                                        <th>Select all  <input type="checkbox" onclick="toggle(this);"/></th>
+                                                                    <tr class="text-center">
+                                                                        <th>Select all <br/><input type="checkbox" onclick="toggle(this);"/></th>
                                                                         <th>Remittance ID #</th>
                                                                         <th>Agent Name</th>
-                                                                        <th>CustomerName</th>
+                                                                        <th>Customer Name</th>
                                                                         <th>Country</th>
                                                                         <th>Date</th>
                                                                         <th>Sender Name</th>
@@ -143,10 +143,11 @@ $resultsell=mysqli_query($connection,"select * from ats_sell_person");
                                                     </div>
                                                 </div>
                                             </div>
+                                        </div>
                                     </div>    
-                                </div>
-                                
-                        </div>  
+                                </div>   
+                            </div>  
+                        </div>
                     </div>
                 </div>
             </div>
@@ -156,20 +157,17 @@ $resultsell=mysqli_query($connection,"select * from ats_sell_person");
 include("bottom.php");
 ?>              
 <script>
-            function toggle(source) {
-    var checkboxes = document.querySelectorAll('input[type="checkbox"]');
-    for (var i = 0; i < checkboxes.length; i++) {
-        if (checkboxes[i] != source)
-            checkboxes[i].checked = source.checked;
+    function toggle(source) {
+        var checkboxes = document.querySelectorAll('input[type="checkbox"]');
+        for (var i = 0; i < checkboxes.length; i++) {
+            if (checkboxes[i] != source)
+                checkboxes[i].checked = source.checked;
+        }  
     }
-    
-}
-$(document).on('ready', function () {
-      // initialization of daterangepicker
-      $('.js-daterangepicker').daterangepicker();
+    $(document).on('ready', function () {
+        // initialization of daterangepicker
+        $('.js-daterangepicker').daterangepicker();
     });
-
-           
 </script>
 
            

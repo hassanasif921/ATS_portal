@@ -4,8 +4,7 @@ include("connection_db.php");
 $resultsell=mysqli_query($connection,"select * from ats_sell_person");
 $resultvendor=mysqli_query($connection,"select * from ats_vendor");
 
-if (isset($_POST["btn_remittance_add"])) {
-
+if (isset($_POST["btn_remittance_add"])){
     $remittance_id_ag = $_POST["remittance_id_ag"];
     $remittance_agent_name = $_POST["remittance_agent_name"];
     $remittance_customer_name = $_POST["remittance_customer_name"];
@@ -159,8 +158,7 @@ if (isset($_POST["btn_remittance_add"])) {
                                                     <option value="<?php echo $rowvendor[0]?>" ><?php echo $rowvendor[1]?></option>
                                                     <?php   
                                                     }
-                                                    ?>
-                                                
+                                                    ?>   
                                             </select>
                                         </div>
                                     </div>
@@ -187,7 +185,7 @@ if (isset($_POST["btn_remittance_add"])) {
                     </div>
                 </div>
             </div>
-            <?php
+<?php
 include("bottom.php");
 ?>
 <script>

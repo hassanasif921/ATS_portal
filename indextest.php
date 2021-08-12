@@ -334,7 +334,7 @@ if(trim($_POST['stock_model'])  && trim($_POST['get_stock_make']))
 if(trim($_POST['stock_model'])  || trim($_POST['get_stock_make']) || trim($_POST['get_stock_chassis_id']) || trim($_POST['get_stock_kobutsu']) || trim($_POST['get_stock_rec_no']))
 {
     if(trim($_POST['get_stock_shift']) ){
-    $query.="AND ats_car_stock_shift LIKE '".$_POST['get_stock_shift']."' ";
+        $query.="AND ats_car_stock_shift LIKE '".$_POST['get_stock_shift']."' ";
     }
 }
 elseif(trim($_POST['get_stock_shift'])) {
@@ -343,7 +343,7 @@ elseif(trim($_POST['get_stock_shift'])) {
 if(trim($_POST['stock_model'])  || trim($_POST['get_stock_make']) || trim($_POST['get_stock_chassis_id']) || trim($_POST['get_stock_kobutsu']) || trim($_POST['get_stock_rec_no']) || trim($_POST['get_stock_shift']))
 {
     if(trim($_POST['get_stock_reg_year']) ){
-    $query.="AND ats_car_stock_man_year LIKE '".$_POST['get_stock_reg_year']."' ";
+        $query.="AND ats_car_stock_man_year LIKE '".$_POST['get_stock_reg_year']."' ";
     }
 }
 elseif(trim($_POST['get_stock_reg_year']) ) {
@@ -353,7 +353,7 @@ elseif(trim($_POST['get_stock_reg_year']) ) {
 if( trim($_POST['stock_model'])  || trim($_POST['get_stock_make']) || trim($_POST['get_stock_chassis_id']) || trim($_POST['get_stock_kobutsu']) || trim($_POST['get_stock_rec_no']) || trim($_POST['get_stock_shift']) || trim($_POST['get_stock_reg_year']))
 {
     if(trim($_POST['get_stock_color']) ){
-    $query.="AND ats_car_stock_color LIKE '".$_POST['get_stock_color']."' ";
+        $query.="AND ats_car_stock_color LIKE '".$_POST['get_stock_color']."' ";
     }
 }
 elseif(trim($_POST['get_stock_color']) ) {
@@ -363,7 +363,7 @@ elseif(trim($_POST['get_stock_color']) ) {
 if( trim($_POST['stock_model'])  || trim($_POST['get_stock_make']) || trim($_POST['get_stock_chassis_id']) || trim($_POST['get_stock_kobutsu']) || trim($_POST['get_stock_rec_no']) || trim($_POST['get_stock_shift']) || trim($_POST['get_stock_reg_year']) || trim($_POST['get_stock_color']))
 {
     if(trim($_POST['stock_fuel']) ){
-    $query.="AND ats_car_stock_fuel LIKE '".$_POST['stock_fuel']."' ";
+        $query.="AND ats_car_stock_fuel LIKE '".$_POST['stock_fuel']."' ";
     }
 }
 elseif(trim($_POST['stock_fuel']) ) {
@@ -373,7 +373,7 @@ elseif(trim($_POST['stock_fuel']) ) {
 if( trim($_POST['stock_model'])  || trim($_POST['get_stock_make']) || trim($_POST['get_stock_chassis_id']) || trim($_POST['get_stock_kobutsu']) || trim($_POST['get_stock_rec_no']) || trim($_POST['get_stock_shift']) || trim($_POST['get_stock_reg_year']) || trim($_POST['get_stock_color']) || trim($_POST['stock_fuel']))
 {
     if(trim($_POST['get_stock_vessel_name']) ){
-    $query.="AND ats_car_stock_vessel_name LIKE '".$_POST['get_stock_vessel_name']."' ";
+        $query.="AND ats_car_stock_vessel_name LIKE '".$_POST['get_stock_vessel_name']."' ";
     }
 }
 elseif(trim($_POST['get_stock_vessel_name']) ) {
@@ -383,7 +383,7 @@ elseif(trim($_POST['get_stock_vessel_name']) ) {
 if(trim($_POST['get_stock_vessel_name']) || trim($_POST['stock_model'])  || trim($_POST['get_stock_make']) || trim($_POST['get_stock_chassis_id']) || trim($_POST['get_stock_kobutsu']) || trim($_POST['get_stock_rec_no']) || trim($_POST['get_stock_shift']) || trim($_POST['get_stock_reg_year']) || trim($_POST['get_stock_color']) || trim($_POST['stock_fuel']))
 {
     if(trim($_POST['get_stock_voyage']) ){
-    $query.="AND ats_car_stock_voyage LIKE '".$_POST['get_stock_voyage']."' ";
+        $query.="AND ats_car_stock_voyage LIKE '".$_POST['get_stock_voyage']."' ";
     }
 }
 elseif(trim($_POST['get_stock_voyage']) ) {
@@ -393,7 +393,7 @@ elseif(trim($_POST['get_stock_voyage']) ) {
 if(trim($_POST['get_stock_voyage']) || trim($_POST['get_stock_vessel_name']) || trim($_POST['stock_model'])  || trim($_POST['get_stock_make']) || trim($_POST['get_stock_chassis_id']) || trim($_POST['get_stock_kobutsu']) || trim($_POST['get_stock_rec_no']) || trim($_POST['get_stock_shift']) || trim($_POST['get_stock_reg_year']) || trim($_POST['get_stock_color']) || trim($_POST['stock_fuel']))
 {
     if(trim($_POST['get_stock_bl_no']) ){
-    $query.="AND ats_car_stock_bl_number LIKE '".$_POST['get_stock_bl_no']."' ";
+        $query.="AND ats_car_stock_bl_number LIKE '".$_POST['get_stock_bl_no']."' ";
     }
 }
 elseif(trim($_POST['get_stock_bl_no']) ) {
@@ -637,7 +637,6 @@ $queryca=mysqli_query($connection,$query);
                 <div class="app-main__inner p-0">
                     <div class="app-inner-layout chat-layout">
                         <form action="" method="">
-                      
                             <div style="margin-top: -1.2%; box-shadow: none;" class="app-inner-layout__wrapper row-fluid no-gutters">
                                 <div class="tab-content app-inner-layout__content card" >
                                     <div id="accordion" >
@@ -746,31 +745,30 @@ $queryca=mysqli_query($connection,$query);
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                </div>
-                                            </div> 
+                                                    </div>
+                                                </div> 
+                                            </div>   
                                         </div>
-                                    </div>  
+                                    </div>     
                                 </div>
                             </div>
                         </form>
                     </div>
                 </div>
             </div>
-            <?php
+<?php
 include("bottom.php");
 ?>
-        
 <script>
-            function toggle(source) {
-    var checkboxes = document.querySelectorAll('input[type="checkbox"]');
-    for (var i = 0; i < checkboxes.length; i++) {
-        if (checkboxes[i] != source)
-            checkboxes[i].checked = source.checked;
+    function toggle(source) {
+        var checkboxes = document.querySelectorAll('input[type="checkbox"]');
+        for (var i = 0; i < checkboxes.length; i++) {
+            if (checkboxes[i] != source)
+                checkboxes[i].checked = source.checked;
+        }
     }
-}
-$(document).on('ready', function () {
-      // initialization of daterangepicker
-      $('.js-daterangepicker').daterangepicker();
-    });
-           
+    $(document).on('ready', function () {
+        // initialization of daterangepicker
+        $('.js-daterangepicker').daterangepicker();
+    });      
 </script>

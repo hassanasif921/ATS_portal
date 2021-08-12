@@ -14,7 +14,7 @@ $query_reserved=mysqli_query($connection,"select * from ats_stock_reservation   
                                 <form action="" method="POST" id="userForm">     
                                         <div style="background:darkgray; padding-top: 2%; padding-bottom: 0.5%;" class="row">
                                             <div class="col-sm-2">
-                                                <label style=" font-weight: bold; margin-top: 5px;" class="form-control-label">Agent Name</label>
+                                                <label style="font-weight: bold; margin-top: 5px;" class="form-control-label">Agent Name</label>
                                             </div>
                                             <div style="margin-left: -8%; "class="col-sm-1">
                                                 <select style="width: 160px;" name="get_all_reserved_reports_agent_name" id="get_all_reserved_reports_agent_name" type="text" class="form-control form-control-sm" onChange="getcustomer(this.value);">
@@ -37,7 +37,7 @@ $query_reserved=mysqli_query($connection,"select * from ats_stock_reservation   
                                                 </select>
                                             </div>
                                             <div style="margin-left: 8%;" class="col-sm-2">
-                                                <label style=" font-weight: bold; margin-top: 5px;" class="form-control-label">Customer Name</label>
+                                                <label style="font-weight: bold; margin-top: 5px;" class="form-control-label">Customer Name</label>
                                             </div>
                                             <div style="margin-left: -6%;" class="col-sm-1 " id="getcustomer_reserved">
                                                 <select style="width: 160px;" name="get_all_reserved_reports_customer_name" id="get_all_reserved_reports_customer_name" type="text" class="form-control form-control-sm">
@@ -45,7 +45,7 @@ $query_reserved=mysqli_query($connection,"select * from ats_stock_reservation   
                                                 </select>
                                             </div>
                                             <div style="margin-left: 8%;" class="col-sm-1">
-                                                <label style=" font-weight: bold; margin-top: 5px;" class="form-control-label">Country</label>
+                                                <label style="font-weight: bold; margin-top: 5px;" class="form-control-label">Country</label>
                                             </div>
                                             <div style="margin-left: -2%;" class="col-sm-2">
                                                 <select  name="get_all_reserved_reports_country_name" id="get_all_reserved_reports_country_name" required class="form-control form-control-sm">
@@ -326,8 +326,8 @@ $query_reserved=mysqli_query($connection,"select * from ats_stock_reservation   
                                 <div style="margin-left: -19px;" class="container">
                                     <h5 class="text-center mt-2 text-primary">All Ship OK Cars</h5>
                                     <div class="row">
-                                        <div class="col-lg-12">
-                                            <div class="main-card  card">
+                                        <div style="margin-left:6.5%;" class="col-lg-12">
+                                            <div class="main-card card">
                                                 <div class="card-body">
                                                     <div class="table-responsive" id="table">
                                                     <table style="font-size: 8px;" class="table" id="myTable">
@@ -344,9 +344,9 @@ $query_reserved=mysqli_query($connection,"select * from ats_stock_reservation   
                                                                     <th>Make</th>
                                                                     <th>Model</th>
                                                                     <th>Year</th>
-                                                                    <th>Mth</th>
+                                                                    <th>Month</th>
                                                                     <th>Color</th>
-                                                                    <th>Sft</th>
+                                                                    <th>Shift</th>
                                                                     <th>Feul</th>
                                                                     <th>Door</th>
                                                                     <th>CC</th>

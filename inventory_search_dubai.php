@@ -10,7 +10,7 @@ $queryca=mysqli_query($connection,$query);
                 <div class="app-main__inner p-0">
                     <div class="app-inner-layout chat-layout">
                         <div style="margin-top: -1.2%; box-shadow: none;" class="app-inner-layout__wrapper row-fluid no-gutters">
-                            <div class="tab-content app-inner-layout__content card" >
+                            <div class="tab-content app-inner-layout__content card">
                                 <div style="box-shadow: none;" class=" container card">
                                     <form action="" method="">    
                                         <div style="background:darkgray; padding-top: 2%;" class="row">
@@ -43,14 +43,15 @@ $queryca=mysqli_query($connection,$query);
                                 </div>
                                 <div style="background-color: gray; height: 1px;"></div>
                                 <div class="card-body">
-                                    <div style="margin-left: -35px;" class="container">
+                                    <div style="margin-left: -71px;" class="container">
                                         <div class="row">
-                                            <div class="col-lg-12">
-                                                <div class="main-card  card">
+                                            <div style="margin-left:6.5%;" class="col-lg-12">
+                                                <div class="main-card card">
                                                     <div class="card-body">
                                                         <div class="table-responsive table-hover">
-                                                            <table style="font-size: 10px;" class="table">
+                                                            <table class="table">
                                                                 <thead>
+<<<<<<< HEAD
                                                                 <tr>
                                                                                         <th>Slct all<input type="checkbox" onclick="toggle(this);" /></th>
                                                                                         <th>Price</th>
@@ -86,6 +87,22 @@ $queryca=mysqli_query($connection,$query);
                                                                                         <th>Mileage</th>
                                                                                         <th>Action</th>
                                                                                     </tr>
+=======
+                                                                    <tr class="text-center">
+                                                                        <th>Select all<br/><input type="checkbox" onclick="toggle(this);" /></th>
+                                                                        <th>ID #</th>
+                                                                        <th>Name</th>
+                                                                        <th>City</th>
+                                                                        <th>Phone #</th>
+                                                                        <th>Email</th>
+                                                                        <th>Designation</th>
+                                                                        <th>Department</th>
+                                                                        <th>Project</th>
+                                                                        <th>Timing</th>
+                                                                        <th>Status</th>
+                                                                        <th>Status</th>
+                                                                    </tr>
+>>>>>>> designing
                                                                 </thead>
                                                                 <tbody>
                                                                 <?php
@@ -160,9 +177,22 @@ $queryca=mysqli_query($connection,$query);
                     </div>
                 </div>
             </div>
-            <?php
+<?php
 include("bottom.php");
 ?>
+<<<<<<< HEAD
+=======
+<script>
+    $('#phone').mask('(ATS) ');
+    function toggle(source) {
+        var checkboxes = document.querySelectorAll('input[type="checkbox"]');
+        for (var i = 0; i < checkboxes.length; i++) {
+            if (checkboxes[i] != source)
+                checkboxes[i].checked = source.checked;
+        }
+    }   
+</script>
+>>>>>>> designing
 
            
 

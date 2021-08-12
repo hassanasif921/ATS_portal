@@ -1,6 +1,4 @@
 <?php
-
-
 include("connection_db.php");
 
 if (isset($_POST["btn_signup"])) {
@@ -22,7 +20,6 @@ values('$customer_name','$customer_company_name','$customer_email','$customer_ph
 }
 ?>
 
-
 <!doctype html>
 <html lang="en">
 <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
@@ -32,19 +29,14 @@ values('$customer_name','$customer_company_name','$customer_email','$customer_ph
     <meta http-equiv="Content-Language" content="en">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>ATS DASHBOARD - For Employees and Vendors Only </title>
-    
-
     <!-- Disable tap highlight on IE -->
     <meta name="msapplication-tap-highlight" content="no">
     <link href="assets/images/logo-fav.png" rel="icon">
     <link href="main.d810cf0ae7f39f28f336.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.linearicons.com/free/1.0.0/icon-font.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link
-         rel="stylesheet"
-         href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/css/intlTelInput.css"
-       />
-       <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/css/intlTelInput.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js"></script>
     <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
     crossorigin="anonymous"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/emojionearea/3.4.1/emojionearea.css" rel="stylesheet" />
@@ -56,8 +48,7 @@ values('$customer_name','$customer_company_name','$customer_email','$customer_ph
         <div class="app-container">
             <div class="h-100">
                 <div class="h-100 no-gutters row">
-                    <div
-                        class="h-100 d-md-flex d-sm-block bg-white justify-content-center align-items-center col-md-12 col-lg-7">
+                    <div class="h-100 d-md-flex d-sm-block bg-white justify-content-center align-items-center col-md-12 col-lg-7">
                         <div class="mx-auto app-login-box col-sm-12 col-md-10 col-lg-9">
                             <div class="app-logo"></div>
                             <h4>
@@ -65,18 +56,18 @@ values('$customer_name','$customer_company_name','$customer_email','$customer_ph
                                 <span>It only takes a <span class="text-success">few seconds</span> to create your account</span>
                             </h4>
                             <div>
-                                <form method="post"  onsubmit="">
+                                <form method="post" onsubmit="">
                                     <div class="form-row">
                                         <div class="col-md-6">
                                             <div class="position-relative form-group">
                                                 <label class=""><span class="text-danger">*</span> Name</label>
-                                                <input name="customer_name" id="customer_name"  placeholder="Enter Your Name" type="text" class="form-control">
+                                                <input name="customer_name" id="customer_name" placeholder="Enter Your Name" type="text" class="form-control">
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="position-relative form-group">
                                                 <label class="">Company Name</label>
-                                                <input name="customer_company_name" id="customer_customer_name"  placeholder="Enter Your Company Name" type="text" class="form-control">
+                                                <input name="customer_company_name" id="customer_customer_name" placeholder="Enter Your Company Name" type="text" class="form-control">
                                             </div>
                                         </div>
                                         <div class="col-md-6">
@@ -88,7 +79,7 @@ values('$customer_name','$customer_company_name','$customer_email','$customer_ph
                                         <div class="col-md-6">
                                             <div class="position-relative form-group">
                                                 <label class=""><span class="text-danger">*</span> Phone</label>
-                                                <input style="width: 275px;" id="customer_phone" type="tel" name="customer_phone"  class="form-control">
+                                                <input style="width: 275px;" id="customer_phone" type="tel" name="customer_phone" class="form-control">
                                             </div>
                                         </div>
                                         <div class="col-md-6">
@@ -131,8 +122,8 @@ values('$customer_name','$customer_company_name','$customer_email','$customer_ph
                         </div>
                     </div>
                     <div class="d-lg-flex d-xs-none col-lg-5">
-                        <div  class="slider-light">
-                            <div  class="slick-slider slick-initialized">
+                        <div class="slider-light">
+                            <div class="slick-slider slick-initialized">
                                 <div>
                                     <div class="position-relative h-100 d-flex justify-content-center align-items-center bg-premium-dark"
                                         tabindex="-1">
@@ -153,14 +144,12 @@ values('$customer_name','$customer_company_name','$customer_email','$customer_ph
             </div>
         </div>
     </div>
-    <script>
-        const phoneInputField = document.querySelector("#customer_phone");
-        const phoneInput = window.intlTelInput(phoneInputField, {
-          utilsScript:
-            "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js",
-        });
-    </script>
-<script type="text/javascript" src="assets/scripts/main.d810cf0ae7f39f28f336.js"></script></body>
-
-
+<script>
+    const phoneInputField = document.querySelector("#customer_phone");
+    const phoneInput = window.intlTelInput(phoneInputField, {
+        utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js",
+    });
+</script>
+<script type="text/javascript" src="assets/scripts/main.d810cf0ae7f39f28f336.js"></script>
+</body>
 </html>

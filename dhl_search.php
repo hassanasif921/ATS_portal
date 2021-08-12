@@ -6,13 +6,13 @@ $resultsell=mysqli_query($connection,"select * from ats_sell_person");
             <div class="app-main__outer">
                 <div class="app-main__inner p-0">
                     <div class="app-inner-layout chat-layout">
-                        <div  style="margin-top: -1.2%; box-shadow: none; " class="app-inner-layout__wrapper row-fluid no-gutters">
+                        <div style="margin-top: -1.2%; box-shadow: none;" class="app-inner-layout__wrapper row-fluid no-gutters">
                             <div class="tab-content app-inner-layout__content card">
                                 <div style="box-shadow: none;" class="container card">
                                     <form action="" method="POST" id="userForm">    
                                         <div style="background:darkgray; padding-top: 2%; padding-bottom: 0.5%;" class="row">
                                             <div class="col-sm-2">
-                                                <label style=" font-weight: bold; margin-top: 5px;" class="form-control-label">Agent Name</label>
+                                                <label style="font-weight: bold; margin-top: 5px;" class="form-control-label">Agent Name</label>
                                             </div>
                                             <div style="margin-left: -8%; "class="col-sm-1">
                                                 <select style="width: 140px;" name="get_search_dhl_request_agent_name" id="get_search_dhl_request_agent_name" type="text" class="form-control form-control-sm" onChange="getrecord(this.value);">
@@ -27,15 +27,15 @@ $resultsell=mysqli_query($connection,"select * from ats_sell_person");
                                                 </select>
                                             </div>
                                             <div style="margin-left: 8%;" class="col-sm-2">
-                                                <label style=" font-weight: bold; margin-top: 5px;" class="form-control-label">Customer Name</label>
+                                                <label style="font-weight: bold; margin-top: 5px;" class="form-control-label">Customer Name</label>
                                             </div>
                                             <div style="margin-left: -6%;" class="col-sm-1 " id="cust">
                                                 <select style="width: 140px;" name="get_search_dhl_request_customer_name" id="get_search_dhl_request_customer_name" type="text" class="form-control form-control-sm">
                                                     <option>Customer Table</option>
                                                 </select>
                                             </div>
-                                            <div  class="col-sm-2">
-                                                <label style=" margin-left: 64px; font-weight: bold; margin-top: 5px;" class="form-control-label">Tracking No.</label>
+                                            <div class="col-sm-2">
+                                                <label style="margin-left: 64px; font-weight: bold; margin-top: 5px;" class="form-control-label">Tracking No.</label>
                                             </div>
                                             <div style="margin-left: -2%;" class="col-sm-1">
                                                 <input style="width: 145px;" name="get_search_stock_tracking_number" id="get_search_stock_tracking_number" class="form-control form-control-sm">
@@ -64,18 +64,17 @@ $resultsell=mysqli_query($connection,"select * from ats_sell_person");
                                         </div>            
                                     </form>
                                 </div>
-                                <div style="background-color: gray; height: 1px; "></div>
+                                <div style="background-color: gray; height: 1px;"></div>
                                 <div style="margin-left: -71px;" class="container">
-                                    
                                     <div class="row">
-                                        <div class="col-lg-12">
-                                            <div style="margin-left: 60px;" class="main-card  card">
+                                        <div style="margin-left: 6.5%;" class="col-lg-12">
+                                            <div class="main-card card mt-2">
                                                 <div class="card-body">
                                                     <div class="table-responsive" id="table">
                                                         <table style="font-size:11px;" >
                                                             <thead>
-                                                                <tr>
-                                                                    <th>Slct all<br/><input type="checkbox" onclick="toggle(this);" /></th>
+                                                                <tr class="text-center">
+                                                                    <th>Select all<br/><input type="checkbox" onclick="toggle(this);" /></th>
                                                                     <th>Agent Name</th>
                                                                     <th>Customer Name</th>
                                                                     <th>Customer Address</th>
@@ -83,7 +82,7 @@ $resultsell=mysqli_query($connection,"select * from ats_sell_person");
                                                                     <th>Phone</th>
                                                                     <th>Rec No. &nbsp;#</th>
                                                                     <th>Maker&nbsp;/&nbsp;Model</th>
-                                                                    <th style="text-align: center;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Chassis&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+                                                                    <th>Chassis</th>
                                                                     <th>Year</th>
                                                                     <th>BL Surrender</th>
                                                                 </tr>
@@ -131,19 +130,18 @@ $resultsell=mysqli_query($connection,"select * from ats_sell_person");
 <?php
 include("bottom.php");
 ?> 
-
 <script>
     $(document).on('ready', function () {
-          // initialization of daterangepicker
-          $('.js-daterangepicker').daterangepicker();
-        });
+        // initialization of daterangepicker
+        $('.js-daterangepicker').daterangepicker();
+    });
     function toggle(source) {
-    var checkboxes = document.querySelectorAll('input[type="checkbox"]');
-    for (var i = 0; i < checkboxes.length; i++) {
-        if (checkboxes[i] != source)
-            checkboxes[i].checked = source.checked;
-    }
-}           
+        var checkboxes = document.querySelectorAll('input[type="checkbox"]');
+        for (var i = 0; i < checkboxes.length; i++) {
+            if (checkboxes[i] != source)
+                checkboxes[i].checked = source.checked;
+        }
+    }           
 </script>
 
            

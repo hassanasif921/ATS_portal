@@ -10,7 +10,7 @@ $queryca=mysqli_query($connection,$query);
                 <div class="app-main__inner p-0">
                     <div class="app-inner-layout chat-layout">
                         <div style="margin-top: -1.2%; box-shadow: none;" class="app-inner-layout__wrapper row-fluid no-gutters">
-                            <div class="tab-content app-inner-layout__content card" >
+                            <div class="tab-content app-inner-layout__content card">
                                 <div style="box-shadow: none;" class=" container card">
                                     <form action="" method="">    
                                         <div style="background:darkgray; padding-top: 2%;" class="row">
@@ -43,13 +43,13 @@ $queryca=mysqli_query($connection,$query);
                                 </div>
                                 <div style="background-color: gray; height: 1px;"></div>
                                 <div class="card-body">
-                                    <div style="margin-left: -35px;" class="container">
+                                    <div style="margin-left: -71px;" class="container">
                                         <div class="row">
-                                            <div class="col-lg-12">
-                                                <div class="main-card  card">
+                                            <div style="margin-left:6.5%;" class="col-lg-12">
+                                                <div class="main-card card">
                                                     <div class="card-body">
                                                         <div class="table-responsive table-hover">
-                                                            <table style="font-size: 10px;" class="table">
+                                                            <table class="table">
                                                                 <thead>
                                                                 <tr>
                                                                                         <th>Slct all<input type="checkbox" onclick="toggle(this);" /></th>
@@ -160,7 +160,7 @@ $queryca=mysqli_query($connection,$query);
                     </div>
                 </div>
             </div>
-            <?php
+<?php
 include("bottom.php");
 ?>
 

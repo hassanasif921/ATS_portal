@@ -424,46 +424,73 @@
                                                                         <br/>
                                                                         <input type="text" id="stock_engine_size" name="stock_engine_size" placeholder="****cc" class="form-control form-control-sm">
                                                                     </div>
-                                                                    <div class="col-md-2">
-                                                                        <label class="form-control-label">Kobutsu</label><br/>
-                                                                        <select id="stock_kobutsu" name="stock_kobutsu" class="form-control form-control-sm" onChange="getSlab(this.value);">
+                                                                </div>
+                                                                <div class="col-md-2">
+                                                                    <div class="position-relative form-group">
+                                                                        <label class="form-control-label">Make</label>
+                                                                        <select name="stock_make" id="stock_make" onChange="getState(this.value);" class="form-control form-control-sm">
                                                                             <?php 
-                                                                                $queryfetchdetails1=mysqli_query($connection,"select DISTINCT countrycode,countryname from kobutsu_slab");
+                                                                                $queryfetchdetails=mysqli_query($connection,"select * from car_make");
                                                                             ?>
                                                                             <option disabled selected>Please Select</option>
                                                                             <?php 
-                                                                                while($rowfetchdetails1=mysqli_fetch_array($queryfetchdetails1)){
+                                                                                while($rowfetchdetails=mysqli_fetch_array($queryfetchdetails)){
                                                                             ?>
                                                                             <option class="form-control" value="<?php echo $rowfetchdetails1[0]?>"><?php echo $rowfetchdetails1[0]."-".$rowfetchdetails1[1]?></option>
                                                                             <?php
                                                                                 }
                                                                             ?>
-                                                                        </select>
-                                                                    </div>
-                                                                    <div class="col-md-2" id="port">
-                                                                        <label class="form-control-label">Port</label><br/>
+                                                                        </select>  
                                                                     </div>
                                                                     <div class="col-md-2">
                                                                         <label class="form-control-label">Engine No.</label><br/>
                                                                         <input type="text" id="stock_engine_no" name="stock_engine_no" placeholder="8785****" class="form-control-sm form-control">
                                                                     </div>
-                                                                    <div class="col-md-1">
-                                                                        <div class="position-relative form-group">
-                                                                            <label class="form-control-label">Seats</label><br/>
-                                                                            <input type="text" id="stock_seats" name="stock_seats" placeholder="" class="form-control-sm form-control">
-                                                                        </div>
+                                                                </div>
+                                                                <div class="col-md-2">
+                                                                    <label class="form-control-label">Package</label>
+                                                                    <input type="text" id="stock_package" name="stock_package" placeholder="" class="form-control form-control-sm">
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-row"> 
+                                                                <div class="col-md-1">
+                                                                    <label class="form-control-label">Man. Year</label>
+                                                                    <input type="text" id="stock_man_year" name="stock_man_year" placeholder="2002" class="form-control form-control-sm">
+                                                                </div>
+                                                                <div class="col-md-1">
+                                                                    <label class="form-control-label">Reg. Year</label>
+                                                                    <input type="text" id="stock_reg_year" name="stock_reg_year" placeholder="2002" class="form-control form-control-sm">
+                                                                </div>
+                                                                <div class="col-md-2">
+                                                                    <label class="form-control-label">Color</label>
+                                                                    <input type="text" id="stock_color" name="stock_color" placeholder="Color" class="form-control form-control-sm">
+                                                                </div> 
+                                                                <div class="col-md-2">
+                                                                    <div class="position-relative form-group">
+                                                                        <label class="form-control-label">Shift</label>
+                                                                        <select name="stock_shift" id="stock_shift" class="form-control form-control-sm">
+                                                                            <option value="---">Select</option>    
+                                                                            <option value="Automatic">Automatic</option>
+                                                                            <option value="Manual">Manual</option> 
+                                                                            <option value="Dual">Dual</option>
+                                                                        </select> 
                                                                     </div>
-                                                                    <div class="col-md-1">
-                                                                        <div class="position-relative form-group">
-                                                                            <label class="form-control-label">Mileage .1</label><br/>
-                                                                            <input type="text" id="stock_mileage_1" name="stock_mileage_1" placeholder="Km 1" class="form-control form-control-sm">
-                                                                        </div>
+                                                                </div>
+                                                                <div class="col-md-2">
+                                                                    <div class="position-relative form-group">
+                                                                        <label class="form-control-label">Fuel</label>
+                                                                        <select name="stock_fuel" id="stock_fuel" class="form-control form-control-sm">
+                                                                            <option value="---">Select</option>    
+                                                                            <option value="GASOLINE">GASOLINE</option>
+                                                                            <option value="DIESEL">DIESEL</option> 
+                                                                            <option value="HYBRID">HYBRID</option>                                       
+                                                                        </select>  
                                                                     </div>
-                                                                    <div class="col-md-1">
-                                                                        <div class="position-relative form-group">
-                                                                            <label class="form-control-label">Mileage .2</label><br/>
-                                                                            <input  type="text" id="stock_mileage_2" name="stock_mileage_2" placeholder="Km 2" class="form-control form-control-sm">
-                                                                        </div>
+                                                                </div>
+                                                                <div class="col-md-1">
+                                                                    <div class="position-relative form-group">
+                                                                        <label class="form-control-label">Door</label>
+                                                                        <input type="text" id="stock_door" name="stock_door" class="form-control form-control-sm">
                                                                     </div>
                                                                     <div class="col-md-1">
                                                                         <label class="form-control-label">Weight</label><br/>
@@ -484,15 +511,17 @@
                                                                             <input ng-model="length" type="text" id="stock_length" name="stock_length" placeholder="Lenght" class="form-control form-control-sm" onkeyup="sum()">
                                                                         </div>
                                                                     </div>
-                                                                    <div class="col-md-1">
-                                                                        <div class="position-relative form-group">
-                                                                            <label class="form-control-label">Width</label><br/>
-                                                                            <input ng-model="width" type="text" id="stock_width" name="stock_width" placeholder="Width" class="form-control form-control-sm" onkeyup="sum()">
-                                                                        </div>
+                                                                </div>
+                                                                <div class="col-md-1">
+                                                                    <div class="position-relative form-group">
+                                                                        <label class="form-control-label">Mileage .1</label><br/>
+                                                                        <input type="text" id="stock_mileage_1" name="stock_mileage_1" placeholder="Km 1" class="form-control form-control-sm">
                                                                     </div>
-                                                                    <div class="col-md-1">
-                                                                        <label class="form-control-label">Height</label><br/>
-                                                                        <input ng-model="height" type="text" id="stock_height" name="stock_height" placeholder="Height" class="form-control form-control-sm" onkeyup="sum()">
+                                                                </div>
+                                                                <div class="col-md-1">
+                                                                    <div class="position-relative form-group">
+                                                                        <label class="form-control-label">Mileage .2</label><br/>
+                                                                        <input type="text" id="stock_mileage_2" name="stock_mileage_2" placeholder="Km 2" class="form-control form-control-sm">
                                                                     </div>
                                                                     <div class="col-md-1">
                                                                         <label class="form-control-label">M &sup3; : <br/></label>

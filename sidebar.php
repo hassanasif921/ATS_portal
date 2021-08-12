@@ -31,31 +31,26 @@
                 </div>    
                 <div class="scrollbar-sidebar">
                     <div class="app-sidebar__inner">
-                       
                         <ul class="vertical-nav-menu">
-                           
                             <li class="app-sidebar__heading">DASHBOARD</li>
                             <li>
                                 <a href="index.php">
                                     <i class="metismenu-icon pe-7s-plugin fa fa-users"></i>Dashboard
-                                    
                                 </a>
-                                
                             </li>
                             <li class="app-sidebar__heading">DATABASE</li>
                             <li>
-                               
-                                <a href="index-dashboard.php"  class="" >
+                                <a href="index-dashboard.php" class="">
                                     <i class="metismenu-icon fa fa-car"></i>Car Search
                                 </a>
                             </li>
                             <li>
-                                <a href="cust_search.php"  class="" >
+                                <a href="cust_search.php" class="">
                                     <i class="metismenu-icon fa fa-user"></i>Customer Search
                                 </a>
                             </li>
                             <li>
-                                <a href="remittance_search.php"  class="" >
+                                <a href="remittance_search.php" class="">
                                     <i class="metismenu-icon fa fa-money"></i>Remittance Search
                                 </a>
                             </li>
@@ -73,32 +68,32 @@
                                         </a>
                                         <ul>
                                             <li>
-                                                <a href="all-reserved-reports.php" >
+                                                <a href="all-reserved-reports.php">
                                                     <i class="metismenu-icon"></i>All Reserved
                                                 </a>
                                             </li>
                                             <li>
-                                                <a href="all-ship-paid.php" >
-                                                    <i class="metismenu-icon"></i>All Ship Paid
+                                                <a href="all-ship-paid.php">
+                                                    <i class="metismenu-icon"></i>All Shipped
                                                 </a>
                                             </li>
                                             <li>
-                                                <a href="all-ship-ok.php" >
+                                                <a href="all-ship-ok.php">
                                                     <i class="metismenu-icon"></i>All Ship OK
                                                 </a>
                                             </li>
                                             <li>
-                                                <a href="all-release-paid.php" >
-                                                    <i class="metismenu-icon"></i>All Release Paid
+                                                <a href="all-release-paid.php">
+                                                    <i class="metismenu-icon"></i>All Released
                                                 </a>
                                             </li>
                                             <li>
-                                                <a href="all-release-ok.php" >
+                                                <a href="all-release-ok.php">
                                                     <i class="metismenu-icon"></i>All Release OK
                                                 </a>
                                             </li>
                                             <li>
-                                                <a href="all-sold.php" >
+                                                <a href="all-sold.php">
                                                     <i class="metismenu-icon"></i>All SOLD
                                                 </a>
                                             </li>
@@ -107,9 +102,7 @@
                                     <li>
                                         <a href="my_bank.php">
                                             <i class="metismenu-icon"></i>My Bank
-                                            
                                         </a>
-                                        
                                     </li>
                                     <li>
                                         <a href="#">
@@ -118,22 +111,22 @@
                                         </a>
                                         <ul>
                                             <li>
-                                                <a href="#" >
+                                                <a href="#">
                                                     <i class="metismenu-icon"></i>Waiting For Shipment
                                                 </a>
                                             </li>
                                             <li>
-                                                <a href="#" >
+                                                <a href="#">
                                                     <i class="metismenu-icon"></i>Ship Units
                                                 </a>
                                             </li>
                                             <li>
-                                                <a href="#" >
+                                                <a href="#">
                                                     <i class="metismenu-icon"></i>Waiting For Balance
                                                 </a>
                                             </li>
                                             <li>
-                                                <a href="#" >
+                                                <a href="#">
                                                     <i class="metismenu-icon"></i>Released Units
                                                 </a>
                                             </li>
@@ -148,29 +141,26 @@
                                     Applications
                                     <i class="metismenu-state-icon pe-7s-angle-down caret-left lnr lnr-chevron-down"></i>
                                 </a>
-                                <ul  class=""  
-                                    >
+                                <ul class="">
                                     <li>
-                                        <a href="#"  class="" >
+                                        <a href="#" class="">
                                             <i class="metismenu-icon"></i>Mailbox
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="#" >
+                                        <a href="#">
                                             <i class="metismenu-icon"></i>Chat
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="#" >
+                                        <a href="#">
                                             <i class="metismenu-icon"></i>FAQ Section
                                         </a>
                                     </li>
-                                    
                                 </ul>
                             </li>
                             <li class="app-sidebar__heading">MENU</li>
-                            <li  class="">
-                                
+                            <li class="">
                                 <a href="#">
                                     <i style="font-size: 20px;" class=" metismenu-icon pe-7s-browser fa fa-desktop"></i>ACCESS
                                     <i class="metismenu-state-icon pe-7s-angle-down caret-left lnr lnr-chevron-down"></i>
@@ -183,45 +173,44 @@
                                         </a>
                                         <ul>
                                             <li>
-                                                <a href="emp_search.php" >
+                                                <a href="emp_search.php">
                                                     <i class="metismenu-icon"></i>All Users
                                                 </a>
                                             </li>
                                             <li>
-                                                <a href="cust_search.php" >
+                                                <a href="cust_search.php">
                                                     <i class="metismenu-icon"></i>All Customers
                                                 </a>
                                             </li>
                                             <li>
-                                                <a href="vend_search.php" >
+                                                <a href="vend_search.php">
                                                     <i class="metismenu-icon"></i>All Vendors
                                                 </a>
                                             </li>
-                                            
                                         </ul>
                                     </li>
                                     <li>
-                                        <a href="forms-wizard-emp.php" >
+                                        <a href="forms-wizard-emp.php">
                                             <i class="metismenu-icon"></i>Add New Employee
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="form-customer.php" >
+                                        <a href="form-customer.php">
                                             <i class="metismenu-icon">
                                             </i>Add New Customer 
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="forms-wizard-ven.php" >
+                                        <a href="forms-wizard-ven.php">
                                             <i class="metismenu-icon">
                                             </i>Add New Vendor 
                                         </a>
                                     </li>
                                 </ul>
                             </li>
-                            <li >
+                            <li>
                                 <a href="#">
-                                    <i style="font-size: 30px;;" class="metismenu-icon pe-7s-browser fa fa-houzz"></i>INVENTORY
+                                    <i style="font-size: 30px;" class="metismenu-icon pe-7s-browser fa fa-houzz"></i>INVENTORY
                                     <i class="metismenu-state-icon pe-7s-angle-down caret-left lnr lnr-chevron-down"></i>
                                 </a>
                                 <ul>
@@ -232,22 +221,22 @@
                                         </a>
                                         <ul>
                                             <li>
-                                                <a href="inventory_search_japan.php" >
+                                                <a href="inventory_search_japan.php">
                                                     <i class="metismenu-icon"></i>Japan Stock
                                                 </a>
                                             </li>
                                             <li>
-                                                <a href="inventory_search_dubai.php" >
+                                                <a href="inventory_search_dubai.php">
                                                     <i class="metismenu-icon"></i>Dubai Stock 
                                                 </a>
                                             </li>
                                             <li>
-                                                <a href="inventory_search_singapore.php" >
+                                                <a href="inventory_search_singapore.php">
                                                     <i class="metismenu-icon"></i>Singapore Stock
                                                 </a>
                                             </li>
                                             <li>
-                                                <a href="inventory_search_thailand.php" >
+                                                <a href="inventory_search_thailand.php">
                                                     <i class="metismenu-icon"></i>Thailand Stock
                                                 </a>
                                             </li>
@@ -263,18 +252,16 @@
                                             </li>
                                         </ul>
                                     </li>
-                                    
                                     <li>
-                                        <a href="forms-wizard-stock.php" >
+                                        <a href="forms-wizard-stock.php">
                                             <i class="metismenu-icon"></i>Add New Car
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="#" >
+                                        <a href="#">
                                             <i class="metismenu-icon"></i>Upload Excel
                                         </a>
                                     </li>
-                                    
                                 </ul>
                             </li>
                             <li>
@@ -290,31 +277,30 @@
                                         </a>
                                         <ul>
                                             <li>
-                                                <a href="remittance_search.php" >
+                                                <a href="remittance_search.php">
                                                     <i class="metismenu-icon"></i>All Payments
                                                 </a>
                                             </li>
                                             <li>
-                                                <a href="refund_search.php" >
+                                                <a href="refund_search.php">
                                                     <i class="metismenu-icon"></i>All Refunds
                                                 </a>
                                             </li>
                                         </ul>
                                     </li>
                                     <li>
-                                        <a href="form-remittance.php" >
+                                        <a href="form-remittance.php">
                                             <i class="metismenu-icon"></i>Add Payment
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="form-refund.php" >
+                                        <a href="form-refund.php">
                                             <i class="metismenu-icon"></i>Add Refund
                                         </a>
                                     </li>
-                                    
                                 </ul>
                             </li>
-                            </ul>
+                        </ul>
                     </div>
                 </div>
             </div>

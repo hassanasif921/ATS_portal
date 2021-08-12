@@ -3,17 +3,16 @@ include("top.php");
 include("connection_db.php");
 $query_reserved=mysqli_query($connection,"select * from ats_stock_reservation ORDER BY id DESC");
 ?>
-
             <div class="app-main__outer">
                 <div class="app-main__inner p-0">
                     <div class="app-inner-layout chat-layout">
-                        <div  style="margin-top: -1.2%; box-shadow: none; " class="app-inner-layout__wrapper row-fluid no-gutters">
+                        <div style="margin-top: -1.2%; box-shadow: none;" class="app-inner-layout__wrapper row-fluid no-gutters">
                             <div class="tab-content app-inner-layout__content card">
                                 <div style="box-shadow: none;" class="container card">
                                 <form action="" method="POST" id="userForm">     
                                         <div style="background:darkgray; padding-top: 2%; padding-bottom: 0.5%;" class="row">
                                             <div class="col-sm-2">
-                                                <label style=" font-weight: bold; margin-top: 5px;" class="form-control-label">Agent Name</label>
+                                                <label style="font-weight: bold; margin-top: 5px;" class="form-control-label">Agent Name</label>
                                             </div>
                                             <div style="margin-left: -8%; "class="col-sm-1">
                                                 <select style="width: 160px;" name="get_all_reserved_reports_agent_name" id="get_all_reserved_reports_agent_name" type="text" class="form-control form-control-sm" onChange="getcustomer(this.value);">
@@ -36,7 +35,7 @@ $query_reserved=mysqli_query($connection,"select * from ats_stock_reservation OR
                                                 </select>
                                             </div>
                                             <div style="margin-left: 8%;" class="col-sm-2">
-                                                <label style=" font-weight: bold; margin-top: 5px;" class="form-control-label">Customer Name</label>
+                                                <label style="font-weight: bold; margin-top: 5px;" class="form-control-label">Customer Name</label>
                                             </div>
                                             <div style="margin-left: -6%;" class="col-sm-1 " id="getcustomer_reserved">
                                                 <select style="width: 160px;" name="get_all_reserved_reports_customer_name" id="get_all_reserved_reports_customer_name" type="text" class="form-control form-control-sm">
@@ -47,7 +46,7 @@ $query_reserved=mysqli_query($connection,"select * from ats_stock_reservation OR
                                                 <label style=" font-weight: bold; margin-top: 5px;" class="form-control-label">Country</label>
                                             </div>
                                             <div style="margin-left: -2%;" class="col-sm-2">
-                                                <select  name="get_all_reserved_reports_country_name" id="get_all_reserved_reports_country_name" required class="form-control form-control-sm">
+                                                <select name="get_all_reserved_reports_country_name" id="get_all_reserved_reports_country_name" required class="form-control form-control-sm">
                                                     <option value="---">Select Country...</option>
                                                     <option value="AF">Afghanistan</option>
                                                     <option value="AL">Albania</option>
@@ -321,12 +320,12 @@ $query_reserved=mysqli_query($connection,"select * from ats_stock_reservation OR
                                         </div>     
                                     </form>
                                 </div>
-                                <div style="background-color: gray; height: 1px; "></div>
-                                <div style="margin-left: -19px;" class="container">
+                                <div style="background-color: gray; height: 1px;"></div>
+                                <div style="margin-left: -71px;" class="container">
                                     <h5 class="text-center mt-2 text-primary">All Reserved Reports</h5>
                                     <div class="row">
-                                        <div class="col-lg-12">
-                                            <div class="main-card  card">
+                                        <div style="margin-left:6.5%;" class="col-lg-12">
+                                            <div class="main-card card">
                                                 <div class="card-body">
                                                     <div class="table-responsive" id="table">
                                                         <table style="font-size: 8px;" class="table" id="myTable">
@@ -343,13 +342,13 @@ $query_reserved=mysqli_query($connection,"select * from ats_stock_reservation OR
                                                                     <th>Make</th>
                                                                     <th>Model</th>
                                                                     <th>Year</th>
-                                                                    <th>Mth</th>
+                                                                    <th>Month</th>
                                                                     <th>Color</th>
-                                                                    <th>Sft</th>
+                                                                    <th>Shift</th>
                                                                     <th>Feul</th>
                                                                     <th>Door</th>
                                                                     <th>CC</th>
-                                                                    <th style="text-align: center;">Opt.</th>
+                                                                    <th>Option</th>
                                                                     <th>FOB</th>
                                                                     <th>Grd</th>
                                                                     <th>Mileage</th>
@@ -488,3 +487,12 @@ $(document).on('submit','#userForm',function(e){
 <?php
 include("bottom.php");
 ?>   
+<script>
+    function toggle(source) {
+        var checkboxes = document.querySelectorAll('input[type="checkbox"]');
+        for (var i = 0; i < checkboxes.length; i++) {
+            if (checkboxes[i] != source)
+                checkboxes[i].checked = source.checked;
+        }
+    }  
+</script>

@@ -3,14 +3,13 @@
 <?php
 include("top.php");
 include("connection_db.php");
-
 ?>
             <div class="app-main__outer">
                 <div class="app-main__inner p-0">
                     <div class="app-inner-layout chat-layout">
                     <div style="margin-top: -1.2%; box-shadow: none; margin-right:-111px; width:100%;" class="app-inner-layout__wrapper row-fluid no-gutters">
-                            <div  class="tab-content app-inner-layout__content card" >
-                                <div style="box-shadow: none; "  id="car-search" role="tabpanel"  class="tab-pane active container card">
+                            <div class="tab-content app-inner-layout__content card">
+                                <div style="box-shadow: none;" id="car-search" role="tabpanel" class="tab-pane active container card">
                                     <form action="" method="">    
                                         <div style="background:darkgray; padding-top: 2%;" class="row">
                                             <div class="col-sm-2">
@@ -45,7 +44,7 @@ include("connection_db.php");
                                                 <div class="main-card  card">
                                                     <div class="card-body">
                                                         <div style="height:370px;" class="table-responsive table-hover">
-                                                            <table style="font-size: 12px;" class="table"  id="myTable">
+                                                            <table class="table" id="myTable">
                                                                 <thead>
                                                                     <tr class="text-center">
                                                                         <th>Mark&nbsp;all</br><input type="checkbox" onclick="toggle(this);" /></th>
@@ -53,16 +52,10 @@ include("connection_db.php");
                                                                         <th>Project</th>
                                                                         <th>Dealership&nbsp;Name</th>
                                                                         <th>Sell&nbsp;Person</th>
-                                                                       
                                                                         <th>Country</th>
-                                                                      
                                                                         <th>Contact&nbsp;Key/Person&nbsp;</th>
-                                                                       
                                                                         <th>Created&nbsp;By</th>
-                                                                        
                                                                         <th>Updated&nbsp;By</th>
-                                                                      
-                                                                        
                                                                         <th>Action</th>
                                                                     </tr>
                                                                 </thead>
@@ -90,31 +83,9 @@ include("connection_db.php");
                                                                     $resultports=mysqli_query($connection,$querycountry);
                                                                     $rowcountry=mysqli_fetch_row($resultports);
                                                                     ?>
-                                                               
-                                                                <td><?php echo $rowcountry[1] ?></td>
-                                                                <?php
-                                                               
-                                                            ?>
-                                                                   
-                                                                    <td><?php echo $row["ats_customer_contact_name_1"] ?></td>
-                                                                   
-                                                                    <td><?php echo $row["ats_customer_createdBy"] ?></td>
-                                                            
-                                                                    <td><?php echo $row["ats_customer_updatedBy"] ?></td>
-                                                                    
-                                                                   
-                                                                    <td><a style="padding:3px" href="cust-view.php?id=<?php echo $row["ats_customer_ATS_ID"] ?>" >View</a><button data-id="<?php echo $row['ats_customer_ATS_ID'] ?>" data-toggle="modal" data-target="#exampleModalLong" class='userinfo'>Changes</button>
-                                                                    </td>
-                                                                </tr>
-                                                                <?php
-                                                                        }    
-                                                                    }
-                                                                ?>
                                                                 </tbody>
-                                                            </table>
-                                                            
-                                                        </div>
-                                                        
+                                                            </table>    
+                                                        </div>    
                                                     </div>
                                                 </div>
                                             </div>
@@ -126,9 +97,7 @@ include("connection_db.php");
                     </div>
                 </div>
             </div>
-
-
-            <?php
+<?php
 include("bottom.php");
 ?> 
 <div class="modal hide fade" id="myModal">
@@ -154,85 +123,82 @@ include("bottom.php");
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div  class="modal-body">
+            <div class="modal-body">
                 <table style="height:450px;" class="table table-responsive table-hover mt-3">
                     <thead>
                         <tr>
-                            <th class="text-center">record id</th>
+                            <th class="text-center">Record id</th>
                             <th class="text-center">Changed Fields</th>
                             <th class="text-center">Changed&nbsp;By</th>
                             <th class="text-center">Changed At</th>
                             <th class="text-center">User ID</th>
                         </tr>
                     </thead>
-                    <tbody><?php 
-                    $query="select * from changes_record where tablename='Customer'";
-                    $result=mysqli_query($connection,$query);
-                    while($row=mysqli_fetch_array($result))
-                    {
-                    ?>
-                    
+                    <tbody>
+                    <?php 
+                        $query="select * from changes_record where tablename='Customer'";
+                        $result=mysqli_query($connection,$query);
+                        while($row=mysqli_fetch_array($result)){
+                        ?>
                         <tr>
                             <td><?php echo $row[6]?></td>
                             <td><?php echo $row[1]?></td>
                             <td><?php echo $row[2]?></td>
                             <td><?php echo $row[3]?></td>
                             <td><?php echo $row[5]?></td>
-                          </tr>
-                          <?php 
-                    }
-                          ?>                                    
+                        </tr>
+                    <?php 
+                        }
+                    ?>                                    
                     </tbody>
                 </table>  
-            </div>
-            
+            </div>            
         </div>
     </div>
 </div>
-
 <!-- Latest compiled JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script>
-function myFunction() {
-  var input, filter, table, tr, td, i, txtValue;
-  input = document.getElementById("get_customer_name");
-  filter = input.value.toUpperCase();
-  table = document.getElementById("myTable");
-  tr = table.getElementsByTagName("tr");
-  for (i = 0; i < tr.length; i++) {
-    td = tr[i].getElementsByTagName("td")[3];
-    if (td) {
-      txtValue = td.textContent || td.innerText;
-      if (txtValue.toUpperCase().indexOf(filter) > -1) {
-        tr[i].style.display = "";
-      } else {
-        tr[i].style.display = "none";
-      }
-    }       
-  }
-}
+    function myFunction() {
+        var input, filter, table, tr, td, i, txtValue;
+        input = document.getElementById("get_customer_name");
+        filter = input.value.toUpperCase();
+        table = document.getElementById("myTable");
+        tr = table.getElementsByTagName("tr");
+        for (i = 0; i < tr.length; i++) {
+            td = tr[i].getElementsByTagName("td")[3];
+            if (td) {
+                txtValue = td.textContent || td.innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                } 
+                else {
+                    tr[i].style.display = "none";
+                }
+            }       
+        }
+    }
 </script>
 <script>
-function myFunction1() {
-    
-  var input, filter, table, tr, td, i, txtValue;
-  input = document.getElementById("get_customer_email");
- 
-  filter = input.value.toUpperCase();
-  table = document.getElementById("myTable");
-  tr = table.getElementsByTagName("tr");
-  for (i = 0; i < tr.length; i++) {
-    td = tr[i].getElementsByTagName("td")[5];
-    if (td) {
-      txtValue = td.textContent || td.innerText;
-      if (txtValue.toUpperCase().indexOf(filter) > -1) {
-        tr[i].style.display = "";
-      } else {
-        tr[i].style.display = "none";
-      }
-    }       
-  }
-}
+    function myFunction1() {    
+        var input, filter, table, tr, td, i, txtValue;
+        input = document.getElementById("get_customer_email");
+        filter = input.value.toUpperCase();
+        table = document.getElementById("myTable");
+        tr = table.getElementsByTagName("tr");
+        for (i = 0; i < tr.length; i++) {
+            td = tr[i].getElementsByTagName("td")[5];
+            if (td) {
+                txtValue = td.textContent || td.innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                } 
+                else {
+                    tr[i].style.display = "none";
+                }
+            }       
+        }
+    }
 </script>
 <script>
 function myFunction2() {
@@ -284,9 +250,24 @@ $(document).ready(function(){
       // Display Modal
       $('#exampleModalLong').modal('show'); 
     }
-  });
- });
-});           
+    $(document).ready(function(){
+        $('.userinfo').click(function(){
+        var userid = $(this).data('id');
+            // AJAX request
+            $.ajax({
+                url: 'ajaxfile.php',
+                type: 'post',
+                data: {userid: userid},
+                success: function(response){ 
+                    // Add response in Modal body
+                    // alert(response);
+                    $('.modal-body').html(response);
+                    // Display Modal
+                    $('#exampleModalLong').modal('show'); 
+                }
+            });
+        });
+    });           
 </script>
 
            
