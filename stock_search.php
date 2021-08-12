@@ -8,7 +8,7 @@ if(isset($_POST['getcustomer_reserved']))
 ?>
 <?php 
     
-   
+  echo""; 
 ?>
  <div class="input-group-prepend">
 <span class="input-group-text">Customer</span>
