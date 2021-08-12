@@ -324,16 +324,17 @@ include("connection_db.php");
                                                         <div class="input-group-prepend">
                                                             <span class="input-group-text">Chassis</span>
                                                         </div>
-                                                      
-                                                        <div  class="col-sm-3 input-group input-group-sm" id="customer">
-                                                            <div class="input-group-prepend">
-                                                                <span class="input-group-text">Customer</span>
-                                                            </div>
-                                                            <input style="font-size: 12px;" name="get_stock_customer_name" id="get_stock_customer_name" type="text" class="form-control">
+                                                        <input style="font-size: 12px;" name="get_stock_chassis_id" id="get_stock_chassis_id" type="text" class="form-control">
+                                                    </div>
+                                                    <div  class="col-sm-3 input-group input-group-sm" id="customer">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text">Customer</span>
                                                         </div>
                                                         <input style="font-size: 12px;" name="get_stock_customer_name" id="get_stock_customer_name" type="text" class="form-control">
                                                     </div>
+                                                        
                                                 </div>
+                                                
                                                 <div style="margin-top: 0.4%;" class="row">
                                                     <div class="col-sm-3 input-group input-group-sm">
                                                         <div class="input-group-prepend">
