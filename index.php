@@ -91,7 +91,6 @@ if (isset($_POST["btn_post"])) {
                                                             <button type="button" tabindex="0" class="dropdown-item">
                                                                 <i class="dropdown-icon fa fa-trash"> </i><span>Delete Post</span>
                                                             </button>
-                                                            
                                                         </div>
                                                     </div>    
                                                 </div>
