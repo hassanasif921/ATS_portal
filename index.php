@@ -57,12 +57,12 @@ if (isset($_POST["btn_post"])) {
                         </div>
                         <div class="app-inner-layout__wrapper row-fluid no-gutters">
                             <div style="background: transparent; box-shadow: none;" class="tab-content col-md-10 app-inner-layout__content card">
-                                <div style=" background: transparent; box-shadow: none;" id="dashboard-home" role="tabpanel" class="tab-pane active container card">
+                                <div style="background: transparent; box-shadow: none;" id="dashboard-home" role="tabpanel" class="tab-pane active container card">
                                     <div>
                                         <h4 style="margin-left:5px; margin-top:2%;">Create Post</h4>
                                         <input style="color: black; border-radius: 20px;" data-toggle="modal" data-target="#exampleModalLong" class="form-control mr-sm-2" placeholder="Create a New Post Here..">
                                     </div>
-                                    <div style=" background: white;  margin-top:30px;  padding-bottom:10px; margin-bottom:50px;">
+                                    <div style="background: white;  margin-top:30px;  padding-bottom:10px; margin-bottom:50px;">
                                         <?php
                                             $query = mysqli_query($connection,"select * from ats_post");
                                             $count =mysqli_num_rows($query);
@@ -70,15 +70,77 @@ if (isset($_POST["btn_post"])) {
                                                 while($row = mysqli_fetch_array($query)){	    				   
                                         ?>                         
                                         <div style="padding-top:3%; color: black;" class="container">
-                                            <img class="user-avatar rounded-circle" style="width: 55px;" id="get_post_emp_passport_image" name="get_post_emp_passport_image" src="assets/images/avatars/1.jpg" alt="User Avatar">
-                                            <label style="font-weight: bold;  margin-left:10px; margin-top:-10px;" name="get_post_emp_fullname" id="get_post_emp_fullname"><?php echo $row["ats_post_username"] ?><br/>
-                                            </label>
-                                            <p style="margin-left:70px;  font-size:12px; margin-top:-22px;" name="get_post_privacy" id="get_post_privacy"><?php echo $row["ats_post_privacy"] ?>  <i class="fa fa-globe"></i></p>
-                                            <h2 style=" margin-top:3.5%;" name="get_post_heading" id="get_post_heading"><?php echo $row["ats_post_heading"] ?></h2>
+                                            <div class="row">
+                                                <div class="col-md-10">
+                                                    <img class="user-avatar rounded-circle" style="width: 55px;" id="get_post_emp_passport_image" name="get_post_emp_passport_image" src="assets/images/avatars/1.jpg" alt="User Avatar">
+                                                    <label style="font-weight: bold;  margin-left:10px; margin-top:-10px;" name="get_post_emp_fullname" id="get_post_emp_fullname"><?php echo $row["ats_post_username"] ?><br/>
+                                                    </label>
+                                                    <p style="margin-left:70px; font-size:12px; margin-top:-22px;" name="get_post_privacy" id="get_post_privacy"><?php echo $row["ats_post_privacy"] ?>  <i class="fa fa-globe"></i></p>
+                                                </div>
+                                                <div class="col-md-1 mt-1">
+                                                    <!-- <a><i style="font-size:20px;" class="fa fa-list"></i></a> -->
+                                                    <div class="btn-group dropdown">
+                                                        <button style="margin-left:100%;" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="btn-icon btn-icon-only btn btn-link">
+                                                            <i style="font-size:20px; color: #343a40;" class="fa fa-list"></i>
+                                                        </button>
+                                                        <div tabindex="-1" role="menu" aria-hidden="true" class="dropdown-menu-right rm-pointers dropdown-menu-shadow dropdown-menu-hover-link dropdown-menu">
+                                                            <h6 tabindex="-1" class="dropdown-header">Options</h6>
+                                                            <button type="button" tabindex="0" class="dropdown-item">
+                                                                <i class="dropdown-icon fa fa-edit"></i><span>Edit Post</span>
+                                                            </button>
+                                                            <button type="button" tabindex="0" class="dropdown-item">
+                                                                <i class="dropdown-icon fa fa-trash"> </i><span>Delete Post</span>
+                                                            </button>
+                                                            
+                                                        </div>
+                                                    </div>    
+                                                </div>
+                                            </div>
+                                            <h2 style="margin-top:3.5%;" name="get_post_heading" id="get_post_heading"><?php echo $row["ats_post_heading"] ?></h2>
                                             <h6 id="get_post_date" name="get_post_date"> Dec 7, 2017</h6>
                                             <p style="padding-bottom:2%; padding-top:5%;" name="get_post_description" id="get_post_description"><?php echo $row["ats_post_description"] ?></p>
                                             <div style="margin-bottom:2%" class="row">
-                                                <div style="margin-left:7px;" class="col-md-6">
+                                                <!-- 1 Image -->
+                                                <div class="col-md-12">
+                                                    <img style="width:100%;" name="get_post_image2" id="get_post_image2" src="assets/images/originals/fence-small.jpg">
+                                                </div> 
+
+
+                                                <!-- 2 images Collage -->
+                                                <!-- <div class="col-md-6">
+                                                    <img style="width:300px; height:300px;" name="get_post_image2" id="get_post_image2" src="assets/images/logo-inverse.png">
+                                                </div> 
+                                                <div class="col-md-6 ">
+                                                    <img style="width:300px; height:300px;" name="get_post_image2" id="get_post_image2" src="assets/images/logo-inverse.png">
+                                                </div> -->
+
+
+                                                <!-- 3 images Collage -->
+                                                <!-- <div class="col-md-9">
+                                                    <img style="width:400px; height:300px;" name="get_post_image1" id="get_post_image1" src="assets/images/logo-inverse.png">
+                                                </div>
+                                                <div style="margin-left:-70px;" class="col-md-3 mt-4">
+                                                    <img style="width:200px; height:130px;" name="get_post_image2" id="get_post_image2" src="assets/images/logo-inverse.png">
+                                                    <img style="width:200px; margin-top:1px; height:130px;" name="get_post_image3" id="get_post_image3" src="assets/images/logo-inverse.png">
+                                                </div>  -->
+                                                <!-- <div class="col-md-9">
+                                                    <img style="width:400px; height:300px;" name="get_post_image1" id="get_post_image1" src="assets/images/logo-inverse.png">
+                                                </div> -->
+
+
+                                                <!-- 4 images Collage -->
+                                                <!-- <div style="margin-left:-0.7%;" class="col-md-6 ">
+                                                    <img style="width:320px; height:130px;" name="get_post_image2" id="get_post_image2" src="assets/images/logo-inverse.png">
+                                                    <img style="width:320px; margin-top:1px; height:130px;" name="get_post_image3" id="get_post_image3" src="assets/images/logo-inverse.png">
+                                                </div> 
+                                                <div class="col-md-6 ">
+                                                    <img style="width:320px; height:130px;" name="get_post_image2" id="get_post_image2" src="assets/images/logo-inverse.png">
+                                                    <img style="width:320px; margin-top:1px; height:130px;" name="get_post_image3" id="get_post_image3" src="assets/images/logo-inverse.png">
+                                                </div> -->
+
+
+                                                <!-- 5 images Collage -->
+                                                <!-- <div style="margin-left:7px;" class="col-md-6">
                                                     <img style="width:300px; height:260px;" name="get_post_image1" id="get_post_image1" src="assets/images/logo-inverse.png">
                                                 </div>
                                                 <div style="margin-left:-20px;" class="col-md-3">
@@ -88,12 +150,12 @@ if (isset($_POST["btn_post"])) {
                                                 <div style="margin-left:-10px;" class="col-md-3">
                                                     <img style="width:150px; height:130px;" name="get_post_image4" id="get_post_image4" src="assets/images/logo-inverse.png">
                                                     <img style="width:150px; margin-top:1px; height:130px;" name="get_post_image5" id="get_post_image5" src="assets/images/logo-inverse.png">
-                                                </div>             
+                                                </div> -->
                                                 <label class="like-share" style="margin-left:3.5%;"><a><i class="fa fa-thumbs-up"></i><span name="get_post_total_likes" id="get_post_total_likes"> 56</span> Likes</a></label>
                                                 <label class="like-share" style="margin-left:67%;  float:right;"><a><i class="fa fa-comments"></i><span name="get_post_total_comments" id="get_post_total_comments"> 56</span> Comments</a></label>
                                             </div>
                                             <form id="signupForm" method="post" action="#">
-                                            <div style=" margin-bottom:px;" class="row like-share">
+                                            <div class="row like-share">
                                                 <div style="text-align: center; color:#ff9900; font-size: 24px; border-right: 1px solid black; border-top: 1px solid black; border-bottom: 1px solid black;" class="col-md-6 "><button name="btn_post_like" id="btn_post_like" style="background: transparent; cursor: pointer; border-style:none;" type="submit"><i style="color: #ff9900" class="fa fa-thumbs-up"></i></button></div>
                                                 <div style="text-align: center;  font-size: 24px; border-top: 1px solid black; border-bottom: 1px solid black;" class="col-md-6"><button  name="btn_write_comment" id="btn_write_comment" style=" background: transparent; cursor: pointer; border-style:none;" type="submit"><i style="color: #ff9900" class="fa fa-comments"></i></button></div>
                                                 <div class="col-sm-1">
@@ -273,222 +335,222 @@ if (isset($_POST["btn_post"])) {
                                                             </div>
                                                             <div class="widget-description ml-auto text-white">
                                                                 <i class="fa fa-angle-up "></i>
-                                                                <span class="pl-1">$4596</span></div>
+                                                                <span class="pl-1">$4596</span>
                                                             </div>
                                                         </div>
-                                                        <div class="widget-progress-wrapper">
-                                                            <div class="progress-bar-sm progress-bar-animated-alt progress">
-                                                                <div class="progress-bar bg-info" role="progressbar" aria-valuenow="65"
-                                                                    aria-valuemin="0" aria-valuemax="100" style="width: 65%;">
-                                                                </div>
+                                                    </div>
+                                                    <div class="widget-progress-wrapper">
+                                                        <div class="progress-bar-sm progress-bar-animated-alt progress">
+                                                            <div class="progress-bar bg-info" role="progressbar" aria-valuenow="65"
+                                                                aria-valuemin="0" aria-valuemax="100" style="width: 65%;">
                                                             </div>
-                                                            <div class="progress-sub-label text-white">YoY Growth</div>
                                                         </div>
+                                                        <div class="progress-sub-label text-white">YoY Growth</div>
                                                     </div>
-                                                </div>
-                                            </div>
-                                            <div style="padding:3%;" class="main-card mb-3 card">
-                                                <div class="card-header">
-                                                    <div class="card-header-title font-size-lg text-capitalize font-weight-normal">Company Agents Status
-                                                    </div>
-                                                    <div class="btn-actions-pane-right">
-                                                        <button type="button" id="PopoverCustomT-1" class="btn-icon btn-wide btn-outline-2x btn btn-outline-focus btn-sm">
-                                                            Actions Menu
-                                                            <span class="pl-2 align-middle opactiy-7">
-                                                                <i class="fa fa-angle-down"></i>
-                                                            </span>
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                                <div class="table-responsive">
-                                                    <table class="align-middle text-truncate mb-0 table table-borderless table-hover">
-                                                        <thead>
-                                                            <tr>
-                                                                <th class="text-center">Rec #</th>
-                                                                <th class="text-center">Customer</th>
-                                                                <th class="text-center">Car Name</th>
-                                                                <th class="text-center">Chassis</th>
-                                                                <th class="text-center">Status</th>
-                                                                <th class="text-center">Due Date</th>
-                                                                <th class="text-center">Payment</th>
-                                                                <th class="text-center">Actions</th>
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody>
-                                                            <tr>
-                                                                <td class="text-center text-muted" style="width: 80px;">#54</td>
-                                                                <td class="text-center" style="width: 80px;">
-                                                                   <label>Hamza Zaheer</label>
-                                                                </td>
-                                                                <td class="text-center"><a href="javascript:void(0)">Juan C. Cargill</a></td>
-                                                                <td class="text-center"><a href="javascript:void(0)">Micro Electronics</a></td>
-                                                                <td class="text-center"><div class="badge badge-pill badge-danger">Canceled</div></td>
-                                                                <td class="text-center">
-                                                                    <span class="pr-2 opacity-6">
-                                                                        <i class="fa fa-business-time"></i>
-                                                                    </span>
-                                                                    12 Dec
-                                                                </td>
-                                                                <td class="text-center" style="width: 200px;">
-                                                                    <div class="widget-content p-0">
-                                                                        <div class="widget-content-outer">
-                                                                            <div class="widget-content-wrapper">
-                                                                                <div class="widget-content-left pr-2">
-                                                                                    <div class="widget-numbers fsize-1 text-danger">71%</div>
-                                                                                </div>
-                                                                                <div class="widget-content-right w-100">
-                                                                                    <div class="progress-bar-xs progress">
-                                                                                        <div class="progress-bar bg-danger" role="progressbar"
-                                                                                            aria-valuenow="71" aria-valuemin="0" aria-valuemax="100"
-                                                                                            style="width: 71%;">
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </td>
-                                                                <td class="text-center">
-                                                                    <div role="group" class="btn-group-sm btn-group">
-                                                                        <button class="btn-shadow btn btn-primary">Hire</button>
-                                                                        <button class="btn-shadow btn btn-primary">Fire</button>
-                                                                    </div>
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td class="text-center text-muted" style="width: 80px;">#55</td>
-                                                                <td class="text-center" style="width: 80px;">
-                                                                    <img width="40" class="rounded-circle" src="assets/images/avatars/2.jpg" alt="">
-                                                                </td>
-                                                                <td class="text-center"><a href="javascript:void(0)">Johnathan Phelan</a></td>
-                                                                <td class="text-center"><a href="javascript:void(0)">Hatchworks</a></td>
-                                                                <td class="text-center"><div class="badge badge-pill badge-info">On Hold</div></td>
-                                                                <td class="text-center">
-                                                                    <span class="pr-2 opacity-6">
-                                                                        <i class="fa fa-business-time"></i>
-                                                                    </span>
-                                                                    12 Dec
-                                                                </td>
-                                                                <td class="text-center" style="width: 200px;">
-                                                                    <div class="widget-content p-0">
-                                                                        <div class="widget-content-outer">
-                                                                            <div class="widget-content-wrapper">
-                                                                                <div class="widget-content-left pr-2">
-                                                                                    <div class="widget-numbers fsize-1 text-warning">54%</div>
-                                                                                </div>
-                                                                                <div class="widget-content-right w-100">
-                                                                                    <div class="progress-bar-xs progress">
-                                                                                        <div class="progress-bar bg-warning" role="progressbar"
-                                                                                            aria-valuenow="54" aria-valuemin="0" aria-valuemax="100"
-                                                                                            style="width: 54%;">
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </td>
-                                                                <td class="text-center">
-                                                                    <div role="group" class="btn-group-sm btn-group">
-                                                                        <button class="btn-shadow btn btn-primary">Hire</button>
-                                                                        <button class="btn-shadow btn btn-primary">Fire</button>
-                                                                    </div>
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td class="text-center text-muted" style="width: 80px;">#56</td>
-                                                                <td class="text-center" style="width: 80px;">
-                                                                    <img width="40" class="rounded-circle" src="assets/images/avatars/3.jpg" alt="">
-                                                                </td>
-                                                                <td class="text-center"><a href="javascript:void(0)">Darrell Lowe</a></td>
-                                                                <td class="text-center"><a href="javascript:void(0)">Riddle Electronics</a></td>
-                                                                <td class="text-center"><div class="badge badge-pill badge-warning">In Progress</div></td>
-                                                                <td class="text-center">
-                                                                    <span class="pr-2 opacity-6">
-                                                                        <i class="fa fa-business-time"></i>
-                                                                    </span>
-                                                                    12 Dec
-                                                                </td>
-                                                                <td class="text-center" style="width: 200px;">
-                                                                    <div class="widget-content p-0">
-                                                                        <div class="widget-content-outer">
-                                                                            <div class="widget-content-wrapper">
-                                                                                <div class="widget-content-left pr-2">
-                                                                                    <div class="widget-numbers fsize-1 text-success">97%</div>
-                                                                                </div>
-                                                                                <div class="widget-content-right w-100">
-                                                                                    <div class="progress-bar-xs progress">
-                                                                                        <div class="progress-bar bg-success" role="progressbar"
-                                                                                            aria-valuenow="97" aria-valuemin="0" aria-valuemax="100"
-                                                                                            style="width: 97%;">
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </td>
-                                                                <td class="text-center">
-                                                                    <div role="group" class="btn-group-sm btn-group">
-                                                                        <button class="btn-shadow btn btn-primary">Hire</button>
-                                                                        <button class="btn-shadow btn btn-primary">Fire</button>
-                                                                    </div>
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td class="text-center text-muted" style="width: 80px;">#56</td>
-                                                                <td class="text-center" style="width: 80px;">
-                                                                    <img width="40" class="rounded-circle" src="assets/images/avatars/4.jpg" alt="">
-                                                                </td>
-                                                                <td class="text-center"><a href="javascript:void(0)">George T. Cottrell</a></td>
-                                                                <td class="text-center"><a href="javascript:void(0)">Pixelcloud</a></td>
-                                                                <td class="text-center"><div class="badge badge-pill badge-success">Completed</div></td>
-                                                                <td class="text-center">
-                                                                    <span class="pr-2 opacity-6">
-                                                                        <i class="fa fa-business-time"></i>
-                                                                    </span>
-                                                                    12 Dec
-                                                                </td>
-                                                                <td class="text-center" style="width: 200px;">
-                                                                    <div class="widget-content p-0">
-                                                                        <div class="widget-content-outer">
-                                                                            <div class="widget-content-wrapper">
-                                                                                <div class="widget-content-left pr-2">
-                                                                                    <div class="widget-numbers fsize-1 text-info">88%</div>
-                                                                                </div>
-                                                                                <div class="widget-content-right w-100">
-                                                                                    <div class="progress-bar-xs progress">
-                                                                                        <div class="progress-bar bg-info" role="progressbar"
-                                                                                            aria-valuenow="88" aria-valuemin="0" aria-valuemax="100"
-                                                                                            style="width: 88%;">
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </td>
-                                                                <td class="text-center">
-                                                                    <div role="group" class="btn-group-sm btn-group">
-                                                                        <button class="btn-shadow btn btn-primary">Hire</button>
-                                                                        <button class="btn-shadow btn btn-primary">Fire</button>
-                                                                    </div>
-                                                                </td>
-                                                            </tr>
-                                                        </tbody>
-                                                    </table>
-                                                </div>
-                                                <div class="d-block p-4 text-center card-footer">
-                                                    <button class="btn-pill btn-shadow btn-wide fsize-1 btn btn-dark btn-lg">
-                                                        <span class="mr-2 opacity-7">
-                                                            <i class="fa fa-cog fa-spin"></i>
-                                                        </span>
-                                                        <span class="mr-1">View Complete Report</span>
-                                                    </button>
                                                 </div>
                                             </div>
                                         </div>
-                                      
+                                        <div style="padding:3%;" class="main-card mb-3 card">
+                                            <div class="card-header">
+                                                <div class="card-header-title font-size-lg text-capitalize font-weight-normal">Company Agents Status
+                                                </div>
+                                                <div class="btn-actions-pane-right">
+                                                    <button type="button" id="PopoverCustomT-1" class="btn-icon btn-wide btn-outline-2x btn btn-outline-focus btn-sm">
+                                                        Actions Menu
+                                                        <span class="pl-2 align-middle opactiy-7">
+                                                            <i class="fa fa-angle-down"></i>
+                                                        </span>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                            <div class="table-responsive">
+                                                <table class="align-middle text-truncate mb-0 table table-borderless table-hover">
+                                                    <thead>
+                                                        <tr>
+                                                            <th class="text-center">Rec #</th>
+                                                            <th class="text-center">Customer</th>
+                                                            <th class="text-center">Car Name</th>
+                                                            <th class="text-center">Chassis</th>
+                                                            <th class="text-center">Status</th>
+                                                            <th class="text-center">Due Date</th>
+                                                            <th class="text-center">Payment</th>
+                                                            <th class="text-center">Actions</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td class="text-center text-muted" style="width: 80px;">#54</td>
+                                                            <td class="text-center" style="width: 80px;">
+                                                               <label>Hamza Zaheer</label>
+                                                            </td>
+                                                            <td class="text-center"><a href="javascript:void(0)">Juan C. Cargill</a></td>
+                                                            <td class="text-center"><a href="javascript:void(0)">Micro Electronics</a></td>
+                                                            <td class="text-center"><div class="badge badge-pill badge-danger">Canceled</div></td>
+                                                            <td class="text-center">
+                                                                <span class="pr-2 opacity-6">
+                                                                    <i class="fa fa-business-time"></i>
+                                                                </span>
+                                                                12 Dec
+                                                            </td>
+                                                            <td class="text-center" style="width: 200px;">
+                                                                <div class="widget-content p-0">
+                                                                    <div class="widget-content-outer">
+                                                                        <div class="widget-content-wrapper">
+                                                                            <div class="widget-content-left pr-2">
+                                                                                <div class="widget-numbers fsize-1 text-danger">71%</div>
+                                                                            </div>
+                                                                            <div class="widget-content-right w-100">
+                                                                                <div class="progress-bar-xs progress">
+                                                                                    <div class="progress-bar bg-danger" role="progressbar"
+                                                                                        aria-valuenow="71" aria-valuemin="0" aria-valuemax="100"
+                                                                                        style="width: 71%;">
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </td>
+                                                            <td class="text-center">
+                                                                <div role="group" class="btn-group-sm btn-group">
+                                                                    <button class="btn-shadow btn btn-primary">Hire</button>
+                                                                    <button class="btn-shadow btn btn-primary">Fire</button>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="text-center text-muted" style="width: 80px;">#55</td>
+                                                            <td class="text-center" style="width: 80px;">
+                                                                <img width="40" class="rounded-circle" src="assets/images/avatars/2.jpg" alt="">
+                                                            </td>
+                                                            <td class="text-center"><a href="javascript:void(0)">Johnathan Phelan</a></td>
+                                                            <td class="text-center"><a href="javascript:void(0)">Hatchworks</a></td>
+                                                            <td class="text-center"><div class="badge badge-pill badge-info">On Hold</div></td>
+                                                            <td class="text-center">
+                                                                <span class="pr-2 opacity-6">
+                                                                    <i class="fa fa-business-time"></i>
+                                                                </span>
+                                                                12 Dec
+                                                            </td>
+                                                            <td class="text-center" style="width: 200px;">
+                                                                <div class="widget-content p-0">
+                                                                    <div class="widget-content-outer">
+                                                                        <div class="widget-content-wrapper">
+                                                                            <div class="widget-content-left pr-2">
+                                                                                <div class="widget-numbers fsize-1 text-warning">54%</div>
+                                                                            </div>
+                                                                            <div class="widget-content-right w-100">
+                                                                                <div class="progress-bar-xs progress">
+                                                                                    <div class="progress-bar bg-warning" role="progressbar"
+                                                                                        aria-valuenow="54" aria-valuemin="0" aria-valuemax="100"
+                                                                                        style="width: 54%;">
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </td>
+                                                            <td class="text-center">
+                                                                <div role="group" class="btn-group-sm btn-group">
+                                                                    <button class="btn-shadow btn btn-primary">Hire</button>
+                                                                    <button class="btn-shadow btn btn-primary">Fire</button>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="text-center text-muted" style="width: 80px;">#56</td>
+                                                            <td class="text-center" style="width: 80px;">
+                                                                <img width="40" class="rounded-circle" src="assets/images/avatars/3.jpg" alt="">
+                                                            </td>
+                                                            <td class="text-center"><a href="javascript:void(0)">Darrell Lowe</a></td>
+                                                            <td class="text-center"><a href="javascript:void(0)">Riddle Electronics</a></td>
+                                                            <td class="text-center"><div class="badge badge-pill badge-warning">In Progress</div></td>
+                                                            <td class="text-center">
+                                                                <span class="pr-2 opacity-6">
+                                                                    <i class="fa fa-business-time"></i>
+                                                                </span>
+                                                                12 Dec
+                                                            </td>
+                                                            <td class="text-center" style="width: 200px;">
+                                                                <div class="widget-content p-0">
+                                                                    <div class="widget-content-outer">
+                                                                        <div class="widget-content-wrapper">
+                                                                            <div class="widget-content-left pr-2">
+                                                                                <div class="widget-numbers fsize-1 text-success">97%</div>
+                                                                            </div>
+                                                                            <div class="widget-content-right w-100">
+                                                                                <div class="progress-bar-xs progress">
+                                                                                    <div class="progress-bar bg-success" role="progressbar"
+                                                                                        aria-valuenow="97" aria-valuemin="0" aria-valuemax="100"
+                                                                                        style="width: 97%;">
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </td>
+                                                            <td class="text-center">
+                                                                <div role="group" class="btn-group-sm btn-group">
+                                                                    <button class="btn-shadow btn btn-primary">Hire</button>
+                                                                    <button class="btn-shadow btn btn-primary">Fire</button>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="text-center text-muted" style="width: 80px;">#56</td>
+                                                            <td class="text-center" style="width: 80px;">
+                                                                <img width="40" class="rounded-circle" src="assets/images/avatars/4.jpg" alt="">
+                                                            </td>
+                                                            <td class="text-center"><a href="javascript:void(0)">George T. Cottrell</a></td>
+                                                            <td class="text-center"><a href="javascript:void(0)">Pixelcloud</a></td>
+                                                            <td class="text-center"><div class="badge badge-pill badge-success">Completed</div></td>
+                                                            <td class="text-center">
+                                                                <span class="pr-2 opacity-6">
+                                                                    <i class="fa fa-business-time"></i>
+                                                                </span>
+                                                                12 Dec
+                                                            </td>
+                                                            <td class="text-center" style="width: 200px;">
+                                                                <div class="widget-content p-0">
+                                                                    <div class="widget-content-outer">
+                                                                        <div class="widget-content-wrapper">
+                                                                            <div class="widget-content-left pr-2">
+                                                                                <div class="widget-numbers fsize-1 text-info">88%</div>
+                                                                            </div>
+                                                                            <div class="widget-content-right w-100">
+                                                                                <div class="progress-bar-xs progress">
+                                                                                    <div class="progress-bar bg-info" role="progressbar"
+                                                                                        aria-valuenow="88" aria-valuemin="0" aria-valuemax="100"
+                                                                                        style="width: 88%;">
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </td>
+                                                            <td class="text-center">
+                                                                <div role="group" class="btn-group-sm btn-group">
+                                                                    <button class="btn-shadow btn btn-primary">Hire</button>
+                                                                    <button class="btn-shadow btn btn-primary">Fire</button>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                            <div class="d-block p-4 text-center card-footer">
+                                                <button class="btn-pill btn-shadow btn-wide fsize-1 btn btn-dark btn-lg">
+                                                    <span class="mr-2 opacity-7">
+                                                        <i class="fa fa-cog fa-spin"></i>
+                                                    </span>
+                                                    <span class="mr-1">View Complete Report</span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div id="dashboard-statstics" role="tabpanel" class="tab-pane container card">
                                     <div style="padding-top:3%;" class="row">

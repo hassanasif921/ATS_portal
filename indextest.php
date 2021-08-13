@@ -166,6 +166,13 @@ $queryca=mysqli_query($connection,$query);
                                                                                 <th>Action</th>
                                                                             </tr>    
                                                                         </thead>
+                                                                        <!-- <div class="col-md-9">
+                                                    <img style="width:400px; height:300px;" name="get_post_image1" id="get_post_image1" src="assets/images/logo-inverse.png">
+                                                </div>
+                                                <div style="margin-left:-70px;" class="col-md-3 mt-4">
+                                                    <img style="width:200px; height:130px;" name="get_post_image2" id="get_post_image2" src="assets/images/logo-inverse.png">
+                                                    <img style="width:200px; margin-top:1px; height:130px;" name="get_post_image3" id="get_post_image3" src="assets/images/logo-inverse.png">
+                                                </div> -->
                                                                         <tbody>
                                                                             <?php
                                                                                 while($rowca=mysqli_fetch_array($queryca)){
