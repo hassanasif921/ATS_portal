@@ -1,23 +1,59 @@
 <?php
+
 include("top.php");
 include("connection_db.php");
+if(isset($_SESSION['user_id']))
+{
+$querylogin=mysqli_fetch_row(mysqli_query($connection,"select admin_image,admin_name from admin_details where admin_id='".$_SESSION['user_id']."'"));
 
+
+}
+if(isset($_SESSION['vendor_id']))
+{
+$querylogin=mysqli_fetch_row(mysqli_query($connection,"select ats_vendor_bussiness_logo,ats_vendor_bussiness_name from ats_vendor where ats_vendor_id='".$_SESSION['vendor_id']."'"));
+
+
+}
+if(isset($_SESSION['agents_id']))
+{
+$querylogin=mysqli_fetch_row(mysqli_query($connection,"select ats_employee_image,ats_employee_firstName from ats_employee where ats_employee_id='".$_SESSION['agents_id']."'"));
+
+
+}
+$queryemp = "SHOW TABLE STATUS LIKE 'ats_post'";
+$resultemp = mysqli_query($connection,$queryemp);
+$rowemp = mysqli_fetch_assoc($resultemp);
 if (isset($_POST["btn_post"])) {
+    date_default_timezone_set("Asia/Karachi");
     $post_privacy = $_POST["post_privacy"];
     $get_post_emp_fullname = "username";
     $post_designation = "abc";
     $post_heading = $_POST["post_heading"];
     $post_description = $_POST["post_description"];
     $post_image = "img";
-    $post_createdAt = time();
+    $post_createdAt = date("d-m-Y");
     $post_createdBy="demo";
     $post_updatedAt = time();
     $post_updatedBy="demo";
     $post_status = "active";
-    $insert = "insert into ats_post(ats_post_privacy,ats_post_username,ats_post_designation,ats_post_heading,ats_post_description,ats_post_image,ats_post_createdBy,ats_post_createdAt,ats_post_updatedBy,ats_post_updatedAt,ats_post_status) values('$post_privacy','$get_post_emp_fullname','$post_designation','$post_heading','$post_description','$post_image','$post_createdAt','$post_createdBy','$post_updatedAt','$post_updatedBy','$post_status')";
+    $post_id = $rowemp['Auto_increment'];
+    $totalfiles = count($_FILES['post_image']['name']);
+    $insert = "insert into ats_post(ats_post_privacy,ats_post_username,ats_post_designation,ats_post_heading,ats_post_description,ats_post_image,ats_post_createdBy,ats_post_createdAt,ats_post_updatedBy,ats_post_updatedAt,ats_post_status) values('$post_privacy','$get_post_emp_fullname','$post_designation','$post_heading','$post_description','$post_image','$post_createdBy','$post_createdAt','$post_updatedAt','$post_updatedBy','$post_status')";
     $query = mysqli_query($connection,$insert);
     if ($query)
     {
+        for($i=0;$i<$totalfiles;$i++){
+            $filename = $_FILES['post_image']['name'][$i];
+            // Upload files and store in database
+            if(move_uploaded_file($_FILES["post_image"]["tmp_name"][$i],'post_images/'.$filename)){
+            // Image db insert sql
+            $insert1 = "INSERT INTO `table_post`(`post_images`, `post_id`) VALUES ('$filename','$post_id')";
+            $iquery = mysqli_query($connection,$insert1);
+            }
+            else{
+                echo 'Error in uploading file - '.$_FILES['post_image']['name'][$i].'<br/>';
+            }
+        }
         echo '<script type="text/javascript"> alert("Employee Register Successfully")</script>';
         //echo '<script language="javascript">window.location.href ="employee-records.php"</script>';
     }
@@ -58,26 +94,185 @@ if (isset($_POST["btn_post"])) {
                         <div class="app-inner-layout__wrapper row-fluid no-gutters">
                             <div style="background: transparent; box-shadow: none;" class="tab-content col-md-10 app-inner-layout__content card">
                                 <div style=" background: transparent; box-shadow: none;" id="dashboard-home" role="tabpanel" class="tab-pane active container card">
+                                  <?php 
+                                  if(isset($_SESSION['user_id']))
+                                  {
+                                  ?>
                                     <div>
                                         <h4 style="margin-left:5px; margin-top:2%;">Create Post</h4>
+                                        <?php 
+                                        
+                                        
+                                        ?>
                                         <input style="color: black; border-radius: 20px;" data-toggle="modal" data-target="#exampleModalLong" class="form-control mr-sm-2" placeholder="Create a New Post Here..">
                                     </div>
+                                    <?php }?>
                                     <div style=" background: white;  margin-top:30px;  padding-bottom:10px; margin-bottom:50px;">
                                         <?php
-                                            $query = mysqli_query($connection,"select * from ats_post");
+                                        if(isset($_SESSION['user_id']))
+                                        {
+                                            $query = mysqli_query($connection,"select * from ats_post ORDER BY ats_post_id DESC");
+                                        
+                                        
+                                        }
+                                        if(isset($_SESSION['agents_id']))
+                                        {
+                                            $query = mysqli_query($connection,"select * from ats_post WHERE `ats_post_privacy` IN('public','vendors ')  ORDER BY ats_post_id DESC");
+                                        
+                                        
+                                        }
+                                        if(isset($_SESSION['vendor_id']))
+                                        {
+                                            $query = mysqli_query($connection,"select * from ats_post WHERE `ats_post_privacy` IN('public','vendors ') ORDER BY ats_post_id DESC");
+                                        
+                                        
+                                        }
+                                           
                                             $count =mysqli_num_rows($query);
                                             if($count > 0){
                                                 while($row = mysqli_fetch_array($query)){	    				   
                                         ?>                         
                                         <div style="padding-top:3%; color: black;" class="container">
-                                            <img class="user-avatar rounded-circle" style="width: 55px;" id="get_post_emp_passport_image" name="get_post_emp_passport_image" src="assets/images/avatars/1.jpg" alt="User Avatar">
+                                        <!--- asas--->
+                                            <div class="row">
+                                                <div class="col-md-10">
+                                                    <img class="user-avatar rounded-circle" style="width: 55px;" id="get_post_emp_passport_image" name="get_post_emp_passport_image" src="assets/images/avatars/1.jpg" alt="User Avatar">
+                                                    <label style="font-weight: bold;  margin-left:10px; margin-top:-10px;" name="get_post_emp_fullname" id="get_post_emp_fullname"><?php echo $row["ats_post_username"] ?><br/>
+                                                    </label>
+                                                    <p style="margin-left:70px; font-size:12px; margin-top:-22px;" name="get_post_privacy" id="get_post_privacy"><?php echo $row["ats_post_privacy"] ?>  <i class="fa fa-globe"></i></p>
+                                                </div>
+                                                <div class="col-md-1 mt-1">
+                                                    <!-- <a><i style="font-size:20px;" class="fa fa-list"></i></a> -->
+                                                    <div class="btn-group dropdown">
+                                                        <button style="margin-left:100%;" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="btn-icon btn-icon-only btn btn-link">
+                                                            <i style="font-size:20px; color: #343a40;" class="fa fa-list"></i>
+                                                        </button>
+                                                        <div tabindex="-1" role="menu" aria-hidden="true" class="dropdown-menu-right rm-pointers dropdown-menu-shadow dropdown-menu-hover-link dropdown-menu">
+                                                            <h6 tabindex="-1" class="dropdown-header">Options</h6>
+                                                            <button type="button" tabindex="0" class="dropdown-item" id="<?php echo $row["ats_post_id"]; ?>" class="edit_data" >
+                                                                <i class="dropdown-icon fa fa-edit"></i><span>Edit Post</span>
+                                                            </button>
+                                                            <button type="button" tabindex="0" class="dropdown-item">
+                                                                <i class="dropdown-icon fa fa-trash"> </i><span>Delete Post</span>
+                                                            </button>
+                                                            
+                                                        </div>
+                                                    </div>    
+                                                </div>
+                                            </div>
+                                            <!-- <img class="user-avatar rounded-circle" style="width: 55px;" id="get_post_emp_passport_image" name="get_post_emp_passport_image" src="data:image/jpg;charset=utf8;base64,<?php echo base64_encode($querylogin[0]); ?>" alt="User Avatar">
                                             <label style="font-weight: bold;  margin-left:10px; margin-top:-10px;" name="get_post_emp_fullname" id="get_post_emp_fullname"><?php echo $row["ats_post_username"] ?><br/>
                                             </label>
-                                            <p style="margin-left:70px;  font-size:12px; margin-top:-22px;" name="get_post_privacy" id="get_post_privacy"><?php echo $row["ats_post_privacy"] ?>  <i class="fa fa-globe"></i></p>
+                                            <p style="margin-left:70px;  font-size:12px; margin-top:-22px;" name="get_post_privacy" id="get_post_privacy"><?php echo $row["ats_post_privacy"] ?>  <i class="fa fa-globe"></i></p> -->
                                             <h2 style=" margin-top:3.5%;" name="get_post_heading" id="get_post_heading"><?php echo $row["ats_post_heading"] ?></h2>
-                                            <h6 id="get_post_date" name="get_post_date"> Dec 7, 2017</h6>
+                                            <h6 id="get_post_date" name="get_post_date"> <?php echo $row["ats_post_createdAt"] ?></h6>
                                             <p style="padding-bottom:2%; padding-top:5%;" name="get_post_description" id="get_post_description"><?php echo $row["ats_post_description"] ?></p>
                                             <div style="margin-bottom:2%" class="row">
+                                            <?php 
+                                            $query_post_images=mysqli_query($connection,"select * from table_post where post_id='".$row[0]."'");
+                                            $count_post=mysqli_num_rows($query_post_images);
+                                            
+                                            ?>
+                                                <?php 
+                                                if($count_post==1)
+                                                {
+                                                ?>
+                                                <!-- 1 Image -->
+                                                <div class="col-md-12">
+                                                    <?php $result_post=mysqli_fetch_row($query_post_images);?>
+                                                    <img style="width:100%;" name="get_post_image2" id="get_post_image2" src="post_images/<?php echo $result_post[1]?>">
+                                                </div> 
+                                                    <?php }
+                                                    ?>
+                                                <?php 
+                                                if($count_post==2)
+                                                {
+                                                    while($result_post=mysqli_fetch_array($query_post_images))
+                                                    {
+                                                ?>
+                                                <!-- 2 images Collage -->
+                                                 <div class="col-md-6">
+                                                    <img style="width:300px; height:300px;" name="get_post_image2" id="get_post_image2" src="post_images/<?php echo $result_post[1]?>">
+                                                    
+                                                </div> 
+                                               
+                                                
+                                                <?php 
+                                                    }
+                                                }
+                                                ?>
+                                                 <?php 
+                                                if($count_post==3)
+                                                {
+                                                    $query_post_images1=mysqli_fetch_row(mysqli_query($connection,"select * from table_post where post_id='".$row[0]."' LIMIT 0,1"));
+                                                    $query_post_images2=mysqli_fetch_row(mysqli_query($connection,"select * from table_post where post_id='".$row[0]."' LIMIT 1,1"));
+                                                    $query_post_images3=mysqli_fetch_row(mysqli_query($connection,"select * from table_post where post_id='".$row[0]."' LIMIT 2,1"));
+                                                ?>
+
+                                                <!-- 3 images Collage -->
+                                                 <div class="col-md-9">
+                                                    <img style="width:400px; height:300px;" name="get_post_image1" id="get_post_image1" src="post_images/<?php echo $query_post_images1[1]?>">
+                                                </div>
+                                                <div style="margin-left:-70px;" class="col-md-3 mt-4">
+                                                    <img style="width:200px; height:130px;" name="get_post_image2" id="get_post_image2" src="post_images/<?php echo $query_post_images2[1]?>">
+                                                    <img style="width:200px; margin-top:1px; height:130px;" name="get_post_image3" id="get_post_image3" src="post_images/<?php echo $query_post_images3[1]?>">
+                                                </div> 
+                                                
+                                                     
+                                                <?php 
+                                                    
+                                                }
+                                                ?>
+                                                 <?php 
+                                                if($count_post==4)
+                                                {
+                                                    $query_post_images1=mysqli_fetch_row(mysqli_query($connection,"select * from table_post where post_id='".$row[0]."' LIMIT 0,1"));
+                                                    $query_post_images2=mysqli_fetch_row(mysqli_query($connection,"select * from table_post where post_id='".$row[0]."' LIMIT 1,1"));
+                                                    $query_post_images3=mysqli_fetch_row(mysqli_query($connection,"select * from table_post where post_id='".$row[0]."' LIMIT 2,1"));
+                                                    $query_post_images4=mysqli_fetch_row(mysqli_query($connection,"select * from table_post where post_id='".$row[0]."' LIMIT 3,1"));
+                                                    ?>
+                                                
+                                                <!-- 4 images Collage -->
+                                                 <div style="margin-left:-0.7%;" class="col-md-6 ">
+                                                    <img style="width:320px; height:130px;" name="get_post_image2" id="get_post_image2" src="post_images/<?php echo $query_post_images1[1]?>">
+                                                    <img style="width:320px; margin-top:1px; height:130px;" name="get_post_image3" id="get_post_image3" src="post_images/<?php echo $query_post_images2[1]?>">
+                                                </div> 
+                                                <div class="col-md-6 ">
+                                                    <img style="width:320px; height:130px;" name="get_post_image2" id="get_post_image2" src="post_images/<?php echo $query_post_images3[1]?>">
+                                                    <img style="width:320px; margin-top:1px; height:130px;" name="get_post_image3" id="get_post_image3" src="post_images/<?php echo $query_post_images4[1]?>">
+                                                </div> 
+                                                <?php 
+                                                }
+                                                ?>
+                                                <?php 
+                                                if($count_post==5)
+                                                {
+                                                    $query_post_images1=mysqli_fetch_row(mysqli_query($connection,"select * from table_post where post_id='".$row[0]."' LIMIT 0,1"));
+                                                    $query_post_images2=mysqli_fetch_row(mysqli_query($connection,"select * from table_post where post_id='".$row[0]."' LIMIT 1,1"));
+                                                    $query_post_images3=mysqli_fetch_row(mysqli_query($connection,"select * from table_post where post_id='".$row[0]."' LIMIT 2,1"));
+                                                    $query_post_images4=mysqli_fetch_row(mysqli_query($connection,"select * from table_post where post_id='".$row[0]."' LIMIT 3,1"));
+                                                    $query_post_images5=mysqli_fetch_row(mysqli_query($connection,"select * from table_post where post_id='".$row[0]."' LIMIT 4,1"));
+                                                ?>
+                                                <!-- 5 images Collage -->
+                                                 <div style="margin-left:7px;" class="col-md-6">
+                                                    <img style="width:300px; height:260px;" name="get_post_image1" id="get_post_image1" src="post_images/<?php echo $query_post_images1[1]?>">
+                                                </div>
+                                                <div style="margin-left:-20px;" class="col-md-3">
+                                                    <img style="width:150px; height:130px;" name="get_post_image2" id="get_post_image2" src="post_images/<?php echo $query_post_images2[1]?>">
+                                                    <img style="width:150px; margin-top:1px; height:130px;" name="get_post_image3" id="get_post_image3" src="post_images/<?php echo $query_post_images3[1]?>">
+                                                </div>
+                                                <div style="margin-left:-10px;" class="col-md-3">
+                                                    <img style="width:150px; height:130px;" name="get_post_image4" id="get_post_image4" src="post_images/<?php echo $query_post_images4[1]?>">
+                                                    <img style="width:150px; margin-top:1px; height:130px;" name="get_post_image5" id="get_post_image5" src="post_images/<?php echo $query_post_images5[1]?>">
+                                                </div> 
+                                                <?php 
+                                                }
+                                                ?>
+                                                <label class="like-share" style="margin-left:3.5%;"><a><i class="fa fa-thumbs-up"></i><span name="get_post_total_likes" id="get_post_total_likes"> 56</span> Likes</a></label>
+                                                <label class="like-share" style="margin-left:67%;  float:right;"><a><i class="fa fa-comments"></i><span name="get_post_total_comments" id="get_post_total_comments"> 56</span> Comments</a></label>
+                                            </div>
+                                            
+                                            <!-- <div style="margin-bottom:2%" class="row">
                                                 <div style="margin-left:7px;" class="col-md-6">
                                                     <img style="width:300px; height:260px;" name="get_post_image1" id="get_post_image1" src="assets/images/logo-inverse.png">
                                                 </div>
@@ -91,13 +286,13 @@ if (isset($_POST["btn_post"])) {
                                                 </div>             
                                                 <label class="like-share" style="margin-left:3.5%;"><a><i class="fa fa-thumbs-up"></i><span name="get_post_total_likes" id="get_post_total_likes"> 56</span> Likes</a></label>
                                                 <label class="like-share" style="margin-left:67%;  float:right;"><a><i class="fa fa-comments"></i><span name="get_post_total_comments" id="get_post_total_comments"> 56</span> Comments</a></label>
-                                            </div>
+                                            </div> -->
                                             <form id="signupForm" method="post" action="#">
                                             <div style=" margin-bottom:px;" class="row like-share">
                                                 <div style="text-align: center; color:#ff9900; font-size: 24px; border-right: 1px solid black; border-top: 1px solid black; border-bottom: 1px solid black;" class="col-md-6 "><button name="btn_post_like" id="btn_post_like" style="background: transparent; cursor: pointer; border-style:none;" type="submit"><i style="color: #ff9900" class="fa fa-thumbs-up"></i></button></div>
                                                 <div style="text-align: center;  font-size: 24px; border-top: 1px solid black; border-bottom: 1px solid black;" class="col-md-6"><button  name="btn_write_comment" id="btn_write_comment" style=" background: transparent; cursor: pointer; border-style:none;" type="submit"><i style="color: #ff9900" class="fa fa-comments"></i></button></div>
                                                 <div class="col-sm-1">
-                                                    <img class="user-avatar rounded-circle" style="width:50px;  margin-top:7px; height:45px;" name="get_comment_emp_passport_image" id="get_comment_emp_passport_image" src="assets/images/avatars/4.jpg" alt="User Avatar">
+                                                    <img class="user-avatar rounded-circle" style="width:50px;  margin-top:7px; height:45px;" name="get_comment_emp_passport_image" id="get_comment_emp_passport_image" src="data:image/jpg;charset=utf8;base64,<?php echo base64_encode($querylogin[0]); ?>" alt="User Avatar">
                                                 </div>
                                                 <div style="margin-top:2%;" class="col-sm-10">
                                                     <input style="color: black; border-radius: 7px;" class="form-control" type="text" id="comments_for_post" required placeholder="Write Comment Here..">
@@ -2127,7 +2322,7 @@ include("bottom.php");
 <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
 aria-hidden="true">
 <div class="modal-dialog" role="document">
-    <form action="" method="post">
+    <form action="" method="post" enctype="multipart/form-data">
         <div class="modal-content">
             <div class="modal-header">
                 <div style="margin-left:-1px;" class="container">
@@ -2158,7 +2353,56 @@ aria-hidden="true">
                         <label for="file" style="cursor: pointer;">
                         <i style="font-size: 35px" class="fa fa-picture-o"></i>
                         </label>
-                        <input type="file" multiple accept="image/*" name="post_image" id="file" onchange="loadFile(event)" style="display: none;"/>
+                        <input type="file" multiple accept="image/*" name="post_image[]" id="file" onchange="loadFile(event)" style="display: none;"/>
+                    </div>
+                    <p><img id="output" width="80"/></p>
+                    <p style="font-size:12px; margin-top: -15px; color:black;">Upload Your Pictures</p>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <a type="button" class="btn btn-secondary text-white" data-dismiss="modal">Cancel</a>
+                <input style="background: #ff9900; border-style: none;" type="submit" value="POST" id="btn_post" name="btn_post" class="btn btn-primary">
+            </div>
+        </div>
+    </form>
+</div>
+</div>
+        
+<div class="modal fade" id="exampleModalLong1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
+aria-hidden="true">
+<div class="modal-dialog" role="document">
+    <form action="" method="post" enctype="multipart/form-data">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div style="margin-left:-1px;" class="container">
+                    <h5 class="modal-title" id="exampleModalLong">Create a Post</h5>
+                    <select style="font-size: 11px; height: 19px; padding: 0px; width:55px;" name="post_privacy" id="post_privacy" class="form-control">
+                        <option value="public">Public</option>
+                        <option value="users">Users</option> 
+                        <option value="vendors">Vendors</option> 
+                        <option value="custom">Custom</option> 
+                    </select> 
+
+                    <a style="margin-top:-10%;" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </a>
+                </div>
+            </div>
+            <div class="modal-body col-md-12">
+                    <img class="user-avatar rounded-circle" style="width: 35px;" id="get_post_emp_passport_image" name="get_post_emp_passport_image" src="assets/images/avatars/2.jpg" alt="User Avatar">
+                    <label style="font-weight: bold;" name="get_post_emp_fullname" id="get_post_emp_fullname" class=""></label>
+                <div style="margin-top: 2%" class="">
+                    <label style="font-weight: bold;" class="form-control-label">Heading</label><br/>
+                    <input style="font-size:12px;" type="text" id="post_heading" name="post_heading" required placeholder="Enter Your Heading..." class="input-style form-control">
+                    
+                    <label style="font-weight: bold;" class="form-control-label">Description</label><br/>
+                    <textarea style="font-size:12px;" id="post_description" name="post_description" rows="5" placeholder="Enter Your Description..." class="form-control"></textarea>
+                    <div class="image-upload">
+                    <label style="font-weight: bold;" class="form-control-label">Picture</label><br/>
+                        <label for="file" style="cursor: pointer;">
+                        <i style="font-size: 35px" class="fa fa-picture-o"></i>
+                        </label>
+                        <input type="file" multiple accept="image/*" name="post_image[]" id="file" onchange="loadFile(event)" style="display: none;"/>
                     </div>
                     <p><img id="output" width="80"/></p>
                     <p style="font-size:12px; margin-top: -15px; color:black;">Upload Your Pictures</p>

@@ -83,6 +83,25 @@ include("connection_db.php");
                                                                     $resultports=mysqli_query($connection,$querycountry);
                                                                     $rowcountry=mysqli_fetch_row($resultports);
                                                                     ?>
+                                                                    <td><?php echo $rowcountry[1] ?></td>
+                                                                <?php
+                                                               
+                                                            ?>
+                                                                   
+                                                                    <td><?php echo $row["ats_customer_contact_name_1"] ?></td>
+                                                                   
+                                                                    <td><?php echo $row["ats_customer_createdBy"] ?></td>
+                                                            
+                                                                    <td><?php echo $row["ats_customer_updatedBy"] ?></td>
+                                                                    
+                                                                   
+                                                                    <td><a style="padding:3px" href="cust-view.php?id=<?php echo $row["ats_customer_ATS_ID"] ?>" >View</a><button data-id="<?php echo $row['ats_customer_ATS_ID'] ?>" data-toggle="modal" data-target="#exampleModalLong" class='userinfo'>Changes</button>
+                                                                    </td>
+                                                                </tr>
+                                                                <?php
+                                                                        }    
+                                                                    }
+                                                                ?>
                                                                 </tbody>
                                                             </table>    
                                                         </div>    
@@ -221,6 +240,7 @@ function myFunction2() {
     }       
   }
 }
+
 </script>
 <script>
             function toggle(source) {
@@ -230,7 +250,8 @@ function myFunction2() {
             checkboxes[i].checked = source.checked;
     }
 }
-
+</script>
+<script>
 $(document).ready(function(){
 
  $('.userinfo').click(function(){
@@ -250,6 +271,9 @@ $(document).ready(function(){
       // Display Modal
       $('#exampleModalLong').modal('show'); 
     }
+   });
+ });
+});
     $(document).ready(function(){
         $('.userinfo').click(function(){
         var userid = $(this).data('id');

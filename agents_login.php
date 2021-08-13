@@ -1,8 +1,9 @@
 <?php	
 session_start();
 include("connection_db.php");
-if(isset($_SESSION['agents_id']))
+if(isset($_SESSION['agents_id']) || isset($_SESSION['vendor_id']) || isset($_SESSION['user_id']))
 {
+    echo "<script>alert('YOU HAVE ALREADY LOGIN')</script>";
     header("Location:index.php");
 
 }
@@ -115,13 +116,13 @@ crossorigin="anonymous"></script>
                                         <div class="col-md-6">
                                             <div class="position-relative form-group">
                                                 <label for="exampleEmail" class="">Username</label>
-                                                <input name="username" id="username" placeholder="Enter Your Username" type="text" class="form-control">
+                                                <input name="username" id="username" placeholder="Enter Your Username" type="text" class="form-control" required>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="position-relative form-group">
                                                 <label for="examplePassword" class="">Password</label>
-                                                <input name="password" id="password" placeholder="Enter Your Password" type="password" class="form-control">
+                                                <input name="password" id="password" placeholder="Enter Your Password" type="password" class="form-control" required>
                                             </div>
                                         </div>
                                     </div>

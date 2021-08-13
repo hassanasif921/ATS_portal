@@ -202,7 +202,7 @@ else {
     else{
         $echoas7=",";
     }
-    $stock_release_ok_date = date("Y-m-d", strtotime($_POST["stock_release_ok_date"]);
+    $stock_release_ok_date = date("Y-m-d", strtotime($_POST["stock_release_ok_date"]));
   
     if(is_uploaded_file($_FILES['stock_shipping_invoice_file']['tmp_name']))
     {

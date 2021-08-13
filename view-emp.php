@@ -5,6 +5,8 @@ $id=$_GET['empid'];
 $query=mysqli_query($connection,"select * from ats_employee where ats_employee_id='".$id."'");
 $row=mysqli_fetch_assoc($query);
 ?>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.8.2/css/lightbox.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.8.2/js/lightbox.min.js"></script>
             <div class="app-main__outer">
                 <div class="app-main__inner">
                     <div class="tab-content">
@@ -233,64 +235,104 @@ $row=mysqli_fetch_assoc($query);
                                                                             </div>
                                                                             <div style="margin-top: 0.5%;" class="col-md-6">
                                                                                 <div id="dvPreview" class="col-md-12">
-                                                                                    <?php 
-                                                                                        $querycnic=mysqli_query($connection,"select * from employeecnic where ats_emp_id='".$id."' AND image_type='NIC-Pic'");
-                                                                                        while($rowcnic=mysqli_fetch_array($querycnic)){
-                                                                                    ?>
-                                                                                    <img width="60px" height="30px" src="upload/<?php echo $rowcnic[3]; ?>">
-                                                                                    <?php 
-                                                                                        }
-                                                                                    ?>
-                                                                                </div></br>
-                                                                                <div id="dvPreviewres" class="col-md-12">
-                                                                                    <?php 
-                                                                                        $queryres=mysqli_query($connection,"select * from employeecnic where ats_emp_id='".$id."' AND image_type='Res-Pic'");
-                                                                                        while($rowres=mysqli_fetch_array($queryres)){
-                                                                                            if($rowres){
-                                                                                    ?>
-                                                                                    <img width="60px" height="30px" src="upload/<?php echo $rowres[3]; ?>">
-                                                                                    <?php 
-                                                                                            }
-                                                                                        }
-                                                                                    ?>
-                                                                                </div></br>
-                                                                                <div id="dvPreviewedu" class="col-md-12">
-                                                                                    <?php 
-                                                                                        $queryedu=mysqli_query($connection,"select * from employeecnic where ats_emp_id='".$id."' AND image_type='Edu-Pic'");
-                                                                                        while($rowedu=mysqli_fetch_array($queryedu)){
-                                                                                            if($rowedu){
-                                                                                    ?>
-                                                                                    <img width="60px" height="30px" src="upload/<?php echo $rowedu[3]; ?>">
-                                                                                    <?php 
-                                                                                            }
-                                                                                        }
-                                                                                    ?>
-                                                                                </div></br>
-                                                                                <div id="dvPreviewexp" class="col-md-12">
-                                                                                    <?php 
-                                                                                        $queryexp=mysqli_query($connection,"select * from employeecnic where ats_emp_id='".$id."' AND image_type='Exp-Pic'");
-                                                                                        while($rowexp=mysqli_fetch_array($queryexp)){
-                                                                                            if($rowexp){
-                                                                                    ?>
-                                                                                    <img width="60px" height="30px" src="upload/<?php echo $rowexp[3]; ?>">
-                                                                                    <?php 
-                                                                                            }
-                                                                                        }
-                                                                                    ?>
-                                                                                </div></br>
-                                                                                <div id="dvPreviewodc" class="col-md-12">
-                                                                                    <?php 
-                                                                                        $queryoth=mysqli_query($connection,"select * from employeecnic where ats_emp_id='".$id."' AND image_type='Other-Pic'");
-                                                                                        while($rowoth=mysqli_fetch_array($queryoth)){
-                                                                                            if($rowoth){
-                                                                                    ?>
-                                                                                    <a href="wwww.google.com>">
-                                                                                        <img width="60px" height="30px" src="upload/<?php echo $rowoth[3]; ?>">
-                                                                                    </a>
-                                                                                    <?php 
-                                                                                            }
-                                                                                        }
-                                                                                    ?>
+                                                                                <div class="lightbox-gallery">
+                                                                                    <div class="container">
+                                                                                        
+                                                                                                <div class="row photos">
+                                                                                                <?php 
+                                                                                                 $querycnic=mysqli_query($connection,"select * from employeecnic where ats_emp_id='".$id."' AND image_type='NIC-Pic'");
+                                                                                                 while($rowcnic=mysqli_fetch_array($querycnic)){
+                                                                                                ?>
+                                                                                                    <div class="item"><a href="upload/<?php echo $rowcnic[3]; ?>?>" data-lightbox="photos"><img class="img-fluid"  width="60px" height="30px" src="upload/<?php echo $rowcnic[3]; ?>"></a></div>
+                                                                                                    <?php 
+                                                                                                     }
+                                                                                                        
+                                                                                                         ?>
+                                                                                                </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                                  
+                                                                            </div></br>
+                                                                            <div id="dvPreviewres" class="col-md-12">
+                                                                                <div class="lightbox-gallery">
+                                                                                    <div class="container">
+                                                                                        
+                                                                                                <div class="row photos">
+                                                                                                    <?php 
+                                                                                                $queryres=mysqli_query($connection,"select * from employeecnic where ats_emp_id='".$id."' AND image_type='Res-Pic'");
+                                                                                                while($rowres=mysqli_fetch_array($queryres)){
+                                                                                                    if($rowres){
+                                                                                                    ?>
+                                                                                                    <div class="item"><a href="upload/<?php echo $rowres[3]; ?>" data-lightbox="photos"><img class="img-fluid"  width="60px" height="30px" src="upload/<?php echo $rowres[3]; ?>"></a></div>
+                                                                                                    <?php 
+                                                                                                    }
+                                                                                                        }
+                                                                                                        ?>
+                                                                                                </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                                            
+                                                                            </div>
+                                                                            <div id="dvPreviewedu" class="col-md-12">
+                                                                                
+                                                                                        <div class="lightbox-gallery">
+                                                                                                <div class="container">
+                                                                                    
+                                                                                                        <div class="row photos">
+                                                                                                            <?php 
+                                                                                                            $queryedu=mysqli_query($connection,"select * from employeecnic where ats_emp_id='".$id."' AND image_type='Edu-Pic'");
+                                                                                                                                                                                        
+
+                                                                                                            while($rowedu=mysqli_fetch_array($queryedu)){
+                                                                                                            if($rowedu){
+                                                                                                            ?>
+                                                                                                                <div class="item"><a href="upload/<?php echo $rowedu[3]; ?>" data-lightbox="photos"><img class="img-fluid"  width="60px" height="30px" src="upload/<?php echo $rowedu[3]; ?>"></a></div>
+                                                                                                            <?php 
+                                                                                                            }
+                                                                                                                }
+                                                                                                                ?>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                        </div>
+                                                                            </div></br>
+                                                                            <div id="dvPreviewexp" class="col-md-12">
+                                                                                    <div class="container">
+                                                                                            
+                                                                                            <div class="row photos">
+                                                                                                <?php 
+                                                                                                $queryexp=mysqli_query($connection,"select * from employeecnic where ats_emp_id='".$id."' AND image_type='Exp-Pic'");
+                                                                                                while($rowexp=mysqli_fetch_array($queryexp)){
+                                                                                                    if($rowexp){
+                                                                                                ?>
+                                                                                                    <div class="item"><a href="upload/<?php echo $rowexp[3]; ?>" data-lightbox="photos"><img class="img-fluid"  width="60px" height="30px" src="upload/<?php echo $rowexp[3]; ?>"></a></div>
+                                                                                                <?php 
+                                                                                                }
+                                                                                                    }
+                                                                                                    ?>
+                                                                                            </div>
+                                                                                    </div>
+                                                                                
+                                                                                
+                                                                                
+
+                                                                            </div></br>
+                                                                            <div id="dvPreviewodc" class="col-md-12">
+                                                                                <div class="container">
+                                                                                                
+                                                                                                <div class="row photos">
+                                                                                                    <?php 
+                                                                                                    $queryoth=mysqli_query($connection,"select * from employeecnic where ats_emp_id='".$id."' AND image_type='Other-Pic'");
+                                                                                                    while($rowoth=mysqli_fetch_array($queryoth)){
+                                                                                                        if($rowoth){
+                                                                                                    ?>
+                                                                                                        <div class="item"><a href="upload/<?php echo $rowoth[3]; ?>" data-lightbox="photos"><img class="img-fluid"  width="60px" height="30px" src="upload/<?php echo $rowoth[3]; ?>"></a></div>
+                                                                                                    <?php 
+                                                                                                    }
+                                                                                                        }
+                                                                                                        ?>
+                                                                                                </div>
+                                                                                        </div>
+                                                                                    
                                                                                 </div>
                                                                             </div> 
                                                                         </div>

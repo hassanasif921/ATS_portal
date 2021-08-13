@@ -490,7 +490,7 @@ if(isset($_SESSION['vendor_id']))
                                         }
                                         elseif (isset($_SESSION['vendor_id'])) {
                                             ?>
-                                            <img width="42" class="rounded-circle" src="data:image/jpeg;charset=utf8;base64,<?php echo base64_encode($queryagents[18]); ?>" alt="">
+                                            <img width="42" class="rounded-circle" src="data:image/jpeg;charset=utf8;base64,<?php echo base64_encode($queryvendor[14]); ?>" alt="">
                                             <i class="fa fa-angle-down ml-2 opacity-8"></i>
                                         <?php
                                         }

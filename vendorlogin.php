@@ -1,8 +1,9 @@
 <?php	
 session_start();
 include("connection_db.php");
-if(isset($_SESSION['agents_id']))
+if(isset($_SESSION['agents_id']) || isset($_SESSION['vendor_id']) || isset($_SESSION['user_id']))
 {
+    echo "<script>alert('YOU HAVE ALREADY LOGIN')</script>";
     header("Location:index.php");
 
 }

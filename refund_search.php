@@ -88,10 +88,8 @@ $resultsell=mysqli_query($connection,"select * from ats_sell_person");
                                                                         <th>Bank Address</th>
                                                                         <th>Swift Code</th>
                                                                         <th>Memo / Notify</th>
-                                                                        <th>HOD Comments</th>
-                                                                        <th>Created At</th>
-                                                                        <th>Updated&nbsp;At</th>
-                                                                        <th>Status</th>
+                                                                      
+                                                                       
                                                                     </tr>
                                                                 </thead>
                                                                 <tbody >
@@ -123,11 +121,8 @@ $resultsell=mysqli_query($connection,"select * from ats_sell_person");
                                                                    
                                                                     <td><?php echo $row["ats_refund_swift_code"] ?></td>
                                                                     <td><?php echo $row["ats_refund_memo_notify"] ?></td>
-                                                                    <td><?php echo $row["ats_refund_created_at"] ?></td>
-                                                                    <td><?php echo $row["ats_refund_updated_at"] ?></td>
-                                                                    <td><div class="mb-2 mr-2 badge badge-info"><?php echo $row["ats_refund_status"] ?></div></td>
-                                                                    <td><a style="padding:3px" href="<?php //echo $row["id"] ?>" class="btn btn-primary"><span class="fa fa-plus"></span></a>
-                                                                    </td>
+                                                                  
+                                                                   
                                                                 </tr>
                                                                 <?php
                                                                         }    

@@ -734,7 +734,7 @@ $queryca=mysqli_query($connection,$query);
                                                                                         <td><?php echo $rowca[51]?></td>
                                                                                         <td><?php echo $rowca[12]?></td>
                                                                                         <td><?php echo $rowca[17]?></td>
-                                                                                        <td><a href="car-view.php?car_id=<?php echo $rowca[0]?>">VIEW</a></td>
+                                                                                        <td><a href="car-view.php?car_id=<?php echo $rowca[0]?>">VIEW</a> || <a href="stock_update.php?car_id=<?php echo $rowca[0]?>">EDIT</a></td>
 
                                                                                     </tr>
                                                                                 <?php }?>
