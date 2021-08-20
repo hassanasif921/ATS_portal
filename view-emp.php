@@ -355,6 +355,3 @@ $row=mysqli_fetch_assoc($query);
                     </div>
                 </div>
             </div>
-<?php
-include("bottom.php");
-?>

@@ -4,6 +4,28 @@
 .fancytree-helper-indeterminate-cb {
   color: #777;
 }
+
+#myProgress {
+  width: 100%;
+  background-color: #000;
+}
+
+#myBar {
+  width: 100%;
+  height: 30px;
+  background-image: linear-gradient(140deg, #2248a8 -30%, #3f6ad8 90%);
+        background-color: #2248a8;
+        border-color: #2248a8;
+        color: #fff;
+}
+#myBar2 {
+  width: 100%;
+  height: 30px;
+  background-image: linear-gradient(140deg, #2248a8 -30%, #3f6ad8 90%);
+        background-color: #2248a8;
+        border-color: #2248a8;
+        color: #fff;
+}
 .fancytree-helper-disabled {
   color: #c0c0c0;
 }

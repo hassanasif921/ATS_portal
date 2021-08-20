@@ -4,20 +4,26 @@ include("top.php");
 include("connection_db.php");
 if(isset($_SESSION['user_id']))
 {
-$querylogin=mysqli_fetch_row(mysqli_query($connection,"select admin_image,admin_name from admin_details where admin_id='".$_SESSION['user_id']."'"));
 
-
+$querylogin=mysqli_fetch_row(mysqli_query($connection,"select admin_image,admin_name,admin_id from admin_details where admin_id='".$_SESSION['user_id']."'"));
+$role="ADMIN";
+$username=$querylogin[2];
+$userid=$querylogin[2];
 }
 if(isset($_SESSION['vendor_id']))
 {
-$querylogin=mysqli_fetch_row(mysqli_query($connection,"select ats_vendor_bussiness_logo,ats_vendor_bussiness_name from ats_vendor where ats_vendor_id='".$_SESSION['vendor_id']."'"));
-
+$querylogin=mysqli_fetch_row(mysqli_query($connection,"select ats_vendor_bussiness_logo,ats_vendor_bussiness_name,ats_vendor_id from ats_vendor where ats_vendor_id='".$_SESSION['vendor_id']."'"));
+$role="VENDOR";
+$username=$querylogin[2];
+$userid=$querylogin[2];
 
 }
 if(isset($_SESSION['agents_id']))
 {
-$querylogin=mysqli_fetch_row(mysqli_query($connection,"select ats_employee_image,ats_employee_firstName from ats_employee where ats_employee_id='".$_SESSION['agents_id']."'"));
-
+$querylogin=mysqli_fetch_row(mysqli_query($connection,"select ats_employee_image,ats_employee_firstName,ats_employee_id from ats_employee where ats_employee_id='".$_SESSION['agents_id']."'"));
+$role="AGENTS";
+$username=$querylogin[2];
+$userid=$querylogin[2];
 
 }
 $queryemp = "SHOW TABLE STATUS LIKE 'ats_post'";
@@ -130,8 +136,10 @@ if (isset($_POST["btn_post"])) {
                                            
                                             $count =mysqli_num_rows($query);
                                             if($count > 0){
-                                                while($row = mysqli_fetch_array($query)){	    				   
-                                        ?>                         
+                                                while($row = mysqli_fetch_array($query)){
+                                                    	    				   
+                                        ?>   
+                                        
                                         <div style="padding-top:3%; color: black;" class="container">
                                         <!--- asas--->
                                             <div class="row">
@@ -149,9 +157,10 @@ if (isset($_POST["btn_post"])) {
                                                         </button>
                                                         <div tabindex="-1" role="menu" aria-hidden="true" class="dropdown-menu-right rm-pointers dropdown-menu-shadow dropdown-menu-hover-link dropdown-menu">
                                                             <h6 tabindex="-1" class="dropdown-header">Options</h6>
-                                                            <button type="button" tabindex="0" class="dropdown-item" id="<?php echo $row["ats_post_id"]; ?>" class="edit_data" >
+                                                            <button  tabindex="0" class="dropdown-item" id="<?php echo $row["ats_post_id"]; ?>"  data-toggle="modal" type="button" data-target="#update_modal<?php echo $row['ats_post_id']?>">
                                                                 <i class="dropdown-icon fa fa-edit"></i><span>Edit Post</span>
                                                             </button>
+                                                            
                                                             <button type="button" tabindex="0" class="dropdown-item">
                                                                 <i class="dropdown-icon fa fa-trash"> </i><span>Delete Post</span>
                                                             </button>
@@ -160,6 +169,7 @@ if (isset($_POST["btn_post"])) {
                                                     </div>    
                                                 </div>
                                             </div>
+                                           
                                             <!-- <img class="user-avatar rounded-circle" style="width: 55px;" id="get_post_emp_passport_image" name="get_post_emp_passport_image" src="data:image/jpg;charset=utf8;base64,<?php echo base64_encode($querylogin[0]); ?>" alt="User Avatar">
                                             <label style="font-weight: bold;  margin-left:10px; margin-top:-10px;" name="get_post_emp_fullname" id="get_post_emp_fullname"><?php echo $row["ats_post_username"] ?><br/>
                                             </label>
@@ -287,7 +297,10 @@ if (isset($_POST["btn_post"])) {
                                                 <label class="like-share" style="margin-left:3.5%;"><a><i class="fa fa-thumbs-up"></i><span name="get_post_total_likes" id="get_post_total_likes"> 56</span> Likes</a></label>
                                                 <label class="like-share" style="margin-left:67%;  float:right;"><a><i class="fa fa-comments"></i><span name="get_post_total_comments" id="get_post_total_comments"> 56</span> Comments</a></label>
                                             </div> -->
-                                            <form id="signupForm" method="post" action="#">
+                                            <form id="signupForm" method="post" action="comment.php">
+                                                <input type="hidden" value="<?php echo $row['ats_post_id']?>" name="form_post_id">
+                                                <input type="hidden" value="<?php echo  $role?>" name="form_post_role">
+                                                <input type="hidden" value="<?php echo  $username?>" name="form_post_username">
                                             <div style=" margin-bottom:px;" class="row like-share">
                                                 <div style="text-align: center; color:#ff9900; font-size: 24px; border-right: 1px solid black; border-top: 1px solid black; border-bottom: 1px solid black;" class="col-md-6 "><button name="btn_post_like" id="btn_post_like" style="background: transparent; cursor: pointer; border-style:none;" type="submit"><i style="color: #ff9900" class="fa fa-thumbs-up"></i></button></div>
                                                 <div style="text-align: center;  font-size: 24px; border-top: 1px solid black; border-bottom: 1px solid black;" class="col-md-6"><button  name="btn_write_comment" id="btn_write_comment" style=" background: transparent; cursor: pointer; border-style:none;" type="submit"><i style="color: #ff9900" class="fa fa-comments"></i></button></div>
@@ -295,15 +308,79 @@ if (isset($_POST["btn_post"])) {
                                                     <img class="user-avatar rounded-circle" style="width:50px;  margin-top:7px; height:45px;" name="get_comment_emp_passport_image" id="get_comment_emp_passport_image" src="data:image/jpg;charset=utf8;base64,<?php echo base64_encode($querylogin[0]); ?>" alt="User Avatar">
                                                 </div>
                                                 <div style="margin-top:2%;" class="col-sm-10">
-                                                    <input style="color: black; border-radius: 7px;" class="form-control" type="text" id="comments_for_post" required placeholder="Write Comment Here..">
+                                                    <input style="color: black; border-radius: 7px;" class="form-control" type="text" name="comments_for_post" id="comments_for_post" required placeholder="Write Comment Here..">
                                                 </div>
                                                 <div class="col-sm-1">
-                                                    <button style=" background: #ff9900; margin-left: -10px; margin-top:13px; border-style:none; border-radius: 7px;" id="btn_submit_comment" name="btn_submit_comment" type="button" class="btn btn-primary"><i style="font-size: 20px;" class="fa fa-location-arrow"></i></button>
+                                                    <button style=" background: #ff9900; margin-left: -10px; margin-top:13px; border-style:none; border-radius: 7px;" id="btn_submit_comment" name="btn_submit_comment" type="submit" class="btn btn-primary"><i style="font-size: 20px;" class="fa fa-location-arrow"></i></button>
                                                 </div>    
                                             </div>
                                             </form>
+                                            <div style="background-color: #ccc;" class="divider"></div>
+                                            <div style="height: 200px;" class="scrollbar-container">
+                                            <?php 
+                                            $querycommentget=mysqli_query($connection,"select * from tbl_comment where post_id='".$row['ats_post_id']."'") ;
+                                            while($rowcomment=mysqli_fetch_array($querycommentget))
+                                            { 
+                                                if($rowcomment['comment_role']=="ADMIN")
+                                                {
+                                                    $queryusername=mysqli_fetch_row(mysqli_query($connection,"select * from admin_details where admin_id='".$rowcomment['username_id']."'"));
+                                                    $username_print=$queryusername[3];
+                                                    $user_picture=$queryusername[4];
+                                                }
+                                                elseif($rowcomment['comment_role']=="VENDOR")
+                                                {
+                                                    $queryusername=mysqli_fetch_row(mysqli_query($connection,"select * from ats_vendor where ats_vendor_id='".$rowcomment['username_id']."'"));
+                                                    $username_print=$queryusername[1];
+                                                    $user_picture=$queryusername[14];
+                                                }elseif($rowcomment['comment_role']=="AGENTS")
+                                                {
+                                                    $queryusername=mysqli_fetch_row(mysqli_query($connection,"select * from ats_employee where ats_employee_id='".$rowcomment['username_id']."'"));
+                                                    $username_print=$queryusername[1];
+                                                    $user_picture=$queryusername[18];
+                                                }
+                                            ?>
+                                            
+                                                <div class="row mb-3" id="divpost">
+                                                    
+                                                    
+                                                    <div class="col-sm-1">
+                                                        <img class="user-avatar rounded-circle" style="width:50px; margin-top:7px; height:45px;" name="get_comment_emp_passport_image" id="get_comment_emp_passport_image" src="data:image/jpg;charset=utf8;base64,<?php echo base64_encode($user_picture); ?>" alt="User Avatar">
+                                                    </div>
+                                                    <div style="margin-left:2.5%; border: 1px solid #ccc; border-radius:10px;" class="col-sm-10">
+                                                        <div class="mt-2">
+                                                            <b><?php  echo $username_print?></b>
+                                                            <p <?php if($rowcomment['username_id']==$userid && $rowcomment['comment_role']==$role){?>contenteditable="true" onClick="showEdit(this);"  onBlur="saveData(this, '<?php echo $rowcomment["id"]; ?>', 'comment');"<?php }?> style="margin-bottom:1%;"><?php echo $rowcomment['comment']?></p>
+                                                            <a><?php echo $rowcomment['status']?></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                            <?php 
+                                                            $querylikes=mysqli_query($connection,"select * from comment_like where like_userid='".$userid."' AND role='".$role."' AND comment_id='".$rowcomment["id"]."'");
+                                                            $num_like=mysqli_num_rows($querylikes);
+                                                             if($num_like<1)
+                                                             {
+                                                            ?>
+                                                                <a id="like" onClick="savecomment(this, '<?php echo $rowcomment["id"]; ?>', '<?php echo $role ?>','<?php echo $userid?>')" style="cursor:pointer;color:orange;">Like</p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                            <?php
+                                                            }
+                                                            else
+                                                            {
+                                                                ?>
+                                                            <a id="unlike" onClick="unlike(this, '<?php echo $rowcomment["id"]; ?>', '<?php echo $role ?>','<?php echo $userid?>')"  style="cursor:pointer;color:orange;font-weight:bold">Unlike</p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                            <?php
+                                                            }
+                                                            ?>
+                                                            <a class href="#" id="editButton">Edit</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            
+                                            <?php 
+                                            }
+                                            ?>
+                                            </div>
+                                            <div style="background-color: #ccc;" class="divider"></div>
                                         </div>
+                                        
                                         <?php
+                                        
                                                 }
                                             }
                                         ?>
@@ -2318,7 +2395,15 @@ if (isset($_POST["btn_post"])) {
             <?php
 include("bottom.php");
 ?>
-        
+
+            <?php
+            $query1 = mysqli_query($connection,"select * from ats_post ORDER BY ats_post_id DESC");
+					  while($row1 = mysqli_fetch_array($query1)){
+                        include 'update_post.php';
+                      }
+					
+				?>  
+       
 <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
 aria-hidden="true">
 <div class="modal-dialog" role="document">
@@ -2437,3 +2522,82 @@ aria-hidden="true">
             });
             });
 </script>
+<script>
+    $('#editButton').click(function(){
+ $('#editable').focus();
+});
+    </script>
+<script>
+    
+    function saveData(obj, id, column) {
+        var customer = {
+            id: id,
+            column: column,
+            value: obj.innerHTML
+        }
+        $.ajax({
+            type: "POST",
+            url: "savecomment.php",
+            data: customer,
+            dataType: 'json',
+            success: function(data){
+                if (data) {
+                
+                }
+            }
+       });
+    }
+    </script>
+    <script>
+    
+    function savecomment(obj, id, role, usrid) {
+       
+        var comment = {
+            id: id,
+            role: role,
+            userid: usrid,
+            value: obj.innerHTML
+        }
+        
+        $.ajax({
+           
+            type: "POST",
+            url: "likedcomment.php",
+            data: comment,
+            dataType: 'json',
+            success: function(data){
+                if (data) {
+                    $("#divpost").load(location.href+" #divpost>*","");
+
+                }
+            }
+       });
+       
+    }
+    </script>
+        <script>
+    
+    function unlike(obj, id, role, usrid) {
+       
+        var comment = {
+            id: id,
+            role: role,
+            userid: usrid,
+            value: obj.innerHTML
+        }
+        
+        $.ajax({
+           
+            type: "POST",
+            url: "unlikecomment.php",
+            data: comment,
+            dataType: 'json',
+            success: function(data){
+                if (data) {
+                    $("#divpost").load(location.href+" #divpost>*","");
+                }
+            }
+       });
+       
+    }
+    </script>

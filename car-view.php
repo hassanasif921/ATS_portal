@@ -1,3 +1,4 @@
+<?php error_reporting(0); ?>
 <?php
 include("top.php");
 include("connection_db.php");
@@ -1809,6 +1810,8 @@ include("bottom.php");
 					<div class="row">
 						<div style="margin-top: -3%;" class="col-md-12">
 							<img style="" src="data:image/jpg;charset=utf8;base64,<?php echo base64_encode($row[85]); ?>" class="img-fluid">
+							<iframe data="data:application/pdf;base64,<?php echo base64_encode($row[85]) ?>" type="application/pdf" style="height:200px;width:60%"></iframe>
+
 						</div>
 											  
 					</div>

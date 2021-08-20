@@ -163,7 +163,9 @@ elseif(trim($_POST['stock_agent_name']) )
 
 elseif(trim($_POST['get_stock_rec_no']))
 {
+    
     $query.="ats_car_stock_rec_no LIKE '%".$_POST['get_stock_rec_no']."%' ";
+   
 }
 
 if(trim($_POST['stock_agent_name']) && empty($_POST['get_stock_rec_no']) && trim($_POST['get_stock_kobutsu'])) {
@@ -479,12 +481,12 @@ if(trim($_POST['get_stock_sure_ok_date']))
     }
    
 }
-if(trim($_POST['get_stock_payment_status']))
+if(trim($_POST['get_stock_payment_status']) && !empty($_POST['get_stock_payment_status']))
 {
 
     $val4=$_POST['get_stock_payment_status'];
   
-   
+
     if($val4=="Yes")
     {
         $payment=mysqli_query($connection,"select recordno from ats_stock_reservation where reservedpaymentstatus='CONFIRMED'");
@@ -516,11 +518,11 @@ if(trim($_POST['get_stock_payment_status']))
     }
    
 }
-if(trim($_POST['get_stock_ship_ok_date']))
+if(isset($_POST['get_stock_ship_ok_date']) && !empty($_POST['get_stock_ship_ok_date']))
 {
 
     $val5=$_POST['get_stock_ship_ok_date'];
-  
+
    
     if($val5=="Yes")
     {
@@ -546,12 +548,12 @@ if(trim($_POST['get_stock_ship_ok_date']))
     $query="select * from ats_car_stocK WHERE ats_car_stock_ship_ok_date='' ";
     }
 } 
-if(trim($_POST['get_stock_shipping_order_file']))
+elseif(trim($_POST['get_stock_shipping_order_file']))
 {
 
     $val6=$_POST['get_stock_shipping_order_file'];
   
-   
+
     if($val6=="Yes")
     {
     $query=" select * from ats_car_stocK WHERE ats_car_stock_ship_order_file<>'' ";
@@ -560,6 +562,7 @@ if(trim($_POST['get_stock_shipping_order_file']))
     {
     $query="select * from ats_car_stocK WHERE ats_car_stock_ship_order_file='' ";
     }
+
 } 
 if(trim($_POST['get_stock_bl_date']))
 {
@@ -632,6 +635,7 @@ if(trim($_POST['get_stock_release_ok_date_from']) && trim($_POST['get_stock_rele
    
 }
 $queryca=mysqli_query($connection,$query);
+echo $query;
 ?>
             <div class="app-main__outer">
                 <div class="app-main__inner p-0">
