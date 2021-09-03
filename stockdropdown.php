@@ -57,7 +57,7 @@ $query_get_conp=mysqli_query($connection,"select * from ats_consignee where ats_
 $rowfetchconp=mysqli_fetch_row($query_get_conp)
 ?>
 <label style="margin-left: 8%;" class="form-control-label">Consignee&nbsp;Phone</label>
-<input style=" font-size: 11px; margin-left: 8%; margin-top: -8%; height: 20px;  width: 100px;" type="text" id="consigneephone" name="consigneephone" class="form-control" value="<?php echo $rowfetchconp[6]?>">
+<input readonly style=" font-size: 11px; margin-left: 8%; margin-top: -8%; height: 20px;  width: 100px;" type="text" id="consigneephone" name="consigneephone" class="form-control" value="<?php echo $rowfetchconp[6]?>">
 <?php
 }
 
@@ -67,7 +67,7 @@ $query_get_notify=mysqli_query($connection,"select * from ats_consignee where at
 $rowfetchnotify=mysqli_fetch_row($query_get_notify)
 ?>
 <label class="form-control-label">Notify&nbsp;Name</label>
-<input style=" font-size: 11px;  margin-top: -8%; height: 20px;  width: 100px;" type="text" id="username" name="notifyname" class="form-control" value="<?php echo $rowfetchnotify[8]?>">
+<input readonly style=" font-size: 11px;  margin-top: -8%; height: 20px;  width: 100px;" type="text" id="username" name="notifyname" class="form-control" value="<?php echo $rowfetchnotify[8]?>">
 <?php
 }
 if(isset($_POST['notifyphone']))
@@ -76,7 +76,7 @@ $query_get_notifyphone=mysqli_query($connection,"select * from ats_consignee whe
 $rowfetchnotifyp=mysqli_fetch_row($query_get_notifyphone)
 ?>
 <label class="form-control-label">Notify&nbsp;Phone</label>
-<input style=" font-size: 11px;  margin-top: -8%; height: 20px;  width: 100px;" type="text" id="username" name="notifyphone" class="form-control" value="<?php echo $rowfetchnotifyp[10]?>">
+<input readonly style=" font-size: 11px;  margin-top: -8%; height: 20px;  width: 100px;" type="text" id="username" name="notifyphone" class="form-control" value="<?php echo $rowfetchnotifyp[10]?>">
 <?php
 }
 if(isset($_POST['consigneeadress']))
@@ -85,7 +85,7 @@ $consigneeadress=mysqli_query($connection,"select * from ats_consignee where ats
 $consigneeadress=mysqli_fetch_row($consigneeadress)
 ?>
 <label class="form-control-label">Consignee&nbsp;Address</label>
-<input style=" font-size: 11px; width: 232px; margin-top: -2%; height: 20px;  " type="text" id="username" name="stock_chassis_id" class="form-control" value="<?php echo $consigneeadress[5]?>">
+<input readonly style=" font-size: 11px; width: 232px; margin-top: -2%; height: 20px;  " type="text" id="username" name="stock_chassis_id" class="form-control" value="<?php echo $consigneeadress[5]?>">
 <?php
 }
 if(isset($_POST['notifyadress']))
@@ -94,7 +94,7 @@ $notifyadress=mysqli_query($connection,"select * from ats_consignee where ats_co
 $notifyadress=mysqli_fetch_row($notifyadress)
 ?>
 <label class="form-control-label">Notify&nbsp;Address</label>
-<input style=" font-size: 11px; width: 224px; margin-top: -2%; height: 20px;  " type="text" id="username" name="stock_chassis_id" class="form-control" value="<?php echo $notifyadress[9]?>">
+<input readonly style=" font-size: 11px; width: 224px; margin-top: -2%; height: 20px;  " type="text" id="username" name="stock_chassis_id" class="form-control" value="<?php echo $notifyadress[9]?>">
 <?php
 }
 if(isset($_POST['cust_id1']))
@@ -103,7 +103,7 @@ $cp=mysqli_query($connection,"select * from ats_customer where ats_customer_ATS_
 $cp=mysqli_fetch_row($cp)
 ?>
 <label style="margin-left: 8%;" class="form-control-label">Phone</label>
-<input style=" font-size: 11px; margin-left: 8%; margin-top: -8%; height: 20px;  width: 100px;" type="text" id="username" name="stock_chassis_id" class="form-control" value="<?php echo $cp[16]?>">
+<input readonly style=" font-size: 11px; margin-left: 8%; margin-top: -8%; height: 20px;  width: 100px;" type="text" id="username" name="stock_chassis_id" class="form-control" value="<?php echo $cp[16]?>">
 <?php
 }
 if(isset($_POST['cust_id2']))
@@ -118,8 +118,8 @@ while($rowcountry=mysqli_fetch_array($resultports))
 if($cp1[8]== $rowcountry[0])
 {
 ?>
-<input style=" font-size: 11px; margin-left: 8%; margin-top: -8%; height: 20px;  width: 100px;" type="text" id="username" name="stock_chassis_id" class="form-control" value="<?php echo $rowcountry[1]?>">
-<input style=" font-size: 11px; margin-left: 8%; margin-top: -8%; height: 20px;  width: 100px;display:none" type="text" id="countryi" name="countryi" class="form-control" value="<?php echo $rowcountry[0]?>">
+<input readonly style=" font-size: 11px; margin-left: 8%; margin-top: -8%; height: 20px;  width: 100px;" type="text" id="username" name="stock_chassis_id" class="form-control" value="<?php echo $rowcountry[1]?>">
+<input readonly style=" font-size: 11px; margin-left: 8%; margin-top: -8%; height: 20px;  width: 100px;display:none" type="text" id="countryi" name="countryi" class="form-control" value="<?php echo $rowcountry[0]?>">
 
 
 <?php
@@ -147,7 +147,7 @@ if($cp3[9]== $rowports[0])
 {
 ?>
 
-<input style=" font-size: 11px;  margin-top: -8%; height: 20px;  width: 100px;" type="text" id="username" name="stock_chassis_id" class="form-control" value="<?php echo $rowports[1]?>">
+<input readonly style=" font-size: 11px;  margin-top: -8%; height: 20px;  width: 100px;" type="text" id="username" name="stock_chassis_id" class="form-control" value="<?php echo $rowports[1]?>">
 
 <?php
 }
@@ -161,7 +161,7 @@ $cp6=mysqli_query($connection,"select * from ats_customer where ats_customer_ATS
 $cp6=mysqli_fetch_row($cp6)
 ?>
 <label class="form-control-label" id="customeradress">Address</label>
-<input style=" font-size: 11px; width: 472px; height: 20px;  margin-top: -2%; " type="text" id="username" name="stock_chassis_id" class="form-control" value="<?php echo $cp6[13]?>">
+<input readonly style=" font-size: 11px; width: 472px; height: 20px;  margin-top: -2%; " type="text" id="username" name="stock_chassis_id" class="form-control" value="<?php echo $cp6[13]?>">
 <?php
 }
 if(isset($_POST['shipment']))

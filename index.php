@@ -32,7 +32,7 @@ $rowemp = mysqli_fetch_assoc($resultemp);
 if (isset($_POST["btn_post"])) {
     date_default_timezone_set("Asia/Karachi");
     $post_privacy = $_POST["post_privacy"];
-    $get_post_emp_fullname = "username";
+    $get_post_emp_fullname = $userid    ;
     $post_designation = "abc";
     $post_heading = $_POST["post_heading"];
     $post_description = $_POST["post_description"];
@@ -46,21 +46,22 @@ if (isset($_POST["btn_post"])) {
     $totalfiles = count($_FILES['post_image']['name']);
     $insert = "insert into ats_post(ats_post_privacy,ats_post_username,ats_post_designation,ats_post_heading,ats_post_description,ats_post_image,ats_post_createdBy,ats_post_createdAt,ats_post_updatedBy,ats_post_updatedAt,ats_post_status) values('$post_privacy','$get_post_emp_fullname','$post_designation','$post_heading','$post_description','$post_image','$post_createdBy','$post_createdAt','$post_updatedAt','$post_updatedBy','$post_status')";
     $query = mysqli_query($connection,$insert);
+    for($i=0;$i<$totalfiles;$i++){
+        $filename = $_FILES['post_image']['name'][$i];
+        // Upload files and store in database
+        if(move_uploaded_file($_FILES["post_image"]["tmp_name"][$i],'post_images/'.$filename)){
+        // Image db insert sql
+        $insert1 = "INSERT INTO `table_post`(`post_images`, `post_id`) VALUES ('$filename','$post_id')";
+        $iquery = mysqli_query($connection,$insert1);
+        }
+        else{
+            echo 'Error in uploading file - '.$_FILES['post_image']['name'][$i].'<br/>';
+        }
+    }
     if ($query)
     {
-        for($i=0;$i<$totalfiles;$i++){
-            $filename = $_FILES['post_image']['name'][$i];
-            // Upload files and store in database
-            if(move_uploaded_file($_FILES["post_image"]["tmp_name"][$i],'post_images/'.$filename)){
-            // Image db insert sql
-            $insert1 = "INSERT INTO `table_post`(`post_images`, `post_id`) VALUES ('$filename','$post_id')";
-            $iquery = mysqli_query($connection,$insert1);
-            }
-            else{
-                echo 'Error in uploading file - '.$_FILES['post_image']['name'][$i].'<br/>';
-            }
-        }
-        echo '<script type="text/javascript"> alert("Employee Register Successfully")</script>';
+       
+        echo '<script type="text/javascript"> alert("POSTED")</script>';
         //echo '<script language="javascript">window.location.href ="employee-records.php"</script>';
     }
     else
@@ -110,7 +111,7 @@ if (isset($_POST["btn_post"])) {
                                         
                                         
                                         ?>
-                                        <input style="color: black; border-radius: 20px;" data-toggle="modal" data-target="#exampleModalLong" class="form-control mr-sm-2" placeholder="Create a New Post Here..">
+                                        <input style="color: black; border-radius: 20px;" data-toggle="modal" data-target="#exampleModalLongpost" class="form-control mr-sm-2" placeholder="Create a New Post Here..">
                                     </div>
                                     <?php }?>
                                     <div style=" background: white;  margin-top:30px;  padding-bottom:10px; margin-bottom:50px;">
@@ -137,6 +138,7 @@ if (isset($_POST["btn_post"])) {
                                             $count =mysqli_num_rows($query);
                                             if($count > 0){
                                                 while($row = mysqli_fetch_array($query)){
+                                                    //$queryuser=mysqli_ftech_row(mysqli_query($connection,"select * from "))
                                                     	    				   
                                         ?>   
                                         
@@ -301,8 +303,21 @@ if (isset($_POST["btn_post"])) {
                                                 <input type="hidden" value="<?php echo $row['ats_post_id']?>" name="form_post_id">
                                                 <input type="hidden" value="<?php echo  $role?>" name="form_post_role">
                                                 <input type="hidden" value="<?php echo  $username?>" name="form_post_username">
-                                            <div style=" margin-bottom:px;" class="row like-share">
-                                                <div style="text-align: center; color:#ff9900; font-size: 24px; border-right: 1px solid black; border-top: 1px solid black; border-bottom: 1px solid black;" class="col-md-6 "><button name="btn_post_like" id="btn_post_like" style="background: transparent; cursor: pointer; border-style:none;" type="submit"><i style="color: #ff9900" class="fa fa-thumbs-up"></i></button></div>
+                                            <div style=" margin-bottom:px;" class="row like-share" id="like_share">
+                                                <?php 
+                                                $query_post_likes=mysqli_query($connection,"select * from table_post_like where post_id='".$row['ats_post_id']."' AND role='".$role."' AND userid='".$userid."'");
+                                                $num_like_post=mysqli_num_rows($query_post_likes);
+                                                if($num_like_post<1){
+                                                ?>
+                                                <div style="text-align: center; color:#ff9900; font-size: 24px; border-right: 1px solid black; border-top: 1px solid black; border-bottom: 1px solid black;" class="col-md-6 "><i style="color: #ff9900" class="fa fa-thumbs-o-up"><input type="button" name="btn_post_like" id="btn_post_like" style="background: transparent; cursor: pointer; border-style:none;" onClick="post_like(this, '<?php echo $row["ats_post_id"]; ?>','<?php echo $role?>','<?php echo $userid?>');"></i></div>
+                                                <?php }
+                                                else
+                                                {
+                                                    ?>
+                                                <div style="text-align: center; color:#ff9900; font-size: 24px; border-right: 1px solid black; border-top: 1px solid black; border-bottom: 1px solid black;" class="col-md-6 "><i style="color: #ff9900" class="fa fa-thumbs-up"><input type="button" name="btn_post_like" id="btn_post_like" style="background: transparent; cursor: pointer; border-style:none;" onClick="unpost_like(this, '<?php echo $row["ats_post_id"]; ?>','<?php echo $role?>','<?php echo $userid?>');"></i></div>
+                                                <?php
+                                                }
+                                                ?>
                                                 <div style="text-align: center;  font-size: 24px; border-top: 1px solid black; border-bottom: 1px solid black;" class="col-md-6"><button  name="btn_write_comment" id="btn_write_comment" style=" background: transparent; cursor: pointer; border-style:none;" type="submit"><i style="color: #ff9900" class="fa fa-comments"></i></button></div>
                                                 <div class="col-sm-1">
                                                     <img class="user-avatar rounded-circle" style="width:50px;  margin-top:7px; height:45px;" name="get_comment_emp_passport_image" id="get_comment_emp_passport_image" src="data:image/jpg;charset=utf8;base64,<?php echo base64_encode($querylogin[0]); ?>" alt="User Avatar">
@@ -311,7 +326,7 @@ if (isset($_POST["btn_post"])) {
                                                     <input style="color: black; border-radius: 7px;" class="form-control" type="text" name="comments_for_post" id="comments_for_post" required placeholder="Write Comment Here..">
                                                 </div>
                                                 <div class="col-sm-1">
-                                                    <button style=" background: #ff9900; margin-left: -10px; margin-top:13px; border-style:none; border-radius: 7px;" id="btn_submit_comment" name="btn_submit_comment" type="submit" class="btn btn-primary"><i style="font-size: 20px;" class="fa fa-location-arrow"></i></button>
+                                                    <button style=" background: #ff9900; margin-left: -10px; margin-top:13px; border-style:none; border-radius: 7px;" id="btn_submit_comment" name="btn_submit_comment" type="post"  class="btn btn-primary"><i style="font-size: 20px;" class="fa fa-location-arrow"></i></button>
                                                 </div>    
                                             </div>
                                             </form>
@@ -2392,9 +2407,7 @@ if (isset($_POST["btn_post"])) {
                     </div>
                 </div>
             </div>
-            <?php
-include("bottom.php");
-?>
+   
 
             <?php
             $query1 = mysqli_query($connection,"select * from ats_post ORDER BY ats_post_id DESC");
@@ -2402,105 +2415,61 @@ include("bottom.php");
                         include 'update_post.php';
                       }
 					
-				?>  
-       
-<div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
-aria-hidden="true">
-<div class="modal-dialog" role="document">
-    <form action="" method="post" enctype="multipart/form-data">
-        <div class="modal-content">
-            <div class="modal-header">
-                <div style="margin-left:-1px;" class="container">
-                    <h5 class="modal-title" id="exampleModalLong">Create a Post</h5>
-                    <select style="font-size: 11px; height: 19px; padding: 0px; width:55px;" name="post_privacy" id="post_privacy" class="form-control">
-                        <option value="public">Public</option>
-                        <option value="users">Users</option> 
-                        <option value="vendors">Vendors</option> 
-                        <option value="custom">Custom</option> 
-                    </select> 
+				?>
+    </div>  
+    <div class="modal fade" id="exampleModalLongpost" aria-hidden="true">
 
-                    <a style="margin-top:-10%;" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </a>
-                </div>
-            </div>
-            <div class="modal-body col-md-12">
-                    <img class="user-avatar rounded-circle" style="width: 35px;" id="get_post_emp_passport_image" name="get_post_emp_passport_image" src="assets/images/avatars/2.jpg" alt="User Avatar">
-                    <label style="font-weight: bold;" name="get_post_emp_fullname" id="get_post_emp_fullname" class=""></label>
-                <div style="margin-top: 2%" class="">
-                    <label style="font-weight: bold;" class="form-control-label">Heading</label><br/>
-                    <input style="font-size:12px;" type="text" id="post_heading" name="post_heading" required placeholder="Enter Your Heading..." class="input-style form-control">
-                    
-                    <label style="font-weight: bold;" class="form-control-label">Description</label><br/>
-                    <textarea style="font-size:12px;" id="post_description" name="post_description" rows="5" placeholder="Enter Your Description..." class="form-control"></textarea>
-                    <div class="image-upload">
-                    <label style="font-weight: bold;" class="form-control-label">Picture</label><br/>
-                        <label for="file" style="cursor: pointer;">
-                        <i style="font-size: 35px" class="fa fa-picture-o"></i>
-                        </label>
-                        <input type="file" multiple accept="image/*" name="post_image[]" id="file" onchange="loadFile(event)" style="display: none;"/>
-                    </div>
-                    <p><img id="output" width="80"/></p>
-                    <p style="font-size:12px; margin-top: -15px; color:black;">Upload Your Pictures</p>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <a type="button" class="btn btn-secondary text-white" data-dismiss="modal">Cancel</a>
-                <input style="background: #ff9900; border-style: none;" type="submit" value="POST" id="btn_post" name="btn_post" class="btn btn-primary">
-            </div>
-        </div>
-    </form>
-</div>
-</div>
-        
-<div class="modal fade" id="exampleModalLong1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
-aria-hidden="true">
-<div class="modal-dialog" role="document">
-    <form action="" method="post" enctype="multipart/form-data">
-        <div class="modal-content">
-            <div class="modal-header">
-                <div style="margin-left:-1px;" class="container">
-                    <h5 class="modal-title" id="exampleModalLong">Create a Post</h5>
-                    <select style="font-size: 11px; height: 19px; padding: 0px; width:55px;" name="post_privacy" id="post_privacy" class="form-control">
-                        <option value="public">Public</option>
-                        <option value="users">Users</option> 
-                        <option value="vendors">Vendors</option> 
-                        <option value="custom">Custom</option> 
-                    </select> 
 
-                    <a style="margin-top:-10%;" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </a>
-                </div>
-            </div>
-            <div class="modal-body col-md-12">
-                    <img class="user-avatar rounded-circle" style="width: 35px;" id="get_post_emp_passport_image" name="get_post_emp_passport_image" src="assets/images/avatars/2.jpg" alt="User Avatar">
-                    <label style="font-weight: bold;" name="get_post_emp_fullname" id="get_post_emp_fullname" class=""></label>
-                <div style="margin-top: 2%" class="">
-                    <label style="font-weight: bold;" class="form-control-label">Heading</label><br/>
-                    <input style="font-size:12px;" type="text" id="post_heading" name="post_heading" required placeholder="Enter Your Heading..." class="input-style form-control">
-                    
-                    <label style="font-weight: bold;" class="form-control-label">Description</label><br/>
-                    <textarea style="font-size:12px;" id="post_description" name="post_description" rows="5" placeholder="Enter Your Description..." class="form-control"></textarea>
-                    <div class="image-upload">
-                    <label style="font-weight: bold;" class="form-control-label">Picture</label><br/>
-                        <label for="file" style="cursor: pointer;">
-                        <i style="font-size: 35px" class="fa fa-picture-o"></i>
-                        </label>
-                        <input type="file" multiple accept="image/*" name="post_image[]" id="file" onchange="loadFile(event)" style="display: none;"/>
+        <div class="modal-dialog" >
+            <form action="" method="post" enctype="multipart/form-data">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <div style="margin-left:-1px;" class="container">
+                            <h5 class="modal-title" id="exampleModalLong1">Create a Post</h5>
+                            <select style="font-size: 11px; height: 19px; padding: 0px; width:55px;" name="post_privacy" id="post_privacy" class="form-control">
+                                <option value="public">Public</option>
+                                <option value="users">Users</option> 
+                                <option value="vendors">Vendors</option> 
+                                <option value="custom">Custom</option> 
+                            </select> 
+
+                            <a style="margin-top:-10%;" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </a>
+                        </div>
                     </div>
-                    <p><img id="output" width="80"/></p>
-                    <p style="font-size:12px; margin-top: -15px; color:black;">Upload Your Pictures</p>
+                    <div class="modal-body col-md-12">
+                            <img class="user-avatar rounded-circle" style="width: 35px;" id="get_post_emp_passport_image" name="get_post_emp_passport_image" src="assets/images/avatars/2.jpg" alt="User Avatar">
+                            <label style="font-weight: bold;" name="get_post_emp_fullname" id="get_post_emp_fullname" class=""></label>
+                        <div style="margin-top: 2%" class="">
+                            <label style="font-weight: bold;" class="form-control-label">Heading</label><br/>
+                            <input style="font-size:12px;" type="text" id="post_heading" name="post_heading" required placeholder="Enter Your Heading..." class="input-style form-control">
+                            
+                            <label style="font-weight: bold;" class="form-control-label">Description</label><br/>
+                            <textarea style="font-size:12px;" id="post_description" name="post_description" rows="5" placeholder="Enter Your Description..." class="form-control"></textarea>
+                            <div class="image-upload">
+                            <label style="font-weight: bold;" class="form-control-label">Picture</label><br/>
+                                <label for="file" style="cursor: pointer;">
+                                <i style="font-size: 35px" class="fa fa-picture-o"></i>
+                                </label>
+                                <input type="file" multiple accept="image/png, image/gif, image/jpeg" name="post_image[]" id="file" onchange="loadFile(event)" />
+                            </div>
+                            <p><img id="output" width="80"/></p>
+                            <p style="font-size:12px; margin-top: -15px; color:black;">Upload Your Pictures</p>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <a type="button" class="btn btn-secondary text-white" data-dismiss="modal">Cancel</a>
+                        <input style="background: #ff9900; border-style: none;" type="submit" value="POST" id="btn_post" name="btn_post" class="btn btn-primary">
+                    </div>
                 </div>
-            </div>
-            <div class="modal-footer">
-                <a type="button" class="btn btn-secondary text-white" data-dismiss="modal">Cancel</a>
-                <input style="background: #ff9900; border-style: none;" type="submit" value="POST" id="btn_post" name="btn_post" class="btn btn-primary">
-            </div>
+            </form>
         </div>
-    </form>
-</div>
-</div>
+    </div>
+
+<?php
+include("bottom.php");
+?>
 <script>
             var loadFile = function(event) {
             var image = document.getElementById('output');
@@ -2595,6 +2564,118 @@ aria-hidden="true">
             success: function(data){
                 if (data) {
                     $("#divpost").load(location.href+" #divpost>*","");
+                }
+            }
+       });
+       
+    }
+    </script>
+      <script>
+    
+    function savecomment(obj, id, role, usrid) {
+       
+        var comment = {
+            id: id,
+            role: role,
+            userid: usrid,
+            value: obj.innerHTML
+        }
+        
+        $.ajax({
+           
+            type: "POST",
+            url: "likedcomment.php",
+            data: comment,
+            dataType: 'json',
+            success: function(data){
+                if (data) {
+                    $("#divpost").load(location.href+" #divpost>*","");
+
+                }
+            }
+       });
+       
+    }
+    </script>
+        <script>
+    
+    function post_like(obj, id, role, usrid) {
+       
+        var like = {
+            id: id,
+            role: role,
+            userid: usrid,
+           
+        }
+       
+        $.ajax({
+           
+            type: "POST",
+            url: "like_post.php",
+            data: like,
+            dataType: 'json',
+            success: function(data){
+                if (data) {
+                   
+                    $("#like_share").load(location.href+" #like_share>*","");
+                    
+                }
+            }
+       });
+       
+    }
+    </script>
+          <script>
+    
+    function unpost_like(obj, id, role, usrid) {
+       
+        var like = {
+            id: id,
+            role: role,
+            userid: usrid,
+           
+        }
+       
+        $.ajax({
+           
+            type: "POST",
+            url: "unlike_post.php",
+            data: like,
+            dataType: 'json',
+            success: function(data){
+                if (data) {
+                   
+                    $("#like_share").load(location.href+" #like_share>*","");
+                    
+                }
+            }
+       });
+       
+    }
+    </script>
+      <script>
+    
+    function DBComment(obj, id, role, usrid) {
+        var inputVal = document.getElementById("myInput").value;
+
+        var like = {
+            id: id,
+            role: role,
+            userid: usrid,
+           
+        }
+       
+        $.ajax({
+           
+            type: "POST",
+            url: "",
+            data: like,
+            dataType: 'json',
+            success: function(data){
+                if (data) {
+                   
+                    $("#like_share").load(location.href+" #like_share>*","");
+                    
                 }
             }
        });

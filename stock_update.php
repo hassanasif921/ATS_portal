@@ -83,14 +83,18 @@ if (isset($_POST["stock_btn"])) {
     $stock_total_expences=$_POST['stock_total_expences'];
     $stock_auction_sheet_file = $_FILES["stock_auction_sheet_file"]['name'];
    
-     if(is_uploaded_file($_FILES['stock_auction_sheet_file']['tmp_name']))
-     {
-         $images1=$_FILES['stock_auction_sheet_file']['tmp_name'];
-   $stock_auction_sheet_file=addslashes(file_get_contents($images1));
-     }
+     
    
 if(is_uploaded_file($_FILES['stock_auction_sheet_file']['tmp_name'])){
-    $echoas=",ats_car_stock_auction_sheet='$stock_auction_sheet_file',";
+    
+    
+   
+    $filename = $_FILES['stock_auction_sheet_file']['name'];
+    $filenamef=$stock_rec_no.$filename;
+    // Upload files and store in database
+    if(move_uploaded_file($_FILES["stock_auction_sheet_file"]["tmp_name"],'DATA/'.$filenamef)){               
+        $echoas=",ats_car_stock_auction_sheet='$filenamef',";
+        }
     }
     else
     {
@@ -104,13 +108,18 @@ if(is_uploaded_file($_FILES['stock_auction_sheet_file']['tmp_name'])){
     $temp_name = 'demo';
     $stock_masso_date = $_POST["stock_masso_date"];
    // $stock_export_cerificate_jp_file = $_FILES["stock_export_cerificate_jp_file"];
-   if(is_uploaded_file($_FILES['stock_export_cerificate_jp_file']['tmp_name']))
-   {
-   $images2=$_FILES['stock_export_cerificate_jp_file']['tmp_name'];
-  $stock_export_cerificate_jp_file=addslashes(file_get_contents($images2));
-   }
+   $stock_port_of_loading=$_POST['stock_port_of_loading'];
+   $stock_ship_name=$_POST['stock_ship_name'];
+   $stock_port_of_discharge=$_POST['stock_port_of_discharge'];
    if(is_uploaded_file($_FILES['stock_export_cerificate_jp_file']['tmp_name'])){
-    $echoas1=",ats_car_stock_exp_cer_jp='$stock_export_cerificate_jp_file',";
+   
+    $filename1_ecjp = $_FILES['stock_export_cerificate_jp_file']['name'];
+    $filename1fecjp=$stock_rec_no.$filename1_ecjp;
+    // Upload files and store in database
+    if(move_uploaded_file($_FILES["stock_export_cerificate_jp_file"]["tmp_name"],'DATA/'.$filename1fecjp)){
+            
+        $echoas1=",ats_car_stock_exp_cer_jp='$filename1fecjp',";
+        }
     }
     else
     {
@@ -120,12 +129,16 @@ if(is_uploaded_file($_FILES['stock_auction_sheet_file']['tmp_name'])){
    // $temp_name = $_FILES["stock_export_cerificate_jp_file"]["tmp_name"];
    if(is_uploaded_file($_FILES['stock_export_cerificate_en_file']['tmp_name']))
    {
-   $images3=$_FILES['stock_export_cerificate_en_file']['tmp_name'];
-    $stock_export_cerificate_en_file=addslashes(file_get_contents($images3));
-   }
-   if(is_uploaded_file($_FILES['stock_export_cerificate_en_file']['tmp_name'])){
-    $echoas2="ats_car_stock_exp_cer_eng='$stock_export_cerificate_en_file',";
+    $filename1_ecen = $_FILES['stock_export_cerificate_en_file']['name'];
+    $filename1fecen=$stock_rec_no.$filename1_en;
+    // Upload files and store in database
+    if(move_uploaded_file($_FILES["stock_export_cerificate_en_file"]["tmp_name"],'DATA/'.$filename1fecen)){
+           
+        $echoas2="ats_car_stock_exp_cer_eng='$stock_export_cerificate_en_file',";
     }
+  
+   }
+ 
     else{
         $echoas2="";
     }
@@ -152,11 +165,13 @@ else {
   
    if(is_uploaded_file($_FILES['stock_tt_copy_file']['tmp_name']))
     {
-        $images5=$_FILES['stock_tt_copy_file']['tmp_name'];
-        $stock_tt_copy_file=addslashes(file_get_contents($images5));
+      
+        $stock_tt_copy_file="";
     $echoas4=",ats_car_stock_tt_copy_file='$stock_tt_copy_file',";
     }
-    else{
+
+    else
+    {
         $echoas4=",";
     }
     
@@ -168,9 +183,14 @@ else {
     //$stock_shipping_invoice_file = $_FILES["stock_shipping_invoice_file"]['name'];
     if(is_uploaded_file($_FILES['stock_shipping_invoice_file']['tmp_name']))
     {
-        $images6=$_FILES['stock_shipping_invoice_file']['tmp_name'];
-        $stock_shipping_invoice_file=addslashes(file_get_contents($images6));
-    $echoas5=",ats_car_stock_ship_invoice_file='$stock_shipping_invoice_file',";
+        $filename1_shippinginvoice = $_FILES['stock_shipping_invoice_file']['name'];
+        $stock_shipping_invoice_file=$stock_rec_no.$filename1_shippinginvoice;
+        // Upload files and store in database
+        if(move_uploaded_file($_FILES["stock_shipping_invoice_file"]["tmp_name"],'DATA/'.$stock_shipping_invoice_file)){
+            $echoas5=",ats_car_stock_ship_invoice_file='$stock_shipping_invoice_file',";
+            
+        }
+    
     }
     else{
         $echoas5=",";
@@ -179,11 +199,17 @@ else {
    
     // $temp_name = $_FILES["stock_shipping_invoice_file"]["tmp_name"];
     //$stock_shipping_order_file = $_FILES["stock_shipping_order_file"]['name'];
-    if(is_uploaded_file($_FILES['stock_shipping_invoice_file']['tmp_name']))
+    if(is_uploaded_file($_FILES['stock_shipping_order_file']['tmp_name']))
     {
         $images7=$_FILES['stock_shipping_order_file']['tmp_name'];
-        $stock_shipping_order_file=addslashes(file_get_contents($images7));
-    $echoas6="ats_car_stock_ship_order_file='$stock_shipping_order_file',";
+        $filename7 = $_FILES['stock_shipping_order_file']['name'];
+        $filename7f=$stock_rec_no.$filename7;
+        // Upload files and store in database
+        if(move_uploaded_file($_FILES["stock_shipping_order_file"]["tmp_name"],'DATA/'.$filename7f)){               
+            $echoas6="ats_car_stock_ship_order_file='$filename7f',";
+        }
+       
+  
     }
   else {
     $echoas6="";    
@@ -193,10 +219,9 @@ else {
     $stock_bl_date = $_POST["stock_bl_date"];
     $stock_bl_no = $_POST["stock_bl_no"];
    // $stock_bill_of_lading_file = $_FILES["stock_bill_of_lading_file"]['name'];
-   if(is_uploaded_file($_FILES['stock_shipping_invoice_file']['tmp_name']))
+   if(is_uploaded_file($_FILES['stock_bill_of_lading_file']['tmp_name']))
     {
-        $images8=$_FILES['stock_bill_of_lading_file']['tmp_name'];
-        $stock_bill_of_lading_file=addslashes(file_get_contents($images8));
+        $stock_bill_of_lading_file="";
     $echoas7=",ats_car_stock_bl_file='$stock_bill_of_lading_file',";
     }
     else{
@@ -204,11 +229,10 @@ else {
     }
     $stock_release_ok_date = date("Y-m-d", strtotime($_POST["stock_release_ok_date"]));
   
-    if(is_uploaded_file($_FILES['stock_shipping_invoice_file']['tmp_name']))
+    if(is_uploaded_file($_FILES['stock_balance_tt_copy_file']['tmp_name']))
     {
-        $images9=$_FILES['stock_balance_tt_copy_file']['tmp_name'];
-    $stock_bal_tt_copy_file=addslashes(file_get_contents($images9));;
-    $echoas8=",ats_car_stock_bal_tt_copy_file='$stock_bal_tt_copy_file',";
+    
+    $echoas8=",ats_car_stock_bal_tt_copy_file='',";
     }
     else{
         $echoas8=",";
@@ -223,7 +247,13 @@ else {
     if(is_uploaded_file($_FILES['stock_inspection_certificate_file']['tmp_name']))
     {
         $images10=$_FILES['stock_inspection_certificate_file']['tmp_name'];
-        $stock_inspection_certificate_file=addslashes(file_get_contents($images10));
+        $filename10 = $_FILES['stock_inspection_certificate_file']['name'];
+        $stock_inspection_certificate_file=$stock_rec_no.$filename10;
+        // Upload files and store in database
+        if(move_uploaded_file($_FILES["stock_inspection_certificate_file"]["tmp_name"],'DATA/'.$stock_inspection_certificate_file)){
+               
+            
+        }
     $echoas9=",ats_car_stock_inspection_cer_file='$stock_inspection_certificate_file',";
     }
     else{
@@ -239,8 +269,34 @@ else {
     $stock_status = "active";
     $stock_extra_transportation=$_POST['stock_extra_transportation'];
     $totalfiles = count($_FILES['stock_auction_pictures']['name']);
+    $totalfilesBTT = count($_FILES['stock_balance_tt_copy_file']['name']);
+    if(trim($totalfilesBTT)){
+        $insertdelbtt = "delete FROM cardocuments WHERE imagetype='BAL-TT' AND stockid='".$rowupdate[1]."' ";                   
+         $rquerydel1BTT = mysqli_query($connection,$insertdelbtt);
+    }
+    for($i=0;$i<$totalfilesBTT;$i++){
+        $filenameBTT = $_FILES['stock_balance_tt_copy_file']['name'][$i];
+     
+       // Upload files and store in database
+       if(move_uploaded_file($_FILES["stock_balance_tt_copy_file"]["tmp_name"][$i],'DATA/'.$filenameBTT))
+    {
+        // Image db insert sql
+        $insert1BTT = "INSERT INTO cardocuments(stockid, imagetype, imagename) VALUES ('$stock_rec_no','BAL-TT','$filenameBTT')"; 
+        $iqueryBTT = mysqli_query($connection,$insert1BTT);
+
+    }
+              
+     
+              
+           else{
+               echo 'Error in uploading file - '.$_FILES['stock_balance_tt_copy_file']['name'][$i].'<br/>';
+           }
+     
+        }
+    $totalfilesif = count($_FILES['stock_invoice_file']['name']);
+
     if(trim($totalfiles)){
-        $insertdel = "delete FROM cardocuments WHERE imagetype='AUCTION-PICTURES' AND stockid=".$rowupdate[1];                   
+        $insertdel = "delete FROM cardocuments WHERE imagetype='AUCTION-PICTURES' stockid='".$rowupdate[1]."' ";                   
          $rquerydel1 = mysqli_query($connection,$insertdel);
     }
     for($i=0;$i<$totalfiles;$i++){
@@ -264,7 +320,7 @@ else {
         }
         $totalfiles1 = count($_FILES['stock_yard_pictures']['name']);
         if(trim($totalfiles1)){
-            $insertdel = "delete FROM cardocuments WHERE imagetype='YARD-PICTURES' AND stockid=".$rowupdate[1];                   
+            $insertdel = "delete FROM cardocuments WHERE imagetype='YARD-PICTURES' stockid='".$rowupdate[1]."' ";                  
              $rquerydel1 = mysqli_query($connection,$insertdel);
         }
     for($i=0;$i<$totalfiles1;$i++){
@@ -286,15 +342,101 @@ else {
            }
      
         }
-            $insert = "UPDATE ats_car_stock SET ats_car_stock_chassic_no='$stock_chassis_id',ats_car_stock_make='$stock_make',ats_car_stock_model='$stock_model',ats_car_stock_pkg='$stock_package',ats_car_stock_man_year='$stock_man_year',ats_car_stock_reg_year='$stock_reg_year',ats_car_stock_color='$stock_color',ats_car_stock_shift='$stock_shift',ats_car_stock_fuel='$stock_fuel',ats_car_stock_door='$stock_door',ats_car_stock_grade='$stock_grade',ats_car_stock_engine_size='$stock_engine_size',ats_car_stock_kobutsu='$stock_kobutsu',ats_car_stock_engine_no='$stock_engine_no',ats_car_stock_seats='$stock_seats',ats_car_stock_mileage_1='$stock_mileage_1',ats_car_stock_mileage_2='$stock_mileage_2',ats_car_stock_length='$stock_length',ats_car_stock_width='$stock_width',ats_car_stock_height='$stock_height',ats_car_stock_cubic_meter='$stock_cubic_meter',ats_car_stock_weight='$stock_weight',ats_car_stock_total_weight='$stock_total_weight',ats_car_stock_max_loading='$stock_max_loading',ats_car_stock_auction_house='$stock_auction',ats_car_stock_lot_no='$stock_lot_no',ats_car_stock_buying_price='$stock_buying_price',ats_car_stock_buying_date='$stock_buying_date',ats_car_stock_country_location='$stock_country_location',ats_car_stock_city_location='$stock_city_location',ats_car_stock_option_ps='$stock_option_ps',ats_car_stock_option_nv='$stock_option_nv',ats_car_stock_option_ac='$stock_option_ac',ats_car_stock_option_wab='$stock_option_wab',ats_car_stock_option_rs='$stock_option_rs',ats_car_stock_option_tv='$stock_option_tv',ats_car_stock_option_rr='$stock_option_rr',ats_car_stock_option_abs='$stock_option_abs',ats_car_stock_option_ls='$stock_option_ls',ats_car_stock_option_pw='$stock_option_pw',ats_car_stock_option_sr='$stock_option_sr',ats_car_stock_option_fog='$stock_option_fog',ats_car_stock_option_ab='$stock_option_ab',ats_car_stock_option_gg='$stock_option_gg',ats_car_stock_option_bt='$stock_option_bt',ats_car_stock_option_aw='$stock_option_aw',ats_car_stock_other_option='$stock_other_options',ats_car_stock_auction_fees='$stock_auction_charges',ats_car_stock_rikuso='$stock_rikuso_charges',ats_car_stock_fob_charge='$stock_fob_charges',ats_car_stock_storage_charge='$stock_storage_charges',ats_car_stock_dhl_charge='$stock_dhl_charges',ats_car_stock_radiation='$stock_radiation_charges',ats_car_stock_thc_charge='$stock_thc_charges',ats_car_stock_vaining_charge='$stock_vainning_charges',ats_car_stock_inspection_charge='$stock_inspection_charges',ats_car_stock_freight_charge='$stock_freight_charges',ats_car_stock_other_charge='$stock_other_charges',ats_car_stock_fob_price_yen='$stock_fob_price_print_yen',ats_car_stock_fob_price_us='$stock_fob_price_print_dollar',ats_car_stock_cnf_price_yen='$stock_cnf_price_print_yen',ats_car_stock_cnf_price_us='$stock_cnf_price_print_dollar' $echoas ats_car_stock_auction_pics='',ats_car_stock_masso_date='$stock_masso_date' $echoas1 $echoas2 ats_car_stock_inyard_date='$stock_inyard_date',ats_car_stock_inyard_pictures='',ats_car_stock_reserve_date='$stock_reserve_date' $echoas3 ats_car_stock_sure_ok_date='$stock_sure_ok_date' $echoas4 ats_car_stock_ship_date='$stock_ship_date',ats_car_stock_vessel_name='$stock_vessel_name',ats_car_stock_voyage='$stock_voyage',ats_car_stock_ship_ok_date='$stock_ship_ok_date' $echoas5 $echoas6 ats_car_stock_bl_date='$stock_bl_date',ats_car_stock_bl_number='$stock_bl_no' $echoas7 ats_car_stock_release_ok_date='$stock_release_ok_date' $echoas8 ats_car_stock_dhl_date='$stock_dhl_date',ats_car_stock_tracking_number='$stock_tracking_number',ats_car_stock_dhl_link='$stock_dhl_link',ats_car_stock_inspection_date='$stock_inspection_date' $echoas9 ats_car_stock_status='$stock_status',ats_car_stock_shape='$stock_shape',stock_port='$stock_port',shipmenttype='$shipmenttype',conversionrate='$conversionrate',extra_transportatiom='$stock_extra_transportation',stock_type='$stock_type',stock_total_expences='$stock_total_expences',stock_country_slab='$stock_country_slab' where ats_car_stock_id=".$_GET['car_id'];
+            $insert = "UPDATE ats_car_stock SET ats_car_stock_chassic_no='$stock_chassis_id',ats_car_stock_make='$stock_make',ats_car_stock_model='$stock_model',ats_car_stock_pkg='$stock_package',ats_car_stock_man_year='$stock_man_year',ats_car_stock_reg_year='$stock_reg_year',ats_car_stock_color='$stock_color',ats_car_stock_shift='$stock_shift',ats_car_stock_fuel='$stock_fuel',ats_car_stock_door='$stock_door',ats_car_stock_grade='$stock_grade',ats_car_stock_engine_size='$stock_engine_size',ats_car_stock_kobutsu='$stock_kobutsu',ats_car_stock_engine_no='$stock_engine_no',ats_car_stock_seats='$stock_seats',ats_car_stock_mileage_1='$stock_mileage_1',ats_car_stock_mileage_2='$stock_mileage_2',ats_car_stock_length='$stock_length',ats_car_stock_width='$stock_width',ats_car_stock_height='$stock_height',ats_car_stock_cubic_meter='$stock_cubic_meter',ats_car_stock_weight='$stock_weight',ats_car_stock_total_weight='$stock_total_weight',ats_car_stock_max_loading='$stock_max_loading',ats_car_stock_auction_house='$stock_auction',ats_car_stock_lot_no='$stock_lot_no',ats_car_stock_buying_price='$stock_buying_price',ats_car_stock_buying_date='$stock_buying_date',ats_car_stock_country_location='$stock_country_location',ats_car_stock_city_location='$stock_city_location',ats_car_stock_option_ps='$stock_option_ps',ats_car_stock_option_nv='$stock_option_nv',ats_car_stock_option_ac='$stock_option_ac',ats_car_stock_option_wab='$stock_option_wab',ats_car_stock_option_rs='$stock_option_rs',ats_car_stock_option_tv='$stock_option_tv',ats_car_stock_option_rr='$stock_option_rr',ats_car_stock_option_abs='$stock_option_abs',ats_car_stock_option_ls='$stock_option_ls',ats_car_stock_option_pw='$stock_option_pw',ats_car_stock_option_sr='$stock_option_sr',ats_car_stock_option_fog='$stock_option_fog',ats_car_stock_option_ab='$stock_option_ab',ats_car_stock_option_gg='$stock_option_gg',ats_car_stock_option_bt='$stock_option_bt',ats_car_stock_option_aw='$stock_option_aw',ats_car_stock_other_option='$stock_other_options',ats_car_stock_auction_fees='$stock_auction_charges',ats_car_stock_rikuso='$stock_rikuso_charges',ats_car_stock_fob_charge='$stock_fob_charges',ats_car_stock_storage_charge='$stock_storage_charges',ats_car_stock_dhl_charge='$stock_dhl_charges',ats_car_stock_radiation='$stock_radiation_charges',ats_car_stock_thc_charge='$stock_thc_charges',ats_car_stock_vaining_charge='$stock_vainning_charges',ats_car_stock_inspection_charge='$stock_inspection_charges',ats_car_stock_freight_charge='$stock_freight_charges',ats_car_stock_other_charge='$stock_other_charges',ats_car_stock_fob_price_yen='$stock_fob_price_print_yen',ats_car_stock_fob_price_us='$stock_fob_price_print_dollar',ats_car_stock_cnf_price_yen='$stock_cnf_price_print_yen',ats_car_stock_cnf_price_us='$stock_cnf_price_print_dollar' $echoas ats_car_stock_auction_pics='',ats_car_stock_masso_date='$stock_masso_date' $echoas1 $echoas2 ats_car_stock_inyard_date='$stock_inyard_date',ats_car_stock_inyard_pictures='',ats_car_stock_reserve_date='$stock_reserve_date' $echoas3 ats_car_stock_sure_ok_date='$stock_sure_ok_date' $echoas4 ats_car_stock_ship_date='$stock_ship_date',ats_car_stock_vessel_name='$stock_vessel_name',ats_car_stock_voyage='$stock_voyage',ats_car_stock_ship_ok_date='$stock_ship_ok_date' $echoas5 $echoas6 ats_car_stock_bl_date='$stock_bl_date',ats_car_stock_bl_number='$stock_bl_no' $echoas7 ats_car_stock_release_ok_date='$stock_release_ok_date' $echoas8 ats_car_stock_dhl_date='$stock_dhl_date',ats_car_stock_tracking_number='$stock_tracking_number',ats_car_stock_dhl_link='$stock_dhl_link',ats_car_stock_inspection_date='$stock_inspection_date' $echoas9 ats_car_stock_status='$stock_status',ats_car_stock_shape='$stock_shape',stock_port='$stock_port',shipmenttype='$shipmenttype',conversionrate='$conversionrate',extra_transportatiom='$stock_extra_transportation',stock_type='$stock_type',stock_total_expences='$stock_total_expences',stock_country_slab='$stock_country_slab',port_of_loding='$stock_port_of_loading',port_of_discharge='$stock_port_of_discharge',ship_name='$stock_ship_name' where ats_car_stock_id=".$_GET['car_id'];
               $query = mysqli_query($connection,$insert) or die(mysqli_error($connection));
               if ($query)
                   {
                       echo '<script type="text/javascript"> alert("Stock Added Successfully")</script>';
-                      echo '<script language="javascript">window.location.href ="car-view.php"</script>';
+                      echo '<script language="javascript">window.location.href ="index.php"</script>';
 
                   }
+////yard
+if(trim($totalfilesif)){
+    $insertdelif = "delete FROM cardocuments WHERE imagetype='INVOICE' stockid='".$rowupdate[1]."' ";              
+     $rquerydel1if = mysqli_query($connection,$insertdelif);
+}
+for($i=0;$i<$totalfilesif;$i++){
+$filenameif = $_FILES['stock_invoice_file']['name'][$i];
 
+// Upload files and store in database
+if(move_uploaded_file($_FILES["stock_invoice_file"]["tmp_name"][$i],'DATA/'.$filenameif)){
+       // Image db insert sql
+      $insertif = "INSERT INTO cardocuments(stockid, imagetype, imagename) VALUES ('$stock_rec_no','INVOICE','$filenameif')";
+      
+      $iqueryif = mysqli_query($connection,$insertif);
+
+}
+      
+
+      
+   else{
+       echo 'Error in uploading file - '.$_FILES['stock_yard_pictures']['name'][$i].'<br/>';
+   }
+
+}
+//BILL OF LADING
+$totalfilesBOL = count($_FILES['stock_bill_of_lading_file']['name']);
+if(trim($totalfilesBOL)){
+    echo "Found";
+    $insertdelBOL = "delete FROM cardocuments WHERE imagetype='BOL' AND stockid='".$rowupdate[1]."' ";                   
+     $rquerydelBOL = mysqli_query($connection,$insertdelBOL);
+     mysqli_error($connection);
+}
+for($i=0;$i<$totalfilesTT;$i++){
+$filenameBOL = $_FILES['stock_bill_of_lading_file']['name'][$i];
+
+// Upload files and store in database
+if(move_uploaded_file($_FILES["stock_bill_of_lading_file"]["tmp_name"][$i],'DATA/'.$filenameBOL)){
+       // Image db insert sql
+      $insertBOL = "INSERT INTO cardocuments(stockid, imagetype, imagename) VALUES ('$stock_rec_no','BOL','$filenameBOL')";
+      
+      $iqueryBOL = mysqli_query($connection,$insertBOL);
+
+}
+      
+
+      
+   else{
+       echo 'Error in uploading file - '.$_FILES['stock_bill_of_lading_file']['name'][$i].'<br/>';
+   }
+
+}
+//
+$totalfilesTT = count($_FILES['stock_tt_copy_file']['name']);
+if(trim($totalfilesTT)){
+    echo "Found";
+    $insertdelTT = "delete FROM cardocuments WHERE imagetype='TT' AND stockid='".$rowupdate[1]."' ";                   
+     $rquerydelTT = mysqli_query($connection,$insertdelTT);
+     mysqli_error($connection);
+}
+for($i=0;$i<$totalfilesTT;$i++){
+$filenameTT = $_FILES['stock_tt_copy_file']['name'][$i];
+
+// Upload files and store in database
+if(move_uploaded_file($_FILES["stock_tt_copy_file"]["tmp_name"][$i],'DATA/'.$filenameTT)){
+       // Image db insert sql
+      $insertTT = "INSERT INTO cardocuments(stockid, imagetype, imagename) VALUES ('$stock_rec_no','TT','$filenameTT')";
+      
+      $iqueryTT = mysqli_query($connection,$insertTT);
+
+}
+      
+
+      
+   else{
+       echo 'Error in uploading file - '.$_FILES['stock_tt_copy_file']['name'][$i].'<br/>';
+   }
+
+}
+    // $insert = "UPDATE ats_car_stock SET ats_car_stock_chassic_no='$stock_chassis_id',ats_car_stock_make='$stock_make',ats_car_stock_model='$stock_model',ats_car_stock_pkg='$stock_package',ats_car_stock_man_year='$stock_man_year',ats_car_stock_reg_year='$stock_reg_year',ats_car_stock_color='$stock_color',ats_car_stock_shift='$stock_shift',ats_car_stock_fuel='$stock_fuel',ats_car_stock_door='$stock_door',ats_car_stock_grade='$stock_grade',ats_car_stock_engine_size='$stock_engine_size',ats_car_stock_kobutsu='$stock_kobutsu',ats_car_stock_engine_no='$stock_engine_no',ats_car_stock_seats='$stock_seats',ats_car_stock_mileage_1='$stock_mileage_1',ats_car_stock_mileage_2='$stock_mileage_2',ats_car_stock_length='$stock_length',ats_car_stock_width='$stock_width',ats_car_stock_height='$stock_height',ats_car_stock_cubic_meter='$stock_cubic_meter',ats_car_stock_weight='$stock_weight',ats_car_stock_total_weight='$stock_total_weight',ats_car_stock_max_loading='$stock_max_loading',ats_car_stock_auction_house='$stock_auction',ats_car_stock_lot_no='$stock_lot_no',ats_car_stock_buying_price='$stock_buying_price',ats_car_stock_buying_date='$stock_buying_date',ats_car_stock_country_location='$stock_country_location',ats_car_stock_city_location='$stock_city_location',ats_car_stock_option_ps='$stock_option_ps',ats_car_stock_option_nv='$stock_option_nv',ats_car_stock_option_ac='$stock_option_ac',ats_car_stock_option_wab='$stock_option_wab',ats_car_stock_option_rs='$stock_option_rs',ats_car_stock_option_tv='$stock_option_tv',ats_car_stock_option_rr='$stock_option_rr',ats_car_stock_option_abs='$stock_option_abs',ats_car_stock_option_ls='$stock_option_ls',ats_car_stock_option_pw='$stock_option_pw',ats_car_stock_option_sr='$stock_option_sr',ats_car_stock_option_fog='$stock_option_fog',ats_car_stock_option_ab='$stock_option_ab',ats_car_stock_option_gg='$stock_option_gg',ats_car_stock_option_bt='$stock_option_bt',ats_car_stock_option_aw='$stock_option_aw',ats_car_stock_other_option='$stock_other_options',ats_car_stock_auction_fees='$stock_auction_charges',ats_car_stock_rikuso='$stock_rikuso_charges',ats_car_stock_fob_charge='$stock_fob_charges',ats_car_stock_storage_charge='$stock_storage_charges',ats_car_stock_dhl_charge='$stock_dhl_charges',ats_car_stock_radiation='$stock_radiation_charges',ats_car_stock_thc_charge='$stock_thc_charges',ats_car_stock_vaining_charge='$stock_vainning_charges',ats_car_stock_inspection_charge='$stock_inspection_charges',ats_car_stock_freight_charge='$stock_freight_charges',ats_car_stock_other_charge='$stock_other_charges',ats_car_stock_fob_price_yen='$stock_fob_price_print_yen',ats_car_stock_fob_price_us='$stock_fob_price_print_dollar',ats_car_stock_cnf_price_yen='$stock_cnf_price_print_yen',ats_car_stock_cnf_price_us='$stock_cnf_price_print_dollar' $echoas ats_car_stock_auction_pics='',ats_car_stock_masso_date='$stock_masso_date' $echoas1 $echoas2 ats_car_stock_inyard_date='$stock_inyard_date',ats_car_stock_inyard_pictures='',ats_car_stock_reserve_date='$stock_reserve_date' $echoas3 ats_car_stock_sure_ok_date='$stock_sure_ok_date' $echoas4 ats_car_stock_ship_date='$stock_ship_date',ats_car_stock_vessel_name='$stock_vessel_name',ats_car_stock_voyage='$stock_voyage',ats_car_stock_ship_ok_date='$stock_ship_ok_date' $echoas5 $echoas6 ats_car_stock_bl_date='$stock_bl_date',ats_car_stock_bl_number='$stock_bl_no' $echoas7 ats_car_stock_release_ok_date='$stock_release_ok_date' $echoas8 ats_car_stock_dhl_date='$stock_dhl_date',ats_car_stock_tracking_number='$stock_tracking_number',ats_car_stock_dhl_link='$stock_dhl_link',ats_car_stock_inspection_date='$stock_inspection_date' $echoas9 ats_car_stock_status='$stock_status',ats_car_stock_shape='$stock_shape',stock_port='$stock_port',shipmenttype='$shipmenttype',conversionrate='$conversionrate',extra_transportatiom='$stock_extra_transportation',stock_type='$stock_type',stock_total_expences='$stock_total_expences',stock_country_slab='$stock_country_slab' where ats_car_stock_id=".$_GET['car_id'];
+    //   $query = mysqli_query($connection,$insert) or die(mysqli_error($connection));
+    //   if ($query)
+    //       {
+    //           echo '<script type="text/javascript"> alert("Stock Added Successfully")</script>';
+    //          // echo '<script language="javascript">window.location.href ="car-view.php"</script>';
+
+    //       }
+  
 }
 
 ?>
@@ -1081,7 +1223,7 @@ else {
                                                             <div class="col-sm-1"></div>
                                                             <div class="col-sm-6">
                                                                 <div class="position-relative ">
-                                                                    <div style="position: relative; overflow: hidden;" class="file mb-2 mr-2 btn btn-gradient-primary btn-sm btn-block">Upload Invoice<input style="position: absolute; width: 100%; border-radius: 20px;  opacity: 0; right: 0; top: 0;" type="file" name="stock_invoice_file" id="stock_invoice_file"/>
+                                                                    <div style="position: relative; overflow: hidden;" class="file mb-2 mr-2 btn btn-gradient-primary btn-sm btn-block">Upload Invoice<input style="position: absolute; width: 100%; border-radius: 20px;  opacity: 0; right: 0; top: 0;" type="file" name="stock_invoice_file[]" id="stock_invoice_file" multiple="multiple"/>
                                                                     </div> 
                                                                 </div>
                                                             </div>
@@ -1100,7 +1242,7 @@ else {
                                                             <div class="col-sm-1"></div>
                                                             <div class="col-sm-6">
                                                                 <div class="position-relative ">
-                                                                    <div style="position: relative; overflow: hidden;" class="file mb-2 mr-2 btn btn-gradient-primary btn-sm btn-block">Upload TT Copy<input style="position: absolute; width: 100%; border-radius: 20px;  opacity: 0; right: 0; top: 0;" type="file" name="stock_tt_copy_file" id="stock_tt_copy_file"/>
+                                                                    <div style="position: relative; overflow: hidden;" class="file mb-2 mr-2 btn btn-gradient-primary btn-sm btn-block">Upload TT Copy<input style="position: absolute; width: 100%; border-radius: 20px;  opacity: 0; right: 0; top: 0;" type="file" name="stock_tt_copy_file[]" id="stock_tt_copy_file" multiple="multiple"/>
                                                                     </div> 
                                                                 </div>
                                                             </div> 
@@ -1112,7 +1254,7 @@ else {
                                                                 </div>
                                                             </div>
                                                             <div class="col-sm-2">
-                                                                <div class="position-relative ">
+                                                                    <div class="position-relative ">
                                                                     <input type="text" id="stock_ship_date" name="stock_ship_date" class="form-control-sm form-control input-mask-trigger" data-inputmask-alias="datetime" data-inputmask-inputformat="dd/mm/yyyy" value="<?php echo $rowupdate[80]?>">
                                                                 </div>
                                                             </div>
@@ -1154,6 +1296,29 @@ else {
                                                             </div>     
                                                         </div>
                                                         <div class="form-row"> 
+                                                                <div class="col-sm-2">
+                                                                    <div class="position-relative form-group">
+                                                                        <label class="form-control-label">Port of Loading</label>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-sm-2">
+                                                                    <div class="position-relative">
+                                                                        <input type="text" id="stock_port_of_loading" name="stock_port_of_loading" placeholder="Port of Loading" class="form-control-sm form-control" value="<?php echo $rowupdate[120]?>">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-sm-1"></div>
+                                                                <div class="col-sm-3">
+                                                                    <div class="position-relative">
+                                                                        <input type="text" id="stock_ship_name" name="stock_ship_name" placeholder="Ship Name" class="form-control-sm form-control" value="<?php echo $rowupdate[122]?>">
+                                                                    </div>
+                                                                </div> 
+                                                                <div class="col-sm-3">
+                                                                    <div class="position-relative">
+                                                                        <input type="text" id="stock_port_of_discharge" name="stock_port_of_discharge" placeholder="Port of Dsicharge" class="form-control-sm form-control" value="<?php echo $rowupdate[121]?>">
+                                                                    </div>
+                                                                </div>     
+                                                            </div>
+                                                        <div class="form-row"> 
                                                             <div class="col-sm-2">
                                                                 <div class="position-relative form-group">
                                                                     <label class="form-control-label">BL Date</label>
@@ -1173,7 +1338,7 @@ else {
                                                             </div>
                                                             <div class="col-sm-3">
                                                                 <div class="position-relative">
-                                                                    <div style="position: relative; overflow: hidden;" class="file mb-2 mr-2 btn btn-gradient-primary btn-sm btn-block">Upload Bill of Lading<input style="position: absolute; width: 100%; border-radius: 20px;  opacity: 0; right: 0; top: 0;" type="file" name="stock_bill_of_lading_file" id="stock_bill_of_lading_file"/>
+                                                                    <div style="position: relative; overflow: hidden;" class="file mb-2 mr-2 btn btn-gradient-primary btn-sm btn-block">Upload Bill of Lading<input style="position: absolute; width: 100%; border-radius: 20px;  opacity: 0; right: 0; top: 0;" type="file" name="stock_bill_of_lading_file[]" multiple="multiple" id="stock_bill_of_lading_file"/>
                                                                     </div> 
                                                                 </div>
                                                             </div> 
@@ -1192,7 +1357,7 @@ else {
                                                             <div class="col-sm-1"></div>
                                                             <div class="col-sm-6">
                                                                 <div class="position-relative ">
-                                                                    <div style="position: relative; overflow: hidden;" class="file mb-2 mr-2 btn btn-gradient-primary btn-sm btn-block">Upload Bal. TT Copy<input style="position: absolute; width: 100%; border-radius: 20px;  opacity: 0; right: 0; top: 0;" type="file" name="stock_balance_tt_copy_file" id="stock_balance_tt_copy_file"/>
+                                                                    <div style="position: relative; overflow: hidden;" class="file mb-2 mr-2 btn btn-gradient-primary btn-sm btn-block">Upload Bal. TT Copy<input style="position: absolute; width: 100%; border-radius: 20px;  opacity: 0; right: 0; top: 0;" type="file" name="stock_balance_tt_copy_file[]" id="stock_balance_tt_copy_file" multiple="multiple"/>
                                                                     </div> 
                                                                 </div>
                                                             </div> 

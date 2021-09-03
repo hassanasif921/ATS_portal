@@ -8,6 +8,9 @@ $NewDate1=Date('d/m/Y');
 $query="select * from ats_car_stocK WHERE ats_car_stock_id=".$_GET['car_id'];
 $result=mysqli_query($connection,$query);
 $row=mysqli_fetch_row($result);
+$reservedrecord1=mysqli_query($connection,"select * from ats_stock_reservation where recordno='".$row[1]."'");
+
+$reservedrecord=mysqli_query($connection,"select * from ats_stock_reservation where recordno='".$row[1]."'");
 if($row[57] !== "-----" || $row[57] !== ""){
 $queryinspection="select * from inspection_charges where id=".$row[57];
 $resultinspection=mysqli_query($connection,$queryinspection);
@@ -32,6 +35,20 @@ if(isset($_POST['btnreserve']))
 	$insertreservequery="INSERT INTO ats_stock_reservation(recordno, date_from, date_till, customer, payment_per, memo, yard_charges, repair_charges,consignee_id,finalfob,agent_name,created_at) VALUES ('$recordno','$date_from','$date_till','$customerreserve','$payment_per','$memo','$yard_charges','$repair_charges','$consignee_id','$finalfob','$agent_name','$created_at')";
 	$insertreserve=mysqli_query($connection,$insertreservequery);
 	if($insertreserve)
+	{
+		echo '<script type="text/javascript"> alert("Car Reserved!")</script>';
+
+	}
+}
+if(isset($_POST['btnreserveupdate']))
+{
+	$recordnoalreadyreserved=mysqli_real_escape_string($connection,$row[1]);
+
+	$consignee_idalreadyreserved=mysqli_real_escape_string($connection,$_POST['consignee_id1']);
+	
+	$updatereservequeryalreadyreserved="UPDATE ats_stock_reservation SET consignee_id='$consignee_idalreadyreserved' where recordno='".$row[1]."'";
+	$insertreservealreadyreserved=mysqli_query($connection,$updatereservequeryalreadyreserved);
+	if($insertreservealreadyreserved)
 	{
 		echo '<script type="text/javascript"> alert("Car Reserved!")</script>';
 
@@ -72,11 +89,24 @@ if(isset($_POST['btn_exp_boss_price']))
 	$exp_boss_price_discription=$_POST['exp_boss_price_discription'];
 	$exp_boss_price_amount=$_POST['exp_boss_price_amount'];
 	$exp_boss_price_memo=$_POST['exp_boss_price_memo'];
-	$newvalueb1=$row[28]+$exp_boss_price_amount;
 	$newvalueb2=$row[65]+$exp_boss_price_amount;
-	$newvalueb3=$row[67]+$exp_boss_price_amount;
+	if($row[67] > 0)
+	{
+
+
+		$newvalueb3=$row[67]+$exp_boss_price_amount;
+	}
+		else
+	{
+		$newvalueb3=0;
+	}
+
+	$newvalueb1=$row[28]+$exp_boss_price_amount;
+
+	
 	$fobdollar1=$newvalueb2/$row[104];
 	$cnfdollar1=$newvalueb3/$row[104];
+
 	$querybossprice=mysqli_query($connection,"INSERT INTO boss_price(recno, date, description, amount, memo) VALUES ('$row[1]','$exp_boss_price_date','$exp_boss_price_discription','$exp_boss_price_amount','$exp_boss_price_memo')");
 	$updatebossprice1=mysqli_query($connection, "UPDATE ats_car_stock SET ats_car_stock_buying_price='$newvalueb1' ,ats_car_stock_fob_price_yen='$newvalueb2',ats_car_stock_cnf_price_yen='$newvalueb3',ats_car_stock_fob_price_us='$fobdollar1',ats_car_stock_cnf_price_us='$cnfdollar1' where ats_car_stock_id ='".$_GET['car_id']."' " );
 }
@@ -507,7 +537,7 @@ if(isset($_POST['btn_exp_important']))
 														</thead>
 													 
 														<tbody>
-														<?php  $reservedrecord=mysqli_query($connection,"select * from ats_stock_reservation where recordno='".$row[1]."'");
+														<?php  
 																while($result_reserve=mysqli_fetch_array($reservedrecord))
 																{?>
 															<tr>
@@ -877,10 +907,28 @@ if(isset($_POST['btn_exp_important']))
 									</div>
 									<div style="margin-left: 1%;" class="row mt-1 nav nav-justified" id="table">
 										<div class="nav-item">
+											<?php 
+											$num_reserve=mysqli_num_rows($reservedrecord);
+											if($num_reserve>0)
+											{
+											?>
+											<input data-toggle="modal"
+											data-target="#exampleModalLongalreadyreserved" 
+											style="width: 120px;" 
+											class="btn-pill btn-shadow btn-wide mt-0 mb-2 btn btn-primary" value="Car Reserved " type="button" >
+											<?php
+											}
+											else
+											{
+											?>
 											<input data-toggle="modal"
 											data-target="#exampleModalLong" 
 											style="width: 120px;" 
 											class="btn-pill btn-shadow btn-wide mt-0 mb-2 btn btn-primary" value="Reserve Car " type="button" >
+											<?php
+											}
+											?>
+											
 										</div>
 										<div class="nav-item">
 											<input data-toggle="modal"
@@ -933,6 +981,258 @@ if(isset($_POST['btn_exp_important']))
 include("bottom.php");
 ?> 
 <!-- Modals -->
+<?php 
+$num_reserve=mysqli_num_rows($reservedrecord);
+if($num_reserve>0)
+{
+?>
+<div class="modal fade" id="exampleModalLongalreadyreserved" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
+	aria-hidden="true">
+	<?php
+	$qureygetreserved=mysqli_fetch_row($reservedrecord1);
+	?>
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="exampleModalLongTitle">Car Reserved</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div style="background: #ccc;" class="container">
+				<div class="row">
+					<div class="col-2">
+						<label class="form-control-label">Rec. #</label>
+						<label style="width: 80px; margin-top: -15%; font-size: 11px; height: 20px; background: #ccc;  padding: 2px; border: 1px solid black; font-weight: bold; " type="text" id="get_stock_rec_no" name="get_stock_rec_no" class="form-control"><?php echo $row[1]?></label>
+					</div>
+					<div class="col-3">
+						<label class="form-control-label">Chassis&nbsp;#</label>
+						<label style="width: 100px; margin-top: -9%; font-size: 11px; height: 20px; background: #ccc; padding: 2px; border: 1px solid black; font-weight: bold;  " type="text" id="get_stock_chassis_id" name="get_stock_chassis_id" class="form-control"><?php echo $row[2]?></label>
+					</div>
+					<div style="margin-left: -4%;" class="col-2">
+						<label class="form-control-label">Make</label>
+						<label style="width: 80px; margin-top: -15%; font-size: 11px; height: 20px; padding: 2px; background: #ccc; border: 1px solid black; font-weight: bold; " type="text" id="get_stock_make" name="get_stock_make" class="form-control"><?php echo $querymake[1]?></label>
+					</div>
+					<div class="col-3">
+						<label class="form-control-label">Model</label>
+						<label style="width: 100px; margin-top: -9%; font-size: 11px; height: 20px; background: #ccc; padding: 2px; border: 1px solid black; font-weight: bold; " type="text" id="get_stock_model" name="get_stock_model" class="form-control"><?php echo $querymodel[2]?></label>
+					</div>
+					<div style="margin-left: -4%;" class="col-2">
+						<label class="form-control-label">Year</label>
+						<label style="width: 80px; margin-top: -15%; font-size: 11px; height: 20px; background: #ccc; padding: 2px; border: 1px solid black; font-weight: bold; " type="text" id="get_stock_man_year" name="get_stock_man_year" class="form-control"><?php echo $row[6]?></label>
+					</div>
+				</div>
+			</div>
+			<form method="post">
+				<div class="modal-body">
+					<div class="row">
+						<div style="margin-top: -3%;" class="col-md-4">
+							<label  class="form-control-label">From</label>
+							<input style=" font-size: 11px;  margin-top: -5%; height: 20px;  width: 130px;" type="text" id="date_from" name="date_from" class="form-control" value="<?php echo $qureygetreserved[2]?>">
+						</div>
+						<div style="margin-top: -3%;" class="col-md-4">
+							<label class="form-control-label">Till</label>
+							<input style=" font-size: 11px;  margin-top: -5%; height: 20px;  width: 130px;" type="text" id="date_till" name="date_till" class="form-control" value="<?php echo $qureygetreserved[3]?>">
+						</div>
+						<div style="margin-top: -3%;" class="col-md-4">
+							<label class="form-control-label">Agent Name</label>
+							<select style="padding: 0px; font-size: 11px; margin-top: -5%;  height: 20px;  width: 140px;" name="rsellperson"  id="select" class="form-control" onChange="getCustomer(this.value);">
+								<?php 
+								while($rowsell=mysqli_fetch_row($resultsell))
+								{
+									if($rowsell[1]==$qureygetreserved[12])
+									{
+								 ?>
+								 <option value="<?php echo $rowsell[1]?>" selected><?php echo $rowsell[1]?></option>
+								 <?php   
+									}
+								}
+								?>
+							</select>
+						</div>
+						<div class="col-md-3" id="custlist">
+							<label class="form-control-label">Customer</label>
+							<select style=" padding: 0px; font-size: 11px;  margin-top: -8%; height: 20px;  width: 120px;" type="text" id="customername" name="customername" class="form-control" onChange="getConsignee(this.value);">
+							<option  selected value="">Please Select</option>
+
+							<?php 
+							$query_get_cust1=mysqli_query($connection,"select * from ats_customer where ats_customer_sell_person='".$query_get_customer_reserve[4]."'");
+
+							while($rowfetchcustomer1=mysqli_fetch_array($query_get_cust1)){
+							if($rowfetchcustomer1[1]==$qureygetreserved[4])
+							{
+							?>
+							<option selected value="<?php echo $rowfetchcustomer1[1]?>"><?php echo $rowfetchcustomer1[3]?></option>
+
+							<?php
+							}
+							}
+							?>
+							<select>
+						</div>
+						
+						<div  class="col-md-3" id="customerphone">
+							<label style="margin-left: 8%;" class="form-control-label">Phone</label>
+							<input readonly style=" font-size: 11px; margin-left: 8%; margin-top: -8%; height: 20px;  width: 100px;" type="text" id="username" name="stock_chassis_id" class="form-control">
+						</div>
+						<div  class="col-md-3" id="customercountry">
+							<label class="form-control-label">Country</label>
+							<input style=" font-size: 11px;  margin-top: -8%; height: 20px;  width: 100px;" type="text" id="username" name="stock_chassis_id" class="form-control">
+						</div>
+						<div  class="col-md-3" id="customerport">
+							<label class="form-control-label">Destination&nbsp;Port</label>
+							<input style=" font-size: 11px;  margin-top: -8%; height: 20px;  width: 100px;" type="text" id="username" name="stock_chassis_id" class="form-control">
+						</div>
+						<div  class="col-md-12" id="customeradress">
+							<label class="form-control-label" >Address</label>
+							<input style=" font-size: 11px; width: 472px; height: 20px;  margin-top: -2%; " type="text" id="username" name="stock_chassis_id" class="form-control">
+						</div>
+						<div class="col-md-3">
+							
+							<?php
+							$query_get_con1=mysqli_query($connection,"select * from ats_consignee where ats_consignee_customer_name='".$qureygetreserved[4]."'");
+
+							?>
+							<label class="form-control-label">Consignee&nbsp;Name</label>
+							<select style=" padding: 0px; font-size: 11px;  margin-top: -8%; height: 20px;  width: 120px;" type="text" id="consignee_id1" name="consignee_id1" class="form-control" onChange="getConsigneedetails(this.value);">
+							<option  selected value="">Please Select</option>
+
+							<?php 
+							while($rowfetchcon1=mysqli_fetch_array($query_get_con1)){
+							?>
+							<option value="<?php echo $rowfetchcon1[0]?>"><?php echo $rowfetchcon1[4]?></option>
+
+							<?php
+							}
+							?>
+							<select>
+						</div>
+					
+					
+						<div  class="col-md-3" id="cp">
+							<label style="margin-left: 8%;" class="form-control-label">Consignee&nbsp;Phone</label>
+							<input style=" font-size: 11px; margin-left: 8%; margin-top: -8%; height: 20px;  width: 100px;" type="text" id="username" name="stock_chassis_id" class="form-control">
+						</div>
+						<div  class="col-md-3" id="notifyname">
+							<label class="form-control-label">Notify&nbsp;Name</label>
+							<input style=" font-size: 11px;  margin-top: -8%; height: 20px;  width: 100px;" type="text" id="username" name="stock_chassis_id" class="form-control">
+						</div>
+						<div  class="col-md-3" id="notifyphone">
+							<label class="form-control-label">Notify&nbsp;Phone</label>
+							<input style=" font-size: 11px;  margin-top: -8%; height: 20px;  width: 100px;" type="text" id="username" name="stock_chassis_id" class="form-control">
+						</div>
+						<div  class="col-md-6" id="consigneeadress">
+							<label class="form-control-label">Consignee&nbsp;Address</label>
+							<input style=" font-size: 11px; width: 232px; margin-top: -2%; height: 20px;  " type="text" id="username" name="stock_chassis_id" class="form-control">
+						</div>
+						<div  class="col-md-6" id="notifyadress">
+							<label class="form-control-label">Notify&nbsp;Address</label>
+							<input style=" font-size: 11px; width: 224px; margin-top: -2%; height: 20px;  " type="text" id="username" name="stock_chassis_id" class="form-control">
+						</div>
+					
+						<div style="background: khaki; margin-left: 0px; padding-left: 0px; margin-top: 1%;  padding-bottom: 1%;" class="row container">
+							<div class="col-md-3" id="shipment">
+								<label class="form-control-label">Shipment</label>
+								<select style="padding: 0px; font-size: 11px;  margin-top: -8%; height: 20px;  width: 105px;" type="text" id="username" name="stock_chassis_id" class="form-control">
+									<option value="---">---</option>
+									<option>Collect</option>
+									<option>Prepaid</option>
+								</select>
+							</div>
+							<div  class="col-md-3" id="currency">
+								<label class="form-control-label">Currency</label>
+								<select style="padding: 0px; font-size: 11px;  margin-top: -8%; height: 20px;  width: 105px;" type="text" id="username" name="stock_chassis_id" class="form-control">
+									<option value="---">---</option>
+									<option>$</option>
+									<option>&yen;</option>
+								</select>
+							</div>
+							<div  class="col-md-3">
+								<label class="form-control-label">FOB</label>
+								<input readonly style=" font-size: 11px;  margin-top: -8%; height: 20px;  width: 100px;" type="text" id="username" name="stock_chassis_id" class="form-control" value="<?php echo $row[65]?>">
+							</div>
+							<div  class="col-md-3">
+								<label class="form-control-label">Freight</label>
+								<input readonly style=" font-size: 11px;  margin-top: -8%; height: 20px;  width: 100px;" type="text" id="username" name="stock_chassis_id" class="form-control" value="<?php echo $row[58]?>">
+							</div>
+							<div  class="col-md-3">
+								<label class="form-control-label">Inspection</label>
+								<input readonly style=" font-size: 11px;  margin-top: -8%; height: 20px;  width: 105px;" type="text" id="username" name="stock_chassis_id" class="form-control" value="<?php echo $rowinspection[2]?>">
+							</div>
+							<div class="col-md-3">
+								<label class="form-control-label">Inspection&nbsp;Chrgs</label>
+								<input readonly style=" font-size: 11px;  margin-top: -8%; height: 20px;  width: 105px;" type="text" id="username" name="stock_chassis_id" class="form-control" value="<?php echo $rowinspection[3]?>">
+							</div>
+							<div class="col-md-3">
+								<label class="form-control-label">Discount %</label>
+								<input readonly style=" font-size: 11px;  margin-top: -8%; height: 20px;  width: 100px;" type="text" id="username" name="stock_chassis_id" class="form-control" value="<?php echo $row[62]?>">
+							</div>
+							<div  class="col-md-3">
+								<label class="form-control-label">Yard Charges</label>
+								<input readonly style=" font-size: 11px;  margin-top: -8%; height: 20px;  width: 100px;" type="text" id="yard_charges" name="yard_charges" class="form-control" value="">
+							</div>
+							<div  class="col-md-3">
+								<label class="form-control-label">Repair</label>
+								<input readonly style=" font-size: 11px;  margin-top: -8%; height: 20px;  width: 105px;" type="text" id="repair_charges" name="repair_charges" class="form-control" value="<?php ?>">
+							</div>
+							<div  class="col-md-3">
+								<label class="form-control-label">Other</label>
+								<input readonly style=" font-size: 11px;  margin-top: -8%; height: 20px;  width: 105px;" type="text" id="username" name="stock_chassis_id" class="form-control" value="<?php echo $row[59]?>">
+							</div>
+							<div  class="col-md-3">
+								<label class="form-control-label">CNF</label>
+								<input readonly style=" font-size: 11px;  margin-top: -8%; height: 20px;  width: 100px;" type="text" id="username" name="stock_chassis_id" class="form-control" value="<?php echo $row[67]?>">
+							</div>
+							<div  class="col-md-3">
+											<?php
+										$get_customer_country=mysqli_fetch_row(mysqli_query($connection,"select ats_customer_country from ats_customer where ats_customer_ATS_ID ='".$qureygetreserved[4]."'"));
+										$get_payment_country=mysqli_query($connection,"select * from payment_per_country where country_code='".$get_customer_country[0]."'");
+
+									?>
+									<label class="form-control-label">Payment %</label>
+									<select style=" padding: 0px; font-size: 11px;  margin-top: -8%; height: 20px;  width: 100px;" type="text"  class="form-control" onChange="getcountryslab(this.value);">
+									<?php 
+									$i=0;
+									while($row_get_payment_country=mysqli_fetch_array($get_payment_country))
+									{
+										$i++;
+										if($row_get_payment_country[2]==$qureygetreserved[5])
+										{
+									?>
+									<option selected value="<?php echo $row_get_payment_country[2]?>"><?php echo $row_get_payment_country[2]?>%</option>
+									<?php
+										} 
+									}
+									?>
+									</select>
+							</div>
+							
+							<div  class="col-md-12" id="getcountryslab">
+							<label class="form-control-label">Final F.O.B</label>
+ 							<input style=" font-size: 11px;  margin-top: -2%; width: 461px; height: 20px; " type="text" id="finalfob" name="finalfob" value="<?php echo $qureygetreserved[11]?>" class="form-control" readonly>
+							</div>
+							<div  class="col-md-12">
+								<label class="form-control-label">Memo</label>
+								<input style=" font-size: 11px;  margin-top: -2%; width: 461px; height: 20px; " type="text" id="memo" name="memo" class="form-control">
+							</div>
+						</div>
+					</div>
+				   
+				   
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+					<input type="submit" name="btnreserveupdate" class="btn btn-primary" value="Update Reserve">
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+<?php 
+}
+else
+{
+?>
 <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
 	aria-hidden="true">
 	<div class="modal-dialog" role="document">
@@ -1002,7 +1302,7 @@ include("bottom.php");
 						
 						<div  class="col-md-3" id="customerphone">
 							<label style="margin-left: 8%;" class="form-control-label">Phone</label>
-							<input style=" font-size: 11px; margin-left: 8%; margin-top: -8%; height: 20px;  width: 100px;" type="text" id="username" name="stock_chassis_id" class="form-control">
+							<input readonly style=" font-size: 11px; margin-left: 8%; margin-top: -8%; height: 20px;  width: 100px;" type="text" id="username" name="stock_chassis_id" class="form-control">
 						</div>
 						<div  class="col-md-3" id="customercountry">
 							<label class="form-control-label">Country</label>
@@ -1066,39 +1366,39 @@ include("bottom.php");
 							</div>
 							<div  class="col-md-3">
 								<label class="form-control-label">FOB</label>
-								<input style=" font-size: 11px;  margin-top: -8%; height: 20px;  width: 100px;" type="text" id="username" name="stock_chassis_id" class="form-control" value="<?php echo $row[65]?>">
+								<input readonly style=" font-size: 11px;  margin-top: -8%; height: 20px;  width: 100px;" type="text" id="username" name="stock_chassis_id" class="form-control" value="<?php echo $row[65]?>">
 							</div>
 							<div  class="col-md-3">
 								<label class="form-control-label">Freight</label>
-								<input style=" font-size: 11px;  margin-top: -8%; height: 20px;  width: 100px;" type="text" id="username" name="stock_chassis_id" class="form-control" value="<?php echo $row[58]?>">
+								<input readonly style=" font-size: 11px;  margin-top: -8%; height: 20px;  width: 100px;" type="text" id="username" name="stock_chassis_id" class="form-control" value="<?php echo $row[58]?>">
 							</div>
 							<div  class="col-md-3">
 								<label class="form-control-label">Inspection</label>
-								<input style=" font-size: 11px;  margin-top: -8%; height: 20px;  width: 105px;" type="text" id="username" name="stock_chassis_id" class="form-control" value="<?php echo $rowinspection[2]?>">
+								<input readonly style=" font-size: 11px;  margin-top: -8%; height: 20px;  width: 105px;" type="text" id="username" name="stock_chassis_id" class="form-control" value="<?php echo $rowinspection[2]?>">
 							</div>
 							<div class="col-md-3">
 								<label class="form-control-label">Inspection&nbsp;Chrgs</label>
-								<input style=" font-size: 11px;  margin-top: -8%; height: 20px;  width: 105px;" type="text" id="username" name="stock_chassis_id" class="form-control" value="<?php echo $rowinspection[3]?>">
+								<input readonly style=" font-size: 11px;  margin-top: -8%; height: 20px;  width: 105px;" type="text" id="username" name="stock_chassis_id" class="form-control" value="<?php echo $rowinspection[3]?>">
 							</div>
 							<div class="col-md-3">
 								<label class="form-control-label">Discount %</label>
-								<input style=" font-size: 11px;  margin-top: -8%; height: 20px;  width: 100px;" type="text" id="username" name="stock_chassis_id" class="form-control" value="<?php echo $row[62]?>">
+								<input readonly style=" font-size: 11px;  margin-top: -8%; height: 20px;  width: 100px;" type="text" id="username" name="stock_chassis_id" class="form-control" value="<?php echo $row[62]?>">
 							</div>
 							<div  class="col-md-3">
 								<label class="form-control-label">Yard Charges</label>
-								<input style=" font-size: 11px;  margin-top: -8%; height: 20px;  width: 100px;" type="text" id="yard_charges" name="yard_charges" class="form-control" value="">
+								<input readonly style=" font-size: 11px;  margin-top: -8%; height: 20px;  width: 100px;" type="text" id="yard_charges" name="yard_charges" class="form-control" value="">
 							</div>
 							<div  class="col-md-3">
 								<label class="form-control-label">Repair</label>
-								<input style=" font-size: 11px;  margin-top: -8%; height: 20px;  width: 105px;" type="text" id="repair_charges" name="repair_charges" class="form-control" value="<?php ?>">
+								<input readonly style=" font-size: 11px;  margin-top: -8%; height: 20px;  width: 105px;" type="text" id="repair_charges" name="repair_charges" class="form-control" value="<?php ?>">
 							</div>
 							<div  class="col-md-3">
 								<label class="form-control-label">Other</label>
-								<input style=" font-size: 11px;  margin-top: -8%; height: 20px;  width: 105px;" type="text" id="username" name="stock_chassis_id" class="form-control" value="<?php echo $row[59]?>">
+								<input readonly style=" font-size: 11px;  margin-top: -8%; height: 20px;  width: 105px;" type="text" id="username" name="stock_chassis_id" class="form-control" value="<?php echo $row[59]?>">
 							</div>
 							<div  class="col-md-3">
 								<label class="form-control-label">CNF</label>
-								<input style=" font-size: 11px;  margin-top: -8%; height: 20px;  width: 100px;" type="text" id="username" name="stock_chassis_id" class="form-control" value="<?php echo $row[67]?>">
+								<input readonly style=" font-size: 11px;  margin-top: -8%; height: 20px;  width: 100px;" type="text" id="username" name="stock_chassis_id" class="form-control" value="<?php echo $row[67]?>">
 							</div>
 							<div  class="col-md-3" id="payment_per">
 							  
@@ -1124,6 +1424,10 @@ include("bottom.php");
 		</div>
 	</div>
 </div>
+<?php
+}
+?>
+
 <div class="modal fade" id="exampleModalLong-repair" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
 	aria-hidden="true">
 	<div class="modal-dialog" role="document">
@@ -1574,11 +1878,24 @@ include("bottom.php");
 						</div>
 						<div  class="col-md-4">
 							<label class="form-control-label">Amount</label>
+							<select name="operation">
+								<option value="addition">+</option>
+								<option value="subtraction">-</option>
+							</select>
 							<input style=" font-size: 11px; margin-top: -5%; height: 20px;" type="text" id="exp_boss_price_amount" name="exp_boss_price_amount" class="form-control">
 						</div>
 						<div style="margin-left: -2%;" class="col-md-8">
 							<label class="form-control-label">Memo</label>
 							<input style=" font-size: 11px; margin-top: -2.5%; height: 20px;" type="text" id="exp_boss_price_memo" name="exp_boss_price_memo" class="form-control">
+						</div>   
+						<div  class="col-md-6">
+							<label class="form-control-label">CNF</label>
+							
+							<input style=" font-size: 11px; margin-top: -5%; height: 20px;" readonly type="text" id="" name="" class="form-control" value="<?php echo $row[67] ?>">
+						</div>
+						<div style="margin-left: -2%;" class="col-md-6">
+							<label class="form-control-label">FOB</label>
+							<input style=" font-size: 11px; margin-top: -2.5%; height: 20px;" readonly type="text" id="" name="" value="<?php echo $row[66] ?>" class="form-control">
 						</div>                        
 					</div>
 				</div>
@@ -1605,7 +1922,22 @@ include("bottom.php");
 				<div class="modal-body">
 					<div class="row">
 						<div style="margin-top: -3%;" class="col-md-12">
-							<img style="" src="data:image/jpg;charset=utf8;base64,<?php echo base64_encode($row[69]); ?>" class="img-fluid">
+						<?php 
+							$DATA_AUC_SHEET = $row[69];;    
+							$first1 = substr($DATA_AUC_SHEET, strpos($DATA_AUC_SHEET, ".") + 1);
+							if($first1 === 'pdf'){
+								?>
+								<a href="DATA/<?php echo $row[69]?>" target="_blank">pdf</a>
+								<?php
+							}
+							else{
+								?>
+							<img style="" src="DATA/<?php echo$row[69]; ?>" class="img-fluid">
+
+								<?php
+							}
+						?>	
+						
 						</div>
 											  
 					</div>
@@ -1630,7 +1962,22 @@ include("bottom.php");
 				<div class="modal-body">
 					<div class="row">
 						<div style="margin-top: -3%;" class="col-md-12">
-							<img style="" src="data:image/jpg;charset=utf8;base64,<?php echo base64_encode($row[72]); ?>" class="img-fluid">
+						<?php 
+							$data_ec_jp = $row[72];;    
+							$first1 = substr($data_ec_jp, strpos($data_ec_jp, ".") + 1);
+							if($first1 === 'pdf'){
+								?>
+								<a href="DATA/<?php echo $row[72]?>" target="_blank">pdf</a>
+								<?php
+							}
+							else{
+								?>
+							<img style="" src="DATA/<?php echo$row[72]; ?>" class="img-fluid">
+
+								<?php
+							}
+						?>
+							
 						</div>
 											  
 					</div>
@@ -1655,7 +2002,22 @@ include("bottom.php");
 				<div class="modal-body">
 					<div class="row">
 						<div style="margin-top: -3%;" class="col-md-12">
-							<img style="" src="data:image/jpg;charset=utf8;base64,<?php echo base64_encode($row[73]); ?>" class="img-fluid">
+						<?php 
+							$data_ec_en = $row[73];;    
+							$first1 = substr($data_ec_en, strpos($data_ec_en, ".") + 1);
+							if($first1 === 'pdf'){
+								?>
+								<a href="DATA/<?php echo $row[73]?>" target="_blank">pdf</a>
+								<?php
+							}
+							else{
+								?>
+							<img style="" src="DATA/<?php echo$row[73]; ?>" class="img-fluid">
+
+								<?php
+							}
+						?>
+							
 						</div>
 											  
 					</div>
@@ -1711,7 +2073,7 @@ include("bottom.php");
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h5 class="modal-title" id="exampleModalLongTitle">Auction Pictures</h5>
+				<h5 class="modal-title" id="exampleModalLongTitle">Invoice</h5>
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 					<span aria-hidden="true">&times;</span>
 				</button>
@@ -1720,23 +2082,43 @@ include("bottom.php");
 			<form>
 				<div class="modal-body">
 					<div class="row">
-					<div class="lightbox-gallery">
-									<div class="container">
-										
-													<div class="row photos">
-													<?php 
-													$queryimginvoice=mysqli_query($connection,"select * from cardocuments where stockid='".$row[1]."' AND imagetype='INVOICE'");
-													
-													while($resultinvoice=mysqli_fetch_array($queryimginvoice))
-													{
-													?>
-													<div class="col-sm-6 col-md-4 col-lg-3 item"><a href="cardocuments/<?php echo $resultinvoice[3]?>" data-lightbox="photos"><img class="img-fluid" src="cardocuments/<?php echo $resultinvoice[3]?>"></a></div>
-												<?php }?>
-													</div>
-										</div>
-								</div>
-											  
-					</div>
+						
+						<div class="lightbox-gallery">
+										<div class="container">
+											
+														<div class="row photos">
+														<?php 
+														$queryimginvoice=mysqli_query($connection,"select * from cardocuments where stockid='".$row[1]."' AND imagetype='INVOICE'");
+														
+														while($resultinvoice=mysqli_fetch_array($queryimginvoice))
+														{
+																					
+														$data_invoice = $resultinvoice[3];;    
+														$firstinvoice = substr($data_invoice, strpos($data_invoice, ".") + 1);
+														if($firstinvoice === 'pdf'){
+															?>
+															
+															<a class="btn btn-primary" href="DATA/<?php echo $resultinvoice[3]?>" target="_blank"><?php echo $resultinvoice[3]?></a> 
+															
+															<?php
+															
+														}
+														else{
+															?>
+														<div class="col-sm-6 col-md-4 col-lg-3 item"><a href="cardocuments/<?php echo $resultinvoice[3]?>" data-lightbox="photos"><img class="img-fluid" src="cardocuments/<?php echo $resultinvoice[3]?>"></a></div>
+
+															<?php
+														}
+						
+														?>
+
+														
+													<?php }?>
+														</div>
+											</div>
+									</div>
+												
+						</div>
 					</div>
 				</div>
 			</form>
@@ -1757,11 +2139,44 @@ include("bottom.php");
 		  
 			<form>
 				<div class="modal-body">
-					<div class="row">
-						<div style="margin-top: -3%;" class="col-md-12">
-							<img style="" src="data:image/jpg;charset=utf8;base64,<?php echo base64_encode($row[79]); ?>" class="img-fluid">
+				<div class="row">
+						
+						<div class="lightbox-gallery">
+										<div class="container">
+											
+														<div class="row photos">
+														<?php 
+														$queryimginvoice=mysqli_query($connection,"select * from cardocuments where stockid='".$row[1]."' AND imagetype='TT'");
+														
+														while($resultinvoice=mysqli_fetch_array($queryimginvoice))
+														{
+																					
+														$data_invoice = $resultinvoice[3];;    
+														$firstinvoice = substr($data_invoice, strpos($data_invoice, ".") + 1);
+														if($firstinvoice === 'pdf'){
+															?>
+															
+															<a class="btn btn-primary" href="DATA/<?php echo $resultinvoice[3]?>" target="_blank"><?php echo $resultinvoice[3]?></a> 
+															
+															<?php
+															
+														}
+														else{
+															?>
+														<div class="col-sm-6 col-md-4 col-lg-3 item"><a href="cardocuments/<?php echo $resultinvoice[3]?>" data-lightbox="photos"><img class="img-fluid" src="cardocuments/<?php echo $resultinvoice[3]?>"></a></div>
+
+															<?php
+														}
+						
+														?>
+
+														
+													<?php }?>
+														</div>
+											</div>
+									</div>
+												
 						</div>
-											  
 					</div>
 				</div>
 			   
@@ -1781,12 +2196,45 @@ include("bottom.php");
 			</div>
 		  
 			<form>
-				<div class="modal-body">
+			<div class="modal-body">
 					<div class="row">
-						<div style="margin-top: -3%;" class="col-md-12">
-							<img style="" src="data:image/jpg;charset=utf8;base64,<?php echo base64_encode($row[90]); ?>" class="img-fluid">
+						
+						<div class="lightbox-gallery">
+										<div class="container">
+											
+														<div class="row photos">
+														<?php 
+														$queryimgbaltt=mysqli_query($connection,"select * from cardocuments where stockid='".$row[1]."' AND imagetype='BAL-TT'");
+														
+														while($resultbaltt=mysqli_fetch_array($queryimgbaltt))
+														{
+																					
+														$data_invoice = $resultbaltt[3];;    
+														$firstinvoice = substr($data_invoice, strpos($data_invoice, ".") + 1);
+														if($firstinvoice === 'pdf'){
+															?>
+															
+															<a class="btn btn-primary" href="DATA/<?php echo $resultbaltt[3]?>" target="_blank"><?php echo $resultbaltt[3]?></a> 
+															
+															<?php
+															
+														}
+														else{
+															?>
+														<div class="col-sm-6 col-md-4 col-lg-3 item"><a href="DATA/<?php echo $resultbaltt[3]?>" data-lightbox="photos"><img class="img-fluid" src="DATA/<?php echo $resultbaltt[3]?>"></a></div>
+
+															<?php
+														}
+						
+														?>
+
+														
+													<?php }?>
+														</div>
+											</div>
+									</div>
+												
 						</div>
-											  
 					</div>
 				</div>
 			   
@@ -1809,8 +2257,24 @@ include("bottom.php");
 				<div class="modal-body">
 					<div class="row">
 						<div style="margin-top: -3%;" class="col-md-12">
-							<img style="" src="data:image/jpg;charset=utf8;base64,<?php echo base64_encode($row[85]); ?>" class="img-fluid">
-							<iframe data="data:application/pdf;base64,<?php echo base64_encode($row[85]) ?>" type="application/pdf" style="height:200px;width:60%"></iframe>
+							<?php 
+							$data = $row[85];;    
+							$first1 = substr($data, strpos($data, ".") + 1);
+							if($first1 === 'pdf'){
+								?>
+								<a href="DATA/<?php echo $row[85]?>" target="_blank">pdf</a>
+								<?php
+							}
+							else{
+								?>
+							<img style="" src="DATA/<?php echo$row[85]; ?>" class="img-fluid">
+
+								<?php
+							}
+							?>	
+						
+							
+							
 
 						</div>
 											  
@@ -1834,12 +2298,45 @@ include("bottom.php");
 			</div>
 		  
 			<form>
-				<div class="modal-body">
+			<div class="modal-body">
 					<div class="row">
-						<div style="margin-top: -3%;" class="col-md-12">
-							<img style="" src="data:image/jpg;charset=utf8;base64,<?php echo base64_encode($row[88]); ?>" class="img-fluid">
+						
+						<div class="lightbox-gallery">
+										<div class="container">
+											
+														<div class="row photos">
+														<?php 
+														$queryimgbol=mysqli_query($connection,"select * from cardocuments where stockid='".$row[1]."' AND imagetype='BOL'");
+														
+														while($resultBOL=mysqli_fetch_array($queryimgbol))
+														{
+																					
+														$data_bol = $resultBOL[3];;    
+														$firstinvoicebol = substr($data_bol, strpos($data_bol, ".") + 1);
+														if($firstinvoicebol === 'pdf'){
+															?>
+															
+															<a class="btn btn-primary" href="DATA/<?php echo $resultBOL[3]?>" target="_blank"><?php echo $resultBOL[3]?></a> 
+															
+															<?php
+															
+														}
+														else{
+															?>
+														<div class="col-sm-6 col-md-4 col-lg-3 item"><a href="DATA/<?php echo $resultBOL[3]?>" data-lightbox="photos"><img class="img-fluid" src="DATA/<?php echo $resultBOL[3]?>"></a></div>
+
+															<?php
+														}
+						
+														?>
+
+														
+													<?php }?>
+														</div>
+											</div>
+									</div>
+												
 						</div>
-											  
 					</div>
 				</div>
 			   
@@ -1885,7 +2382,7 @@ include("bottom.php");
 		</div>
 	</div>
 </div>
-<div class="modal fade" id="exampleModalLong-ic" tabindex="-1" role="dialog"  aria-labelledby="exampleModalLongTitle"
+<div class="modal fade" id="exampleModalLong-ic" tabindex="-1" role="dialog"  aria-labelledby="exampleModalLongTitle"           
 	aria-hidden="true">
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
@@ -1897,10 +2394,28 @@ include("bottom.php");
 			</div>
 		  
 			<form>
-				<div class="modal-body">
+			<div class="modal-body">
 					<div class="row">
 						<div style="margin-top: -3%;" class="col-md-12">
-							<img style="" src="data:image/jpg;charset=utf8;base64,<?php echo base64_encode($row[95]); ?>" class="img-fluid">
+							<?php 
+							$dataic = $row[95];;    
+							$first1ic = substr($dataic, strpos($dataic, ".") + 1);
+							if($first1ic === 'pdf'){
+								?>
+								<a href="DATA/<?php echo $row[95]?>" target="_blank">pdf</a>
+								<?php
+							}
+							else{
+								?>
+							<img style="" src="DATA/<?php echo$row[95]; ?>" class="img-fluid">
+
+								<?php
+							}
+							?>	
+						
+							
+							
+
 						</div>
 											  
 					</div>

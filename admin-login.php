@@ -3,8 +3,9 @@ session_start();
 include("connection_db.php");
 if(isset($_SESSION['user_id']))
 {
-    header("Location:index.php");
 
+    header("Location:index.php");
+    
 }
 if(isset($_SESSION['agents_id']) || isset($_SESSION['vendor_id']) || isset($_SESSION['user_id']))
 {

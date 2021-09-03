@@ -82,7 +82,17 @@
         $recordno1=$_POST['stock_rec_no'];
         //$stock_auction_sheet_file = $_FILES["stock_auction_sheet_file"]['name'];
         $images1=$_FILES['stock_auction_sheet_file']['tmp_name'];
-        $stock_auction_sheet_file=addslashes(file_get_contents($images1));
+        $filename1_auc = $_FILES['stock_auction_sheet_file']['name'];
+        $filename1f=$stock_rec_no.$filename1_auc;
+        $stock_port_of_loading=$_POST['stock_port_of_loading'];
+        $stock_ship_name=$_POST['stock_ship_name'];
+        $stock_port_of_discharge=$_POST['stock_port_of_discharge'];
+        // Upload files and store in database
+        if(move_uploaded_file($_FILES["stock_auction_sheet_file"]["tmp_name"],'DATA/'.$filename1f)){
+               
+            
+        }
+    
         $stock_total_expences=$_POST['stock_total_expences'];
         //$temp_name = $_FILES["stock_auction_sheet_file"]["tmp_name"];
         $temp_name ='demo';
@@ -93,11 +103,24 @@
         $stock_masso_date = $_POST["stock_masso_date"];
     // $stock_export_cerificate_jp_file = $_FILES["stock_export_cerificate_jp_file"];
     $images2=$_FILES['stock_export_cerificate_jp_file']['tmp_name'];
-    $stock_export_cerificate_jp_file=addslashes(file_get_contents($images2));
+    $filename1_ecjp = $_FILES['stock_export_cerificate_jp_file']['name'];
+    $filename1fecjp=$stock_rec_no.$filename1_ecjp;
+    // Upload files and store in database
+    if(move_uploaded_file($_FILES["stock_export_cerificate_jp_file"]["tmp_name"],'DATA/'.$filename1fecjp)){
+            
+        
+    }
     
     // $temp_name = $_FILES["stock_export_cerificate_jp_file"]["tmp_name"];
     $images3=$_FILES['stock_export_cerificate_en_file']['tmp_name'];
-        $stock_export_cerificate_en_file=addslashes(file_get_contents($images3));
+      
+        $filename1_ecen = $_FILES['stock_export_cerificate_en_file']['name'];
+        $filename1fecen=$stock_rec_no.$filename1_en;
+        // Upload files and store in database
+        if(move_uploaded_file($_FILES["stock_export_cerificate_en_file"]["tmp_name"],'DATA/'.$filename1fecen)){
+               
+            
+        }
     
         //$temp_name = $_FILES["stock_export_cerificate_en_file"]["tmp_name"];
         $stock_inyard_date = $_POST["stock_inyard_date"];
@@ -122,25 +145,39 @@
         $stock_ship_ok_date = date("Y-m-d", strtotime($_POST["stock_ship_ok_date"]));
         //$stock_shipping_invoice_file = $_FILES["stock_shipping_invoice_file"]['name'];
         $images6=$_FILES['stock_shipping_invoice_file']['tmp_name'];
-        $stock_shipping_invoice_file=addslashes(file_get_contents($images6));
+        
+        $filename1_shippinginvoice = $_FILES['stock_shipping_invoice_file']['name'];
+        $stock_shipping_invoice_file=$stock_rec_no.$filename1_shippinginvoice;
+        // Upload files and store in database
+        if(move_uploaded_file($_FILES["stock_shipping_invoice_file"]["tmp_name"],'DATA/'.$stock_shipping_invoice_file)){
+               
+            
+        }
     
         // $temp_name = $_FILES["stock_shipping_invoice_file"]["tmp_name"];
         //$stock_shipping_order_file = $_FILES["stock_shipping_order_file"]['name'];
         $images7=$_FILES['stock_shipping_order_file']['tmp_name'];
-        $stock_shipping_order_file=addslashes(file_get_contents($images7));
+        $filename7 = $_FILES['stock_shipping_order_file']['name'];
+        $filename7f=$stock_rec_no.$filename7;
+        // Upload files and store in database
+        if(move_uploaded_file($_FILES["stock_shipping_order_file"]["tmp_name"],'DATA/'.$filename7f)){
+               
+            
+        }
+    
         $stock_country_slab=$_POST['stock_country_slab'];
     // $temp_name = $_FILES["stock_shipping_order_file"]["tmp_name"];
         $stock_bl_date = $_POST["stock_bl_date"];
         $stock_bl_no = $_POST["stock_bl_no"];
     // $stock_bill_of_lading_file = $_FILES["stock_bill_of_lading_file"]['name'];
     $images8=$_FILES['stock_bill_of_lading_file']['tmp_name'];
-    $stock_bill_of_lading_file=addslashes(file_get_contents($images8));
+    $stock_bill_of_lading_file="";
     
     //$temp_name = $_FILES["stock_bill_of_lading_file"]["tmp_name"];
         $stock_release_ok_date = date("Y-m-d", strtotime($_POST["stock_release_ok_date"]));
         //$stock_bal_tt_copy_file = $_FILES["stock_balance_tt_copy_file"]['name'];
-        $images9=$_FILES['stock_balance_tt_copy_file']['tmp_name'];
-        $stock_bal_tt_copy_file=addslashes(file_get_contents($images9));
+    
+        $stock_bal_tt_copy_file="";
     
         //$temp_name = $_FILES["stock_balance_tt_copy_file"]["tmp_name"];
         $stock_dhl_date = $_POST["stock_dhl_date"];
@@ -148,7 +185,13 @@
         $stock_dhl_link = $_POST["stock_dhl_link"];
         $stock_inspection_date = $_POST["stock_inspection_date"];
         $images10=$_FILES['stock_inspection_certificate_file']['tmp_name'];
-        $stock_inspection_certificate_file=addslashes(file_get_contents($images10));
+        $filename10 = $_FILES['stock_inspection_certificate_file']['name'];
+        $stock_inspection_certificate_file=$stock_rec_no.$filename10;
+        // Upload files and store in database
+        if(move_uploaded_file($_FILES["stock_inspection_certificate_file"]["tmp_name"],'DATA/'.$stock_inspection_certificate_file)){
+               
+            
+        }
         // $temp_name = $_FILES["stock_inspection_certificate_file"]["tmp_name"];
         $stock_createdBy = "username";
         $stock_createdAt = time();
@@ -157,6 +200,48 @@
         $stock_status = "active";
         $stock_extra_transportation=$_POST['stock_extra_transportation'];
         $totalfiles = count($_FILES['stock_auction_pictures']['name']);
+        //bill of lading
+        $totalfilesBOL = count($_FILES['stock_bill_of_lading_file']['name']);
+        for($i=0;$i<$totalfilesBOL;$i++){
+            $filenameBOL = $_FILES['stock_bill_of_lading_file']['name'][$i];
+        
+        // Upload files and store in database
+        if(move_uploaded_file($_FILES["stock_bill_of_lading_file"]["tmp_name"][$i],'DATA/'.$filenameBOL)){
+                // Image db insert sql
+                $insert1BOL = "INSERT INTO cardocuments(stockid, imagetype, imagename) VALUES ('$stock_rec_no','BOL','$filenameBOL')";
+                
+                $iqueryBOL = mysqli_query($connection,$insert1BOL);
+        
+        }
+                
+        
+                
+            else{
+                echo 'Error in uploading file - '.$_FILES['stock_bill_of_lading_file']['name'][$i].'<br/>';
+            }
+        
+        }
+        //
+        $totalfilesBTT = count($_FILES['stock_balance_tt_copy_file']['name']);
+        for($i=0;$i<$totalfilesBTT;$i++){
+            $filenameBTT = $_FILES['stock_balance_tt_copy_file']['name'][$i];
+        
+        // Upload files and store in database
+        if(move_uploaded_file($_FILES["stock_balance_tt_copy_file"]["tmp_name"][$i],'DATA/'.$filenameBTT)){
+                // Image db insert sql
+                $insert1BTT = "INSERT INTO cardocuments(stockid, imagetype, imagename) VALUES ('$stock_rec_no','BAL-TT','$filenameBTT')";
+                
+                $iqueryBTT = mysqli_query($connection,$insert1BTT);
+        
+        }
+                
+        
+                
+            else{
+                echo 'Error in uploading file - '.$_FILES['stock_balance_tt_copy_file']['name'][$i].'<br/>';
+            }
+        
+            }
         for($i=0;$i<$totalfiles;$i++){
             $filename = $_FILES['stock_auction_pictures']['name'][$i];
         
@@ -198,10 +283,10 @@
             }
             $totalfiles2 = count($_FILES['stock_invoice_file']['name']);
             for($i=0;$i<$totalfiles2;$i++){
-                $filename2 = $_FILES['stock_invoice_file']['name'][$i];
-            
+                $filename2 = "invoice-".$_FILES['stock_invoice_file']['name'][$i];
+                
             // Upload files and store in database
-            if(move_uploaded_file($_FILES["stock_invoice_file"]["tmp_name"][$i],'cardocuments/'.$filename2)){
+            if(move_uploaded_file($_FILES["stock_invoice_file"]["tmp_name"][$i],'DATA/'.$filename2)){
                     // Image db insert sql
                     $insert12 = "INSERT INTO cardocuments(stockid, imagetype, imagename) VALUES ('$stock_rec_no','INVOICE','$filename2')";
                     
@@ -223,7 +308,7 @@
             // Upload files and store in database
             if(move_uploaded_file($_FILES["stock_invoice_file"]["tmp_name"][$i],'cardocuments/'.$filename3)){
                     // Image db insert sql
-                    $insert123 = "INSERT INTO cardocuments(stockid, imagetype, imagename) VALUES ('$stock_rec_no','TT','$filename3')";
+                    $insert123 = "INSERT INTO cardocuments(stockid, imagetype, imagename) VALUES ('$stock_rec_no','YARD-PICTURES','$filename3')";
                     
                     $iquery23 = mysqli_query($connection,$insert123);
             
@@ -236,6 +321,26 @@
                 }
             
                 }
+                $totalfiles4 = count($_FILES['stock_tt_copy_file']['name']);
+                for($i=0;$i<$totalfiles4;$i++){
+                    $filename4 = $_FILES['stock_tt_copy_file']['name'][$i];
+                
+                // Upload files and store in database
+                if(move_uploaded_file($_FILES["stock_tt_copy_file"]["tmp_name"][$i],'DATA/'.$filename4)){
+                        // Image db insert sql
+                        $insert1234 = "INSERT INTO cardocuments(stockid, imagetype, imagename) VALUES ('$stock_rec_no','TT','$filename4')";
+                        
+                        $iquery234 = mysqli_query($connection,$insert1234);
+                
+                }
+                        
+                
+                        
+                    else{
+                        echo 'Error in uploading file - '.$_FILES['stock_yard_pictures']['name'][$i].'<br/>';
+                    }
+                
+                    }
                 $insert = "insert into ats_car_stock(ats_car_stock_rec_no,ats_car_stock_chassic_no,ats_car_stock_make,ats_car_stock_model
                 ,ats_car_stock_pkg,ats_car_stock_man_year,ats_car_stock_reg_year,ats_car_stock_color,ats_car_stock_shift,
                 ats_car_stock_fuel,ats_car_stock_door,ats_car_stock_grade,ats_car_stock_engine_size,ats_car_stock_kobutsu
@@ -260,18 +365,18 @@
                 ats_car_stock_bl_file,ats_car_stock_release_ok_date,ats_car_stock_bal_tt_copy_file,ats_car_stock_dhl_date
                 ,ats_car_stock_tracking_number,ats_car_stock_dhl_link,ats_car_stock_inspection_date,ats_car_stock_inspection_cer_file,
                 ats_car_stock_createdBy,ats_car_stock_createdAt,ats_car_stock_updatedBy,ats_car_stock_updatedAt,ats_car_stock_status,
-                ats_car_stock_shape,stock_port, shipmenttype, conversionrate,extra_transportatiom,stock_type,stock_total_expences,stock_country_slab,project,recordno1) 
+                ats_car_stock_shape,stock_port, shipmenttype, conversionrate,extra_transportatiom,stock_type,stock_total_expences,stock_country_slab,project,recordno1,port_of_loding,port_of_discharge,ship_name) 
                     values('$stock_rec_no','$stock_chassis_id','$stock_make','$stock_model','$stock_package',
                     '$stock_man_year','$stock_reg_year','$stock_color','$stock_shift','$stock_fuel','$stock_door','$stock_grade','$stock_engine_size','$stock_kobutsu','$stock_engine_no','$stock_seats','$stock_mileage_1','$stock_mileage_2','$stock_length','$stock_width','$stock_height','$stock_cubic_meter','$stock_weight','$stock_total_weight','$stock_max_loading','$stock_auction','$stock_lot_no','$stock_buying_price','$stock_buying_date','$stock_country_location','$stock_city_location','$stock_option_ps','$stock_option_nv',
                     '$stock_option_ac','$stock_option_wab','$stock_option_rs','$stock_option_tv','$stock_option_rr','$stock_option_abs','$stock_option_ls','$stock_option_pw',
                     '$stock_option_sr','$stock_option_fog','$stock_option_ab','$stock_option_gg','$stock_option_bt','$stock_option_aw','$stock_other_options','$stock_auction_charges','$stock_rikuso_charges','$stock_fob_charges','$stock_storage_charges','$stock_dhl_charges','$stock_radiation_charges','$stock_thc_charges','$stock_vainning_charges','$stock_inspection_charges','$stock_freight_charges','$stock_other_charges','$stock_profit','$stock_discount_print','$stock_total_profit_print','$stock_your_profit_print',
-                    '$stock_ats_profit_print','$stock_fob_price_print_yen','$stock_fob_price_print_dollar','$stock_cnf_price_print_yen','$stock_cnf_price_print_dollar','$stock_auction_sheet_file','$stock_auction_pictures','$stock_masso_date','$stock_export_cerificate_jp_file','$stock_export_cerificate_en_file','$stock_inyard_date','$stock_yard_pictures','$stock_reserve_date','$stock_invoice_file','$stock_sure_ok_date','$stock_tt_copy_file','$stock_ship_date','$stock_vessel_name','$stock_voyage','$stock_ship_ok_date'
-                    ,'$stock_shipping_invoice_file','$stock_shipping_order_file','$stock_bl_date','$stock_bl_no','$stock_bill_of_lading_file','$stock_release_ok_date','$stock_tt_copy_file','$stock_dhl_date','$stock_tracking_number','$stock_dhl_link','$stock_inspection_date','$stock_inspection_certificate_file','$stock_createdBy','$stock_createdAt','$stock_updatedBy','$stock_updatedAt','$stock_status','$stock_shape','$stock_port','$shipmenttype','$conversionrate','$stock_extra_transportation','$stock_type','$stock_total_expences','$stock_country_slab','$project','$recordno1')";
+                    '$stock_ats_profit_print','$stock_fob_price_print_yen','$stock_fob_price_print_dollar','$stock_cnf_price_print_yen','$stock_cnf_price_print_dollar','$filename1f','$stock_auction_pictures','$stock_masso_date','$filename1fecjp','$filename1fecen','$stock_inyard_date','$stock_yard_pictures','$stock_reserve_date','$stock_invoice_file','$stock_sure_ok_date','$stock_tt_copy_file','$stock_ship_date','$stock_vessel_name','$stock_voyage','$stock_ship_ok_date'
+                    ,'$stock_shipping_invoice_file','$filename7f','$stock_bl_date','$stock_bl_no','$stock_bill_of_lading_file','$stock_release_ok_date','$stock_tt_copy_file','$stock_dhl_date','$stock_tracking_number','$stock_dhl_link','$stock_inspection_date','$stock_inspection_certificate_file','$stock_createdBy','$stock_createdAt','$stock_updatedBy','$stock_updatedAt','$stock_status','$stock_shape','$stock_port','$shipmenttype','$conversionrate','$stock_extra_transportation','$stock_type','$stock_total_expences','$stock_country_slab','$project','$recordno1','$stock_port_of_loading','$stock_port_of_discharge','$stock_ship_name')";
                 $query = mysqli_query($connection,$insert) or die(mysqli_error($connection));
                 if ($query)
                     {
                         echo '<script type="text/javascript"> alert("Stock Added Successfully")</script>';
-                        echo '<script language="javascript">window.location.href ="car-view.php"</script>';
+                        echo '<script language="javascript">window.location.href ="index.php"</script>';
 
                     }
 
@@ -946,7 +1051,7 @@
                                                                 <div class="col-sm-1"></div>
                                                                 <div class="col-sm-3">
                                                                     <div class="position-relative ">
-                                                                        <div style="position: relative; overflow: hidden;" class="file mb-2 mr-2 btn btn-gradient-primary btn-sm btn-block">Upload Auction Sheet<input style="position: absolute; width: 100%; border-radius: 20px;  opacity: 0; right: 0; top: 0;" type="file" name="stock_auction_pictures" id="stock_auction_sheet_file"/>
+                                                                        <div style="position: relative; overflow: hidden;" class="file mb-2 mr-2 btn btn-gradient-primary btn-sm btn-block">Upload Auction Sheet<input style="position: absolute; width: 100%; border-radius: 20px;  opacity: 0; right: 0; top: 0;" type="file" name="stock_auction_sheet_file" id="stock_auction_sheet_file"/>
                                                                         </div> 
                                                                     </div>
                                                                 </div> 
@@ -1026,7 +1131,7 @@
                                                                 <div class="col-sm-1"></div>
                                                                 <div class="col-sm-6">
                                                                     <div class="position-relative ">
-                                                                        <div style="position: relative; overflow: hidden;" class="file mb-2 mr-2 btn btn-gradient-primary btn-sm btn-block">Upload Invoice<input style="position: absolute; width: 100%; border-radius: 20px;  opacity: 0; right: 0; top: 0;" type="file" name="stock_invoice_file[]" multiple="multiple" id="stock_invoice_file"/>
+                                                                        <div style="position: relative; overflow: hidden;" class="file mb-2 mr-2 btn btn-gradient-primary btn-sm btn-block">Upload Invoice<input style="position: absolute; width: 100%; border-radius: 20px;  opacity: 0; right: 0; top: 0;" type="file" name="stock_invoice_file[]"   ="multiple" id="stock_invoice_file"/>
                                                                         </div> 
                                                                     </div>
                                                                 </div>
@@ -1045,7 +1150,7 @@
                                                                 <div class="col-sm-1"></div>
                                                                 <div class="col-sm-6">
                                                                     <div class="position-relative ">
-                                                                        <div style="position: relative; overflow: hidden;" class="file mb-2 mr-2 btn btn-gradient-primary btn-sm btn-block">Upload TT Copy<input style="position: absolute; width: 100%; border-radius: 20px;  opacity: 0; right: 0; top: 0;" type="file" name="stock_tt_copy_file" id="stock_tt_copy_file"/>
+                                                                        <div style="position: relative; overflow: hidden;" class="file mb-2 mr-2 btn btn-gradient-primary btn-sm btn-block">Upload TT Copy<input style="position: absolute; width: 100%; border-radius: 20px;  opacity: 0; right: 0; top: 0;" type="file" name="stock_tt_copy_file[]" id="stock_tt_copy_file" multiple="multiple"/>
                                                                         </div> 
                                                                     </div>
                                                                 </div> 
@@ -1101,6 +1206,29 @@
                                                             <div class="form-row"> 
                                                                 <div class="col-sm-2">
                                                                     <div class="position-relative form-group">
+                                                                        <label class="form-control-label">Port of Loading</label>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-sm-2">
+                                                                    <div class="position-relative">
+                                                                        <input type="text" id="stock_port_of_loading" name="stock_port_of_loading" placeholder="Port of Loading" class="form-control-sm form-control" >
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-sm-1"></div>
+                                                                <div class="col-sm-3">
+                                                                    <div class="position-relative">
+                                                                        <input type="text" id="stock_ship_name" name="stock_ship_name" placeholder="Ship Name" class="form-control-sm form-control">
+                                                                    </div>
+                                                                </div> 
+                                                                <div class="col-sm-3">
+                                                                    <div class="position-relative">
+                                                                        <input type="text" id="stock_port_of_discharge" name="stock_port_of_discharge" placeholder="Port of Dsicharge" class="form-control-sm form-control">
+                                                                    </div>
+                                                                </div>     
+                                                            </div>
+                                                            <div class="form-row"> 
+                                                                <div class="col-sm-2">
+                                                                    <div class="position-relative form-group">
                                                                         <label class="form-control-label">BL Date</label>
                                                                     </div>
                                                                 </div>
@@ -1118,7 +1246,7 @@
                                                                 </div>
                                                                 <div class="col-sm-3">
                                                                     <div class="position-relative">
-                                                                        <div style="position: relative; overflow: hidden;" class="file mb-2 mr-2 btn btn-gradient-primary btn-sm btn-block">Upload Bill of Lading<input style="position: absolute; width: 100%; border-radius: 20px;  opacity: 0; right: 0; top: 0;" type="file" name="stock_bill_of_lading_file" id="stock_bill_of_lading_file"/>
+                                                                        <div style="position: relative; overflow: hidden;" class="file mb-2 mr-2 btn btn-gradient-primary btn-sm btn-block">Upload Bill of Lading<input style="position: absolute; width: 100%; border-radius: 20px;  opacity: 0; right: 0; top: 0;" type="file" name="stock_bill_of_lading_file[]" multiple="multiple" id="stock_bill_of_lading_file"/>
                                                                         </div> 
                                                                     </div>
                                                                 </div> 
@@ -1137,7 +1265,7 @@
                                                                 <div class="col-sm-1"></div>
                                                                 <div class="col-sm-6">
                                                                     <div class="position-relative ">
-                                                                        <div style="position: relative; overflow: hidden;" class="file mb-2 mr-2 btn btn-gradient-primary btn-sm btn-block">Upload Bal. TT Copy<input style="position: absolute; width: 100%; border-radius: 20px;  opacity: 0; right: 0; top: 0;" type="file" name="stock_balance_tt_copy_file" id="stock_balance_tt_copy_file"/>
+                                                                        <div style="position: relative; overflow: hidden;" class="file mb-2 mr-2 btn btn-gradient-primary btn-sm btn-block">Upload Bal. TT Copy<input style="position: absolute; width: 100%; border-radius: 20px;  opacity: 0; right: 0; top: 0;" type="file" name="stock_balance_tt_copy_file[]" id="stock_balance_tt_copy_file" multiple="multiple"/>
                                                                         </div> 
                                                                     </div>
                                                                 </div> 
@@ -1179,7 +1307,7 @@
                                                                 <div class="col-sm-1"></div>
                                                                 <div class="col-sm-6">
                                                                     <div class="position-relative">
-                                                                        <div style="position: relative; overflow: hidden;" class="file mb-2 mr-2 btn btn-gradient-primary btn-sm btn-block">Upload Inspection Certificate<input style="position: absolute; border-radius: 20px; width: 100%; opacity: 0; right: 0; top: 0;" type="file" multiple="multiple" name="stock_inspection_certificate_file" id="stock_inspection_certificate_file"/>
+                                                                        <div style="position: relative; overflow: hidden;" class="file mb-2 mr-2 btn btn-gradient-primary btn-sm btn-block">Upload Inspection Certificate<input style="position: absolute; border-radius: 20px; width: 100%; opacity: 0; right: 0; top: 0;" type="file"  name="stock_inspection_certificate_file" id="stock_inspection_certificate_file"/>
                                                                         </div>
                                                                     </div>
                                                                 </div> 
