@@ -213,12 +213,12 @@ if (isset($_POST["btn_cus"])) {
                                                             while($row = mysqli_fetch_array($query_sell)){
                                                                 if($rowcupdate[4]==$row['Sell_person']){
                                                         ?>
-                                                        <option value = "<?php echo($row['Sell_person'])?>" selected><?php echo($row['Sell_person']) ?></option>
+                                                        <option value = "<?php echo($row['id'])?>" selected><?php echo($row['Sell_person']) ?></option>
                                                         <?php
                                                                 }
                                                                 else{
                                                         ?>
-                                                        <option value = "<?php echo($row['Sell_person'])?>"> <?php echo($row['Sell_person']) ?></option>
+                                                        <option value = "<?php echo($row['id'])?>"> <?php echo($row['Sell_person']) ?></option>
                                                         <?php
                                                                 }
                                                             }                                             

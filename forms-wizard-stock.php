@@ -391,8 +391,8 @@
                                     <div class="col-md-12">
                                         <div class="main-card mb-3 card">
                                             <div class="card-body">
-                                                <form action="" name="test" method="post" enctype="multipart/form-data"> 
-                                                <div id="smartwizard">
+                                                <form action="" name="test" method="post" enctype="multipart/form-data" id="formstock"> 
+                                                <div id="smartwizard2">
                                                     <ul class="forms-wizard">
                                                         <li>
                                                             <a href="#step-1">
@@ -1338,8 +1338,8 @@
                                                 <div class="clearfix">
                                                     <input type="reset" id="reset-btn" class="btn-shadow float-left btn btn-link" value="Reset">
                                                     <input type="submit"  name="stock_btn" class="btn-shadow btn-wide float-right btn-pill btn-hover-shine btn btn-primary" value="add">
-                                                    <a id="next-btn" name="next_btn" class="btn-shadow btn-wide float-right btn-pill btn-hover-shine btn btn-primary text-white" >Next</a>
-                                                    <a id="prev-btn" class="btn-shadow float-right btn-wide btn-pill mr-3 btn btn-outline-secondary">Previous</a>
+                                                    <a id="next-btn2" name="next_btn" class="btn-shadow btn-wide float-right btn-pill btn-hover-shine btn btn-primary text-white" >Next</a>
+                                                    <a id="prev-btn2" class="btn-shadow float-right btn-wide btn-pill mr-3 btn btn-outline-secondary">Previous</a>
                                                 </div>
                                                 </form>
                                             </div>
@@ -1354,6 +1354,9 @@
                 </div>
             
                 <script>
+              
+
+
     function getState(val) {
     // alert(val);
         $.ajax({
@@ -2754,7 +2757,22 @@ document.getElementById("myBar2").style.color = "var(--green)";
 }
 
 </script>
+<script>
+$(document).ready(function(){
+    $(window).scrollTop(0,0);
+});
+</script>
+<script>
+$('#formstock').on('keyup keypress', function(e) {
+  var keyCode = e.keyCode || e.which;
+  if (keyCode === 13) { 
+    e.preventDefault();
+    return false;
+  }
+});
+</script>
     <?php
     include("bottom.php");
     ?>
             
+    

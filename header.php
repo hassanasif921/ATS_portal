@@ -1,5 +1,5 @@
 <?php 
-session_start();
+
 include("connection_db.php");
 if(isset($_SESSION['user_id']))
 {
@@ -18,6 +18,12 @@ if(isset($_SESSION['vendor_id']))
     $vendor_id=$_SESSION['vendor_id'];
 
     $queryvendor=mysqli_fetch_row(mysqli_query($connection,"SELECT * FROM ats_vendor where ats_vendor_id ='$vendor_id'"));
+}
+if(isset($_SESSION['customer']))
+{
+    $customer_id=$_SESSION['customer'];
+
+    $querycustomer=mysqli_fetch_row(mysqli_query($connection,"SELECT * FROM ats_customer where ats_customer_id ='$customer_id'"));
 }
 ?>
 <div class="app-header header-shadow">
@@ -54,7 +60,9 @@ if(isset($_SESSION['vendor_id']))
             <div class="app-header__content">
                 <div class="app-header-left">
                     <ul class="header-megamenu nav">
-                        
+                    <?php
+        if(!isset($_SESSION["customer"]))
+        {?>
                         <li class="dropdown nav-item">
                             <a aria-haspopup="true" data-toggle="dropdown" class="nav-link" aria-expanded="false">
                                 <i class="nav-link-icon lnr lnr-cog"></i> Projects&nbsp;
@@ -94,12 +102,15 @@ if(isset($_SESSION['vendor_id']))
                                 </button>
                             </div>
                         </li>
+                        <?php }?>
                     </ul>
                           
                 </div>
                 <div class="app-header-right">
                     <div class="header-dots">
-                     
+                    <?php
+        if(!isset($_SESSION["customer"]))
+        {?>
                         <div class="search-wrapper">
                             <div class="input-holder">
                                 <input type="text" class="search-input" placeholder="Type to search">
@@ -107,6 +118,7 @@ if(isset($_SESSION['vendor_id']))
                             </div>
                             <button class="close"></button>
                         </div>
+                     
                         <div class="dropdown">
                             <button type="button" aria-haspopup="true" aria-expanded="false" data-toggle="dropdown"
                                 class="p-0 mr-2 btn btn-link">
@@ -285,6 +297,7 @@ if(isset($_SESSION['vendor_id']))
                                             </div>
                                         </div>
                                     </div>
+                                   
                                     <div class="tab-pane" id="tab-events-header" role="tabpanel">
                                         <div class="scroll-area-sm">
                                             <div class="scrollbar-container">
@@ -399,6 +412,7 @@ if(isset($_SESSION['vendor_id']))
                                             </div>
                                         </div>
                                     </div>
+                                   
                                     <div class="tab-pane" id="tab-errors-header" role="tabpanel">
                                         <div class="scroll-area-sm">
                                             <div class="scrollbar-container">
@@ -426,6 +440,10 @@ if(isset($_SESSION['vendor_id']))
                                 </ul>
                             </div>
                         </div>
+                        <?php }?>
+                        <?php
+        if(!isset($_SESSION["customer"]))
+        {?>
                         <div class="dropdown">
                             <button type="button" data-toggle="dropdown" class="p-0 mr-2 btn btn-link">
                                 <span class="icon-wrapper icon-wrapper-alt rounded-circle">
@@ -465,7 +483,7 @@ if(isset($_SESSION['vendor_id']))
                                 </button>
                             </div>
                         </div>
-                        
+                        <?php }?>
                     </div>
                     
                     <div class="header-btn-lg pr-0">
@@ -474,14 +492,16 @@ if(isset($_SESSION['vendor_id']))
                                 <div class="widget-content-left">
                                     <div class="btn-group">
                                         <a data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="p-0 btn">
+                                            
                                        <?php
-                                        if(isset($_SESSION['user_id']))
-                                        {
-                                            ?>
-                                            <img width="42" class="rounded-circle" src="data:image/jpeg;charset=utf8;base64,<?php echo base64_encode($queryadmin[4]); ?>" alt="">
+                                          if(isset($_SESSION["customer"]))
+                                          {
+                                              ?>
+                                              <img width="42" class="rounded-circle" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAARAAAAC5CAMAAADXsJC1AAAAhFBMVEUAAAD////u7u7t7e36+vry8vL19fX39/f5+fnf39/Z2dnU1NTj4+PFxcVUVFQZGRmsrKzDw8NbW1uQkJCdnZ3Ozs46Ojqfn5+ysrItLS1oaGiKioq9vb0zMzNhYWGWlpZ3d3eAgIBHR0cLCwskJCRLS0t6enooKCgdHR1AQEBvb284ODiU+F8EAAAKeklEQVR4nO1dC3eiPBBNAnmoWF+10mq19rH71f3//++DBGyUII8MEKh395x6D62Sa5jMJJkJwhLcIzEUYRdEvqaK0NqEKSJfexeEK+Jlicglfpb4BoKzROSSRAJ0F+QuyF2QuyAQgkikgsQgBkIloZUIkYQZiPpMnktELvGzxDcQnCUilyQSIH7HBZAr34wrPRUZHuTWn10a4Uw6tmXdC4JFMFlPF5PJOIjuglH6awWJWzqeH5+Qhqe3zZpx+hsFoTwI98iI5YYZBNEJ9cprcLYhWQ3cEYQwGj6Y1Ug0WWQEaauHqB/tWnff38xuyRHj45DamHZHuw48VeoditRQeEya3eij27nrTnn4UU4PhGaL4QvCgpu24xpLOnBBRFhFjhiLYQd3x6p6ILRlpFWjyiS4kKhP1Gt+k3Ba6XFJ8cD9wrc+E+vmtBjc0eC1jh6R+yrAe6oLwR0NPuvpgdBfPkDXnXh/6+qB0LM/OEF8+l1fD4TeBycIfrHRA6E3ddvG4C4T6XkmYtAgtSFZQQjXfo+ILPENxC8gQidzOz0Q2nCt2ZW6CysiFxK044fQia0eCAXq22zcD0mZ1iHhPVVmYVBTvCoNLB9dN1x3vrLXIwl+ByEIHUHogRAdiiDCcoRJcWpVkOaMKoRFVQjaCe5o9J/7EtFLRhMiqHZFqCtCv5ISeel8Jbp0dQWfoAQ5Yabuk1H5QSmJb63Elfgf/7ny02r9SguOGYHSA6GR7ot51QiRhBmI52kStCBIyRnUMlgl99lv1712kJvF54Wj2U9B4ExqjHX/BWFbSEG2SeMywZ3ZhhCNGDQwBndUIn02JZIQroj4BUSod645TWbGk7pPpj7HQNRrVo5wA2ncD6GQekTjDOl7cLeAFSSktY17okEeact1f4QV5MD6LkjOloe6WPK+C2I1lZrFd2uCNGRU/dIr2+Uw80jDRjUZc9IwJ0NEAREG4p8JC2D1QIgmIRzV47kyhGaJqdVNO2ZAc0OaIKoLEsvgjmjk0jFrVhCoybIfyIe3v647HUML4vVckHsPuRSkhzak2VGGwo8y+Dx80BoDS/Eoo3TpjR/y0bgfkjLZiVINdFL7cVXkqbiRVfDU+1hmCStI/2MZwCnmGKve95AdrCDtzYc0ZFSxBytI8zNmtsNuOo2aM+xS/gypx2s86PrnadQsSQbXckQ19II0v3IHO+t+TLsgqe6YyVvrOriLLMkaUpBp0tLahq1z1z2yzYWpMeUxs9qW4YYgHgbZPqSwHcTaLuA4M25m9f9CkHKjjCmEK0l8uIn3Pa42a2gg+Q1tKbiLdxCBmdXxQLZlCqB4Zo+tHt1EgzzS5i5EoHlEbyiCEF4jkSqL1bUG/RWEUIBpollGg34Gd2qv+9RekLHSoHGjKoecczaEJCJLfAPxC4jQifW0yEqN4sm3RDRC6U1CWDnSdr5MrfzDH+yTzJO0C+rPZL5jRjSiGtp9cHcmVtMAr5hD2DI3XHcJQQMLw/pBB5diJjybRTxvgFmZHqGjmhMB/8WWQ/oCnm5DGtrabZvMnU8y6dfCq7Wd6IniEsnc+aRiZrfSpa3c/xqZMycq326gBVXEpqoe8+QRH2i5DMInldY2vwN4W+aWIJGLWWHn6vyn2YMVJHoZ/Cknx5FpzR5oQRWi3oyUWKz5M8JJs71WjaqUheh+iCnVPSFpCFeFJJ99QSgPHv/dUuNpLtLOaeqp1qnuJEu6rnTH2OQxxy35Xqm09l9U6S5tHJ+urqbkl9tdwJlBgwG67jkEk8l0F853u/Uk6hicUXOn+D2CcH2yx4F6qsq23ivu2gR3vBLRwzHu4woluLj6A19/AwFDXAnueLicR7Fahard4T4cRWZlmMHdVMa6f+eJn1JU1z26gVDOO35tAk4H5rpT7K3O00OzAy0WhPLR4b/zaPyyw0MShPLF1fLuy/SmIJR7uysH5Xk+GEEo35lc0rdFINjPeoguCA2NE0kHMYjgzt/lRi3Px3CS/Fa8WhRZeoxHu21+LvjBp40b1RzrbiaVb4TwyVdu8xRmD2/H1WYTzjer47JwGnpe+4txojgk88Cqy6T4nGAL495tcEe4dX07E06ip7EMHlmu5+ZiinspCPC2fx0nQhsTpDGjWnLitB7+TlhTRrWZY2v8ADiTKoMQN3PnzfghDLhqiAmHHgV3opHR5RpJzdk+uO7AaWV5WMrDeXogCOBu/9v4ihVpXZAKM/6KtKYHQu8NCgJmVFt6XhQeGHE8uOPARZiKcHI8uGOVTwexxcpp1x2DJtiVw853WBDWvh4ITai7gjQV3t7EJ2wPgTSqLRvUFCcOaVRLLJ+VXBcToJVTq2CHK64g3iBwfgihoEntVfDhuxjccdCc9mr442AsA1+gqwrG7gnCgUvJVMN728Fd4UE3bUwJ3cLC5AvYCEIynaLa7j8BXCa0Kp4L90km95lLEgmA/BCILEM7hGm3dSO4Yx13EIT+Gbptd6579x0krYHviCAcuPJyHewdEgS+4mEdlKqj2U5wR1udNsyDPMOqreDudq4b7iyK0fGJWY1EwNzgLu415+AuJsRAcnIenXhi5EyRI667E0+MOqrYDUGaXtguiVfhiCCdzKSaEFBgQXQbUjK4i21IgztjqiEEFETP0cg/zsZwtg2tdTJ5MzjywjomCcFZkkgA4IdwgJNBYfDqRHBHgCum2sAJ1x22HKYdxk4I0sp2oXLYOSFIh7Pt1zi4ENwxoMNjIfAGYFRVjUieVLbMIzdqUUIfumSDb7/U+Qw3GkpzHbPywR3wYQc2mHEXXPeuVdDBHBBEdC2CDpMGbQvikF+G0AhWkHLB3aUNYU4JMrYX5MLE4ixhBYQ7Ml2mMDaMJRVHGVs/BHe2TcYEr/vgDne6DeIapHvXHfp4EDu4EMsIwKMObPHqgiAuxTJbF4I7WrmaX3NYtxDcGY6UuzxfziEj8iEKR9r6wR0pv3LXyf5lEx6hlyFqrsu44ol8OLOU2ekGxB8snBGEdi2FxJYTaEFq2hCMO96TKbHXjgQEC+7KjTLZ+UQH1v+XIjtrWGsK0doPUX/fYiqmEW8i7bZdB3dph+x2dWbO3cuomnQ32fw+Zi6mmPlv3cjxEXUPR3PuJu8d6LGhsEmIMEY1vWKsWNYgXkPwRGb1I51GzZJKu2eiT5iA16XKx2nKeHyQnvxikiE0S0QRuWg1xJaqK8LCotJlIHjZqeq8PSiXgUUwb3bz+/d2Hbc8z5Y5JwgllJP140sjA/HXMVRFvXslSPw6LuU4Pbx8gknxsd/u1pSxdANd44LU3tp9k3C63h3e9jbb4WcPb6udWpQjWrObESSNbOTOdxNhGmG1COcivk8xWi/mh+3x5eu5xLM0+/dw+rPd7Nbj6IajoMzHKjaL3/gctVUn3EAuWt1i1W5yHuEwF4IGIy8Yjcbj9TTGYiKxXq8n41FqIxjTBnn5Zi1U7VZ9sKPK//LXdGdAeQa/vNC94UG+C3IXxF1B2jOqOcS1oxCSGyF5XwbsQTfZr+l8kGuW5B/8k57qKpGf3Z4mQGhtK051T78Zrd/WKYYgW2pziqmBdPHodnFol/nZvQviqCD/A6AAf1tvnB5hAAAAAElFTkSuQmCC" alt="">
                                             <i class="fa fa-angle-down ml-2 opacity-8"></i>
-                                        <?php 
-                                        }
+                                            <?php
+                                            }
+                                       
                                         elseif (isset($_SESSION['agents_id'])) {
                                             ?>
                                             <img width="42" class="rounded-circle" src="data:image/jpeg;charset=utf8;base64,<?php echo base64_encode($queryagents[18]); ?>" alt="">
@@ -502,7 +522,26 @@ if(isset($_SESSION['vendor_id']))
                                                     <div class="menu-header-image opacity-2" style="background-image: url('assets/images/dropdown-header/city3.jpg');"></div>
                                                     <div class="menu-header-content text-left">
                                                         <div class="widget-content p-0">
+                                                        <?php
+                                                                    if(isset($_SESSION['customer']))
+                                                                    {
+                                                                ?>
+                                                            <div class="widget-content-wrapper">
+
+                                                                <div class="widget-content-left mr-3">
+                                                                    <img width="42" class="rounded-circle" src="data:image/png;base64,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" alt="">
+                                                                </div>
+
+                                                                <div class="widget-content-left">
+                                                                    <div class="widget-heading"><?php echo strtoupper($querycustomer[3]);?></div>
+                                                                    <div class="widget-subheading opacity-8"></div>
+                                                                </div>
+                                                                <div class="widget-content-right mr-2">
+                                                                    <a class="btn-pill btn-shadow btn-shine btn btn-focus" href="logout.php">Logout</a>
+                                                                </div>
+                                                            </div>
                                                                  <?php
+                                                                    }
                                                                     if(isset($_SESSION['user_id']))
                                                                     {
                                                                 ?>
@@ -568,6 +607,10 @@ if(isset($_SESSION['vendor_id']))
                                                     </div>
                                                 </div>
                                             </div>
+                                            <?php
+                                                if(!isset($_SESSION['customer']))
+                                                {
+                                                                ?>
                                             <div class="scroll-area-xs" style="height: 150px;">
                                                 <div class="scrollbar-container ps">
                                                     <ul class="nav flex-column">
@@ -623,10 +666,21 @@ if(isset($_SESSION['vendor_id']))
                                                     <button class="btn-wide btn btn-primary btn-sm"> Open Messages </button>
                                                 </li>
                                             </ul>
+                                            <?php }?>
                                         </div>
                                     </div>
                                 </div>
                                 <?php
+                                if(isset($_SESSION['customer']))
+                                {
+                                ?>
+                                <div class="widget-content-left  ml-3 header-user-info">
+                                    <div class="widget-heading "style="color: black;"><?php echo strtoupper($querycustomer[3]);?> </div>
+                                    
+                                </div>
+                                
+                                <?php
+                                }
                                 if(isset($_SESSION['user_id']))
                                 {
                                 ?>

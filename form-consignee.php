@@ -50,12 +50,12 @@ if (isset($_POST["btn_consignee_add"])) {
                                             <label class="">Agent Name</label>
                                             <select name="consignee_agent_name" id="consignee_agent_name" class="form-control">
                                             <?php
-                                                $query_sell = mysqli_query($connection,"select * from ats_sell_person");
+                                                $query_sell = mysqli_query($connection,"select * from ats_employee");
                                                 $count_sell = mysqli_num_rows($query_sell);
                                                 while($row = mysqli_fetch_array($query_sell)){
-                                                    if($rowcupdate[4]==$row['Sell_person']){
+                                                    if($rowcupdate[4]==$row['ats_employee_id']){
                                             ?>
-                                                <option value = "<?php echo($row['Sell_person'])?>" selected><?php echo($row['Sell_person']) ?></option>
+                                                <option value = "<?php echo($row['ats_employee_id'])?>" selected><?php echo($row['ats_employee_firstName']) ?></option>
                                             <?php
                                                     }
                                                 }                                             
@@ -123,14 +123,17 @@ if (isset($_POST["btn_consignee_add"])) {
                                         <div class="position-relative form-group">    
                                             <label class="">Consignee Country</label>
                                             <select name="cus_country" id="cus_country" class="form-control" onChange="getport(this.value);" required>
-                                                <option disabled selected>Please Select</option>
-                                                <?php 
-                                                    while($rowcountry1=mysqli_fetch_array($resultports1)){
-                                                ?>
-                                                <option value="<?php echo $rowcountry1[0]?>"><?php echo $rowcountry1[1]?></option>
-                                                <?php
-                                                    }
-                                                ?>
+                                            <?php 
+                                                $queryfetchdetails1=mysqli_query($connection,"select DISTINCT countrycode,countryname from kobutsu_slab");
+                                            ?>
+                                            <option disabled selected>Please Select</option>
+                                            <?php 
+                                                while($rowfetchdetails1=mysqli_fetch_array($queryfetchdetails1)){
+                                            ?>
+                                            <option class="form-control" value="<?php echo $rowfetchdetails1[0]?>"><?php echo $rowfetchdetails1[0]."-".$rowfetchdetails1[1]?></option>
+                                            <?php
+                                                }
+                                            ?>
                                             </select> 
                                         </div>
                                     </div>

@@ -1,7 +1,7 @@
 <?php
 include("top.php");
 include("connection_db.php");
-$resultsell=mysqli_query($connection,"select * from ats_sell_person");
+$resultsell=mysqli_query($connection,"select * from ats_employee");
 $resultvendor=mysqli_query($connection,"select * from ats_vendor");
 
 if (isset($_POST["btn_remittance_add"])){
@@ -90,7 +90,7 @@ if (isset($_POST["btn_remittance_add"])){
                                                     while($rowsell=mysqli_fetch_row($resultsell))
                                                     {
                                                     ?>
-                                                    <option value="<?php echo $rowsell[1]?>" ><?php echo $rowsell[1]?></option>
+                                                    <option value="<?php echo $rowsell[0]?>" ><?php echo $rowsell[1]?></option>
                                                     <?php   
                                                     }
                                                     ?>

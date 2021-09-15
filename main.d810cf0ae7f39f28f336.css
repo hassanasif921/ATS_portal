@@ -4,36 +4,13 @@
 .fancytree-helper-indeterminate-cb {
   color: #777;
 }
-
-#myProgress {
-  width: 100%;
-  background-color: #000;
-}
-
-#myBar {
-  width: 100%;
-  height: 30px;
-  background-image: linear-gradient(140deg, #2248a8 -30%, #3f6ad8 90%);
-        background-color: #2248a8;
-        border-color: #2248a8;
-        color: #fff;
-}
-#myBar2 {
-  width: 100%;
-  height: 30px;
-  background-image: linear-gradient(140deg, #2248a8 -30%, #3f6ad8 90%);
-        background-color: #2248a8;
-        border-color: #2248a8;
-        color: #fff;
-}
 .fancytree-helper-disabled {
   color: #c0c0c0;
 }
 table {
   border-collapse: collapse;
   border-spacing: 0;
-  width: 100%;
-  
+  /* ////width: 100%; */
   border: 1px solid #ddd;
 }
 th, td {
@@ -47,6 +24,57 @@ th, td {
   padding-top: 20%;
 }
 tr:nth-child(even){background-color: #f2f2f2}
+/* flip card */
+
+.label-flip {
+  -webkit-perspective: 1000px;
+  perspective: 1000px;
+  -webkit-transform-style: preserve-3d;
+  transform-style: preserve-3d;
+  display: block;
+  width: 300px;
+  height: 100px;
+  position: absolute;
+  left: 50%;
+  top: 105%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  cursor: pointer;
+}
+
+.card-flip {
+  position: relative;
+  height: 100%;
+  width: 100%;
+  -webkit-transform-style: preserve-3d;
+  transform-style: preserve-3d;
+  -webkit-transition: all 600ms;
+  transition: all 600ms;
+  z-index: 20;
+}
+
+.card-flip div {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  text-align: center;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  border-radius: 2px;
+}
+.input-none {
+  display: none;
+}
+.card-flip .back {
+  -webkit-transform: rotateX(180deg);
+  transform: rotateX(180deg);
+}
+.label-flip:hover :checked + .card-flip {
+  transform: rotateX(160deg);
+  -webkit-transform: rotateX(160deg);
+  box-shadow: 0 20px 20px rgba(255,255,255,.2);
+}
+/* end */
 /* Helper to allow spinning loader icon with glyph-, ligature-, and SVG-icons. */
 .fancytree-helper-spin {
   -webkit-animation: spin 1000ms infinite linear;

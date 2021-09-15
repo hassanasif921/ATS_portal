@@ -105,7 +105,7 @@ if (isset($_POST["btn_cus"])) {
                                                             $count_sell = mysqli_num_rows($query_sell);
                                                             while($row = mysqli_fetch_array($query_sell)){
                                                         ?>
-                                                        <option value = "<?php echo($row['Sell_person'])?>"><?php echo($row['Sell_person']) ?>
+                                                        <option value = "<?php echo($row['id'])?>"><?php echo($row['Sell_person']) ?>
                                                         </option>
                                                         <?php
                                                             }                                             

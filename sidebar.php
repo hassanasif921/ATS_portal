@@ -134,7 +134,7 @@
                                     </li>
                                 </ul>
                             </li>    
-                            <li class="app-sidebar__heading">Application</li>
+                            <!-- <li class="app-sidebar__heading">Application</li>
                             <li>
                                 <a href="#">
                                     <i class="metismenu-icon fa fa-comment"></i>
@@ -158,8 +158,9 @@
                                         </a>
                                     </li>
                                 </ul>
-                            </li>
+                            </li>--->
                             <li class="app-sidebar__heading">MENU</li>
+                            <?php if(!isset($_SESSION['agents_id'])){?>
                             <li class="">
                                 <a href="#">
                                     <i style="font-size: 20px;" class=" metismenu-icon pe-7s-browser fa fa-desktop"></i>ACCESS
@@ -208,6 +209,7 @@
                                     </li>
                                 </ul>
                             </li>
+                            
                             <li>
                                 <a href="#">
                                     <i style="font-size: 30px;" class="metismenu-icon pe-7s-browser fa fa-houzz"></i>INVENTORY
@@ -264,18 +266,21 @@
                                     </li>
                                 </ul>
                             </li>
+                            <?php }?>
                             <li>
                                 <a href="#">
                                     <i class="metismenu-icon pe-7s-plugin fa fa-credit-card"></i>REMITTANCE
                                     <i class="metismenu-state-icon pe-7s-angle-down caret-left lnr lnr-chevron-down"></i>
                                 </a>
                                 <ul>
+                                <?php if(!isset($_SESSION['agents_id'])){?>
                                     <li>
                                         <a href="#">
                                             <i class="metismenu-icon"></i>View All
                                             <i class="metismenu-state-icon pe-7s-angle-down caret-left lnr lnr-chevron-down"></i>
                                         </a>
                                         <ul>
+                                      
                                             <li>
                                                 <a href="remittance_search.php">
                                                     <i class="metismenu-icon"></i>All Payments
@@ -286,8 +291,10 @@
                                                     <i class="metismenu-icon"></i>All Refunds
                                                 </a>
                                             </li>
+                                        
                                         </ul>
                                     </li>
+                                    <?php }?>
                                     <li>
                                         <a href="form-remittance.php">
                                             <i class="metismenu-icon"></i>Add Payment
@@ -299,7 +306,7 @@
                                         </a>
                                     </li>
                                 </ul>
-                            </li>
+                            </li> 
                         </ul>
                     </div>
                 </div>

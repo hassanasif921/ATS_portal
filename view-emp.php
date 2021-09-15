@@ -1,7 +1,14 @@
 <?php
 include("top.php");
 include("connection_db.php");
-$id=$_GET['empid'];
+if(isset($_GET['empid'])){
+$id=$_GET['empid'];}
+elseif (isset($_GET['empprofile'])) {
+    $id = base64_decode(urldecode($_GET['empprofile']));
+
+  
+}
+
 $query=mysqli_query($connection,"select * from ats_employee where ats_employee_id='".$id."'");
 $row=mysqli_fetch_assoc($query);
 ?>

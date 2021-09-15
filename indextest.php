@@ -1,7 +1,17 @@
 <?php
 include("top.php");
 include("connection_db.php");
-$query="select * from ats_car_stocK WHERE ";
+if(isset($_SESSION['agents_id']))
+{
+    $NULL="";
+    $query="select * from ats_car_stock WHERE reserved_status <> 'RESERVED' AND ";
+
+}
+else
+{
+    $query="select * from ats_car_stocK WHERE ";
+
+}
 if(trim($_POST['get_stock_rec_no']) && trim($_POST['stock_agent_name']) && trim($_POST['get_stock_customer_name']) ) {
     // $query.="AND ats_car_stock_kobutsu LIKE '".$_POST['get_stock_kobutsu']."' ";
      $customer_sellc=mysqli_query($connection,"select recordno from ats_stock_reservation where agent_name='".$_POST['stock_agent_name']."' AND customer='".$_POST['get_stock_customer_name']."'");
@@ -20,7 +30,7 @@ if(trim($_POST['get_stock_rec_no']) && trim($_POST['stock_agent_name']) && trim(
  {
          
   
-     $customerid = implode(',', $projectsc);
+     $customerid = implode( "', '", $projectsc ) . "'";
       $query.="ats_car_stock_rec_no in ($customerid) ";
  }
      
@@ -42,7 +52,7 @@ if(trim($_POST['get_stock_rec_no']) && trim($_POST['stock_agent_name']) && trim(
     
          
   
-     $customerid = implode(',', $projectsc);
+     $customerid = implode( "', '", $projectsc ) . "'";
       $query.="ats_car_stock_rec_no in ($customerid) ";
  
      
@@ -67,7 +77,7 @@ if(trim($_POST['get_stock_rec_no']) && trim($_POST['stock_agent_name']) && trim(
      if (in_array($recno1, $projectsc))
      
  {
-     $customerid = implode(',', $projectsc);
+     $customerid = implode( "', '", $projectsc) . "'";
       $query.="ats_car_stock_rec_no in ($customerid) ";
  
  }
@@ -89,7 +99,7 @@ if(trim($_POST['get_stock_rec_no']) && trim($_POST['stock_agent_name']) && trim(
     
          
      
-     $customerid = implode(',', $projectsc);
+     $customerid = implode( "', '", $projectsc) . "'";
       $query.="AND ats_car_stock_chassic_no LIKE '%".$_POST['get_stock_chassis_id']."%' ";
  
  
@@ -111,7 +121,7 @@ elseif(trim($_POST['stock_agent_name']) && trim($_POST['get_stock_customer_name'
    
     
  
-    $customerid = implode(',', $projectsc);
+    $customerid = implode( "', '", $projectsc) . "'";
      $query.="ats_car_stock_rec_no in ($customerid) ";
   
     
@@ -134,7 +144,7 @@ elseif(trim($_POST['get_stock_rec_no']) && trim($_POST['stock_agent_name'] ))
             
         {
             
-            $query.="ats_car_stock_rec_no LIKE '%".$_POST['get_stock_rec_no']."%' ";
+            $query.=" LIKE '%".$_POST['get_stock_rec_no']."%' ";
             echo "found";
         
         }
@@ -196,10 +206,26 @@ if(trim($_POST['stock_all_agent']) && trim($_POST['stock_agent_name'])){
    
     if($valagent=='AllCar')
     {
-        $query="select * from ats_car_stock";
+        if(isset($_SESSION['agents_id']))
+            {
+                $query="select * from ats_car_stocK WHERE reserved_status='' ";
+
+            }
+            else
+            {
+                $query="select * from ats_car_stock ";
+
+            }
+        
     }
     elseif($valagent=='AllReserved')
     {
+        if(isset($_SESSION['agents_id']))
+        {
+          
+            $query="select * from ats_car_stock WHERE ";
+        
+        }
         $customer_sell1="select distinct recordno from ats_stock_reservation where agent_name='".$_POST['stock_agent_name']."'";
         $reserved=mysqli_query($connection,$customer_sell1);
         $arrayreserved = array();
@@ -209,10 +235,10 @@ if(trim($_POST['stock_all_agent']) && trim($_POST['stock_agent_name'])){
         array_push($arrayreserved,$arrayres[0]);
         
         }
-       
+      
         $reserveid = implode(',', $arrayreserved);
-        $query.="ats_car_stock_rec_no in ($reserveid) ";
-        echo $query;
+        $query.="ats_car_stock_rec_no in ('$reserveid') ";
+        
     
     }
     elseif($valagent=='AllSold')
@@ -230,7 +256,7 @@ if(trim($_POST['stock_all_agent']) && trim($_POST['stock_agent_name'])){
         }
        
         $reserveid = implode(',', $arrayreserved);
-        $query.="ats_car_stock_rec_no in ($reserveid) ";
+        $query.="ats_car_stock_rec_no in ('$reserveid') ";
         
     
     }
@@ -246,20 +272,20 @@ if(trim($_POST['stock_all_agent']) && trim($_POST['stock_agent_name'])){
         }
         
         $reserveid = implode(',', $arrayreserved);
-         $query.="ats_car_stock_rec_no in ($reserveid) ";
+         $query.="ats_car_stock_rec_no in ('$reserveid') ";
     
     }
 }
 elseif(trim($_POST['stock_all_agent']))
 {
 
-    $valagent=$_POST['stock_all_agent'];
+    $valagent1=$_POST['stock_all_agent'];
    
-    if($valagent=='AllCar')
+    if($valagent1=='AllCar')
     {
         $query="select * from ats_car_stock";
     }
-    elseif($valagent=='AllReserved')
+    elseif($valagent1=='AllReserved')
     {
         $reserved=mysqli_query($connection,"select recordno from ats_stock_reservation");
         $arrayreserved = array();
@@ -272,9 +298,10 @@ elseif(trim($_POST['stock_all_agent']))
         
         $reserveid = implode(',', $arrayreserved);
          $query.="ats_car_stock_rec_no in ($reserveid) ";
+         
     
     }
-    elseif($valagent=='AllSold')
+    elseif($valagent1=='AllSold')
     {
         $reserved=mysqli_query($connection,"select recordno from ats_stock_reservation Where reservedpaymentstatus='CONFIRMED' AND payment_status=''");
         $arrayreserved = array();
@@ -289,7 +316,7 @@ elseif(trim($_POST['stock_all_agent']))
          $query.="ats_car_stock_rec_no in ($reserveid) ";
     
     }
-    elseif($valagent=='AllPaid')
+    elseif($valagent1=='AllPaid')
     {
         $reserved=mysqli_query($connection,"select recordno from ats_stock_reservation Where reservedpaymentstatus='CONFIRMED' AND payment_status <> ''");
         $arrayreserved = array();
@@ -631,11 +658,11 @@ if(trim($_POST['get_stock_release_ok_date_from']) && trim($_POST['get_stock_rele
     $val151= date("Y-m-d", strtotime($val15));
     $val162= date("Y-m-d", strtotime($val16));
 
-    $query="select * from ats_car_stocK WHERE ats_car_stock_release_ok_date BETWEEN '$val151' AND '$val161' ";
+    $query="select * from ats_car_stock WHERE ats_car_stock_release_ok_date BETWEEN '$val151' AND '$val161' ";
    
 }
 $queryca=mysqli_query($connection,$query);
-echo $query;
+
 ?>
             <div class="app-main__outer">
                 <div class="app-main__inner p-0">
@@ -662,37 +689,46 @@ echo $query;
                                                                                 <thead>
                                                                                     <tr>
                                                                                         <th>Slct all<input type="checkbox" onclick="toggle(this);" /></th>
-                                                                                        <th>Price</th>
+                                                                                        <?php 
+                                                                                        if(!isset($_SESSION['agents_id']))
+                                                                                        {
+                                                                                            ?>
+                                                                                             <th>Price</th>
+                                                                                            <?php
+                                                                                        }
+                                                                                        ?>
+                                                                                       
                                                                                         <th>Inyrd</th>
                                                                                         <th>Rsrv</th>
                                                                                         <th>Sure</th>
                                                                                         <th>Sold</th>
-                                                                                        <th>Shok</th>
+                                                                                        <th>Shpok</th>
                                                                                         <th>Shinv</th>
                                                                                         <th>Bl</th>
-                                                                                        <th>RLrq</th>
+                                                                                       
                                                                                         <th>RLok</th>
                                                                                         <th>RL</th>
                                                                                     
                                                                                         <th>Crfct</th>
                                                                                         <th>Dhl</th>
                                                                                         <th>Rec#</th>
-                                                                                        <th>Pics</th>
+                                                                                        
                                                                                         <th>Kbtsu</th>
                                                                                         <th>Chassis&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
-                                                                                        <th>Make</th>
-                                                                                        <th>Model</th>
+                                                                                        <th>Make/Modal</th>
                                                                                         <th>Year</th>
-                                                                                        <th>Mth</th>
                                                                                         <th>Color</th>
                                                                                         <th>Sft</th>
-                                                                                        <th>Feul</th>
+                                                                                        <?php if(!isset($_SESSION['agents_id'])){?>
+                                                                                        <th>Feul</th>   
                                                                                         <th>Door</th>
+                                                                                        <?php }?>
                                                                                         <th>CC</th>
                                                                                         <th style="text-align: center;">Opt.</th>
                                                                                         <th>FOB</th>
+                                                                                        <?php if(!isset($_SESSION['agents_id'])){?>
                                                                                         <th>Grd</th>
-                                                                                        <th>Mileage</th>
+                                                                                        <th>Mileage</th><?php } ?>
                                                                                         <th>Action</th>
                                                                                     </tr>
                                                                                     
@@ -707,37 +743,52 @@ echo $query;
                                                                                     <tr>
                                                                                        
                                                                                         <td><input type="checkbox" /></td>
-                                                                                        <td style="color: #ff9900; font-weight: bolder; background: wheat; "><?php echo $rowca[28]?></td>
-                                                                                        <td style="color: #ff9900; font-weight: bolder; background: wheat; ">&checkmark;</td>
-                                                                                        <td style="color: #ff9900; font-weight: bolder; background: wheat; ">&checkmark;</td>
-                                                                                        <td style="color: #ff9900; font-weight: bolder; background: wheat; ">&checkmark;</td>
-                                                                                        <td style="color: #ff9900; font-weight: bolder; background: wheat; ">&checkmark;</td>
-                                                                                        <td style="color: #ff9900; font-weight: bolder; background: wheat; ">&checkmark;</td>
-                                                                                        <td style="color: #ff9900; font-weight: bolder; background: wheat; ">&checkmark;</td>
-                                                                                        <td style="color: #ff9900; font-weight: bolder; background: wheat; ">&checkmark;</td>
-                                                                                        <td style="color: #ff9900; font-weight: bolder; background: wheat; ">&checkmark;</td>
-                                                                                        <td style="color: #ff9900; font-weight: bolder; background: wheat; ">&checkmark;</td>
-                                                                                        <td style="color: #ff9900; font-weight: bolder; background: wheat; ">&checkmark;</td>
-                                                                                        <td style="color: #ff9900; font-weight: bolder; background: wheat; ">&checkmark;</td>
-                                                                                        <td style="color: #ff9900; font-weight: bolder; background: wheat; ">&checkmark;</td>
+                                                                                        <?php
+                                                                                        if(!isset($_SESSION['agents_id']))
+                                                                                        {
+                                                                                            ?>
+                                                                                            <td style="color: #ff9900; font-weight: bolder; background: wheat; "><?php echo $rowca[28]?></td>
+                                                                                            <?php
+                                                                                        }
+                                                                                        ?>
+                                                                                        
+                                                                                        <td style="color: #ff9900; font-weight: bolder; background: wheat; "><?php  if(!empty($rowca[74])){echo "&checkmark;";}else{echo "X";} ?></td>
+                                                                                        
+                                                                                        
+                                                                                        <td style="color: #ff9900; font-weight: bolder; background: wheat; "><?php  if($rowca[76] == '0000-00-00'){echo "X";}else{echo "&checkmark;";} ?></td>
+                                                                                        <td style="color: #ff9900; font-weight: bolder; background: wheat; "><?php  if(!empty($rowca[78])){echo "&checkmark;";}else{echo "X";} ?></td>
+                                                                                    
+                                                                                        <td style="color: #ff9900; font-weight: bolder; background: wheat; "><?php  if(!empty($rowca[78])){echo "&checkmark;";}else{echo "X";} ?></td>
+                                                                                        <td style="color: #ff9900; font-weight: bolder; background: wheat; "><?php  if($rowca[83] == '0000-00-00'){echo "X";}else{echo "&checkmark;";} ?></td>
+                                                                                        <td style="color: #ff9900; font-weight: bolder; background: wheat; "><?php if(!empty($rowca[84])){echo "&checkmark;";}else{echo "X";} ?></td>
+                                                                                        <td style="color: #ff9900; font-weight: bolder; background: wheat; "><?php if(!empty($rowca[86])){echo "&checkmark;";}else{echo "X";} ?></td>
+                                                                                        
+                                                                                        <td style="color: #ff9900; font-weight: bolder; background: wheat; "><?php if(!empty($rowca[86])){echo "&checkmark;";}else{echo "X";} ?></td>
+                                                                                        <td style="color: #ff9900; font-weight: bolder; background: wheat; "><?php if(!empty($rowca[91])){echo "&checkmark;";}else{echo "X";} ?></td>
+                                                                                        <td style="color: #ff9900; font-weight: bolder; background: wheat; "><?php if(!empty($rowca[95])){echo "&checkmark;";}else{echo "X";} ?></td>
+                                                                                        <td style="color: #ff9900; font-weight: bolder; background: wheat; "><?php if(!empty($rowca[91])){echo "&checkmark;";}else{echo "X";} ?></td>
                                                                                         
                                                                                         <td><?php echo $rowca[1]?></td>
-                                                                                        <td>5</td>
+                                                                                       
                                                                                         <td><?php echo $rowca[14]?></td>
                                                                                         <td><?php echo $rowca[2]?></td>
-                                                                                        <td><?php echo $rowca[3]?></td>
-                                                                                        <td><?php echo $rowca[4]?></td>
+                                                                                        <?php $querymakeseaarch=mysqli_fetch_row(mysqli_query($connection,"select * from car_make where id='".$rowca[3]."'"));
+                                                                                        $querymodelseaarch=mysqli_fetch_row(mysqli_query($connection,"select * from ats_model_car where ats_model_id='".$rowca[4]."'"));?>
+                                                                                        <td><?php echo $querymakeseaarch[1]."/".$querymodelseaarch[2]?>
+                                                                                      </td>
                                                                                         <td><?php echo $rowca[6]?></td>
-                                                                                        <td>--</td>
+                                                                                        
                                                                                         <td><?php echo $rowca[8]?></td>
                                                                                         <td><?php echo $rowca[9]?></td>
+                                                                                        <?php if(!isset($_SESSION['agents_id'])){?>
                                                                                         <td><?php echo $rowca[10]?></td>
-                                                                                        <td><?php echo $rowca[11]?></td>
+                                                                                        <td><?php echo $rowca[11]?></td><?php } ?>
                                                                                         <td><?php echo $rowca[13]?></td>
                                                                                         <td><?php echo $rowca[32] .",".$rowca[33].",".$rowca[34].",".$rowca[35].",".$rowca[36].",".$rowca[37].",".$rowca[38].",".$rowca[39].",".$rowca[40].",".$rowca[41].",".$rowca[42].",".$rowca[43].",".$rowca[44].",".$rowca[45].",".$rowca[46].",".$rowca[47].",".$rowca[48]?></td>
                                                                                         <td><?php echo $rowca[51]?></td>
+                                                                                        <?php if(!isset($_SESSION['agents_id'])){?>
                                                                                         <td><?php echo $rowca[12]?></td>
-                                                                                        <td><?php echo $rowca[17]?></td>
+                                                                                        <td><?php echo $rowca[17]?></td><?php }?>
                                                                                         <td><a href="car-view.php?car_id=<?php echo $rowca[0]?>">VIEW</a> || <a href="stock_update.php?car_id=<?php echo $rowca[0]?>">EDIT</a></td>
 
                                                                                     </tr>

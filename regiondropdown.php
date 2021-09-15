@@ -19,16 +19,16 @@ if(isset($_POST['make_id'])){
 <?php 
 }
 if(isset($_POST['country_id'])){
-  $querycountry="select * from arrivalports where country='".$countryid."'";
+  $querycountry="select * from kobutsu_slab where countrycode='".$countryid."'";
   $resultports=mysqli_query($connection,$querycountry);
 ?>
 <label class="form-control-label">Arrival Port<span style="color:red">*</span></label>
-  <select name="cus_arrival_port" id="cus_arrival_port" class="form-control form-control-sm" required>
+  <select name="cus_arrival_port" id="cus_arrival_port" class="form-control " required>
     <option selected disabled>Please Select option</option>         
     <?php 
       while($rowfetchports=mysqli_fetch_array($resultports)){
     ?>
-    <option value="<?php echo $rowfetchports[0]?>"><?php echo $rowfetchports[1]?></option>
+    <option value="<?php echo $rowfetchports[0]?>"><?php echo $rowfetchports[4]?></option>
     <?php
       }
     ?>

@@ -2,31 +2,52 @@
 include("top.php");
 include("connection_db.php");
 ?>
+
             <div class="app-main__outer">
                 <div class="app-main__inner p-0">
                     <div class="app-inner-layout chat-layout">
-                        <form action="indextest.php" method="POST">
+                        <form action="agentcarsearch.php" method="POST">
                             <div style="background:darkgray; padding-top: 1%; padding-bottom: 1.2%;" class="container row">        
                                 <div class="col-sm-1">
                                     <label style="margin-top: 5%; font-weight: bold;" class="form-control-label">Agent</label>
                                 </div>
                                 <div style="margin-left: -4%;" class="col-sm-2 ">
                                     <select name="stock_agent_name" id="stock_agent_name"  class="form-control form-control-sm" onChange="getcustomer(this.value);">
-                                   <option value="">SELECT</option>
+                                   <!-- <option value="" >SELECT</option> -->
                                    <?php
-                                                $query_reserve = mysqli_query($connection,"select DISTINCT agent_name from ats_stock_reservation");
-                                               
-                                                while($row = mysqli_fetch_array($query_reserve))
+                                                if(isset($_SESSION['agents_id']))
                                                 {
-                                                    $query_sell=mysqli_fetch_row(mysqli_query($connection,"select * from ats_sell_person where Sell_person='".$row[0]."'"));
+                                                    $agent=$_SESSION['agents_id'];
+                                                    $query_sell=mysqli_query($connection,"select * from ats_sell_person where id='".$agent."'");
+                                                    while($row = mysqli_fetch_array($query_sell))
+                                                    {
+                                                       
+    
+                                                    ?>
+                                                    
+                                                    <option value = "<?php echo $row[0]?>" >
+                                                        <?php echo $row[1]?>
+                                                    </option>
+                                                    <?php
+                                                    
                                                 
+                                                    }                                             
+                                                     
+                                                }
+                                                else{
+                                               $query_sell=mysqli_query($connection,"select * from ats_sell_person ");
+                                                while($row = mysqli_fetch_array($query_sell))
+                                                {
+                                                   
+
                                                 ?>
-                                                <option value = "<?php echo $query_sell[1]?>" >
-                                                    <?php echo $query_sell[1]?>
+                                                
+                                                <option value = "<?php echo $row[0]?>" >
+                                                    <?php echo $row[1]?>
                                                 </option>
                                                 <?php
                                                 
-                                            
+                                                }
                                                 }                                             
                                                 ?>  
                                     </select> 
@@ -294,8 +315,8 @@ include("connection_db.php");
                                 </div>
                                 <div class="col-sm-2 ">
                                 <select style="margin-left: 50%;" name="stock_all_agent" id="stock_all_agent" class="form-control form-control-sm">
-                                <option value=""></option>
-                                <option value="AllCar">All Car</option>
+                                
+                                <option selected value="AllCar">All Car</option>
                                         <option value="AllReserved">All Reserved</option>
                                         <option value="AllSold">All Sold</option>
                                         <option value="AllPaid">All Paid</option>
@@ -330,7 +351,27 @@ include("connection_db.php");
                                                         <div class="input-group-prepend">
                                                             <span class="input-group-text">Customer</span>
                                                         </div>
-                                                        <input style="font-size: 12px;" name="get_stock_customer_name" id="get_stock_customer_name" type="text" class="form-control">
+                                                        <?php 
+                                                         if(isset($_SESSION['agents_id']))
+                                                         {
+                                                            $getcustomer_reserved=mysqli_query($connection,"select * from ats_customer where ats_customer_sell_person='".$agent."'");
+
+                                                            ?>
+                                                            <select style="font-size: 12px;" name="get_stock_customer_name" id="get_stock_customer_name" type="text" class="form-control">
+                                                            <option value="">Please Select</option> 
+
+                                                            <?php while($rowcustomer_reserved=mysqli_fetch_array($getcustomer_reserved))
+                                                            {
+                                                            ?>
+                                                            <option value="<?php echo $rowcustomer_reserved[1]?>"><?php echo $rowcustomer_reserved[3]?></option>  
+                                                            <?php
+                                                            }
+                                                            ?>
+                                                            </select>
+                                                            <?php
+                                                         }
+                                                        ?>
+                                                      
                                                     </div>
                                                         
                                                 </div>
@@ -428,10 +469,10 @@ include("connection_db.php");
                                                         </div>
                                                         <div class="row">
                                                             <div class="col-md-6">
-                                                                <input name="get_stock_buying_date_from" id="get_stock_buying_date_from" placeholder="From" style="background: #ff9900;" class="form-control form-control-sm input-mask-trigger"  data-inputmask-alias="datetime" data-inputmask-inputformat="dd/mm/yyyy">
+                                                                <input name="get_stock_buying_date_from" id="get_stock_buying_date_from" placeholder="From" style="background: #ff9900;" class="form-control form-control-sm input-mask-trigger"  data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy">
                                                             </div>
                                                             <div class="col-md-6">
-                                                                <input name="get_stock_buying_date_till" id="get_stock_buying_date_till" placeholder="Till" style="background: #ff9900;" class="form-control form-control-sm input-mask-trigger"  data-inputmask-alias="datetime" data-inputmask-inputformat="dd/mm/yyyy">
+                                                                <input name="get_stock_buying_date_till" id="get_stock_buying_date_till" placeholder="Till" style="background: #ff9900;" class="form-control form-control-sm input-mask-trigger"  data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy">
                                                             </div>
                                                         </div>
                                                     </div>
@@ -519,22 +560,7 @@ include("connection_db.php");
                                                             <option value="No">NO</option>
                                                         </select>
                                                     </div>
-                                                    <div class="col-md-1 ">
-                                                        <label style="padding: 5px;" class="input-group-text">Sold</label> 
-                                                        <select style="padding: 2px;" name="get_stock_sold_date" id="get_stock_sold_date" class="form-control form-control-sm">
-                                                        <option value="" selected>--</option>
-                                                            <option value="Yes">YES</option>
-                                                            <option value="No">NO</option>
-                                                        </select>
-                                                    </div>
-                                                    <div class="col-md-1 ">
-                                                        <label style="padding: 5px;" class="input-group-text">Paid</label> 
-                                                        <select style="padding: 2px;" name="get_stock_payment_status" id="get_stock_payment_status" class="form-control form-control-sm">
-                                                            <option value="" selected>--</option>
-                                                            <option value="Yes">YES</option>
-                                                            <option value="No">NO</option>
-                                                        </select>
-                                                    </div>
+                                                   
                                                     <div class="col-md-1 ">
                                                         <label style="padding: 5px;" class="input-group-text">ShipOK</label> 
                                                         <select style="padding: 2px;" name="get_stock_ship_ok_date" id="stock_ship_ok_date" class="form-control form-control-sm">

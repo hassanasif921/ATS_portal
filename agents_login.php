@@ -105,7 +105,7 @@ crossorigin="anonymous"></script>
                         <div class="mx-auto app-login-box col-sm-12 col-md-10 col-lg-9">
                             <div class="app-logo"></div>
                             <h4 style="margin-top: -4%;" class="mb-0">
-                                <span class="d-block">Welcome Admin</span>
+                                <span class="d-block">Welcome</span>
                                 <span>Please sign in to your account.</span>
                             </h4>
                             <h6 class="mt-3">No account? <a href="pages-register.php" class="text-primary">Sign up now</a></h6>

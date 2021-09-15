@@ -4,8 +4,8 @@ include("top.php");
 include("connection_db.php");
 $NewDate=Date('d/m/Y', strtotime('+3 days'));
 $NewDate1=Date('d/m/Y');
-
-$query="select * from ats_car_stocK WHERE ats_car_stock_id=".$_GET['car_id'];
+$reservedate=Date('Y/m/d');
+$query="select * from ats_car_stock WHERE ats_car_stock_id=".$_GET['car_id'];
 $result=mysqli_query($connection,$query);
 $row=mysqli_fetch_row($result);
 $reservedrecord1=mysqli_query($connection,"select * from ats_stock_reservation where recordno='".$row[1]."'");
@@ -30,10 +30,12 @@ if(isset($_POST['btnreserve']))
 	$repair_charges=mysqli_real_escape_string($connection,$_POST['repair_charges']);
 	$consignee_id=mysqli_real_escape_string($connection,$_POST['consignee_id']);
 	$finalfob=$_POST['finalfob'];
+	$conforfob=$_POST['paymenttype'];
 	$agent_name=$_POST['rsellperson'];
 	$created_at=date("Y-m-d");
-	$insertreservequery="INSERT INTO ats_stock_reservation(recordno, date_from, date_till, customer, payment_per, memo, yard_charges, repair_charges,consignee_id,finalfob,agent_name,created_at) VALUES ('$recordno','$date_from','$date_till','$customerreserve','$payment_per','$memo','$yard_charges','$repair_charges','$consignee_id','$finalfob','$agent_name','$created_at')";
+	$insertreservequery="INSERT INTO ats_stock_reservation(recordno, date_from, date_till, customer, payment_per, memo, yard_charges, repair_charges,consignee_id,finalfob,agent_name,remaining_amount,created_at,conforfob) VALUES ('$recordno','$date_from','$date_till','$customerreserve','$payment_per','$memo','$yard_charges','$repair_charges','$consignee_id','$finalfob','$agent_name','$finalfob','$created_at','$conforfob')";
 	$insertreserve=mysqli_query($connection,$insertreservequery);
+	$updatecarrecord=mysqli_query($connection,"update ats_car_stock set reserved_status='RESERVED',ats_car_stock_reserve_date='$reservedate0',reserved_date='$date_from' where ats_car_stock_rec_no='".$recordno."'");
 	if($insertreserve)
 	{
 		echo '<script type="text/javascript"> alert("Car Reserved!")</script>';
@@ -46,7 +48,7 @@ if(isset($_POST['btnreserveupdate']))
 
 	$consignee_idalreadyreserved=mysqli_real_escape_string($connection,$_POST['consignee_id1']);
 	
-	$updatereservequeryalreadyreserved="UPDATE ats_stock_reservation SET consignee_id='$consignee_idalreadyreserved' where recordno='".$row[1]."'";
+	$updatereservequeryalreadyreserved="UPDATE ats_stock_reservation SET consignee_id='$consignee_idalreadyreserved',consigneechangestatus='CHANGED' where recordno='".$row[1]."'";
 	$insertreservealreadyreserved=mysqli_query($connection,$updatereservequeryalreadyreserved);
 	if($insertreservealreadyreserved)
 	{
@@ -118,8 +120,8 @@ if(isset($_POST['btn_exp_rec_money']))
 	$cust_remaining_amount=$_POST['cust_remaining_amount'];
 	$get_alloacted_remittance_id_ag=$_POST['get_alloacted_remittance_id_ag'];
 	$dateofconfirmation=date("Y-m-d");
-	$query_rec_money=mysqli_query($connection,"INSERT INTO reservationmoney(recordno, cnfprice, customername, allocatedamount, remaing_amount,remittance_id) VALUES ('$row[1]','$get_stock_cnf_price_print_yen','$allocation_customer_name','$get_cust_allocated_amount','$cust_remaining_amount','$get_alloacted_remittance_id_ag')");
-	$update_reservation_status=mysqli_query($connection, "UPDATE ats_stock_reservation SET reservedpaymentstatus='CONFIRMED',sold_status='$dateofconfirmation' where recordno ='".$row[1]."' " );
+	$query_rec_money=mysqli_query($connection,"INSERT INTO reservationmoney(recordno, cnfprice, customername, allocatedamount, remaing_amount,remittance_id,agent_id) VALUES ('$row[1]','$get_stock_cnf_price_print_yen','$allocation_customer_name','$get_cust_allocated_amount','$cust_remaining_amount','$get_alloacted_remittance_id_ag','".$_SESSION['agents_id']."')");
+	$update_reservation_status=mysqli_query($connection, "UPDATE ats_stock_reservation SET reservedpaymentstatus='CONFIRMED',sold_status='$dateofconfirmation',remaining_amount=remaining_amount-$get_cust_allocated_amount where recordno ='".$row[1]."' " );
 	$update_remaining_amount=mysqli_query($connection, "UPDATE ats_remittance SET remaining_amount='$cust_remaining_amount' where ats_remittance_Remittance_ID ='$get_alloacted_remittance_id_ag' " );
 }
 if(isset($_POST['btn_exp_important']))
@@ -275,7 +277,11 @@ if(isset($_POST['btn_exp_important']))
 										</div>
 										<div class="col-3">
 											<label style="margin-left: 41%;"  class="form-control-label text-center"> Option</label>
-											<label style=" width: 258px; font-size: 11px; margin-top: -3.8%; height: 20px; padding: 1px;" type="text" id="get_stock_all_options" name="get_stock_all_options" class="form-control"><?php echo $row[32] .",".$row[33].",".$row[34].",".$row[35].",".$row[36].",".$row[37].",".$row[38].",".$row[39].",".$row[40].",".$row[41].",".$row[42].",".$row[43].",".$row[44].",".$row[45].",".$row[46].",".$row[47]?></label>
+											<label style=" width: 258px; font-size: 11px; margin-top: -3.8%; height: 20px; padding: 1px;" type="text" id="get_stock_all_options" name="get_stock_all_options" class="form-control"><?php 
+												for($ia=32;$ia<=47;$ia++)
+												{
+													echo $row[$i];
+												}?></label>
 										</div>
 										<div class="col-3">
 											<label style="margin-left: 40%;"  class="form-control-label text-center">Other Option</label>
@@ -983,13 +989,15 @@ include("bottom.php");
 <!-- Modals -->
 <?php 
 $num_reserve=mysqli_num_rows($reservedrecord);
+$qureygetreserved=mysqli_fetch_row($reservedrecord1);
 if($num_reserve>0)
 {
+		if($qureygetreserved[18] <> "CHANGED"){
 ?>
 <div class="modal fade" id="exampleModalLongalreadyreserved" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
 	aria-hidden="true">
 	<?php
-	$qureygetreserved=mysqli_fetch_row($reservedrecord1);
+
 	?>
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
@@ -1043,7 +1051,7 @@ if($num_reserve>0)
 									if($rowsell[1]==$qureygetreserved[12])
 									{
 								 ?>
-								 <option value="<?php echo $rowsell[1]?>" selected><?php echo $rowsell[1]?></option>
+								 <option value="<?php echo $rowsell[0]?>" selected><?php echo $rowsell[1]?></option>
 								 <?php   
 									}
 								}
@@ -1117,6 +1125,8 @@ if($num_reserve>0)
 							<label class="form-control-label">Notify&nbsp;Name</label>
 							<input style=" font-size: 11px;  margin-top: -8%; height: 20px;  width: 100px;" type="text" id="username" name="stock_chassis_id" class="form-control">
 						</div>
+						
+						
 						<div  class="col-md-3" id="notifyphone">
 							<label class="form-control-label">Notify&nbsp;Phone</label>
 							<input style=" font-size: 11px;  margin-top: -8%; height: 20px;  width: 100px;" type="text" id="username" name="stock_chassis_id" class="form-control">
@@ -1129,7 +1139,18 @@ if($num_reserve>0)
 							<label class="form-control-label">Notify&nbsp;Address</label>
 							<input style=" font-size: 11px; width: 224px; margin-top: -2%; height: 20px;  " type="text" id="username" name="stock_chassis_id" class="form-control">
 						</div>
-					
+						<?php 
+						if($qureygetreserved[17]=="CNF"){
+						
+						?>
+						<input type="radio" id="paymenttype" checked name="paymenttype" value="CNF">CNF
+						<?php 
+					}
+					else {
+						?>
+
+					<input type="radio" id="paymenttype" checked name="paymenttype" value="FOB">FOB
+					<?php }?>
 						<div style="background: khaki; margin-left: 0px; padding-left: 0px; margin-top: 1%;  padding-bottom: 1%;" class="row container">
 							<div class="col-md-3" id="shipment">
 								<label class="form-control-label">Shipment</label>
@@ -1208,7 +1229,19 @@ if($num_reserve>0)
 							</div>
 							
 							<div  class="col-md-12" id="getcountryslab">
-							<label class="form-control-label">Final F.O.B</label>
+							<?php 
+						if($qureygetreserved[17]=="CNF"){
+						
+						?>
+							<label class="form-control-label">Final CNF</label>
+						<?php 
+					}
+					else {
+						?>
+
+						<label class="form-control-label">Final F.O.B</label>
+					<?php }?>
+						
  							<input style=" font-size: 11px;  margin-top: -2%; width: 461px; height: 20px; " type="text" id="finalfob" name="finalfob" value="<?php echo $qureygetreserved[11]?>" class="form-control" readonly>
 							</div>
 							<div  class="col-md-12">
@@ -1229,6 +1262,7 @@ if($num_reserve>0)
 	</div>
 </div>
 <?php 
+		}
 }
 else
 {
@@ -1285,7 +1319,7 @@ else
 								while($rowsell=mysqli_fetch_row($resultsell))
 								{
 								 ?>
-								 <option value="<?php echo $rowsell[1]?>" ><?php echo $rowsell[1]?></option>
+								 <option value="<?php echo $rowsell[0]?>" ><?php echo $rowsell[1]?></option>
 								 <?php   
 								}
 								?>
@@ -1342,11 +1376,15 @@ else
 							<label class="form-control-label">Consignee&nbsp;Address</label>
 							<input style=" font-size: 11px; width: 232px; margin-top: -2%; height: 20px;  " type="text" id="username" name="stock_chassis_id" class="form-control">
 						</div>
+						<div  class="col-md-3" id="cpORT">
+							
+						</div>
 						<div  class="col-md-6" id="notifyadress">
 							<label class="form-control-label">Notify&nbsp;Address</label>
 							<input style=" font-size: 11px; width: 224px; margin-top: -2%; height: 20px;  " type="text" id="username" name="stock_chassis_id" class="form-control">
 						</div>
-					
+					<input type="radio" id="paymenttype" name="paymenttype" value="CNF">CNF
+					<input type="radio" id="paymenttype" name="paymenttype" value="FOB">FOB
 						<div style="background: khaki; margin-left: 0px; padding-left: 0px; margin-top: 1%;  padding-bottom: 1%;" class="row container">
 							<div class="col-md-3" id="shipment">
 								<label class="form-control-label">Shipment</label>
@@ -1651,16 +1689,32 @@ else
 					</div>
 				</div>
 			</div>
+			<?php 	$payment_method=mysqli_fetch_row(mysqli_query($connection,"select * from ats_stock_reservation where recordno='".$row[1]."' AND agent_name='".$_SESSION['agents_id']."'"));  
+			if($payment_method[15] > 0)
+			{?>
 			<form method="POST">
 				<div class="modal-body">
 					<div class="row">
 						<div style="margin-top: -2%" class="col-md-6">
+							
+						<!-- getting cnf or fob -->
+						<?php 
+					
+						if($payment_method[17] == "CNF"){
+						?>
 							<label class="form-control-label">CNF Price</label>
-							<input style=" font-size: 11px;  margin-top: -2%; height: 20px;  width: 230px;" type="text" id="get_stock_cnf_price_print_yen" name="get_stock_cnf_price_print_yen" class="form-control" value="<?php echo $row[67]?>">
+							<input style=" font-size: 11px;  margin-top: -2%; height: 20px;  width: 230px;" type="text" id="get_stock_cnf_price_print_yen" name="get_stock_cnf_price_print_yen" class="form-control" value="<?php echo $payment_method[11]?>">
+						<?php }
+						else{?>
+							<label class="form-control-label">FOB Price</label>
+							<input style=" font-size: 11px;  margin-top: -2%; height: 20px;  width: 230px;" type="text" id="get_stock_cnf_price_print_yen" name="get_stock_cnf_price_print_yen" class="form-control" value="<?php echo $payment_method[11]?>">
+						<?php }?>
 						</div>
-						<div style="margin-top: -2%" class="col-md-6">
+						
+						<div  class="col-md-6" style="margin-top: -2%">
 							<label class="form-control-label">Customer Name</label>
 							<select style=" padding: 0px; font-size: 11px;  margin-top: -2%; height: 20px;  width: 205px;" type="text" id="allocation_customer_name" name="allocation_customer_name" class="form-control">
+							<option>Select</option>
 							<?php $queryremittance=mysqli_fetch_row(mysqli_query($connection,"select * from ats_stock_reservation where recordno='".$row[1]."'"));
 							$queryreservecustomers=mysqli_query($connection,"select * from ats_customer where ats_customer_ATS_ID='".$queryremittance[4]."'");
 							while($fetchreservedcustomer=mysqli_fetch_array($queryreservecustomers))
@@ -1669,9 +1723,13 @@ else
 								<?php }?>
 							</select>
 						</div>
+						<div  class="col-md-12">
+							<label class="form-control-label">Balance Due</label>
+							<input style=" font-size: 11px;  margin-top: -2%; height: 20px; " type="text" id="get_stock_cnf_price_print_yen" name="get_stock_cnf_price_print_yen" class="form-control" value="<?php echo $payment_method[15]?>">
+						</div>
 						<div  class="col-md-4 mt-1">
 							<label  class="form-control-label">Remittance ID #</label>
-							<select style=" padding: 0px; font-size: 11px;  margin-top: -2%; height: 20px;  width: 205px;" type="text" id="get_alloacted_remittance_id_ag" name="get_alloacted_remittance_id_ag" class="form-control">
+							<select style=" padding: 0px; font-size: 11px;  margin-top: -2%; height: 20px;  width: 205px;"  id="get_alloacted_remittance_id_ag" name="get_alloacted_remittance_id_ag" class="form-control">
 							<?php $queryremittanceR=mysqli_fetch_row(mysqli_query($connection,"select * from ats_stock_reservation where recordno='".$row[1]."'"));
 							$queryreservecustomersR=mysqli_query($connection,"select * from ats_remittance where ats_remittance_customer_name='".$queryremittanceR[4]."' AND remaining_amount>0");
 							while($fetchreservedcustomerR=mysqli_fetch_array($queryreservecustomersR))
@@ -1687,8 +1745,8 @@ else
 							
 						</div>
 						<div  class="col-md-6">
-							<label class="form-control-label">Allocated Amount</label>
-							<input style=" font-size: 11px;  margin-top: -2%; height: 20px;  width: 230px;" type="text" id="get_cust_allocated_amount" name="get_cust_allocated_amount" class="form-control" onkeyup="remainingamount()">
+							<label class="form-control-label">Allocat Amount</label>
+							<input style=" font-size: 11px;  margin-top: -2%; height: 20px;  width: 230px;" type="number" id="get_cust_allocated_amount" name="get_cust_allocated_amount" class="form-control" min="1" max="<?php echo $payment_method[15]?>" onkeyup="remainingamount()" >
 						</div>
 						<div class="col-md-6">
 							<label class="form-control-label">Remaining Amount</label>
@@ -1702,6 +1760,11 @@ else
 					<input type="submit" name="btn_exp_rec_money" id="btn_exp_rec_money" class="btn btn-primary" value="ADD +" >
 				</div>
 			</form>
+			<?php }
+			else {
+				//form to design
+			}?>
+			
 		</div>
 	</div>
 </div>
@@ -2534,7 +2597,14 @@ function getConsigneedetails(val) {
 		$("#cp").html(data);
 	}
 	});
-	 
+	$.ajax({
+	type: "POST",
+	url: "stockdropdown.php",
+	data:'consigneePORT='+val,
+	success: function(data){
+		$("#cpORT").html(data);
+	}
+	});
 	$.ajax({
 	type: "POST",
 	url: "stockdropdown.php",
@@ -2579,7 +2649,7 @@ function getConsigneedetails(val) {
 	</script>
 	<script>
   function RemittanceSearch(){
-	var rs1 = parseInt(document.getElementById("get_alloacted_remittance_id_ag").value);
+	var rs1 =document.getElementById("get_alloacted_remittance_id_ag").value;
 	$.ajax({
 	type: "POST",
 	url: "stockdropdown.php",
@@ -2593,13 +2663,14 @@ function getConsigneedetails(val) {
 	<script>
   function getcountryslab(val){
 	var cid = parseInt(document.getElementById("countryi").value);
-	
+	var consigneeport = parseInt(document.getElementById("consigneePORT").value);
+	var selectedOption = $("input:radio[name=paymenttype]:checked").val()
 	var bpp =parseInt(document.getElementById("get_stock_buying_price").value);
 	var countryslab =parseInt(document.getElementById("countryslab").value);
 	$.ajax({
 	type: "POST",
 	url: "stockdropdown.php",
-	data: { getcountryslab: val, countrycode: cid, buying: bpp,countryslabval : countryslab },
+	data: { getcountryslab: val,selectedOptions : selectedOption,consigneeports : consigneeport, countrycode: cid, buying: bpp,countryslabval : countryslab },
 	
 	success: function(data){
 		$("#getcountryslab").html(data);
@@ -2607,3 +2678,4 @@ function getConsigneedetails(val) {
 	});
 	}
 	</script>
+	

@@ -1,7 +1,7 @@
 <?php
 include("top.php");
 include("connection_db.php");
-$resultsell=mysqli_query($connection,"select * from ats_sell_person");
+$resultsell=mysqli_query($connection,"select * from ats_employee");
 
 
 ?>        
@@ -22,7 +22,7 @@ $resultsell=mysqli_query($connection,"select * from ats_sell_person");
                                                     while($rowsell=mysqli_fetch_row($resultsell))
                                                     {
                                                     ?>
-                                                    <option value="<?php echo $rowsell[1]?>" ><?php echo $rowsell[1]?></option>
+                                                    <option value="<?php echo $rowsell[0]?>" ><?php echo $rowsell[1]?></option>
                                                     <?php   
                                                     }
                                                     ?>

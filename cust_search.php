@@ -24,13 +24,15 @@ include("connection_db.php");
                                             <div class="col-sm-2">
                                                 <input name="get_customer_email" id="get_customer_email"   type="text" class="form-control form-control-sm" onkeyup="myFunction1()">
                                             </div>
+                                            <?php if(!isset($_SESSION['agents_id'])){?>
                                             <div class="col-sm-2">
                                                 <label style="font-weight: bold; margin-top: 5px;" class="form-control-label">Sell Person</label>
                                             </div>
                                             <div class="col-sm-2">
                                                 <input name="get_agent" id="get_agent"  type="text" class="form-control form-control-sm" onkeyup="myFunction2()">
                                             </div>
-                                            <div  class="col-sm-1">
+                                            <?php }?>
+                                            <div  class="col-sm-2">
                                                 <input type="reset" name="stock_add_btn" class="mb-2 mr-2 btn btn-gradient-primary btn-block" value="Refresh"> 
                                             </div>
                                         </div>    
@@ -54,17 +56,25 @@ include("connection_db.php");
                                                                         <th>Sell&nbsp;Person</th>
                                                                         <th>Country</th>
                                                                         <th>Contact&nbsp;Key/Person&nbsp;</th>
+                                                                        <?php if(!isset($_SESSION['agents_id'])){?>
                                                                         <th>Created&nbsp;By</th>
-                                                                        <th>Updated&nbsp;By</th>
+                                                                        <th>Updated&nbsp;By</th><?php }?>
                                                                         <th>Action</th>
                                                                     </tr>
                                                                 </thead>
                                                                 <tbody >
                                                                 <?php
-                                                                    
+                                                                    if(isset($_SESSION['agents_id']) )
+                                                                    {
+                                                                        $query = mysqli_query($connection,"select * from ats_customer where ats_customer_sell_person='".$_SESSION['agents_id']."' ORDER BY ats_customer_id DESC");
+                                                                        $count =mysqli_num_rows($query);
+                                                                    }
+                                                                    else{
+                                                                        $query = mysqli_query($connection,"select * from ats_customer ORDER BY ats_customer_id DESC");
+                                                                        $count =mysqli_num_rows($query);
+                                                                    }
 
-                                                                    $query = mysqli_query($connection,"select * from ats_customer ORDER BY ats_customer_id DESC");
-                                                                    $count =mysqli_num_rows($query);
+                                                                   
                                                                     if($count > 0)
                                                                     {
                                                                         while($row = mysqli_fetch_array($query))
@@ -77,7 +87,8 @@ include("connection_db.php");
                                                                     <td>ATS-CUS<?php echo $row["ats_customer_ATS_ID"] ?></td>
                                                                     <td><?php echo $row["ats_customer_project"] ?></td>
                                                                     <td><?php echo $row["ats_customer_dealership_name"] ?></td>
-                                                                    <td><?php echo $row["ats_customer_sell_person"] ?></td> 
+                                                                    <?php $queryemployee=mysqli_fetch_row(mysqli_query($connection,"select * from ats_employee where ats_employee_id='".$row["ats_customer_sell_person"]."'"));?>
+                                                                    <td><?php echo $queryemployee[1] ?></td> 
                                                                     <?php 
                                                                     $querycountry="select * from countryports where id=".$row["ats_customer_country"];
                                                                     $resultports=mysqli_query($connection,$querycountry);
@@ -89,13 +100,13 @@ include("connection_db.php");
                                                             ?>
                                                                    
                                                                     <td><?php echo $row["ats_customer_contact_name_1"] ?></td>
-                                                                   
+                                                                    <?php if(!isset($_SESSION['agents_id'])){?>
                                                                     <td><?php echo $row["ats_customer_createdBy"] ?></td>
                                                             
                                                                     <td><?php echo $row["ats_customer_updatedBy"] ?></td>
-                                                                    
+                                                                    <?php } ?>
                                                                    
-                                                                    <td><a style="padding:3px" href="cust-view.php?id=<?php echo $row["ats_customer_ATS_ID"] ?>" >View</a><button data-id="<?php echo $row['ats_customer_ATS_ID'] ?>" data-toggle="modal" data-target="#exampleModalLong" class='userinfo'>Changes</button>
+                                                                    <td><a class="btn btn-warning mb-2" style="padding:3px" href="cust-view.php?id=<?php echo $row["ats_customer_ATS_ID"] ?>" ><i class="fa fa-eye"></i></a><br/></a> <?php if(!isset($_SESSION['agents_id'])){?><button data-id="<?php echo $row['ats_customer_ATS_ID'] ?>" data-toggle="modal" data-target="#exampleModalLong" class='userinfo'>Changes</button><?php }?>
                                                                     </td>
                                                                 </tr>
                                                                 <?php

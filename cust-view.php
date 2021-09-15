@@ -39,12 +39,12 @@ $rowcust = mysqli_fetch_assoc($resultcust);
                                                 <div class="col-sm-3">
                                                     <label class="form-control-label">Sell Person</label>
                                                     <?php
-                                                        $query_sell = mysqli_query($connection,"select * from ats_sell_person");
+                                                        $query_sell = mysqli_query($connection,"select * from ats_employee");
                                                         $count_sell = mysqli_num_rows($query_sell);
                                                         while($row = mysqli_fetch_array($query_sell)){
-                                                            if($rowcupdate[4]==$row['Sell_person']){
+                                                            if($rowcupdate[4]==$row['ats_employee_id']){
                                                     ?>
-                                                    <input type="text" value="<?php echo($row['Sell_person']) ?>" class="form-control form-control-sm" style="pointer-events: none" required>
+                                                    <input type="text" value="<?php echo($row['ats_employee_firstName']) ?>" class="form-control form-control-sm" style="pointer-events: none" required>
                                                     <?php
                                                             }
                                                         }                                             
@@ -214,9 +214,11 @@ $rowcust = mysqli_fetch_assoc($resultcust);
                                                         <img style="width: 50px; height: 55px; margin-left:4%;" id="emp_passport_image_print" src="data:image/jpg;charset=utf8;base64,<?php echo base64_encode($rowcupdate[33]); ?>" />
                                                     </div>  
                                                 </div>
+                                                <?php if(!isset($_SESSION['agents_id'])){?>
                                                 <div class="col-sm-2">
                                                     <a style="margin-top: 5%" type="submit" name="btn_cus" id="btn_cus" class="btn btn-primary float-right" value="Add Customer" href="form-customer-update.php?id=<?php echo $_GET['id']?>">Update Record</a>
                                                 </div>
+                                               <?php }?>
                                             </div>
                                             <div style="margin-top: -1.5%" class="row form-group">
                                                  <div class="col-sm-6">

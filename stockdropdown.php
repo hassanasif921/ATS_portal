@@ -79,6 +79,15 @@ $rowfetchnotifyp=mysqli_fetch_row($query_get_notifyphone)
 <input readonly style=" font-size: 11px;  margin-top: -8%; height: 20px;  width: 100px;" type="text" id="username" name="notifyphone" class="form-control" value="<?php echo $rowfetchnotifyp[10]?>">
 <?php
 }
+if(isset($_POST['consigneePORT']))
+{
+$consigneePORT=mysqli_query($connection,"select * from ats_consignee where ats_consignee_id='".$_POST['consigneePORT']."'");
+$consigneePORT1=mysqli_fetch_row($consigneePORT)
+?>
+
+<input readonly style=" font-size: 11px; width: 232px; margin-top: -2%; height: 20px;display:none  " type="text" id="consigneePORT" name="consigneePORT" class="form-control" value="<?php echo $consigneePORT1[16]?>">
+<?php
+}
 if(isset($_POST['consigneeadress']))
 {
 $consigneeadress=mysqli_query($connection,"select * from ats_consignee where ats_consignee_id='".$_POST['consigneeadress']."'");
@@ -118,7 +127,7 @@ while($rowcountry=mysqli_fetch_array($resultports))
 if($cp1[8]== $rowcountry[0])
 {
 ?>
-<input readonly style=" font-size: 11px; margin-left: 8%; margin-top: -8%; height: 20px;  width: 100px;" type="text" id="username" name="stock_chassis_id" class="form-control" value="<?php echo $rowcountry[1]?>">
+<input readonly style=" font-size: 11px; margin-left: 8%; margin-top: -8%; height: 20px;  width: 100px;display:none" type="text" id="username" name="stock_chassis_id" class="form-control" value="<?php echo $rowcountry[1]?>">
 <input readonly style=" font-size: 11px; margin-left: 8%; margin-top: -8%; height: 20px;  width: 100px;display:none" type="text" id="countryi" name="countryi" class="form-control" value="<?php echo $rowcountry[0]?>">
 
 
@@ -191,7 +200,7 @@ $currency=mysqli_fetch_row($currency)
 if(isset($_POST['get_alloacted_remittance_id_ag']))
 {
     ?>
-    <label class="form-control-label">Current Balance</label>
+    <label style="font-size:12px" class="form-control-label">Rem. Available Amount</label>
     <?php
    
     $resultgetremittance=mysqli_fetch_row(mysqli_query($connection,"select * from ats_remittance where ats_remittance_Remittance_ID='".$_POST['get_alloacted_remittance_id_ag']."'"));
@@ -229,30 +238,54 @@ if(isset($_POST['getcountryslab']))
     $countrycode=$_POST['countrycode'];
     $buying=$_POST['buying'];
     $countryslab=$_POST['countryslabval'];
-
+    $selectedOption=$_POST['selectedOptions'];
+    $consigneeports=$_POST['consigneeports'];
     $query=mysqli_fetch_row(mysqli_query($connection,"select * from slabcharges where country_id='".$_POST['countrycode']."' AND $buying>= buyingprice AND $buying<=buyingprice_end"));
 if($per_country==30)
 {
 ?>
 
+<?php if ($selectedOption == "CNF"){
+    $querycnf=mysqli_fetch_row(mysqli_query($connection,"select * from kobutsu_slab where id='".$_POST['consigneeports']."'"));
+    ?>
+ <label class="form-control-label">Final CNF</label>
+ <input style=" font-size: 11px;  margin-top: -2%; width: 461px; height: 20px; " type="text" id="finalfob" name="finalfob" value="<?php echo $query[4]+$countryslab+$querycnf[5]?>" class="form-control">
+<?php } else {?>
  <label class="form-control-label">Final F.O.B</label>
  <input style=" font-size: 11px;  margin-top: -2%; width: 461px; height: 20px; " type="text" id="finalfob" name="finalfob" value="<?php echo $query[4]+$countryslab?>" class="form-control">
+<?php }?>
+
 <?php 
 }
 if($per_country==50)
 {
 ?>
-
+<?php if ($selectedOption == "CNF"){
+    $querycnf=mysqli_fetch_row(mysqli_query($connection,"select * from kobutsu_slab where id='".$_POST['consigneeports']."'"));
+    ?>
+ <label class="form-control-label">Final CNF</label>
+ <input style=" font-size: 11px;  margin-top: -2%; width: 461px; height: 20px; " type="text" id="finalfob" name="finalfob" value="<?php echo $query[5]+$countryslab+$querycnf[5]?>" class="form-control">
+<?php } else {?>
  <label class="form-control-label">Final F.O.B</label>
  <input style=" font-size: 11px;  margin-top: -2%; width: 461px; height: 20px; " type="text" id="finalfob" name="finalfob" value="<?php echo $query[5]+$countryslab?>" class="form-control">
+<?php }?>
+
 <?php 
 }
 if($per_country==100)
 {
 ?>
 
+<?php if ($selectedOption == "CNF"){
+    $querycnf=mysqli_fetch_row(mysqli_query($connection,"select * from kobutsu_slab where id='".$_POST['consigneeports']."'"));
+    ?>
+ <label class="form-control-label">Final CNF</label>
+ <input style=" font-size: 11px;  margin-top: -2%; width: 461px; height: 20px; " type="text" id="finalfob" name="finalfob" value="<?php echo $query[6]+$countryslab+$querycnf[5]?>" class="form-control">
+<?php } else {?>
  <label class="form-control-label">Final F.O.B</label>
  <input style=" font-size: 11px;  margin-top: -2%; width: 461px; height: 20px; " type="text" id="finalfob" name="finalfob" value="<?php echo $query[6]+$countryslab?>" class="form-control">
+<?php }?>
+
 <?php 
 }
 }
