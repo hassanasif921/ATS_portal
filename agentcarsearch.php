@@ -48,7 +48,7 @@ if(trim($_POST['stock_all_agent']=="AllCar")){
                     {
                     array_push($projectsc,$arrayuasc[0]);
                     }
-                    $customerid = "'" . implode ( "', '", $projectsc ) . "'";;
+                    $customerid = "'" . implode ( "', '", $projectsc ) . "'";
                     $query.=" ats_car_stock_rec_no in ($customerid) ";
                    
             }
@@ -59,7 +59,7 @@ if(trim($_POST['stock_all_agent']=="AllCar")){
                     {
                     array_push($projectsc,$arrayuasc[0]);
                     }
-                    $customerid = "'" . implode ( "', '", $projectsc ) . "'";;
+                    $customerid = "'" . implode ( "', '", $projectsc ) . "'";
                     $query.="AND ats_car_stock_rec_no in ($customerid) ";
                    
             }

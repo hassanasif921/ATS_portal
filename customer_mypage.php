@@ -1,6 +1,12 @@
 <?php
+session_start();
+if(!isset($_SESSION['customer']))
+{
+    header("Location:customer-login.php");
+}
 include("top.php");
 include("connection_db.php");
+
 $querytotalbalancepaid=mysqli_fetch_row(mysqli_query($connection,"select SUM(ats_remittance_amount) from ats_remittance where ats_remittance_customer_name='".$querycustomer[1]."'"));
 $querytotalbalanceinacc=mysqli_fetch_row(mysqli_query($connection,"select SUM(remaining_amount) from ats_remittance where ats_remittance_customer_name='".$querycustomer[1]."'"));
 $querytotalallocation=mysqli_fetch_row(mysqli_query($connection,"select SUM(allocatedamount) from reservationmoney where customername='".$querycustomer[1]."'"));
@@ -116,132 +122,35 @@ $querytotaltopay=mysqli_fetch_row(mysqli_query($connection,"select SUM(remaining
                                                                             </tr>
                                                                         </thead>
                                                                         <tbody style="background: rgb(0, 0, 0, 0.1);">
-                                                                            <!-- <tr>
+                                                                        <?php
+                                                                        $queryallumits=mysqli_query($connection,"select * from ats_stock_reservation where customer ='".$querycustomer[1]."'");
+                                                                        while($rowallunits=mysqli_fetch_array($queryallumits))
+                                                                        {
+                                                                            ?>
+                                                                            <tr>
                                                                                 <th scope="row">1</th>
-                                                                                <td><div class="mb-2 mr-2 badge badge-success">Active</div></td>
-                                                                                <td>MI-298978</td>
-                                                                                <td>Suzuki Cultus</td>
-                                                                                <td>4676578746</td>
-                                                                                <td>$</td>
-                                                                                <td>5430 $USD</td>
-                                                                                <td>3400 $</td>
-                                                                                <td>50%</td>
-                                                                                <td>30%</td>
-                                                                                <td>4698$</td>
-                                                                                <td>KAI TAKA Saki, Port of Japan</td>
-                                                                                <td>Gawadar Port</td>
-                                                                                <td>Mark</td>
-                                                                                <td>02\6\2021</td>
-                                                                                <td>02\7\2021</td>
+                                                                                <td><?php echo $rowallunits[1]?></td>
+                                                                                <?php $querycarrecord=mysqli_fetch_row(mysqli_query($connection,"select * from ats_car_stock where ats_car_stock_rec_no='".$rowallunits[1]."'"));
+                                                                                $querymodel=mysqli_fetch_row(mysqli_query($connection,"select * from ats_model_car where ats_make_model='".$querycarrecord[4]."'"));?>
+                                                                                <td><?php echo $querymodel[2]?></td>
+                                                                                <td><?php echo $querycarrecord[2]?></td>
+                                                                                <td>&yen;</td>
+                                                                                <td><?php echo ($rowallunits[17] == "CNF" ?$rowallunits[11]   : "--") ?></td>
+                                                                                <td><?php echo ($rowallunits[17] == "FOB" ?$rowallunits[11]   : "--") ?></td>
+                                                                             
+                                                                                <td><?php echo $rowallunits[11]-$rowallunits[15]?></td>
+                                                                                <td><?php echo $rowallunits[15]?></td>
+                                                                                <td><?php echo $querycarrecord[120]?></td>
+                                                                                <td><?php echo $querycarrecord[121]?></td>
+                                                                                <td><?php echo $querycarrecord[83]?></td>
+                                                                                <td><?php echo $querycarrecord[125]?></td>
+                                                                              
                                                                             </tr>
-                                                                            <tr>
-                                                                                <th scope="row">2</th>
-                                                                                <td><div class="mb-2 mr-2 badge badge-primary">Pending</div></td>
-                                                                                <td>Otto</td>
-                                                                                <td>@mdo</td>
-                                                                                <td>Mark</td>
-                                                                                <td>Otto</td>
-                                                                                <td>@mdo</td>
-                                                                                <td>Mark</td>
-                                                                                <td>Otto</td>
-                                                                                <td>@mdo</td>
-                                                                                <td>Mark</td>
-                                                                                <td>Otto</td>
-                                                                                <td>@mdo</td>
-                                                                                <td>Mark</td>
-                                                                                <td>Otto</td>
-                                                                                <td>Otto</td>
-                                                                            </tr>
-                                                                            <tr>
-                                                                                <th scope="row">3</th>
-                                                                                <td><div class="mb-2 mr-2 badge badge-danger">Expired</div></td>
-                                                                                <td>Otto</td>
-                                                                                <td>@mdo</td>
-                                                                                <td>Mark</td>
-                                                                                <td>Otto</td>
-                                                                                <td>@mdo</td>
-                                                                                <td>Mark</td>
-                                                                                <td>Otto</td>
-                                                                                <td>@mdo</td>
-                                                                                <td>Mark</td>
-                                                                                <td>Otto</td>
-                                                                                <td>@mdo</td>
-                                                                                <td>Mark</td>
-                                                                                <td>Otto</td>
-                                                                                <td>Otto</td>
-                                                                            </tr>
-                                                                            <tr>
-                                                                                <th scope="row">4</th>
-                                                                                <td><div class="mb-2 mr-2 badge badge-warning">Cancel</div></td>
-                                                                                <td>Otto</td>
-                                                                                <td>@mdo</td>
-                                                                                <td>Mark</td>
-                                                                                <td>Otto</td>
-                                                                                <td>@mdo</td>
-                                                                                <td>Mark</td>
-                                                                                <td>Otto</td>
-                                                                                <td>@mdo</td>
-                                                                                <td>Mark</td>
-                                                                                <td>Otto</td>
-                                                                                <td>@mdo</td>
-                                                                                <td>Mark</td>
-                                                                                <td>Otto</td>
-                                                                                <td>Otto</td>
-                                                                            </tr>
-                                                                            <tr>
-                                                                                <th scope="row">5</th>
-                                                                                <td><div class="mb-2 mr-2 badge badge-success">Active</div></td>
-                                                                                <td>Otto</td>
-                                                                                <td>@mdo</td>
-                                                                                <td>Mark</td>
-                                                                                <td>Otto</td>
-                                                                                <td>@mdo</td>
-                                                                                <td>Mark</td>
-                                                                                <td>Otto</td>
-                                                                                <td>@mdo</td>
-                                                                                <td>Mark</td>
-                                                                                <td>Otto</td>
-                                                                                <td>@mdo</td>
-                                                                                <td>Mark</td>
-                                                                                <td>Otto</td>
-                                                                                <td>Otto</td>
-                                                                            </tr>
-                                                                            <tr>
-                                                                                <th scope="row">6</th>
-                                                                                <td><div class="mb-2 mr-2 badge badge-primary">Pending</div></td>
-                                                                                <td>Otto</td>
-                                                                                <td>@mdo</td>
-                                                                                <td>Mark</td>
-                                                                                <td>Otto</td>
-                                                                                <td>@mdo</td>
-                                                                                <td>Mark</td>
-                                                                                <td>Otto</td>
-                                                                                <td>@mdo</td>
-                                                                                <td>Mark</td>
-                                                                                <td>Otto</td>
-                                                                                <td>@mdo</td>
-                                                                                <td>Mark</td>
-                                                                                <td>Otto</td>
-                                                                                <td>Otto</td>
-                                                                            </tr>
-                                                                            <tr>
-                                                                                <th scope="row">7</th>
-                                                                                <td><div class="mb-2 mr-2 badge badge-danger">Expired</div></td>
-                                                                                <td>Otto</td>
-                                                                                <td>@mdo</td>
-                                                                                <td>Mark</td>
-                                                                                <td>Otto</td>
-                                                                                <td>@mdo</td>
-                                                                                <td>Mark</td>
-                                                                                <td>Otto</td>
-                                                                                <td>@mdo</td>
-                                                                                <td>Mark</td>
-                                                                                <td>Otto</td>
-                                                                                <td>@mdo</td>
-                                                                                <td>Mark</td>
-                                                                                <td>Otto</td>
-                                                                                <td>Otto</td>
-                                                                            </tr> -->
+                                                                            <?php
+                                                                        }
+                                                                        ?>
+                                                                             
+                                                                             
                                                                         </tbody>
                                                                     </table>
                                                                 </div>
@@ -281,134 +190,35 @@ $querytotaltopay=mysqli_fetch_row(mysqli_query($connection,"select SUM(remaining
                                                                                 <th>ETA</th>    
                                                                             </tr>
                                                                         </thead>
-                                                                        <!-- <tbody style="background: rgb(0, 0, 0, 0.1);">
+                                                                        <?php
+                                                                        $queryzeroallocation2=mysqli_query($connection,"select * from ats_stock_reservation where customer ='".$querycustomer[1]."' AND finalfob = remaining_amount");
+                                                                        while($rowzeroallocation=mysqli_fetch_array($queryzeroallocation2))
+                                                                        {
+                                                                            ?>
                                                                             <tr>
                                                                                 <th scope="row">1</th>
-                                                                                <td><div class="mb-2 mr-2 badge badge-success">Active</div></td>
-                                                                                <td>MI-298978</td>
-                                                                                <td>Suzuki Cultus</td>
-                                                                                <td>4676578746</td>
-                                                                                <td>$</td>
-                                                                                <td>5430 $USD</td>
-                                                                                <td>3400 $</td>
-                                                                                <td>50%</td>
-                                                                                <td>30%</td>
-                                                                                <td>4698$</td>
-                                                                                <td>KAI TAKA Saki, Port of Japan</td>
-                                                                                <td>Gawadar Port</td>
-                                                                                <td>Mark</td>
-                                                                                <td>02\6\2021</td>
-                                                                                <td>02\7\2021</td>
+                                                                                <td><?php echo $rowzeroallocation[1]?></td>
+                                                                                <?php $querycarrecord2=mysqli_fetch_row(mysqli_query($connection,"select * from ats_car_stock where ats_car_stock_rec_no='".$rowzeroallocation[1]."'"));
+                                                                                $querymodel1=mysqli_fetch_row(mysqli_query($connection,"select * from ats_model_car where ats_make_model='".$querycarrecord2[4]."'"));?>
+                                                                                <td><?php echo $querymodel1[2]?></td>
+                                                                                <td><?php echo $querycarrecord2[2]?></td>
+                                                                                <td>&yen;</td>
+                                                                                <td><?php echo ($rowzeroallocation[17] == "CNF" ?$rowzeroallocation[11]   : "--") ?></td>
+                                                                                <td><?php echo ($rowzeroallocation[17] == "FOB" ?$rowzeroallocation[11]   : "--") ?></td>
+                                                                             
+                                                                                <td><?php echo $rowzeroallocation[11]-$rowzeroallocation[15]?></td>
+                                                                                <td><?php echo $rowzeroallocation[15]?></td>
+                                                                                <td><?php echo $querycarrecord2[120]?></td>
+                                                                                <td><?php echo $querycarrecord2[121]?></td>
+                                                                                <td><?php echo $querycarrecord2[83]?></td>
+                                                                                <td><?php echo $querycarrecord2[125]?></td>
+                                                                              
                                                                             </tr>
-                                                                            <tr>
-                                                                                <th scope="row">2</th>
-                                                                                <td><div class="mb-2 mr-2 badge badge-primary">Pending</div></td>
-                                                                                <td>Otto</td>
-                                                                                <td>@mdo</td>
-                                                                                <td>Mark</td>
-                                                                                <td>Otto</td>
-                                                                                <td>@mdo</td>
-                                                                                <td>Mark</td>
-                                                                                <td>Otto</td>
-                                                                                <td>@mdo</td>
-                                                                                <td>Mark</td>
-                                                                                <td>Otto</td>
-                                                                                <td>@mdo</td>
-                                                                                <td>Mark</td>
-                                                                                <td>Otto</td>
-                                                                                <td>Otto</td>
-                                                                            </tr>
-                                                                            <tr>
-                                                                                <th scope="row">3</th>
-                                                                                <td><div class="mb-2 mr-2 badge badge-danger">Expired</div></td>
-                                                                                <td>Otto</td>
-                                                                                <td>@mdo</td>
-                                                                                <td>Mark</td>
-                                                                                <td>Otto</td>
-                                                                                <td>@mdo</td>
-                                                                                <td>Mark</td>
-                                                                                <td>Otto</td>
-                                                                                <td>@mdo</td>
-                                                                                <td>Mark</td>
-                                                                                <td>Otto</td>
-                                                                                <td>@mdo</td>
-                                                                                <td>Mark</td>
-                                                                                <td>Otto</td>
-                                                                                <td>Otto</td>
-                                                                            </tr>
-                                                                            <tr>
-                                                                                <th scope="row">4</th>
-                                                                                <td><div class="mb-2 mr-2 badge badge-warning">Cancel</div></td>
-                                                                                <td>Otto</td>
-                                                                                <td>@mdo</td>
-                                                                                <td>Mark</td>
-                                                                                <td>Otto</td>
-                                                                                <td>@mdo</td>
-                                                                                <td>Mark</td>
-                                                                                <td>Otto</td>
-                                                                                <td>@mdo</td>
-                                                                                <td>Mark</td>
-                                                                                <td>Otto</td>
-                                                                                <td>@mdo</td>
-                                                                                <td>Mark</td>
-                                                                                <td>Otto</td>
-                                                                                <td>Otto</td>
-                                                                            </tr>
-                                                                            <tr>
-                                                                                <th scope="row">5</th>
-                                                                                <td><div class="mb-2 mr-2 badge badge-success">Active</div></td>
-                                                                                <td>Otto</td>
-                                                                                <td>@mdo</td>
-                                                                                <td>Mark</td>
-                                                                                <td>Otto</td>
-                                                                                <td>@mdo</td>
-                                                                                <td>Mark</td>
-                                                                                <td>Otto</td>
-                                                                                <td>@mdo</td>
-                                                                                <td>Mark</td>
-                                                                                <td>Otto</td>
-                                                                                <td>@mdo</td>
-                                                                                <td>Mark</td>
-                                                                                <td>Otto</td>
-                                                                                <td>Otto</td>
-                                                                            </tr>
-                                                                            <tr>
-                                                                                <th scope="row">6</th>
-                                                                                <td><div class="mb-2 mr-2 badge badge-primary">Pending</div></td>
-                                                                                <td>Otto</td>
-                                                                                <td>@mdo</td>
-                                                                                <td>Mark</td>
-                                                                                <td>Otto</td>
-                                                                                <td>@mdo</td>
-                                                                                <td>Mark</td>
-                                                                                <td>Otto</td>
-                                                                                <td>@mdo</td>
-                                                                                <td>Mark</td>
-                                                                                <td>Otto</td>
-                                                                                <td>@mdo</td>
-                                                                                <td>Mark</td>
-                                                                                <td>Otto</td>
-                                                                                <td>Otto</td>
-                                                                            </tr>
-                                                                            <tr>
-                                                                                <th scope="row">7</th>
-                                                                                <td><div class="mb-2 mr-2 badge badge-danger">Expired</div></td>
-                                                                                <td>Otto</td>
-                                                                                <td>@mdo</td>
-                                                                                <td>Mark</td>
-                                                                                <td>Otto</td>
-                                                                                <td>@mdo</td>
-                                                                                <td>Mark</td>
-                                                                                <td>Otto</td>
-                                                                                <td>@mdo</td>
-                                                                                <td>Mark</td>
-                                                                                <td>Otto</td>
-                                                                                <td>@mdo</td>
-                                                                                <td>Mark</td>
-                                                                                <td>Otto</td>
-                                                                                <td>Otto</td>
-                                                                            </tr>
-                                                                        </tbody> -->
+                                                                            <?php
+                                                                        }
+                                                                        ?>
+                                                                       
+                                                                        </tbody> 
                                                                     </table>
                                                                 </div>
                                                             </div>
@@ -447,134 +257,46 @@ $querytotaltopay=mysqli_fetch_row(mysqli_query($connection,"select SUM(remaining
                                                                                 <th>ETA</th>    
                                                                             </tr>
                                                                         </thead>
-                                                                        <!-- <tbody style="background: rgb(0, 0, 0, 0.1);">
+                                                                         <tbody style="background: rgb(0, 0, 0, 0.1);">
+                                                                         <?php
+                                                                          $customer_sellc=mysqli_query($connection,"select ats_car_stock_rec_no from ats_car_stock where ats_car_stock_dhl_date=''");
+                                                                          $projectsc = array();
+                                                                          while($arrayuasc=mysqli_fetch_array($customer_sellc))
+                                                                          {
+                                                                              
+                                                                          array_push($projectsc,$arrayuasc[0]);
+                                                                          
+                                                                          }
+                                                                          $customerid = "'" . implode ( "', '", $projectsc ) . "'";
+                                                                        $querywaitingforarrivalfullpaid=mysqli_query($connection,"select * from ats_stock_reservation where customer ='".$querycustomer[1]."' AND remaining_amount <= 0 AND recordno in ($customerid)");
+                                                                        
+                                                                        while($rowzeroallocation2=mysqli_fetch_array($querywaitingforarrivalfullpaid))
+                                                                        {
+                                                                            ?>
                                                                             <tr>
                                                                                 <th scope="row">1</th>
-                                                                                <td><div class="mb-2 mr-2 badge badge-success">Active</div></td>
-                                                                                <td>MI-298978</td>
-                                                                                <td>Suzuki Cultus</td>
-                                                                                <td>4676578746</td>
-                                                                                <td>$</td>
-                                                                                <td>5430 $USD</td>
-                                                                                <td>3400 $</td>
-                                                                                <td>50%</td>
-                                                                                <td>30%</td>
-                                                                                <td>4698$</td>
-                                                                                <td>KAI TAKA Saki, Port of Japan</td>
-                                                                                <td>Gawadar Port</td>
-                                                                                <td>Mark</td>
-                                                                                <td>02\6\2021</td>
-                                                                                <td>02\7\2021</td>
+                                                                                <td><?php echo $rowzeroallocation2[1]?></td>
+                                                                                <?php $querycarrecord2=mysqli_fetch_row(mysqli_query($connection,"select * from ats_car_stock where ats_car_stock_rec_no='".$rowzeroallocation2[1]."'"));
+                                                                                $querymodel2=mysqli_fetch_row(mysqli_query($connection,"select * from ats_model_car where ats_make_model='".$querycarrecord2[4]."'"));?>
+                                                                                <td><?php echo $querymodel2[2]?></td>
+                                                                                <td><?php echo $querycarrecord2[2]?></td>
+                                                                                <td>&yen;</td>
+                                                                                <td><?php echo ($rowzeroallocation2[17] == "CNF" ?$rowzeroallocation2[11]   : "--") ?></td>
+                                                                                <td><?php echo ($rowzeroallocation2[17] == "FOB" ?$rowzeroallocation2[11]   : "--") ?></td>
+                                                                             
+                                                                                <td><?php echo $rowzeroallocation2[11]-$rowzeroallocation2[15]?></td>
+                                                                                <td><?php echo $rowzeroallocation2[15]?></td>
+                                                                                <td><?php echo $querycarrecord2[120]?></td>
+                                                                                <td><?php echo $querycarrecord2[121]?></td>
+                                                                                <td><?php echo $querycarrecord2[83]?></td>
+                                                                                <td><?php echo $querycarrecord2[125]?></td>
+                                                                                
                                                                             </tr>
-                                                                            <tr>
-                                                                                <th scope="row">2</th>
-                                                                                <td><div class="mb-2 mr-2 badge badge-primary">Pending</div></td>
-                                                                                <td>Otto</td>
-                                                                                <td>@mdo</td>
-                                                                                <td>Mark</td>
-                                                                                <td>Otto</td>
-                                                                                <td>@mdo</td>
-                                                                                <td>Mark</td>
-                                                                                <td>Otto</td>
-                                                                                <td>@mdo</td>
-                                                                                <td>Mark</td>
-                                                                                <td>Otto</td>
-                                                                                <td>@mdo</td>
-                                                                                <td>Mark</td>
-                                                                                <td>Otto</td>
-                                                                                <td>Otto</td>
-                                                                            </tr>
-                                                                            <tr>
-                                                                                <th scope="row">3</th>
-                                                                                <td><div class="mb-2 mr-2 badge badge-danger">Expired</div></td>
-                                                                                <td>Otto</td>
-                                                                                <td>@mdo</td>
-                                                                                <td>Mark</td>
-                                                                                <td>Otto</td>
-                                                                                <td>@mdo</td>
-                                                                                <td>Mark</td>
-                                                                                <td>Otto</td>
-                                                                                <td>@mdo</td>
-                                                                                <td>Mark</td>
-                                                                                <td>Otto</td>
-                                                                                <td>@mdo</td>
-                                                                                <td>Mark</td>
-                                                                                <td>Otto</td>
-                                                                                <td>Otto</td>
-                                                                            </tr>
-                                                                            <tr>
-                                                                                <th scope="row">4</th>
-                                                                                <td><div class="mb-2 mr-2 badge badge-warning">Cancel</div></td>
-                                                                                <td>Otto</td>
-                                                                                <td>@mdo</td>
-                                                                                <td>Mark</td>
-                                                                                <td>Otto</td>
-                                                                                <td>@mdo</td>
-                                                                                <td>Mark</td>
-                                                                                <td>Otto</td>
-                                                                                <td>@mdo</td>
-                                                                                <td>Mark</td>
-                                                                                <td>Otto</td>
-                                                                                <td>@mdo</td>
-                                                                                <td>Mark</td>
-                                                                                <td>Otto</td>
-                                                                                <td>Otto</td>
-                                                                            </tr>
-                                                                            <tr>
-                                                                                <th scope="row">5</th>
-                                                                                <td><div class="mb-2 mr-2 badge badge-success">Active</div></td>
-                                                                                <td>Otto</td>
-                                                                                <td>@mdo</td>
-                                                                                <td>Mark</td>
-                                                                                <td>Otto</td>
-                                                                                <td>@mdo</td>
-                                                                                <td>Mark</td>
-                                                                                <td>Otto</td>
-                                                                                <td>@mdo</td>
-                                                                                <td>Mark</td>
-                                                                                <td>Otto</td>
-                                                                                <td>@mdo</td>
-                                                                                <td>Mark</td>
-                                                                                <td>Otto</td>
-                                                                                <td>Otto</td>
-                                                                            </tr>
-                                                                            <tr>
-                                                                                <th scope="row">6</th>
-                                                                                <td><div class="mb-2 mr-2 badge badge-primary">Pending</div></td>
-                                                                                <td>Otto</td>
-                                                                                <td>@mdo</td>
-                                                                                <td>Mark</td>
-                                                                                <td>Otto</td>
-                                                                                <td>@mdo</td>
-                                                                                <td>Mark</td>
-                                                                                <td>Otto</td>
-                                                                                <td>@mdo</td>
-                                                                                <td>Mark</td>
-                                                                                <td>Otto</td>
-                                                                                <td>@mdo</td>
-                                                                                <td>Mark</td>
-                                                                                <td>Otto</td>
-                                                                                <td>Otto</td>
-                                                                            </tr>
-                                                                            <tr>
-                                                                                <th scope="row">7</th>
-                                                                                <td><div class="mb-2 mr-2 badge badge-danger">Expired</div></td>
-                                                                                <td>Otto</td>
-                                                                                <td>@mdo</td>
-                                                                                <td>Mark</td>
-                                                                                <td>Otto</td>
-                                                                                <td>@mdo</td>
-                                                                                <td>Mark</td>
-                                                                                <td>Otto</td>
-                                                                                <td>@mdo</td>
-                                                                                <td>Mark</td>
-                                                                                <td>Otto</td>
-                                                                                <td>@mdo</td>
-                                                                                <td>Mark</td>
-                                                                                <td>Otto</td>
-                                                                                <td>Otto</td>
-                                                                            </tr>
-                                                                        </tbody> -->
+                                                                            <?php
+                                                                        }
+                                                                        ?>
+                                                                          
+                                                                        </tbody> 
                                                                     </table>
                                                                 </div>
                                                             </div>
@@ -613,134 +335,46 @@ $querytotaltopay=mysqli_fetch_row(mysqli_query($connection,"select SUM(remaining
                                                                                 <th>ETA</th>    
                                                                             </tr>
                                                                         </thead>
-                                                                        <!-- <tbody style="background: rgb(0, 0, 0, 0.1);">
+                                                                        <tbody style="background: rgb(0, 0, 0, 0.1);">
+                                                                         <?php
+                                                                          $customer_sellc1=mysqli_query($connection,"select ats_car_stock_rec_no from ats_car_stock where ats_car_stock_dhl_date<>''");
+                                                                          $projectsc1 = array();
+                                                                          while($arrayuasc=mysqli_fetch_array($customer_sellc1))
+                                                                          {
+                                                                              
+                                                                          array_push($projectsc1,$arrayuasc[0]);
+                                                                          
+                                                                          }
+                                                                          $customerid1 = "'" . implode ( "', '", $projectsc1 ) . "'";
+                                                                        $queryshippedunitswithbalance=mysqli_query($connection,"select * from ats_stock_reservation where customer ='".$querycustomer[1]."' AND remaining_amount > 0 AND recordno in ($customerid1)");
+                                                                        
+                                                                        while($rowzeroallocation3=mysqli_fetch_array($queryshippedunitswithbalance))
+                                                                        {
+                                                                            ?>
                                                                             <tr>
                                                                                 <th scope="row">1</th>
-                                                                                <td><div class="mb-2 mr-2 badge badge-success">Active</div></td>
-                                                                                <td>MI-298978</td>
-                                                                                <td>Suzuki Cultus</td>
-                                                                                <td>4676578746</td>
-                                                                                <td>$</td>
-                                                                                <td>5430 $USD</td>
-                                                                                <td>3400 $</td>
-                                                                                <td>50%</td>
-                                                                                <td>30%</td>
-                                                                                <td>4698$</td>
-                                                                                <td>KAI TAKA Saki, Port of Japan</td>
-                                                                                <td>Gawadar Port</td>
-                                                                                <td>Mark</td>
-                                                                                <td>02\6\2021</td>
-                                                                                <td>02\7\2021</td>
+                                                                                <td><?php echo $rowzeroallocation3[1]?></td>
+                                                                                <?php $querycarrecord3=mysqli_fetch_row(mysqli_query($connection,"select * from ats_car_stock where ats_car_stock_rec_no='".$rowzeroallocation3[1]."'"));
+                                                                                $querymodel3=mysqli_fetch_row(mysqli_query($connection,"select * from ats_model_car where ats_make_model='".$querycarrecord3[4]."'"));?>
+                                                                                <td><?php echo $querymodel3[2]?></td>
+                                                                                <td><?php echo $querycarrecord3[2]?></td>
+                                                                                <td>&yen;</td>
+                                                                                <td><?php echo ($rowzeroallocation3[17] == "CNF" ?$rowzeroallocation3[11]   : "--") ?></td>
+                                                                                <td><?php echo ($rowzeroallocation3[17] == "FOB" ?$rowzeroallocation3[11]   : "--") ?></td>
+                                                                             
+                                                                                <td><?php echo $rowzeroallocation3[11]-$rowzeroallocation3[15]?></td>
+                                                                                <td><?php echo $rowzeroallocation3[15]?></td>
+                                                                                <td><?php echo $querycarrecord3[120]?></td>
+                                                                                <td><?php echo $querycarrecord3[121]?></td>
+                                                                                <td><?php echo $querycarrecord3[83]?></td>
+                                                                                <td><?php echo $querycarrecord3[125]?></td>
+                                                                                
                                                                             </tr>
-                                                                            <tr>
-                                                                                <th scope="row">2</th>
-                                                                                <td><div class="mb-2 mr-2 badge badge-primary">Pending</div></td>
-                                                                                <td>Otto</td>
-                                                                                <td>@mdo</td>
-                                                                                <td>Mark</td>
-                                                                                <td>Otto</td>
-                                                                                <td>@mdo</td>
-                                                                                <td>Mark</td>
-                                                                                <td>Otto</td>
-                                                                                <td>@mdo</td>
-                                                                                <td>Mark</td>
-                                                                                <td>Otto</td>
-                                                                                <td>@mdo</td>
-                                                                                <td>Mark</td>
-                                                                                <td>Otto</td>
-                                                                                <td>Otto</td>
-                                                                            </tr>
-                                                                            <tr>
-                                                                                <th scope="row">3</th>
-                                                                                <td><div class="mb-2 mr-2 badge badge-danger">Expired</div></td>
-                                                                                <td>Otto</td>
-                                                                                <td>@mdo</td>
-                                                                                <td>Mark</td>
-                                                                                <td>Otto</td>
-                                                                                <td>@mdo</td>
-                                                                                <td>Mark</td>
-                                                                                <td>Otto</td>
-                                                                                <td>@mdo</td>
-                                                                                <td>Mark</td>
-                                                                                <td>Otto</td>
-                                                                                <td>@mdo</td>
-                                                                                <td>Mark</td>
-                                                                                <td>Otto</td>
-                                                                                <td>Otto</td>
-                                                                            </tr>
-                                                                            <tr>
-                                                                                <th scope="row">4</th>
-                                                                                <td><div class="mb-2 mr-2 badge badge-warning">Cancel</div></td>
-                                                                                <td>Otto</td>
-                                                                                <td>@mdo</td>
-                                                                                <td>Mark</td>
-                                                                                <td>Otto</td>
-                                                                                <td>@mdo</td>
-                                                                                <td>Mark</td>
-                                                                                <td>Otto</td>
-                                                                                <td>@mdo</td>
-                                                                                <td>Mark</td>
-                                                                                <td>Otto</td>
-                                                                                <td>@mdo</td>
-                                                                                <td>Mark</td>
-                                                                                <td>Otto</td>
-                                                                                <td>Otto</td>
-                                                                            </tr>
-                                                                            <tr>
-                                                                                <th scope="row">5</th>
-                                                                                <td><div class="mb-2 mr-2 badge badge-success">Active</div></td>
-                                                                                <td>Otto</td>
-                                                                                <td>@mdo</td>
-                                                                                <td>Mark</td>
-                                                                                <td>Otto</td>
-                                                                                <td>@mdo</td>
-                                                                                <td>Mark</td>
-                                                                                <td>Otto</td>
-                                                                                <td>@mdo</td>
-                                                                                <td>Mark</td>
-                                                                                <td>Otto</td>
-                                                                                <td>@mdo</td>
-                                                                                <td>Mark</td>
-                                                                                <td>Otto</td>
-                                                                                <td>Otto</td>
-                                                                            </tr>
-                                                                            <tr>
-                                                                                <th scope="row">6</th>
-                                                                                <td><div class="mb-2 mr-2 badge badge-primary">Pending</div></td>
-                                                                                <td>Otto</td>
-                                                                                <td>@mdo</td>
-                                                                                <td>Mark</td>
-                                                                                <td>Otto</td>
-                                                                                <td>@mdo</td>
-                                                                                <td>Mark</td>
-                                                                                <td>Otto</td>
-                                                                                <td>@mdo</td>
-                                                                                <td>Mark</td>
-                                                                                <td>Otto</td>
-                                                                                <td>@mdo</td>
-                                                                                <td>Mark</td>
-                                                                                <td>Otto</td>
-                                                                                <td>Otto</td>
-                                                                            </tr>
-                                                                            <tr>
-                                                                                <th scope="row">7</th>
-                                                                                <td><div class="mb-2 mr-2 badge badge-danger">Expired</div></td>
-                                                                                <td>Otto</td>
-                                                                                <td>@mdo</td>
-                                                                                <td>Mark</td>
-                                                                                <td>Otto</td>
-                                                                                <td>@mdo</td>
-                                                                                <td>Mark</td>
-                                                                                <td>Otto</td>
-                                                                                <td>@mdo</td>
-                                                                                <td>Mark</td>
-                                                                                <td>Otto</td>
-                                                                                <td>@mdo</td>
-                                                                                <td>Mark</td>
-                                                                                <td>Otto</td>
-                                                                                <td>Otto</td>
-                                                                            </tr>
-                                                                        </tbody> -->
+                                                                            <?php
+                                                                        }
+                                                                        ?>
+                                                                          
+                                                                        </tbody> 
                                                                     </table>
                                                                 </div>
                                                             </div>
@@ -778,135 +412,48 @@ $querytotaltopay=mysqli_fetch_row(mysqli_query($connection,"select SUM(remaining
                                                                                 <th>ETD</th>
                                                                                 <th>ETA</th>    
                                                                             </tr>
-                                                                        </thead>
-                                                                        <!-- <tbody style="background: rgb(0, 0, 0, 0.1);">
-                                                                            <tr>
-                                                                                <th scope="row">1</th>
-                                                                                <td><div class="mb-2 mr-2 badge badge-success">Active</div></td>
-                                                                                <td>MI-298978</td>
-                                                                                <td>Suzuki Cultus</td>
-                                                                                <td>4676578746</td>
-                                                                                <td>$</td>
-                                                                                <td>5430 $USD</td>
-                                                                                <td>3400 $</td>
-                                                                                <td>50%</td>
-                                                                                <td>30%</td>
-                                                                                <td>4698$</td>
-                                                                                <td>KAI TAKA Saki, Port of Japan</td>
-                                                                                <td>Gawadar Port</td>
-                                                                                <td>Mark</td>
-                                                                                <td>02\6\2021</td>
-                                                                                <td>02\7\2021</td>
-                                                                            </tr>
-                                                                            <tr>
-                                                                                <th scope="row">2</th>
-                                                                                <td><div class="mb-2 mr-2 badge badge-primary">Pending</div></td>
-                                                                                <td>Otto</td>
-                                                                                <td>@mdo</td>
-                                                                                <td>Mark</td>
-                                                                                <td>Otto</td>
-                                                                                <td>@mdo</td>
-                                                                                <td>Mark</td>
-                                                                                <td>Otto</td>
-                                                                                <td>@mdo</td>
-                                                                                <td>Mark</td>
-                                                                                <td>Otto</td>
-                                                                                <td>@mdo</td>
-                                                                                <td>Mark</td>
-                                                                                <td>Otto</td>
-                                                                                <td>Otto</td>
-                                                                            </tr>
-                                                                            <tr>
-                                                                                <th scope="row">3</th>
-                                                                                <td><div class="mb-2 mr-2 badge badge-danger">Expired</div></td>
-                                                                                <td>Otto</td>
-                                                                                <td>@mdo</td>
-                                                                                <td>Mark</td>
-                                                                                <td>Otto</td>
-                                                                                <td>@mdo</td>
-                                                                                <td>Mark</td>
-                                                                                <td>Otto</td>
-                                                                                <td>@mdo</td>
-                                                                                <td>Mark</td>
-                                                                                <td>Otto</td>
-                                                                                <td>@mdo</td>
-                                                                                <td>Mark</td>
-                                                                                <td>Otto</td>
-                                                                                <td>Otto</td>
-                                                                            </tr>
-                                                                            <tr>
-                                                                                <th scope="row">4</th>
-                                                                                <td><div class="mb-2 mr-2 badge badge-warning">Cancel</div></td>
-                                                                                <td>Otto</td>
-                                                                                <td>@mdo</td>
-                                                                                <td>Mark</td>
-                                                                                <td>Otto</td>
-                                                                                <td>@mdo</td>
-                                                                                <td>Mark</td>
-                                                                                <td>Otto</td>
-                                                                                <td>@mdo</td>
-                                                                                <td>Mark</td>
-                                                                                <td>Otto</td>
-                                                                                <td>@mdo</td>
-                                                                                <td>Mark</td>
-                                                                                <td>Otto</td>
-                                                                                <td>Otto</td>
-                                                                            </tr>
-                                                                            <tr>
-                                                                                <th scope="row">5</th>
-                                                                                <td><div class="mb-2 mr-2 badge badge-success">Active</div></td>
-                                                                                <td>Otto</td>
-                                                                                <td>@mdo</td>
-                                                                                <td>Mark</td>
-                                                                                <td>Otto</td>
-                                                                                <td>@mdo</td>
-                                                                                <td>Mark</td>
-                                                                                <td>Otto</td>
-                                                                                <td>@mdo</td>
-                                                                                <td>Mark</td>
-                                                                                <td>Otto</td>
-                                                                                <td>@mdo</td>
-                                                                                <td>Mark</td>
-                                                                                <td>Otto</td>
-                                                                                <td>Otto</td>
-                                                                            </tr>
-                                                                            <tr>
-                                                                                <th scope="row">6</th>
-                                                                                <td><div class="mb-2 mr-2 badge badge-primary">Pending</div></td>
-                                                                                <td>Otto</td>
-                                                                                <td>@mdo</td>
-                                                                                <td>Mark</td>
-                                                                                <td>Otto</td>
-                                                                                <td>@mdo</td>
-                                                                                <td>Mark</td>
-                                                                                <td>Otto</td>
-                                                                                <td>@mdo</td>
-                                                                                <td>Mark</td>
-                                                                                <td>Otto</td>
-                                                                                <td>@mdo</td>
-                                                                                <td>Mark</td>
-                                                                                <td>Otto</td>
-                                                                                <td>Otto</td>
-                                                                            </tr>
-                                                                            <tr>
-                                                                                <th scope="row">7</th>
-                                                                                <td><div class="mb-2 mr-2 badge badge-danger">Expired</div></td>
-                                                                                <td>Otto</td>
-                                                                                <td>@mdo</td>
-                                                                                <td>Mark</td>
-                                                                                <td>Otto</td>
-                                                                                <td>@mdo</td>
-                                                                                <td>Mark</td>
-                                                                                <td>Otto</td>
-                                                                                <td>@mdo</td>
-                                                                                <td>Mark</td>
-                                                                                <td>Otto</td>
-                                                                                <td>@mdo</td>
-                                                                                <td>Mark</td>
-                                                                                <td>Otto</td>
-                                                                                <td>Otto</td>
-                                                                            </tr>
-                                                                        </tbody> -->
+                                                                    </thead>
+                                                                        <tbody style="background: rgb(0, 0, 0, 0.1);">
+                                                                            <?php
+                                                                            $customer_sellc2=mysqli_query($connection,"select ats_car_stock_rec_no from ats_car_stock where ats_car_stock_dhl_date=''");
+                                                                            $projectsc2 = array();
+                                                                            while($arrayuasc2=mysqli_fetch_array($customer_sellc2))
+                                                                            {
+                                                                                
+                                                                            array_push($projectsc2,$arrayuasc2[0]);
+                                                                            
+                                                                            }
+                                                                            $customerid1 = "'" . implode ( "', '", $projectsc2 ) . "'";
+                                                                            $queryallcompleted=mysqli_query($connection,"select * from ats_stock_reservation where customer ='".$querycustomer[1]."' AND reservedpaymentstatus = 'CONFIRMED' AND recordno in ($customerid1)");
+                                                                            
+                                                                            while($rowzeroallocation4=mysqli_fetch_array($querywaitingfordeparture))
+                                                                            {
+
+                                                                                ?>
+                                                                                <tr>
+                                                                                    <th scope="row">1</th>
+                                                                                    <td><?php echo $rowzeroallocation4[1]?></td>
+                                                                                    <?php $querycarrecord4=mysqli_fetch_row(mysqli_query($connection,"select * from ats_car_stock where ats_car_stock_rec_no='".$rowzeroallocation4[1]."'"));
+                                                                                    $querymodel4=mysqli_fetch_row(mysqli_query($connection,"select * from ats_model_car where ats_make_model='".$querycarrecord4[4]."'"));?>
+                                                                                    <td><?php echo $querymodel4[2]?></td>
+                                                                                    <td><?php echo $querycarrecord4[2]?></td>
+                                                                                    <td>&yen;</td>
+                                                                                    <td><?php echo ($rowzeroallocation4[17] == "CNF" ?$rowzeroallocation4[11]   : "--") ?></td>
+                                                                                    <td><?php echo ($rowzeroallocation4[17] == "FOB" ?$rowzeroallocation4[11]   : "--") ?></td>
+                                                                                
+                                                                                    <td><?php echo $rowzeroallocation4[11]-$rowzeroallocation4[15]?></td>
+                                                                                    <td><?php echo $rowzeroallocation4[15]?></td>
+                                                                                    <td><?php echo $querycarrecord4[120]?></td>
+                                                                                    <td><?php echo $querycarrecord4[121]?></td>
+                                                                                    <td><?php echo $querycarrecord4[83]?></td>
+                                                                                    <td><?php echo $querycarrecord4[125]?></td>
+                                                                                    
+                                                                                </tr>
+                                                                                <?php
+                                                                            }
+                                                                            ?>
+                                                                          
+                                                                        </tbody> 
                                                                     </table>
                                                                 </div>
                                                             </div>
@@ -944,134 +491,47 @@ $querytotaltopay=mysqli_fetch_row(mysqli_query($connection,"select SUM(remaining
                                                                                 <th>Arrival Date</th>    
                                                                             </tr>
                                                                         </thead>
-                                                                        <!-- <tbody style="background: rgb(0, 0, 0, 0.1);">
-                                                                            <tr>
-                                                                                <th scope="row">1</th>
-                                                                                <td><div class="mb-2 mr-2 badge badge-success">Active</div></td>
-                                                                                <td>MI-298978</td>
-                                                                                <td>Suzuki Cultus</td>
-                                                                                <td>4676578746</td>
-                                                                                <td>$</td>
-                                                                                <td>5430 $USD</td>
-                                                                                <td>3400 $</td>
-                                                                                <td>50%</td>
-                                                                                <td>30%</td>
-                                                                                <td>4698$</td>
-                                                                                <td>KAI TAKA Saki, Port of Japan</td>
-                                                                                <td>Gawadar Port</td>
-                                                                                <td>Mark</td>
-                                                                                <td>02\6\2021</td>
-                                                                                <td>02\7\2021</td>
-                                                                            </tr>
-                                                                            <tr>
-                                                                                <th scope="row">2</th>
-                                                                                <td><div class="mb-2 mr-2 badge badge-primary">Pending</div></td>
-                                                                                <td>Otto</td>
-                                                                                <td>@mdo</td>
-                                                                                <td>Mark</td>
-                                                                                <td>Otto</td>
-                                                                                <td>@mdo</td>
-                                                                                <td>Mark</td>
-                                                                                <td>Otto</td>
-                                                                                <td>@mdo</td>
-                                                                                <td>Mark</td>
-                                                                                <td>Otto</td>
-                                                                                <td>@mdo</td>
-                                                                                <td>Mark</td>
-                                                                                <td>Otto</td>
-                                                                                <td>Otto</td>
-                                                                            </tr>
-                                                                            <tr>
-                                                                                <th scope="row">3</th>
-                                                                                <td><div class="mb-2 mr-2 badge badge-danger">Expired</div></td>
-                                                                                <td>Otto</td>
-                                                                                <td>@mdo</td>
-                                                                                <td>Mark</td>
-                                                                                <td>Otto</td>
-                                                                                <td>@mdo</td>
-                                                                                <td>Mark</td>
-                                                                                <td>Otto</td>
-                                                                                <td>@mdo</td>
-                                                                                <td>Mark</td>
-                                                                                <td>Otto</td>
-                                                                                <td>@mdo</td>
-                                                                                <td>Mark</td>
-                                                                                <td>Otto</td>
-                                                                                <td>Otto</td>
-                                                                            </tr>
-                                                                            <tr>
-                                                                                <th scope="row">4</th>
-                                                                                <td><div class="mb-2 mr-2 badge badge-warning">Cancel</div></td>
-                                                                                <td>Otto</td>
-                                                                                <td>@mdo</td>
-                                                                                <td>Mark</td>
-                                                                                <td>Otto</td>
-                                                                                <td>@mdo</td>
-                                                                                <td>Mark</td>
-                                                                                <td>Otto</td>
-                                                                                <td>@mdo</td>
-                                                                                <td>Mark</td>
-                                                                                <td>Otto</td>
-                                                                                <td>@mdo</td>
-                                                                                <td>Mark</td>
-                                                                                <td>Otto</td>
-                                                                                <td>Otto</td>
-                                                                            </tr>
-                                                                            <tr>
-                                                                                <th scope="row">5</th>
-                                                                                <td><div class="mb-2 mr-2 badge badge-success">Active</div></td>
-                                                                                <td>Otto</td>
-                                                                                <td>@mdo</td>
-                                                                                <td>Mark</td>
-                                                                                <td>Otto</td>
-                                                                                <td>@mdo</td>
-                                                                                <td>Mark</td>
-                                                                                <td>Otto</td>
-                                                                                <td>@mdo</td>
-                                                                                <td>Mark</td>
-                                                                                <td>Otto</td>
-                                                                                <td>@mdo</td>
-                                                                                <td>Mark</td>
-                                                                                <td>Otto</td>
-                                                                                <td>Otto</td>
-                                                                            </tr>
-                                                                            <tr>
-                                                                                <th scope="row">6</th>
-                                                                                <td><div class="mb-2 mr-2 badge badge-primary">Pending</div></td>
-                                                                                <td>Otto</td>
-                                                                                <td>@mdo</td>
-                                                                                <td>Mark</td>
-                                                                                <td>Otto</td>
-                                                                                <td>@mdo</td>
-                                                                                <td>Mark</td>
-                                                                                <td>Otto</td>
-                                                                                <td>@mdo</td>
-                                                                                <td>Mark</td>
-                                                                                <td>Otto</td>
-                                                                                <td>@mdo</td>
-                                                                                <td>Mark</td>
-                                                                                <td>Otto</td>
-                                                                                <td>Otto</td>
-                                                                            </tr>
-                                                                            <tr>
-                                                                                <th scope="row">7</th>
-                                                                                <td><div class="mb-2 mr-2 badge badge-danger">Expired</div></td>
-                                                                                <td>Otto</td>
-                                                                                <td>@mdo</td>
-                                                                                <td>Mark</td>
-                                                                                <td>Otto</td>
-                                                                                <td>@mdo</td>
-                                                                                <td>Mark</td>
-                                                                                <td>Otto</td>
-                                                                                <td>@mdo</td>
-                                                                                <td>Mark</td>
-                                                                                <td>Otto</td>
-                                                                                <td>@mdo</td>
-                                                                                <td>Mark</td>
-                                                                                <td>Otto</td>
-                                                                                <td>Otto</td>
-                                                                            </tr>
-                                                                        </tbody> -->
+                                                                        <tbody style="background: rgb(0, 0, 0, 0.1);">
+                                                                            <?php
+                                                                            $customer_sellc3=mysqli_query($connection,"select ats_car_stock_rec_no from ats_car_stock where ats_car_stock_dhl_date=''");
+                                                                            $projectsc3 = array();
+                                                                            while($arrayuasc3=mysqli_fetch_array($customer_sellc3))
+                                                                            {
+                                                                                
+                                                                            array_push($projectsc3,$arrayuasc3[0]);
+                                                                            
+                                                                            }
+                                                                            $customerid3 = "'" . implode ( "', '", $projectsc3 ) . "'";
+                                                                            $queryallcompleted=mysqli_query($connection,"select * from ats_stock_reservation where customer ='".$querycustomer[1]."' AND reservedpaymentstatus = 'CONFIRMED' AND recordno in ($customerid3)");
+                                                                            
+                                                                            while($rowallcompleted=mysqli_fetch_array($queryallcompleted))
+                                                                            {
+
+                                                                                ?>
+                                                                                <tr>
+                                                                                    <th scope="row">1</th>
+                                                                                    <td><?php echo $rowallcompleted[1]?></td>
+                                                                                    <?php $querycarrecord5=mysqli_fetch_row(mysqli_query($connection,"select * from ats_car_stock where ats_car_stock_rec_no='".$rowallcompleted[1]."'"));
+                                                                                    $querymodel4=mysqli_fetch_row(mysqli_query($connection,"select * from ats_model_car where ats_make_model='".$querycarrecord5[4]."'"));?>
+                                                                                    <td><?php echo $querymodel4[2]?></td>
+                                                                                    <td><?php echo $querycarrecord5[2]?></td>
+                                                                                    <td>&yen;</td>
+                                                                                    <td><?php echo ($rowallcompleted[17] == "CNF" ?$rowallcompleted[11]   : "--") ?></td>
+                                                                                    <td><?php echo ($rowallcompleted[17] == "FOB" ?$rowallcompleted[11]   : "--") ?></td>
+                                                                                
+                                                                                    <td><?php echo $rowallcompleted[11]-$rowallcompleted[15]?></td>
+                                                                                    <td><?php echo $rowallcompleted[15]?></td>
+                                                                                    <td><?php echo $querycarrecord5[120]?></td>
+                                                                                    <td><?php echo $querycarrecord5[121]?></td>
+                                                                                    <td><?php echo $querycarrecord5[83]?></td>
+                                                                                    <td><?php echo $querycarrecord5[125]?></td>
+                                                                                    
+                                                                                </tr>
+                                                                                <?php
+                                                                            }
+                                                                            ?>
+                                                                          
+                                                                        </tbody> 
                                                                     </table>
                                                                 </div>
                                                             </div>

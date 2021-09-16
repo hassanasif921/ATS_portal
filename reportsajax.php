@@ -18,7 +18,7 @@ if(isset($_POST['getcustomer_reserved']))
 }
 if(isset($_POST['get_remittance_date']))
 {
-    $get_reservedreports_date_old     = $_POST['get_remittance_date'];
+    $get_reservedreports_date_old= $_POST['get_remittance_date'];
     $get_reservedreports_date= date("Y-m-d", strtotime($get_reservedreports_date_old));
     $get_reservedreports_till_0ld = $_POST['get_remittance_date_till'];
     $get_reservedreports_till =  date("Y-m-d", strtotime($get_reservedreports_till_0ld));

@@ -87,6 +87,7 @@
         $stock_port_of_loading=$_POST['stock_port_of_loading'];
         $stock_ship_name=$_POST['stock_ship_name'];
         $stock_port_of_discharge=$_POST['stock_port_of_discharge'];
+        $stock_eta=$_POST['stock_eta'];
         // Upload files and store in database
         if(move_uploaded_file($_FILES["stock_auction_sheet_file"]["tmp_name"],'DATA/'.$filename1f)){
                
@@ -365,13 +366,13 @@
                 ats_car_stock_bl_file,ats_car_stock_release_ok_date,ats_car_stock_bal_tt_copy_file,ats_car_stock_dhl_date
                 ,ats_car_stock_tracking_number,ats_car_stock_dhl_link,ats_car_stock_inspection_date,ats_car_stock_inspection_cer_file,
                 ats_car_stock_createdBy,ats_car_stock_createdAt,ats_car_stock_updatedBy,ats_car_stock_updatedAt,ats_car_stock_status,
-                ats_car_stock_shape,stock_port, shipmenttype, conversionrate,extra_transportatiom,stock_type,stock_total_expences,stock_country_slab,project,recordno1,port_of_loding,port_of_discharge,ship_name) 
+                ats_car_stock_shape,stock_port, shipmenttype, conversionrate,extra_transportatiom,stock_type,stock_total_expences,stock_country_slab,project,recordno1,port_of_loding,port_of_discharge,ship_name,ETA) 
                     values('$stock_rec_no','$stock_chassis_id','$stock_make','$stock_model','$stock_package',
                     '$stock_man_year','$stock_reg_year','$stock_color','$stock_shift','$stock_fuel','$stock_door','$stock_grade','$stock_engine_size','$stock_kobutsu','$stock_engine_no','$stock_seats','$stock_mileage_1','$stock_mileage_2','$stock_length','$stock_width','$stock_height','$stock_cubic_meter','$stock_weight','$stock_total_weight','$stock_max_loading','$stock_auction','$stock_lot_no','$stock_buying_price','$stock_buying_date','$stock_country_location','$stock_city_location','$stock_option_ps','$stock_option_nv',
                     '$stock_option_ac','$stock_option_wab','$stock_option_rs','$stock_option_tv','$stock_option_rr','$stock_option_abs','$stock_option_ls','$stock_option_pw',
                     '$stock_option_sr','$stock_option_fog','$stock_option_ab','$stock_option_gg','$stock_option_bt','$stock_option_aw','$stock_other_options','$stock_auction_charges','$stock_rikuso_charges','$stock_fob_charges','$stock_storage_charges','$stock_dhl_charges','$stock_radiation_charges','$stock_thc_charges','$stock_vainning_charges','$stock_inspection_charges','$stock_freight_charges','$stock_other_charges','$stock_profit','$stock_discount_print','$stock_total_profit_print','$stock_your_profit_print',
                     '$stock_ats_profit_print','$stock_fob_price_print_yen','$stock_fob_price_print_dollar','$stock_cnf_price_print_yen','$stock_cnf_price_print_dollar','$filename1f','$stock_auction_pictures','$stock_masso_date','$filename1fecjp','$filename1fecen','$stock_inyard_date','$stock_yard_pictures','$stock_reserve_date','$stock_invoice_file','$stock_sure_ok_date','$stock_tt_copy_file','$stock_ship_date','$stock_vessel_name','$stock_voyage','$stock_ship_ok_date'
-                    ,'$stock_shipping_invoice_file','$filename7f','$stock_bl_date','$stock_bl_no','$stock_bill_of_lading_file','$stock_release_ok_date','$stock_tt_copy_file','$stock_dhl_date','$stock_tracking_number','$stock_dhl_link','$stock_inspection_date','$stock_inspection_certificate_file','$stock_createdBy','$stock_createdAt','$stock_updatedBy','$stock_updatedAt','$stock_status','$stock_shape','$stock_port','$shipmenttype','$conversionrate','$stock_extra_transportation','$stock_type','$stock_total_expences','$stock_country_slab','$project','$recordno1','$stock_port_of_loading','$stock_port_of_discharge','$stock_ship_name')";
+                    ,'$stock_shipping_invoice_file','$filename7f','$stock_bl_date','$stock_bl_no','$stock_bill_of_lading_file','$stock_release_ok_date','$stock_tt_copy_file','$stock_dhl_date','$stock_tracking_number','$stock_dhl_link','$stock_inspection_date','$stock_inspection_certificate_file','$stock_createdBy','$stock_createdAt','$stock_updatedBy','$stock_updatedAt','$stock_status','$stock_shape','$stock_port','$shipmenttype','$conversionrate','$stock_extra_transportation','$stock_type','$stock_total_expences','$stock_country_slab','$project','$recordno1','$stock_port_of_loading','$stock_port_of_discharge','$stock_ship_name','$stock_eta')";
                 $query = mysqli_query($connection,$insert) or die(mysqli_error($connection));
                 if ($query)
                     {
@@ -1158,7 +1159,7 @@
                                                             <div class="form-row"> 
                                                                 <div class="col-sm-2">
                                                                     <div class="position-relative form-group">
-                                                                        <label class="form-control-label">Ship Date</label>
+                                                                        <label class="form-control-label">Departure Date</label>
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-sm-2">
@@ -1167,12 +1168,17 @@
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-sm-1"></div>
-                                                                <div class="col-sm-3">
+                                                                <div class="col-sm-2">
+                                                                    <div class="position-relative ">
+                                                                        <input type="text" id="stock_eta" name="stock_eta" placeholder="ETA" class="form-control-sm form-control">
+                                                                    </div>
+                                                                </div> 
+                                                                <div class="col-sm-2">
                                                                     <div class="position-relative ">
                                                                         <input type="text" id="stock_vessel_name" name="stock_vessel_name" placeholder="Vessel Name" class="form-control-sm form-control">
                                                                     </div>
                                                                 </div> 
-                                                                <div class="col-sm-3">
+                                                                <div class="col-sm-2">
                                                                     <div class="position-relative ">
                                                                         <input  type="text" id="stock_voyage" name="stock_voyage" placeholder="Voyage" class="form-control-sm form-control">
                                                                     </div>

@@ -105,7 +105,7 @@
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="#">
+                                        <!-- <a href="#">
                                             <i class="metismenu-icon"></i>Track My Car
                                             <i class="metismenu-state-icon pe-7s-angle-down caret-left lnr lnr-chevron-down"></i>
                                         </a>
@@ -130,7 +130,7 @@
                                                     <i class="metismenu-icon"></i>Released Units
                                                 </a>
                                             </li>
-                                        </ul>
+                                        </ul> -->
                                     </li>
                                 </ul>
                             </li>    
@@ -159,8 +159,9 @@
                                     </li>
                                 </ul>
                             </li>--->
-                            <li class="app-sidebar__heading">MENU</li>
                             <?php if(!isset($_SESSION['agents_id'])){?>
+                            <li class="app-sidebar__heading">MENU</li>
+                            
                             <li class="">
                                 <a href="#">
                                     <i style="font-size: 20px;" class=" metismenu-icon pe-7s-browser fa fa-desktop"></i>ACCESS
@@ -266,7 +267,7 @@
                                     </li>
                                 </ul>
                             </li>
-                            <?php }?>
+                           
                             <li>
                                 <a href="#">
                                     <i class="metismenu-icon pe-7s-plugin fa fa-credit-card"></i>REMITTANCE
@@ -305,6 +306,7 @@
                                             <i class="metismenu-icon"></i>Add Refund
                                         </a>
                                     </li>
+                                    <?php }?>
                                 </ul>
                             </li> 
                         </ul>

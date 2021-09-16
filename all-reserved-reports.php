@@ -1,7 +1,15 @@
 <?php
 include("top.php");
 include("connection_db.php");
-$query_reserved=mysqli_query($connection,"select * from ats_stock_reservation ORDER BY id DESC");
+
+if(isset($_SESSION['agents_id'])) //checking session variable
+{
+$query_reserved=mysqli_query($connection,"select * from ats_stock_reservation where agent_name='".$_SESSION['agents_id']."' ORDER BY id DESC");
+}
+else {
+    $query_reserved=mysqli_query($connection,"select * from ats_stock_reservation ORDER BY id DESC");
+
+}
 ?>
             <div class="app-main__outer">
                 <div class="app-main__inner p-0">
@@ -17,15 +25,15 @@ $query_reserved=mysqli_query($connection,"select * from ats_stock_reservation OR
                                             <div style="margin-left: -8%; "class="col-sm-1">
                                                 <select style="width: 160px;" name="get_all_reserved_reports_agent_name" id="get_all_reserved_reports_agent_name" type="text" class="form-control form-control-sm" onChange="getcustomer(this.value);">
                                                 <?php
-                                                $query_sell = mysqli_query($connection,"select * from ats_sell_person");
+                                                $query_sell = mysqli_query($connection,"select * from ats_employee");
                                                
                                                 while($row = mysqli_fetch_array($query_sell))
                                                 {
                                                
                                                 
                                                 ?>
-                                                <option value = "<?php echo($row['Sell_person'])?>" >
-                                                    <?php echo($row['Sell_person']) ?>
+                                                <option value = "<?php echo($row['ats_employee_id'])?>" >
+                                                    <?php echo($row['ats_employee_firstName']) ?>
                                                 </option>
                                                 <?php
                                                 

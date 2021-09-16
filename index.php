@@ -142,8 +142,12 @@ if (isset($_POST["btn_post"])) {
                                                     	    				   
                                         ?>   
                                         
-                                        <div style="padding-top:3%; color: black;" class="container">
+                                        <div style="padding-top:; color: black;" class="container">
                                         <!--- asas--->
+                                        <?php 
+                                         if(isset($_SESSION['user_id']))
+                                         {
+                                        ?>
                                             <div class="row">
                                                 <div class="col-md-10">
                                                     <img class="user-avatar rounded-circle" style="width: 55px;" id="get_post_emp_passport_image" name="get_post_emp_passport_image" src="assets/images/avatars/1.jpg" alt="User Avatar">
@@ -171,14 +175,14 @@ if (isset($_POST["btn_post"])) {
                                                     </div>    
                                                 </div>
                                             </div>
-                                           
+                                        <?php }?>   
                                             <!-- <img class="user-avatar rounded-circle" style="width: 55px;" id="get_post_emp_passport_image" name="get_post_emp_passport_image" src="data:image/jpg;charset=utf8;base64,<?php echo base64_encode($querylogin[0]); ?>" alt="User Avatar">
                                             <label style="font-weight: bold;  margin-left:10px; margin-top:-10px;" name="get_post_emp_fullname" id="get_post_emp_fullname"><?php echo $row["ats_post_username"] ?><br/>
                                             </label>
                                             <p style="margin-left:70px;  font-size:12px; margin-top:-22px;" name="get_post_privacy" id="get_post_privacy"><?php echo $row["ats_post_privacy"] ?>  <i class="fa fa-globe"></i></p> -->
                                             <h2 style=" margin-top:3.5%;" name="get_post_heading" id="get_post_heading"><?php echo $row["ats_post_heading"] ?></h2>
                                             <h6 id="get_post_date" name="get_post_date"> <?php echo $row["ats_post_createdAt"] ?></h6>
-                                            <p style="padding-bottom:2%; padding-top:5%;" name="get_post_description" id="get_post_description"><?php echo $row["ats_post_description"] ?></p>
+                                            <p style="padding-bottom:2%;" name="get_post_description" id="get_post_description"><?php echo $row["ats_post_description"] ?></p>
                                             <div style="margin-bottom:2%" class="row">
                                             <?php 
                                             $query_post_images=mysqli_query($connection,"select * from table_post where post_id='".$row[0]."'");
@@ -284,26 +288,12 @@ if (isset($_POST["btn_post"])) {
                                                 <label class="like-share" style="margin-left:67%;  float:right;"><a><i class="fa fa-comments"></i><span name="get_post_total_comments" id="get_post_total_comments"> 56</span> Comments</a></label>
                                             </div>
                                             
-                                            <!-- <div style="margin-bottom:2%" class="row">
-                                                <div style="margin-left:7px;" class="col-md-6">
-                                                    <img style="width:300px; height:260px;" name="get_post_image1" id="get_post_image1" src="assets/images/logo-inverse.png">
-                                                </div>
-                                                <div style="margin-left:-20px;" class="col-md-3">
-                                                    <img style="width:150px; height:130px;" name="get_post_image2" id="get_post_image2" src="assets/images/logo-inverse.png">
-                                                    <img style="width:150px; margin-top:1px; height:130px;" name="get_post_image3" id="get_post_image3" src="assets/images/logo-inverse.png">
-                                                </div>
-                                                <div style="margin-left:-10px;" class="col-md-3">
-                                                    <img style="width:150px; height:130px;" name="get_post_image4" id="get_post_image4" src="assets/images/logo-inverse.png">
-                                                    <img style="width:150px; margin-top:1px; height:130px;" name="get_post_image5" id="get_post_image5" src="assets/images/logo-inverse.png">
-                                                </div>             
-                                                <label class="like-share" style="margin-left:3.5%;"><a><i class="fa fa-thumbs-up"></i><span name="get_post_total_likes" id="get_post_total_likes"> 56</span> Likes</a></label>
-                                                <label class="like-share" style="margin-left:67%;  float:right;"><a><i class="fa fa-comments"></i><span name="get_post_total_comments" id="get_post_total_comments"> 56</span> Comments</a></label>
-                                            </div> -->
+                                        
                                             <form id="signupForm" method="post" action="comment.php">
                                                 <input type="hidden" value="<?php echo $row['ats_post_id']?>" name="form_post_id">
                                                 <input type="hidden" value="<?php echo  $role?>" name="form_post_role">
                                                 <input type="hidden" value="<?php echo  $username?>" name="form_post_username">
-                                            <div style=" margin-bottom:px;" class="row like-share" id="like_share">
+                                            <div style=" margin-bottom:0px;" class="row like-share" id="like_share">
                                                 <?php 
                                                 $query_post_likes=mysqli_query($connection,"select * from table_post_like where post_id='".$row['ats_post_id']."' AND role='".$role."' AND userid='".$userid."'");
                                                 $num_like_post=mysqli_num_rows($query_post_likes);
@@ -784,7 +774,7 @@ if (isset($_POST["btn_post"])) {
                                                 <ul class="nav nav-justified">
                                                     <li class="nav-item">
                                                         <a href="#tab-minimal-1" data-toggle="tab" class="nav-link minimal-tab-btn-1">
-                                                            <div class="widget-number"><span>$15,065ss</span></div>
+                                                            <div class="widget-number"><span>&yen; 15,065ss </span></div>
                                                             <div class="tab-subheading">
                                                                 <span class="pr-2 opactiy-6">
                                                                     <i class="fa fa-comment-dots"></i>
@@ -2021,7 +2011,7 @@ if (isset($_POST["btn_post"])) {
                                                             $month = $now->format('F'); ?>
 
                                                                 <h5 class="widget-heading opacity-4"><?php echo $month; ?> Totals</h5>
-                                                                <h5><span class="pr-2"> <b class="text-danger">12</b> new leads,</span>
+                                                                <h5>
                                                                 <span><b class="text-success">$56,24</b> in sales</span></h5>
                                                             </div>
                                                         </div>
@@ -2267,7 +2257,7 @@ include("bottom.php");
             success: function(data){
                 if (data) {
                    
-                    $("#like_share").load(location.href+" #like_share>*","");
+                    $("#dashboard-home").load(location.href+" #dashboard-home>*","");
                     
                 }
             }
@@ -2295,7 +2285,7 @@ include("bottom.php");
             success: function(data){
                 if (data) {
                    
-                    $("#like_share").load(location.href+" #like_share>*","");
+                    $("#dashboard-home").load(location.href+" #dashboard-home>*","");
                     
                 }
             }

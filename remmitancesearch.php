@@ -1,4 +1,5 @@
 <?php
+session_start();
 include("connection_db.php");
 ?>
 <?php
@@ -43,10 +44,12 @@ if(isset($_POST['agent_id']))
                                                                         <th>Account #</th>
                                                                         <!-- <th>TT File</th>
                                                                         <th>Confirmation File</th> -->
+                                                                        <?php if(!isset($_SESSION['agents_id'])){?>
                                                                         <th>Created At</th>
                                                                         <th>Updated At</th>
                                                                         <th>Status</th>
                                                                         <th>Action</th>
+                                                                        <?php }?>
                                                                     </tr>
                                                                 </thead>
                                                                 <tbody >
@@ -78,11 +81,14 @@ if(isset($_POST['agent_id']))
                                                                     <td><?php echo $queryv[1] ?></td>
                                                                     <td><?php echo $row["ats_remittance_account"] ?></td>
                                                                     
+                                                                    <?php if(!isset($_SESSION['agents_id'])){?>
                                                                     <td><?php echo $row["ats_remittance_created_at"] ?></td>
                                                                     <td><?php echo $row["ats_remittance_updated_at"] ?></td>
                                                                     <td><div class="mb-2 mr-2 badge badge-info"><?php echo $row["ats_remittance_status"] ?></div></td>
                                                                     <td><a style="padding:3px" href="<?php //echo $row["id"] ?>" class="btn btn-primary"><span class="fa fa-plus"></span></a>
-                                                                    </td>
+                                                                    
+                                                                </td>
+                                                                <?php }?>
                                                                 </tr>
                                                                 <?php
                                                                         }    
@@ -114,10 +120,12 @@ if(isset($_POST['cust_id']))
                                                                         <th>Account #</th>
                                                                         <!-- <th>TT File</th>
                                                                         <th>Confirmation File</th> -->
+                                                                        <?php if(!isset($_SESSION['agents_id'])){?>
                                                                         <th>Created At</th>
                                                                         <th>Updated At</th>
                                                                         <th>Status</th>
                                                                         <th>Action</th>
+                                                                        <?php }?>
                                                                     </tr>
                                                                 </thead>
                                                                 <tbody >
@@ -147,13 +155,14 @@ if(isset($_POST['cust_id']))
                                                                     <td><?php echo $row["ats_remittance_con_rate"] ?></td>
                                                                     <?php $queryv=mysqli_fetch_row(mysqli_query($connection,"select * from ats_vendor where ats_vendor_id='".$row["ats_remittance_vendor_name"]."'"))?>
                                                                     <td><?php echo $queryv[1] ?></td>
-                                                                    <td><?php echo $row["ats_remittance_account"] ?></td>
-                                                                    
+                                                                    <?php if(!isset($_SESSION['agents_id'])){?>
                                                                     <td><?php echo $row["ats_remittance_created_at"] ?></td>
                                                                     <td><?php echo $row["ats_remittance_updated_at"] ?></td>
                                                                     <td><div class="mb-2 mr-2 badge badge-info"><?php echo $row["ats_remittance_status"] ?></div></td>
                                                                     <td><a style="padding:3px" href="<?php //echo $row["id"] ?>" class="btn btn-primary"><span class="fa fa-plus"></span></a>
+                                                                        
                                                                     </td>
+                                                                    <?php }?>
                                                                 </tr>
                                                                 <?php
                                                                         }    
