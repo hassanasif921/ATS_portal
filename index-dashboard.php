@@ -426,9 +426,7 @@ include("connection_db.php");
                                                         </div>
                                                         <input style="font-size: 12px;" name="get_stock_color" id="get_stock_color" type="text" class="form-control">
                                                     </div>
-                                                    <!-- <div style="background: lightgray;" class="">
-                                                        <h6 style="font-weight: bold;" name="" id="">Results</h6>
-                                                    </div> -->
+                                                  
                                                 </div>
                                                 <div style="margin-top: 0.4%;" class="row">
                                                     <div class="col-sm-3 input-group input-group-sm">
@@ -519,6 +517,36 @@ include("connection_db.php");
                                                         </div>
                                                     </div>
                                                 </div>
+                                                <!-- New  -->
+                                                <div style="margin-top: 0.4%;" class="row">
+                                                    <div class="col-sm-6 input-group input-group-sm">
+                                                        <div class="input-group-prepend">
+                                                            <span style="width: 100px;" class="input-group-text">InYard Date</span>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-md-6">
+                                                                <input name="get_stock_inyard_date_from" id="get_stock_inyard_date_from" placeholder="From" style="background: #ff9900;" class="form-control form-control-sm input-mask-trigger"  data-inputmask-alias="datetime" data-inputmask-inputformat="dd/mm/yyyy">
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <input name="get_stock_inyard_date_till" id="get_stock_inyard_date_till" placeholder="Till" style="background: #ff9900;" class="form-control form-control-sm input-mask-trigger"  data-inputmask-alias="datetime" data-inputmask-inputformat="dd/mm/yyyy">
+                                                            </div>
+                                                        </div>
+                                                        
+                                                    </div>
+                                                    <div class="col-sm-6 input-group input-group-sm">
+                                                        <div class="input-group-prepend">
+                                                            <span style="width: 100px;" class="input-group-text">Sure. OK Date</span>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-md-6">
+                                                                <input name="get_stock_sure_ok_date_from" id="get_stock_sure_ok_date_from" placeholder="From" style="background: #ff9900;" class="form-control form-control-sm input-mask-trigger"  data-inputmask-alias="datetime" data-inputmask-inputformat="dd/mm/yyyy">
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <input name="get_stock_sure_ok_date_till" id="get_stock_sure_ok_date_till" placeholder="Till" style="background: #ff9900;" class="form-control form-control-sm input-mask-trigger"  data-inputmask-alias="datetime" data-inputmask-inputformat="dd/mm/yyyy">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                                 <div style="margin-top: 0.4%; " class="row ">
                                                         <div style="margin-right: 5%;"  class="col-md-1 ">
                                                         </div>
@@ -585,14 +613,7 @@ include("connection_db.php");
                                                             <option value="No">NO</option>
                                                         </select>
                                                     </div>
-                                                    <!-- <div class="col-md-1">
-                                                        <label style="padding: 5px;" class="input-group-text">Rel-req</label> 
-                                                        <select style="padding: 2px;" name="get_stock_bl_date" id="get_stock_bl_date" class="form-control form-control-sm">
-                                                            <option>--</option>
-                                                            <option value="Yes">YES</option>
-                                                            <option value="No">NO</option>
-                                                        </select>
-                                                    </div> -->
+                                                 
                                                     <div class="col-md-1">
                                                         <label style="padding: 5px;" class="input-group-text">Rel. OK</label> 
                                                         <select style="padding: 2px;" name="get_stock_release_ok_date" id="get_stock_release_ok_date" class="form-control form-control-sm">
@@ -610,127 +631,11 @@ include("connection_db.php");
                                                         </select>
                                                     </div>
                                                 </div>
-                                                <div style="margin-top: 0.4%;" class="row">
-                                                    <div class="col-sm-3"></div>
-                                                    <div class="col-sm-6 input-group input-group-sm">
-                                                        <div class="input-group-prepend">
-                                                            <span class="input-group-text">Select Dt.</span>
-                                                        </div>
-                                                        <div class="row">
-                                                            <div class="col-md-6">
-                                                                <input style="background: #ff9900; width:160px;" name="get_stock_select_all_dates_from" id="get_stock_select_all_dates_from" placeholder="From"  class="form-control form-control-sm input-mask-trigger"  data-inputmask-alias="datetime" data-inputmask-inputformat="dd/mm/yyyy">
-                                                            </div>
-                                                            <div class="col-md-6">
-                                                                <input style="margin-left:-20%; background: #ff9900; width:148px;" name="get_stock_select_all_dates_till" id="get_stock_select_all_dates_till" placeholder="Till"  class="form-control form-control-sm input-mask-trigger"  data-inputmask-alias="datetime" data-inputmask-inputformat="dd/mm/yyyy">
-                                                            </div>
-                                                        </div>
-                                                        <!-- <input style="background: wheat;" name="get_stock_select_all_dates" id="get_stock_select_all_dates" class="btn form-control form-control-sm js-daterangepicker"> -->
-                                                    </div>
-                                                    <div class="col-sm-3"></div> 
-                                                </div>     
+                                              
                                             </div> 
                                         </div>
                                         <div style="background-color: gray; height: 1px;"></div>
-                                        <!-- <div data-parent="#accordion" id="show-records" aria-labelledby="headingOne" class="collapse">
-                                            <div class="card-body">
-                                                <a data-toggle="collapse" data-target="#back-to-search" aria-expanded="true" aria-controls="collapseOne" class="btn btn-primary text-center text-white">Back to Search</a>
-                                                <div style="margin-left: -35px;" class="container">
-                                                        <div class="row">
-                                                            <div class="col-lg-12">
-                                                                <div class="main-card card">
-                                                                    <div class="card-body">
-                                                                        <div class="table-responsive">
-                                                                            <table style="font-size: 10px;" class="table">
-                                                                                <thead>
-                                                                                    <tr>
-                                                                                        <th>Slct all<input type="checkbox" onclick="toggle(this);" /></th>
-                                                                                        <th>Price</th>
-                                                                                        <th>Inyrd</th>
-                                                                                        <th>Rsrv</th>
-                                                                                        <th>Sure</th>
-                                                                                        <th>Sold</th>
-                                                                                        <th>Shok</th>
-                                                                                        <th>Shinv</th>
-                                                                                        <th>Bl</th>
-                                                                                        <th>RLrq</th>
-                                                                                        <th>RLok</th>
-                                                                                        <th>RL</th>
-                                                                                        <th>Crfct</th>
-                                                                                        <th>Dhl</th>
-                                                                                        <th>Rec#</th>
-                                                                                        <th>Pics</th>
-                                                                                        <th>Kbtsu</th>
-                                                                                        <th>Chassis&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
-                                                                                        <th>Make</th>
-                                                                                        <th>Model</th>
-                                                                                        <th>Year</th>
-                                                                                        <th>Mth</th>
-                                                                                        <th>Color</th>
-                                                                                        <th>Sft</th>
-                                                                                        <th>Feul</th>
-                                                                                        <th>Door</th>
-                                                                                        <th>CC</th>
-                                                                                        <th style="text-align: center;">Opt.</th>
-                                                                                        <th>FOB</th>
-                                                                                        <th>Grd</th>
-                                                                                        <th>Mileage</th>
-                                                                                    </tr>
-                                                                                    
-                                                                                </thead>
-                                                                                <tbody>
-                                                                                    <?php
-                                                                                    $queryca=mysqli_query($connection,"select * from ats_car_stock");
-
-                                                                                    
-                                                                                        while($rowca=mysqli_fetch_array($queryca))
-                                                                                        {
-                                                                                        ?>
-                                                                                    <tr>
-                                                                                       
-                                                                                        <td><input type="checkbox" /></td>
-                                                                                        <td style="color: #ff9900; font-weight: bolder; background: wheat;"><?php echo $rowca[28]?></td>
-                                                                                        <td style="color: #ff9900; font-weight: bolder; background: wheat;">&checkmark;</td>
-                                                                                        <td style="color: #ff9900; font-weight: bolder; background: wheat;">&checkmark;</td>
-                                                                                        <td style="color: #ff9900; font-weight: bolder; background: wheat;">&checkmark;</td>
-                                                                                        <td style="color: #ff9900; font-weight: bolder; background: wheat;">&checkmark;</td>
-                                                                                        <td style="color: #ff9900; font-weight: bolder; background: wheat;">&checkmark;</td>
-                                                                                        <td style="color: #ff9900; font-weight: bolder; background: wheat;">&checkmark;</td>
-                                                                                        <td style="color: #ff9900; font-weight: bolder; background: wheat;">&checkmark;</td>
-                                                                                        <td style="color: #ff9900; font-weight: bolder; background: wheat;">&checkmark;</td>
-                                                                                        <td style="color: #ff9900; font-weight: bolder; background: wheat;">&checkmark;</td>
-                                                                                        <td style="color: #ff9900; font-weight: bolder; background: wheat;">&checkmark;</td>
-                                                                                        <td style="color: #ff9900; font-weight: bolder; background: wheat;">&checkmark;</td>
-                                                                                        <td style="color: #ff9900; font-weight: bolder; background: wheat;">&checkmark;</td>
-                                                                                        
-                                                                                        <td><?php echo $rowca[1]?></td>
-                                                                                        <td>5</td>
-                                                                                        <td><?php echo $rowca[14]?></td>
-                                                                                        <td><?php echo $rowca[2]?></td>
-                                                                                        <td><?php echo $rowca[3]?></td>
-                                                                                        <td><?php echo $rowca[4]?></td>
-                                                                                        <td><?php echo $rowca[6]?></td>
-                                                                                        <td>--</td>
-                                                                                        <td><?php echo $rowca[8]?></td>
-                                                                                        <td><?php echo $rowca[9]?></td>
-                                                                                        <td><?php echo $rowca[10]?></td>
-                                                                                        <td><?php echo $rowca[11]?></td>
-                                                                                        <td><?php echo $rowca[13]?></td>
-                                                                                        <td><?php echo $rowca[32] .",".$rowca[34]?></td>
-                                                                                        <td><?php echo $rowca[51]?></td>
-                                                                                        <td><?php echo $rowca[12]?></td>
-                                                                                        <td><?php echo $rowca[17]?></td>
-                                                                                    </tr>
-                                                                                <?php }?>
-                                                                                </tbody>
-                                                                            </table>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                </div>
-                                            </div> 
-                                        </div> -->
+                                
                                     </div>  
                                 </div>
                             </div>

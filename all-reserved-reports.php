@@ -25,8 +25,12 @@ else {
                                             <div style="margin-left: -8%; "class="col-sm-1">
                                                 <select style="width: 160px;" name="get_all_reserved_reports_agent_name" id="get_all_reserved_reports_agent_name" type="text" class="form-control form-control-sm" onChange="getcustomer(this.value);">
                                                 <?php
-                                                $query_sell = mysqli_query($connection,"select * from ats_employee");
-                                               
+                                                if(isset($_SESSION['agents_id'])){
+                                                $query_sell = mysqli_query($connection,"select * from ats_employee where ats_employee_id='".$_SESSION['agents_id']."'");
+                                                }
+                                                else{
+                                                    $query_sell = mysqli_query($connection,"select * from ats_employee");
+                                                }
                                                 while($row = mysqli_fetch_array($query_sell))
                                                 {
                                                
@@ -46,9 +50,22 @@ else {
                                                 <label style="font-weight: bold; margin-top: 5px;" class="form-control-label">Customer Name</label>
                                             </div>
                                             <div style="margin-left: -6%;" class="col-sm-1 " id="getcustomer_reserved">
-                                                <select style="width: 160px;" name="get_all_reserved_reports_customer_name" id="get_all_reserved_reports_customer_name" type="text" class="form-control form-control-sm">
-                                                   
-                                                </select>
+                                           
+                                                <?php 
+                                                    if(isset($_SESSION['agents_id'])){
+                                                    $getcustomer_reserved=mysqli_query($connection,"select * from ats_customer where ats_customer_sell_person='".$_SESSION['agents_id']."'");
+                                                    ?>
+                                                    <select style="width: 160px;" name="get_all_reserved_reports_customer_name" id="get_all_reserved_reports_customer_name" type="text" class="form-control form-control-sm" onChange="getcustomerreserved(this.value);">
+                                                    <option value="">Please Select</option>
+
+                                                    <?php while($rowcustomer_reserved=mysqli_fetch_array($getcustomer_reserved))
+                                                    {
+                                                    ?>
+                                                    <option value="<?php echo $rowcustomer_reserved[1]?>"><?php echo $rowcustomer_reserved[3]?></option>
+                                                    <?php }?>
+                                                    </select>
+                                                    <?php }?>
+                                            
                                             </div>
                                             <div style="margin-left: 8%;" class="col-sm-1">
                                                 <label style=" font-weight: bold; margin-top: 5px;" class="form-control-label">Country</label>
@@ -373,12 +390,15 @@ else {
                                                                     <td><input type="checkbox" /></td>
                                                                     <td><?php echo $rowreserved[1]?></td>
                                                                     <td style="display:none"><?php echo $rowreserved[12]?></td>
-                                                                    <td ><?php echo $rowreserved[4]?></td>
+                                                                    <?php $querycust=mysqli_fetch_row(mysqli_query($connection,"select * from ats_customer where ats_customer_ATS_ID='".$rowreserved[4]."'"));?>
+                                                                    <td ><?php echo $querycust[3]?></td>
 
                                                                     <td><?php echo $querycar[14]?></td>
                                                                     <td><?php echo $querycar[2]?></td>
-                                                                    <td><?php echo $querycar[3]?></td>
-                                                                    <td><?php echo $querycar[4]?></td>
+                                                                    <?php $query_make=mysqli_fetch_row(mysqli_query($connection,"select * from car_make where id='".$querycar[3]."'"));?>
+                                                                    <td><?php echo $query_make[1]?></td>
+                                                                    <?php $query_model=mysqli_fetch_row(mysqli_query($connection,"select * from ats_model_car where ats_model_id='".$querycar[4]."'"));?>
+                                                                    <td><?php echo $query_model[2]?></td>
                                                                     <td><?php echo $querycar[6]?></td>
                                                                     <td><?php echo $querycar[14]?></td>
                                                                     <td><?php echo $querycar[8]?></td>

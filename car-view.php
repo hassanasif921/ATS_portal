@@ -2,7 +2,7 @@
 <?php
 include("top.php");
 include("connection_db.php");
-$NewDate=Date('d/m/Y', strtotime('+3 days'));
+$NewDate=Date('d/m/Y', strtotime('+10 days'));
 $NewDate1=Date('d/m/Y');
 $reservedate=Date('Y/m/d');
 $query="select * from ats_car_stock WHERE ats_car_stock_id=".$_GET['car_id'];
@@ -23,7 +23,6 @@ if(isset($_POST['btnreserve']))
 	$recordno=mysqli_real_escape_string($connection,$row[1]);
 	$date_from=mysqli_real_escape_string($connection,$_POST['date_from']);
 	$date_till=mysqli_real_escape_string($connection,$_POST['date_till']);
-	$customerreserve=$_POST['customername'];
 	$payment_per=mysqli_real_escape_string($connection,$_POST['payment_per']);
 	$memo=mysqli_real_escape_string($connection,$_POST['memo']);
 	$yard_charges=mysqli_real_escape_string($connection,$_POST['yard_charges']);
@@ -1154,10 +1153,10 @@ if($num_reserve>0)
 						<div style="background: khaki; margin-left: 0px; padding-left: 0px; margin-top: 1%;  padding-bottom: 1%;" class="row container">
 							<div class="col-md-3" id="shipment">
 								<label class="form-control-label">Shipment</label>
-								<select style="padding: 0px; font-size: 11px;  margin-top: -8%; height: 20px;  width: 105px;" type="text" id="username" name="stock_chassis_id" class="form-control">
+								<select style="padding: 0px; font-size: 11px;  margin-top: -8%; height: 20px;  width: 105px;" id="username" name="stock_chassis_id" class="form-control">
 									<option value="---">---</option>
-									<option>Collect</option>
-									<option>Prepaid</option>
+									<option value="Collect">Collect</option>
+									<option value="Prepaid">Prepaid</option>
 								</select>
 							</div>
 							<div  class="col-md-3" id="currency">
@@ -1184,10 +1183,7 @@ if($num_reserve>0)
 								<label class="form-control-label">Inspection&nbsp;Chrgs</label>
 								<input readonly style=" font-size: 11px;  margin-top: -8%; height: 20px;  width: 105px;" type="text" id="username" name="stock_chassis_id" class="form-control" value="<?php echo $rowinspection[3]?>">
 							</div>
-							<div class="col-md-3">
-								<label class="form-control-label">Discount %</label>
-								<input readonly style=" font-size: 11px;  margin-top: -8%; height: 20px;  width: 100px;" type="text" id="username" name="stock_chassis_id" class="form-control" value="<?php echo $row[62]?>">
-							</div>
+							
 							<div  class="col-md-3">
 								<label class="form-control-label">Yard Charges</label>
 								<input readonly style=" font-size: 11px;  margin-top: -8%; height: 20px;  width: 100px;" type="text" id="yard_charges" name="yard_charges" class="form-control" value="">
@@ -1285,9 +1281,9 @@ else
 					</div>
 					<div class="col-3">
 						<label class="form-control-label">Chassis&nbsp;#</label>
-						<label style="width: 100px; margin-top: -9%; font-size: 11px; height: 20px; background: #ccc; padding: 2px; border: 1px solid black; font-weight: bold;  " type="text" id="get_stock_chassis_id" name="get_stock_chassis_id" class="form-control"><?php echo $row[2]?></label>
+						<input style="width: 100px; margin-top: -9%; font-size: 11px; height: 20px; background: #ccc; padding: 2px; border: 1px solid black; font-weight: bold;  " type="text" id="get_stock_chassis_id" name="get_stock_chassis_id" class="form-control" value="<?php echo $row[2]?>">
 					</div>
-					<div style="margin-left: -4%;" class="col-2">
+					<div style="margin-left: -6%;" class="col-2">
 						<label class="form-control-label">Make</label>
 						<label style="width: 80px; margin-top: -15%; font-size: 11px; height: 20px; padding: 2px; background: #ccc; border: 1px solid black; font-weight: bold; " type="text" id="get_stock_make" name="get_stock_make" class="form-control"><?php echo $querymake[1]?></label>
 					</div>
@@ -1297,7 +1293,7 @@ else
 					</div>
 					<div style="margin-left: -4%;" class="col-2">
 						<label class="form-control-label">Year</label>
-						<label style="width: 80px; margin-top: -15%; font-size: 11px; height: 20px; background: #ccc; padding: 2px; border: 1px solid black; font-weight: bold; " type="text" id="get_stock_man_year" name="get_stock_man_year" class="form-control"><?php echo $row[6]?></label>
+						<label style="width: 50px; margin-top: -15%; font-size: 11px; height: 20px; background: #ccc; padding: 2px; border: 1px solid black; font-weight: bold; " type="text" id="get_stock_man_year" name="get_stock_man_year" class="form-control"><?php echo $row[6]?></label>
 					</div>
 				</div>
 			</div>
@@ -1388,10 +1384,10 @@ else
 						<div style="background: khaki; margin-left: 0px; padding-left: 0px; margin-top: 1%;  padding-bottom: 1%;" class="row container">
 							<div class="col-md-3" id="shipment">
 								<label class="form-control-label">Shipment</label>
-								<select style="padding: 0px; font-size: 11px;  margin-top: -8%; height: 20px;  width: 105px;" type="text" id="username" name="stock_chassis_id" class="form-control">
+								<select style="padding: 0px; font-size: 11px;  margin-top: -8%; height: 20px;  width: 105px;" type="text" id="payment_type" name="stock_chassis_id" class="form-control">
 									<option value="---">---</option>
-									<option>Collect</option>
-									<option>Prepaid</option>
+									<option value="Collect">Collect</option>
+									<option value="Prepaid">Prepaid</option>
 								</select>
 							</div>
 							<div  class="col-md-3" id="currency">
@@ -1418,10 +1414,7 @@ else
 								<label class="form-control-label">Inspection&nbsp;Chrgs</label>
 								<input readonly style=" font-size: 11px;  margin-top: -8%; height: 20px;  width: 105px;" type="text" id="username" name="stock_chassis_id" class="form-control" value="<?php echo $rowinspection[3]?>">
 							</div>
-							<div class="col-md-3">
-								<label class="form-control-label">Discount %</label>
-								<input readonly style=" font-size: 11px;  margin-top: -8%; height: 20px;  width: 100px;" type="text" id="username" name="stock_chassis_id" class="form-control" value="<?php echo $row[62]?>">
-							</div>
+							
 							<div  class="col-md-3">
 								<label class="form-control-label">Yard Charges</label>
 								<input readonly style=" font-size: 11px;  margin-top: -8%; height: 20px;  width: 100px;" type="text" id="yard_charges" name="yard_charges" class="form-control" value="">
@@ -2562,7 +2555,7 @@ function getConsignee(val) {
 	data:'shipment='+val,
 	success: function(data){
 	   
-		$("#shipment").html(data);
+		//$("#shipment").html(data);
 	}
 	});
 	$.ajax({
@@ -2678,4 +2671,25 @@ function getConsigneedetails(val) {
 	});
 	}
 	</script>
-	
+	<script>
+		$(document).ready(function() {
+    $('input:radio[name=paymenttype]').change(function() {
+        if (this.value == 'CNF') {
+			$("#payment_type").prop("disabled", false);
+            $("#payment_type option[value='Prepaid']").attr('selected', 'selected');
+			$("#payment_type option[value='Collect']").removeAttr('selected', 'selected');
+
+			$("#payment_type").prop("disabled", true);
+
+        }
+        else if (this.value == 'FOB') {
+			$("#payment_type").prop("disabled", false);
+
+			$("#payment_type option[value='Collect']").attr('selected', 'selected');
+			$("#payment_type option[value='Prepaid']").removeAttr('selected', 'selected');
+
+			$("#payment_type").prop("disabled", true);
+        }
+    });
+});
+		</script>

@@ -175,14 +175,14 @@ $cp6=mysqli_fetch_row($cp6)
 }
 if(isset($_POST['shipment']))
 {
-$shipment=mysqli_query($connection,"select * from ats_customer where ats_customer_ATS_ID='".$_POST['shipment']."'");
-$shipment=mysqli_fetch_row($shipment)
+//$shipment=mysqli_query($connection,"select * from ats_customer where ats_customer_ATS_ID='".$_POST['shipment']."'");
+//$shipment=mysqli_fetch_row($shipment)
 ?>
-<label class="form-control-label">Shipment</label>
+<!-- <label class="form-control-label">Shipment</label>
 <select style="padding: 0px; font-size: 11px;  margin-top: -8%; height: 20px;  width: 105px;" type="text" id="username" name="stock_chassis_id" class="form-control">
-<option value="<?php echo $shipment[11]?>"><?php echo $shipment[11]?></option>
+<option value="<?php //echo $shipment[11]?>"><?php //echo $shipment[11]?></option>
 
-</select>
+</select> -->
 <?php
 }
 if(isset($_POST['currency']))
