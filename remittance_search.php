@@ -2,8 +2,8 @@
 include("top.php");
 include("connection_db.php");
 if(isset($_SESSION['agents_id'])){
+    
     $resultsell=mysqli_query($connection,"select * from ats_employee where ats_employee_id='".$_SESSION['agents_id']."'");
-
 }
 else {
     $resultsell=mysqli_query($connection,"select * from ats_employee");

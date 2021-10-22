@@ -16,8 +16,14 @@ $queryinspection="select * from inspection_charges where id=".$row[57];
 $resultinspection=mysqli_query($connection,$queryinspection);
 $rowinspection=mysqli_fetch_row($resultinspection);
 }
+if(isset($_SESSION['agents_id'])){
+    $resultsell=mysqli_query($connection,"select * from ats_employee where ats_employee_id='".$_SESSION['agents_id']."'");
 
-$resultsell=mysqli_query($connection,"select * from ats_sell_person");
+}
+else{
+	$resultsell=mysqli_query($connection,"select * from ats_employee");
+
+}
 if(isset($_POST['btnreserve']))
 {
 	$recordno=mysqli_real_escape_string($connection,$row[1]);
@@ -29,6 +35,7 @@ if(isset($_POST['btnreserve']))
 	$repair_charges=mysqli_real_escape_string($connection,$_POST['repair_charges']);
 	$consignee_id=mysqli_real_escape_string($connection,$_POST['consignee_id']);
 	$finalfob=$_POST['finalfob'];
+	$customerreserve=$_POST['customername'];
 	$conforfob=$_POST['paymenttype'];
 	$agent_name=$_POST['rsellperson'];
 	$created_at=date("Y-m-d");
@@ -118,7 +125,7 @@ if(isset($_POST['btn_exp_rec_money']))
 	$get_cust_allocated_amount=$_POST['get_cust_allocated_amount'];
 	$cust_remaining_amount=$_POST['cust_remaining_amount'];
 	$get_alloacted_remittance_id_ag=$_POST['get_alloacted_remittance_id_ag'];
-	$dateofconfirmation=date("Y-m-d");
+	$dateofconfirmation=date();
 	$query_rec_money=mysqli_query($connection,"INSERT INTO reservationmoney(recordno, cnfprice, customername, allocatedamount, remaing_amount,remittance_id,agent_id) VALUES ('$row[1]','$get_stock_cnf_price_print_yen','$allocation_customer_name','$get_cust_allocated_amount','$cust_remaining_amount','$get_alloacted_remittance_id_ag','".$_SESSION['agents_id']."')");
 	$update_reservation_status=mysqli_query($connection, "UPDATE ats_stock_reservation SET reservedpaymentstatus='CONFIRMED',sold_status='$dateofconfirmation',remaining_amount=remaining_amount-$get_cust_allocated_amount where recordno ='".$row[1]."' " );
 	$update_remaining_amount=mysqli_query($connection, "UPDATE ats_remittance SET remaining_amount='$cust_remaining_amount' where ats_remittance_Remittance_ID ='$get_alloacted_remittance_id_ag' " );
@@ -1044,6 +1051,7 @@ if($num_reserve>0)
 						<div style="margin-top: -3%;" class="col-md-4">
 							<label class="form-control-label">Agent Name</label>
 							<select style="padding: 0px; font-size: 11px; margin-top: -5%;  height: 20px;  width: 140px;" name="rsellperson"  id="select" class="form-control" onChange="getCustomer(this.value);">
+								<option value="">Please Select</option>
 								<?php 
 								while($rowsell=mysqli_fetch_row($resultsell))
 								{
@@ -1311,6 +1319,7 @@ else
 						<div style="margin-top: -3%;" class="col-md-4">
 							<label class="form-control-label">Agent Name</label>
 							<select style="padding: 0px; font-size: 11px; margin-top: -5%;  height: 20px;  width: 140px;" name="rsellperson"  id="select" class="form-control" onChange="getCustomer(this.value);">
+							<option value="">Please Select</option>
 								<?php 
 								while($rowsell=mysqli_fetch_row($resultsell))
 								{

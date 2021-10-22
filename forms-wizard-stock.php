@@ -1063,8 +1063,8 @@
                                                                             <p id="filenumber"></p> 
                                                                         </div> -->
                                                                         <!-- <input type="file" name="uploadFile[]" onChange="move()" multiple="multiple" id="upload"/> -->
-                                                                        <div id="myBar" style="position: relative; overflow: hidden;" class=" mb-2 mr-2 btn btn-sm">Upload Auction Pictures<input style="position: absolute; border-radius: 20px; opacity: 0; right: 0; top: 0;" type="file" onChange="move()" name="stock_auction_pictures[]" multiple="multiple" />
-                                                                        </div>
+                                                                        <div id="myBar" style="height:30px; position: relative; overflow: hidden;" class="btn-block file btn-gradient-primary btn btn-sm">Upload Auction Pictures<input style="position: absolute; border-radius: 20px; opacity: 0; right: 0; top: 0;" type="file" onChange="move()" name="stock_auction_pictures[]" multiple="multiple" />
+                                                                        </div>  
                                                                     </div>
                                                                 </div>  
                                                                 <p id="filenumber"></p>
@@ -1109,7 +1109,7 @@
                                                                 <div class="col-sm-1"></div>
                                                                 <div class="col-sm-6">
                                                                     <div class="position-relative ">
-                                                                        <div id="myBar2" style="position: relative; overflow: hidden;" class=" mb-2 mr-2 btn btn-sm">Upload Yard Pictures<input style="position: absolute; border-radius: 20px; opacity: 0; right: 0; top: 0;" type="file" onChange="move2()" name="stock_yard_pictures[]" multiple="multiple" id="upload2"/>
+                                                                    <div id="myBar2" style="height:30px; width:100%; position: relative; overflow: hidden;" class="btn-block file btn-gradient-primary mb-2 mr-2 btn btn-sm">Upload Yard Pictures<input style="position: absolute; width: 100%;border-radius: 20px; opacity: 0; right: 0; top: 0;" type="file" onChange="move2()" name="stock_yard_pictures[]" multiple="multiple" id="upload2"/>
                                                                         </div>
                                                                       <!--  <div style="position: relative; overflow: hidden;" class="file mb-2 mr-2 btn btn-gradient-primary btn-sm btn-block">Upload Yard Pictures<input style="position: absolute; width: 100%; border-radius: 20px;  opacity: 0; right: 0; top: 0;" type="file" name="stock_yard_pictures[]" id="stock_yard_pictures" multiple="multiple"/>
                                                                         </div> -->
@@ -1685,111 +1685,111 @@
     </script>
 <script>
 
-    function move() {
+function move() {
 
-        let numFiles = document.forms["test"]["stock_auction_pictures[]"].files.length;
-        document.getElementById("filenumber").innerHTML = numFiles+"/100";
+    let numFiles = document.forms["test"]["stock_auction_pictures[]"].files.length;
+    document.getElementById("filenumber").innerHTML = numFiles+"/100";
 
-        if(numFiles === 1)
-        {
+    if(numFiles === 1)
+    {
 
-            document.getElementById("myBar").style.width = "10%";
-            document.getElementById("myBar").style.color = "var(--green)";
-            document.getElementById("myBar").style.background = "var(--green)";
-
-        }
-        if(numFiles === 2)
-        {
-
-            document.getElementById("myBar").style.width = "20%";
-            document.getElementById("myBar").style.color = "var(--green)";
-            document.getElementById("myBar").style.background = "var(--green)";
-
-
-        }
-        if(numFiles === 3)
-        {
-            document.getElementById("myBar").style.width = "30%";
-            document.getElementById("myBar").style.color = "var(--green)";
-            document.getElementById("myBar").style.background = "var(--green)";
-
-
-        }
-        if(numFiles === 4)
-        {
-
-        document.getElementById("myBar").style.width = "40%";
+        document.getElementById("myBar").style.width = "10%";
         document.getElementById("myBar").style.color = "var(--green)";
-            document.getElementById("myBar").style.background = "var(--green)";
+        document.getElementById("myBar").style.background = "var(--green)";
 
+    }
+    if(numFiles === 2)
+    {
 
-
-        }
-        if(numFiles === 5)
-        {
-
-        document.getElementById("myBar").style.width = "50%";
+        document.getElementById("myBar").style.width = "20%";
         document.getElementById("myBar").style.color = "var(--green)";
-            document.getElementById("myBar").style.background = "var(--green)";
+        document.getElementById("myBar").style.background = "var(--green)";
 
 
-
-        }
-        if(numFiles === 6)
-        {
-
-        document.getElementById("myBar").style.width = "60%";
+    }
+    if(numFiles === 3)
+    {
+        document.getElementById("myBar").style.width = "30%";
         document.getElementById("myBar").style.color = "var(--green)";
-            document.getElementById("myBar").style.background = "var(--green)";
+        document.getElementById("myBar").style.background = "var(--green)";
+
+
+    }
+    if(numFiles === 4)
+    {
+
+    document.getElementById("myBar").style.width = "40%";
+    document.getElementById("myBar").style.color = "var(--green)";
+        document.getElementById("myBar").style.background = "var(--green)";
 
 
 
-        }
-        if(numFiles === 7)
-        {
+    }
+    if(numFiles === 5)
+    {
 
-        document.getElementById("myBar").style.width = "70%";
-        document.getElementById("myBar").style.color = "var(--green)";
-            document.getElementById("myBar").style.background = "var(--green)";
-
-
-
-        }
-
-        if(numFiles === 8)
-        {
-
-        document.getElementById("myBar").style.width = "80%";
-        document.getElementById("myBar").style.color = "var(--green)";
-            document.getElementById("myBar").style.background = "var(--green)";
+    document.getElementById("myBar").style.width = "50%";
+    document.getElementById("myBar").style.color = "var(--green)";
+        document.getElementById("myBar").style.background = "var(--green)";
 
 
 
-        }
-        if(numFiles === 9)
-        {
+    }
+    if(numFiles === 6)
+    {
 
-        document.getElementById("myBar").style.width = "90%";
-        document.getElementById("myBar").style.color = "var(--green)";
-            document.getElementById("myBar").style.background = "var(--green)";
-
-
-
-        }
-        if(numFiles === 10)
-        {
-
-        document.getElementById("myBar").style.width = "100%";
-        document.getElementById("myBar").style.color = "var(--green)";
-            document.getElementById("myBar").style.background = "var(--green)";
+    document.getElementById("myBar").style.width = "60%";
+    document.getElementById("myBar").style.color = "var(--green)";
+        document.getElementById("myBar").style.background = "var(--green)";
 
 
 
-        }
+    }
+    if(numFiles === 7)
+    {
+
+    document.getElementById("myBar").style.width = "70%";
+    document.getElementById("myBar").style.color = "var(--green)";
+        document.getElementById("myBar").style.background = "var(--green)";
+
+
 
     }
 
-    function move2() {
+    if(numFiles === 8)
+    {
+
+    document.getElementById("myBar").style.width = "80%";
+    document.getElementById("myBar").style.color = "var(--green)";
+        document.getElementById("myBar").style.background = "var(--green)";
+
+
+
+    }
+    if(numFiles === 9)
+    {
+
+    document.getElementById("myBar").style.width = "90%";
+    document.getElementById("myBar").style.color = "var(--green)";
+        document.getElementById("myBar").style.background = "var(--green)";
+
+
+
+    }
+    if(numFiles === 10)
+    {
+
+    document.getElementById("myBar").style.width = "100%";
+    document.getElementById("myBar").style.color = "var(--green)";
+        document.getElementById("myBar").style.background = "var(--green)";
+
+
+
+    }
+
+}
+
+function move2() {
 
 let numFiles2 = document.forms["test"]["stock_yard_pictures[]"].files.length;
 document.getElementById("countimages").innerHTML = numFiles2+"/10";
@@ -1797,25 +1797,25 @@ document.getElementById("countimages").innerHTML = numFiles2+"/10";
 if(numFiles2 === 1)
 {
 
-    document.getElementById("myBar2").style.width = "1%";
-    document.getElementById("myBar2").style.color = "var(--green)";
-    document.getElementById("myBar2").style.background = "var(--green)";
+document.getElementById("myBar2").style.width = "1%";
+document.getElementById("myBar2").style.color = "var(--green)";
+document.getElementById("myBar2").style.background = "var(--green)";
 
 }
 if(numFiles2 === 2)
 {
 
-    document.getElementById("myBar2").style.width = "2%";
-    document.getElementById("myBar2").style.color = "var(--green)";
-    document.getElementById("myBar2").style.background = "var(--green)";
+document.getElementById("myBar2").style.width = "2%";
+document.getElementById("myBar2").style.color = "var(--green)";
+document.getElementById("myBar2").style.background = "var(--green)";
 
 
 }
 if(numFiles2 === 3)
 {
-    document.getElementById("myBar2").style.width = "3%";
-    document.getElementById("myBar2").style.color = "var(--green)";
-    document.getElementById("myBar2").style.background = "var(--green)";
+document.getElementById("myBar2").style.width = "3%";
+document.getElementById("myBar2").style.color = "var(--green)";
+document.getElementById("myBar2").style.background = "var(--green)";
 
 
 }
@@ -1824,7 +1824,7 @@ if(numFiles2 === 4)
 
 document.getElementById("myBar2").style.width = "4%";
 document.getElementById("myBar2").style.color = "var(--green)";
-    document.getElementById("myBar2").style.background = "var(--green)";
+document.getElementById("myBar2").style.background = "var(--green)";
 
 
 
@@ -1834,7 +1834,7 @@ if(numFiles2 === 5)
 
 document.getElementById("myBar2").style.width = "5%";
 document.getElementById("myBar2").style.color = "var(--green)";
-    document.getElementById("myBar2").style.background = "var(--green)";
+document.getElementById("myBar2").style.background = "var(--green)";
 
 
 
@@ -1844,7 +1844,7 @@ if(numFiles2 === 6)
 
 document.getElementById("myBar2").style.width = "6%";
 document.getElementById("myBar2").style.color = "var(--green)";
-    document.getElementById("myBar2").style.background = "var(--green)";
+document.getElementById("myBar2").style.background = "var(--green)";
 
 
 
@@ -1854,7 +1854,7 @@ if(numFiles2 === 7)
 
 document.getElementById("myBar2").style.width = "7%";
 document.getElementById("myBar2").style.color = "var(--green)";
-    document.getElementById("myBar2").style.background = "var(--green)";
+document.getElementById("myBar2").style.background = "var(--green)";
 
 
 
@@ -1865,7 +1865,7 @@ if(numFiles2 === 8)
 
 document.getElementById("myBar2").style.width = "8%";
 document.getElementById("myBar2").style.color = "var(--green)";
-    document.getElementById("myBar2").style.background = "var(--green)";
+document.getElementById("myBar2").style.background = "var(--green)";
 
 
 
@@ -1875,7 +1875,7 @@ if(numFiles2 === 9)
 
 document.getElementById("myBar2").style.width = "9%";
 document.getElementById("myBar2").style.color = "var(--green)";
-    document.getElementById("myBar2").style.background = "var(--green)";
+document.getElementById("myBar2").style.background = "var(--green)";
 
 
 
@@ -1885,7 +1885,7 @@ if(numFiles2 === 10)
 
 document.getElementById("myBar2").style.width = "10%";
 document.getElementById("myBar2").style.color = "var(--green)";
-    document.getElementById("myBar2").style.background = "var(--green)";
+document.getElementById("myBar2").style.background = "var(--green)";
 
 
 
@@ -1894,25 +1894,25 @@ document.getElementById("myBar2").style.color = "var(--green)";
 if(numFiles2 === 11)
 {
 
-    document.getElementById("myBar2").style.width = "11%";
-    document.getElementById("myBar2").style.color = "var(--green)";
-    document.getElementById("myBar2").style.background = "var(--green)";
+document.getElementById("myBar2").style.width = "11%";
+document.getElementById("myBar2").style.color = "var(--green)";
+document.getElementById("myBar2").style.background = "var(--green)";
 
 }
 if(numFiles2 === 12)
 {
 
-    document.getElementById("myBar2").style.width = "12%";
-    document.getElementById("myBar2").style.color = "var(--green)";
-    document.getElementById("myBar2").style.background = "var(--green)";
+document.getElementById("myBar2").style.width = "12%";
+document.getElementById("myBar2").style.color = "var(--green)";
+document.getElementById("myBar2").style.background = "var(--green)";
 
 
 }
 if(numFiles2 === 13)
 {
-    document.getElementById("myBar2").style.width = "13%";
-    document.getElementById("myBar2").style.color = "var(--green)";
-    document.getElementById("myBar2").style.background = "var(--green)";
+document.getElementById("myBar2").style.width = "13%";
+document.getElementById("myBar2").style.color = "var(--green)";
+document.getElementById("myBar2").style.background = "var(--green)";
 
 
 }
@@ -1921,7 +1921,7 @@ if(numFiles2 === 14)
 
 document.getElementById("myBar2").style.width = "14%";
 document.getElementById("myBar2").style.color = "var(--green)";
-    document.getElementById("myBar2").style.background = "var(--green)";
+document.getElementById("myBar2").style.background = "var(--green)";
 
 
 
@@ -1931,7 +1931,7 @@ if(numFiles2 === 15)
 
 document.getElementById("myBar2").style.width = "15%";
 document.getElementById("myBar2").style.color = "var(--green)";
-    document.getElementById("myBar2").style.background = "var(--green)";
+document.getElementById("myBar2").style.background = "var(--green)";
 
 
 
@@ -1941,7 +1941,7 @@ if(numFiles2 === 16)
 
 document.getElementById("myBar2").style.width = "16%";
 document.getElementById("myBar2").style.color = "var(--green)";
-    document.getElementById("myBar2").style.background = "var(--green)";
+document.getElementById("myBar2").style.background = "var(--green)";
 
 
 
@@ -1951,7 +1951,7 @@ if(numFiles2 === 17)
 
 document.getElementById("myBar2").style.width = "17%";
 document.getElementById("myBar2").style.color = "var(--green)";
-    document.getElementById("myBar2").style.background = "var(--green)";
+document.getElementById("myBar2").style.background = "var(--green)";
 
 
 
@@ -1962,7 +1962,7 @@ if(numFiles2 === 18)
 
 document.getElementById("myBar2").style.width = "18%";
 document.getElementById("myBar2").style.color = "var(--green)";
-    document.getElementById("myBar2").style.background = "var(--green)";
+document.getElementById("myBar2").style.background = "var(--green)";
 
 
 
@@ -1972,7 +1972,7 @@ if(numFiles2 === 19)
 
 document.getElementById("myBar2").style.width = "19%";
 document.getElementById("myBar2").style.color = "var(--green)";
-    document.getElementById("myBar2").style.background = "var(--green)";
+document.getElementById("myBar2").style.background = "var(--green)";
 
 
 
@@ -1982,7 +1982,7 @@ if(numFiles2 === 20)
 
 document.getElementById("myBar2").style.width = "20%";
 document.getElementById("myBar2").style.color = "var(--green)";
-    document.getElementById("myBar2").style.background = "var(--green)";
+document.getElementById("myBar2").style.background = "var(--green)";
 
 
 
@@ -1991,25 +1991,25 @@ document.getElementById("myBar2").style.color = "var(--green)";
 if(numFiles2 === 21)
 {
 
-    document.getElementById("myBar2").style.width = "21%";
-    document.getElementById("myBar2").style.color = "var(--green)";
-    document.getElementById("myBar2").style.background = "var(--green)";
+document.getElementById("myBar2").style.width = "21%";
+document.getElementById("myBar2").style.color = "var(--green)";
+document.getElementById("myBar2").style.background = "var(--green)";
 
 }
 if(numFiles2 === 22)
 {
 
-    document.getElementById("myBar2").style.width = "22%";
-    document.getElementById("myBar2").style.color = "var(--green)";
-    document.getElementById("myBar2").style.background = "var(--green)";
+document.getElementById("myBar2").style.width = "22%";
+document.getElementById("myBar2").style.color = "var(--green)";
+document.getElementById("myBar2").style.background = "var(--green)";
 
 
 }
 if(numFiles2 === 23)
 {
-    document.getElementById("myBar2").style.width = "23%";
-    document.getElementById("myBar2").style.color = "var(--green)";
-    document.getElementById("myBar2").style.background = "var(--green)";
+document.getElementById("myBar2").style.width = "23%";
+document.getElementById("myBar2").style.color = "var(--green)";
+document.getElementById("myBar2").style.background = "var(--green)";
 
 
 }
@@ -2018,7 +2018,7 @@ if(numFiles2 === 24)
 
 document.getElementById("myBar2").style.width = "24%";
 document.getElementById("myBar2").style.color = "var(--green)";
-    document.getElementById("myBar2").style.background = "var(--green)";
+document.getElementById("myBar2").style.background = "var(--green)";
 
 
 
@@ -2028,7 +2028,7 @@ if(numFiles2 === 25)
 
 document.getElementById("myBar2").style.width = "25%";
 document.getElementById("myBar2").style.color = "var(--green)";
-    document.getElementById("myBar2").style.background = "var(--green)";
+document.getElementById("myBar2").style.background = "var(--green)";
 
 
 
@@ -2038,7 +2038,7 @@ if(numFiles2 === 26)
 
 document.getElementById("myBar2").style.width = "26%";
 document.getElementById("myBar2").style.color = "var(--green)";
-    document.getElementById("myBar2").style.background = "var(--green)";
+document.getElementById("myBar2").style.background = "var(--green)";
 
 
 
@@ -2048,7 +2048,7 @@ if(numFiles2 === 27)
 
 document.getElementById("myBar2").style.width = "27%";
 document.getElementById("myBar2").style.color = "var(--green)";
-    document.getElementById("myBar2").style.background = "var(--green)";
+document.getElementById("myBar2").style.background = "var(--green)";
 
 
 
@@ -2059,7 +2059,7 @@ if(numFiles2 === 28)
 
 document.getElementById("myBar2").style.width = "28%";
 document.getElementById("myBar2").style.color = "var(--green)";
-    document.getElementById("myBar2").style.background = "var(--green)";
+document.getElementById("myBar2").style.background = "var(--green)";
 
 
 
@@ -2069,7 +2069,7 @@ if(numFiles2 === 29)
 
 document.getElementById("myBar2").style.width = "29%";
 document.getElementById("myBar2").style.color = "var(--green)";
-    document.getElementById("myBar2").style.background = "var(--green)";
+document.getElementById("myBar2").style.background = "var(--green)";
 
 
 
@@ -2085,25 +2085,25 @@ document.getElementById("myBar2").style.background = "var(--green)";
 if(numFiles2 === 31)
 {
 
-    document.getElementById("myBar2").style.width = "31%";
-    document.getElementById("myBar2").style.color = "var(--green)";
-    document.getElementById("myBar2").style.background = "var(--green)";
+document.getElementById("myBar2").style.width = "31%";
+document.getElementById("myBar2").style.color = "var(--green)";
+document.getElementById("myBar2").style.background = "var(--green)";
 
 }
 if(numFiles2 === 32)
 {
 
-    document.getElementById("myBar2").style.width = "32%";
-    document.getElementById("myBar2").style.color = "var(--green)";
-    document.getElementById("myBar2").style.background = "var(--green)";
+document.getElementById("myBar2").style.width = "32%";
+document.getElementById("myBar2").style.color = "var(--green)";
+document.getElementById("myBar2").style.background = "var(--green)";
 
 
 }
 if(numFiles2 === 33)
 {
-    document.getElementById("myBar2").style.width = "33%";
-    document.getElementById("myBar2").style.color = "var(--green)";
-    document.getElementById("myBar2").style.background = "var(--green)";
+document.getElementById("myBar2").style.width = "33%";
+document.getElementById("myBar2").style.color = "var(--green)";
+document.getElementById("myBar2").style.background = "var(--green)";
 
 
 }
@@ -2112,7 +2112,7 @@ if(numFiles2 === 34)
 
 document.getElementById("myBar2").style.width = "4%";
 document.getElementById("myBar2").style.color = "var(--green)";
-    document.getElementById("myBar2").style.background = "var(--green)";
+document.getElementById("myBar2").style.background = "var(--green)";
 
 
 
@@ -2122,7 +2122,7 @@ if(numFiles2 === 35)
 
 document.getElementById("myBar2").style.width = "35%";
 document.getElementById("myBar2").style.color = "var(--green)";
-    document.getElementById("myBar2").style.background = "var(--green)";
+document.getElementById("myBar2").style.background = "var(--green)";
 
 
 
@@ -2132,7 +2132,7 @@ if(numFiles2 === 36)
 
 document.getElementById("myBar2").style.width = "36%";
 document.getElementById("myBar2").style.color = "var(--green)";
-    document.getElementById("myBar2").style.background = "var(--green)";
+document.getElementById("myBar2").style.background = "var(--green)";
 
 
 
@@ -2142,7 +2142,7 @@ if(numFiles2 === 37)
 
 document.getElementById("myBar2").style.width = "37%";
 document.getElementById("myBar2").style.color = "var(--green)";
-    document.getElementById("myBar2").style.background = "var(--green)";
+document.getElementById("myBar2").style.background = "var(--green)";
 
 
 
@@ -2153,7 +2153,7 @@ if(numFiles2 === 38)
 
 document.getElementById("myBar2").style.width = "38%";
 document.getElementById("myBar2").style.color = "var(--green)";
-    document.getElementById("myBar2").style.background = "var(--green)";
+document.getElementById("myBar2").style.background = "var(--green)";
 
 
 
@@ -2163,7 +2163,7 @@ if(numFiles2 === 39)
 
 document.getElementById("myBar2").style.width = "39%";
 document.getElementById("myBar2").style.color = "var(--green)";
-    document.getElementById("myBar2").style.background = "var(--green)";
+document.getElementById("myBar2").style.background = "var(--green)";
 
 
 
@@ -2173,7 +2173,7 @@ if(numFiles2 === 40)
 
 document.getElementById("myBar2").style.width = "40%";
 document.getElementById("myBar2").style.color = "var(--green)";
-    document.getElementById("myBar2").style.background = "var(--green)";
+document.getElementById("myBar2").style.background = "var(--green)";
 
 
 
@@ -2182,25 +2182,25 @@ document.getElementById("myBar2").style.color = "var(--green)";
 if(numFiles2 === 41)
 {
 
-    document.getElementById("myBar2").style.width = "41%";
-    document.getElementById("myBar2").style.color = "var(--green)";
-    document.getElementById("myBar2").style.background = "var(--green)";
+document.getElementById("myBar2").style.width = "41%";
+document.getElementById("myBar2").style.color = "var(--green)";
+document.getElementById("myBar2").style.background = "var(--green)";
 
 }
 if(numFiles2 === 42)
 {
 
-    document.getElementById("myBar2").style.width = "42%";
-    document.getElementById("myBar2").style.color = "var(--green)";
-    document.getElementById("myBar2").style.background = "var(--green)";
+document.getElementById("myBar2").style.width = "42%";
+document.getElementById("myBar2").style.color = "var(--green)";
+document.getElementById("myBar2").style.background = "var(--green)";
 
 
 }
 if(numFiles2 === 43)
 {
-    document.getElementById("myBar2").style.width = "43%";
-    document.getElementById("myBar2").style.color = "var(--green)";
-    document.getElementById("myBar2").style.background = "var(--green)";
+document.getElementById("myBar2").style.width = "43%";
+document.getElementById("myBar2").style.color = "var(--green)";
+document.getElementById("myBar2").style.background = "var(--green)";
 
 
 }
@@ -2209,7 +2209,7 @@ if(numFiles2 === 44)
 
 document.getElementById("myBar2").style.width = "44%";
 document.getElementById("myBar2").style.color = "var(--green)";
-    document.getElementById("myBar2").style.background = "var(--green)";
+document.getElementById("myBar2").style.background = "var(--green)";
 
 
 
@@ -2219,7 +2219,7 @@ if(numFiles2 === 45)
 
 document.getElementById("myBar2").style.width = "45%";
 document.getElementById("myBar2").style.color = "var(--green)";
-    document.getElementById("myBar2").style.background = "var(--green)";
+document.getElementById("myBar2").style.background = "var(--green)";
 
 
 
@@ -2229,7 +2229,7 @@ if(numFiles2 === 46)
 
 document.getElementById("myBar2").style.width = "46%";
 document.getElementById("myBar2").style.color = "var(--green)";
-    document.getElementById("myBar2").style.background = "var(--green)";
+document.getElementById("myBar2").style.background = "var(--green)";
 
 
 
@@ -2239,7 +2239,7 @@ if(numFiles2 === 47)
 
 document.getElementById("myBar2").style.width = "47%";
 document.getElementById("myBar2").style.color = "var(--green)";
-    document.getElementById("myBar2").style.background = "var(--green)";
+document.getElementById("myBar2").style.background = "var(--green)";
 
 
 
@@ -2250,7 +2250,7 @@ if(numFiles2 === 48)
 
 document.getElementById("myBar2").style.width = "48%";
 document.getElementById("myBar2").style.color = "var(--green)";
-    document.getElementById("myBar2").style.background = "var(--green)";
+document.getElementById("myBar2").style.background = "var(--green)";
 
 
 
@@ -2260,7 +2260,7 @@ if(numFiles2 === 49)
 
 document.getElementById("myBar2").style.width = "49%";
 document.getElementById("myBar2").style.color = "var(--green)";
-    document.getElementById("myBar2").style.background = "var(--green)";
+document.getElementById("myBar2").style.background = "var(--green)";
 
 
 
@@ -2270,7 +2270,7 @@ if(numFiles2 === 50)
 
 document.getElementById("myBar2").style.width = "50%";
 document.getElementById("myBar2").style.color = "var(--green)";
-    document.getElementById("myBar2").style.background = "var(--green)";
+document.getElementById("myBar2").style.background = "var(--green)";
 
 
 
@@ -2279,25 +2279,25 @@ document.getElementById("myBar2").style.color = "var(--green)";
 if(numFiles2 === 51)
 {
 
-    document.getElementById("myBar2").style.width = "51%";
-    document.getElementById("myBar2").style.color = "var(--green)";
-    document.getElementById("myBar2").style.background = "var(--green)";
+document.getElementById("myBar2").style.width = "51%";
+document.getElementById("myBar2").style.color = "var(--green)";
+document.getElementById("myBar2").style.background = "var(--green)";
 
 }
 if(numFiles2 === 52)
 {
 
-    document.getElementById("myBar2").style.width = "52%";
-    document.getElementById("myBar2").style.color = "var(--green)";
-    document.getElementById("myBar2").style.background = "var(--green)";
+document.getElementById("myBar2").style.width = "52%";
+document.getElementById("myBar2").style.color = "var(--green)";
+document.getElementById("myBar2").style.background = "var(--green)";
 
 
 }
 if(numFiles2 === 53)
 {
-    document.getElementById("myBar2").style.width = "53%";
-    document.getElementById("myBar2").style.color = "var(--green)";
-    document.getElementById("myBar2").style.background = "var(--green)";
+document.getElementById("myBar2").style.width = "53%";
+document.getElementById("myBar2").style.color = "var(--green)";
+document.getElementById("myBar2").style.background = "var(--green)";
 
 
 }
@@ -2306,7 +2306,7 @@ if(numFiles2 === 54)
 
 document.getElementById("myBar2").style.width = "54%";
 document.getElementById("myBar2").style.color = "var(--green)";
-    document.getElementById("myBar2").style.background = "var(--green)";
+document.getElementById("myBar2").style.background = "var(--green)";
 
 
 
@@ -2316,7 +2316,7 @@ if(numFiles2 === 55)
 
 document.getElementById("myBar2").style.width = "55%";
 document.getElementById("myBar2").style.color = "var(--green)";
-    document.getElementById("myBar2").style.background = "var(--green)";
+document.getElementById("myBar2").style.background = "var(--green)";
 
 
 
@@ -2326,7 +2326,7 @@ if(numFiles2 === 56)
 
 document.getElementById("myBar2").style.width = "56%";
 document.getElementById("myBar2").style.color = "var(--green)";
-    document.getElementById("myBar2").style.background = "var(--green)";
+document.getElementById("myBar2").style.background = "var(--green)";
 
 
 
@@ -2336,7 +2336,7 @@ if(numFiles2 === 57)
 
 document.getElementById("myBar2").style.width = "57%";
 document.getElementById("myBar2").style.color = "var(--green)";
-    document.getElementById("myBar2").style.background = "var(--green)";
+document.getElementById("myBar2").style.background = "var(--green)";
 
 
 
@@ -2347,7 +2347,7 @@ if(numFiles2 === 58)
 
 document.getElementById("myBar2").style.width = "58%";
 document.getElementById("myBar2").style.color = "var(--green)";
-    document.getElementById("myBar2").style.background = "var(--green)";
+document.getElementById("myBar2").style.background = "var(--green)";
 
 
 
@@ -2357,7 +2357,7 @@ if(numFiles2 === 59)
 
 document.getElementById("myBar2").style.width = "59%";
 document.getElementById("myBar2").style.color = "var(--green)";
-    document.getElementById("myBar2").style.background = "var(--green)";
+document.getElementById("myBar2").style.background = "var(--green)";
 
 
 
@@ -2367,7 +2367,7 @@ if(numFiles2 === 60)
 
 document.getElementById("myBar2").style.width = "60%";
 document.getElementById("myBar2").style.color = "var(--green)";
-    document.getElementById("myBar2").style.background = "var(--green)";
+document.getElementById("myBar2").style.background = "var(--green)";
 
 
 
@@ -2376,25 +2376,25 @@ document.getElementById("myBar2").style.color = "var(--green)";
 if(numFiles2 === 61)
 {
 
-    document.getElementById("myBar2").style.width = "61%";
-    document.getElementById("myBar2").style.color = "var(--green)";
-    document.getElementById("myBar2").style.background = "var(--green)";
+document.getElementById("myBar2").style.width = "61%";
+document.getElementById("myBar2").style.color = "var(--green)";
+document.getElementById("myBar2").style.background = "var(--green)";
 
 }
 if(numFiles2 === 62)
 {
 
-    document.getElementById("myBar2").style.width = "62%";
-    document.getElementById("myBar2").style.color = "var(--green)";
-    document.getElementById("myBar2").style.background = "var(--green)";
+document.getElementById("myBar2").style.width = "62%";
+document.getElementById("myBar2").style.color = "var(--green)";
+document.getElementById("myBar2").style.background = "var(--green)";
 
 
 }
 if(numFiles2 === 63)
 {
-    document.getElementById("myBar2").style.width = "63%";
-    document.getElementById("myBar2").style.color = "var(--green)";
-    document.getElementById("myBar2").style.background = "var(--green)";
+document.getElementById("myBar2").style.width = "63%";
+document.getElementById("myBar2").style.color = "var(--green)";
+document.getElementById("myBar2").style.background = "var(--green)";
 
 
 }
@@ -2403,7 +2403,7 @@ if(numFiles2 === 64)
 
 document.getElementById("myBar2").style.width = "64%";
 document.getElementById("myBar2").style.color = "var(--green)";
-    document.getElementById("myBar2").style.background = "var(--green)";
+document.getElementById("myBar2").style.background = "var(--green)";
 
 
 
@@ -2413,7 +2413,7 @@ if(numFiles2 === 65)
 
 document.getElementById("myBar2").style.width = "65%";
 document.getElementById("myBar2").style.color = "var(--green)";
-    document.getElementById("myBar2").style.background = "var(--green)";
+document.getElementById("myBar2").style.background = "var(--green)";
 
 
 
@@ -2423,7 +2423,7 @@ if(numFiles2 === 66)
 
 document.getElementById("myBar2").style.width = "66%";
 document.getElementById("myBar2").style.color = "var(--green)";
-    document.getElementById("myBar2").style.background = "var(--green)";
+document.getElementById("myBar2").style.background = "var(--green)";
 
 
 
@@ -2433,7 +2433,7 @@ if(numFiles2 === 77)
 
 document.getElementById("myBar2").style.width = "77%";
 document.getElementById("myBar2").style.color = "var(--green)";
-    document.getElementById("myBar2").style.background = "var(--green)";
+document.getElementById("myBar2").style.background = "var(--green)";
 
 
 
@@ -2444,7 +2444,7 @@ if(numFiles2 === 68)
 
 document.getElementById("myBar2").style.width = "68%";
 document.getElementById("myBar2").style.color = "var(--green)";
-    document.getElementById("myBar2").style.background = "var(--green)";
+document.getElementById("myBar2").style.background = "var(--green)";
 
 
 
@@ -2454,7 +2454,7 @@ if(numFiles2 === 69)
 
 document.getElementById("myBar2").style.width = "69%";
 document.getElementById("myBar2").style.color = "var(--green)";
-    document.getElementById("myBar2").style.background = "var(--green)";
+document.getElementById("myBar2").style.background = "var(--green)";
 
 
 
@@ -2464,7 +2464,7 @@ if(numFiles2 === 70)
 
 document.getElementById("myBar2").style.width = "70%";
 document.getElementById("myBar2").style.color = "var(--green)";
-    document.getElementById("myBar2").style.background = "var(--green)";
+document.getElementById("myBar2").style.background = "var(--green)";
 
 
 
@@ -2473,25 +2473,25 @@ document.getElementById("myBar2").style.color = "var(--green)";
 if(numFiles2 === 71)
 {
 
-    document.getElementById("myBar2").style.width = "71%";
-    document.getElementById("myBar2").style.color = "var(--green)";
-    document.getElementById("myBar2").style.background = "var(--green)";
+document.getElementById("myBar2").style.width = "71%";
+document.getElementById("myBar2").style.color = "var(--green)";
+document.getElementById("myBar2").style.background = "var(--green)";
 
 }
 if(numFiles2 === 72)
 {
 
-    document.getElementById("myBar2").style.width = "72%";
-    document.getElementById("myBar2").style.color = "var(--green)";
-    document.getElementById("myBar2").style.background = "var(--green)";
+document.getElementById("myBar2").style.width = "72%";
+document.getElementById("myBar2").style.color = "var(--green)";
+document.getElementById("myBar2").style.background = "var(--green)";
 
 
 }
 if(numFiles2 === 73)
 {
-    document.getElementById("myBar2").style.width = "73%";
-    document.getElementById("myBar2").style.color = "var(--green)";
-    document.getElementById("myBar2").style.background = "var(--green)";
+document.getElementById("myBar2").style.width = "73%";
+document.getElementById("myBar2").style.color = "var(--green)";
+document.getElementById("myBar2").style.background = "var(--green)";
 
 
 }
@@ -2500,7 +2500,7 @@ if(numFiles2 === 74)
 
 document.getElementById("myBar2").style.width = "74%";
 document.getElementById("myBar2").style.color = "var(--green)";
-    document.getElementById("myBar2").style.background = "var(--green)";
+document.getElementById("myBar2").style.background = "var(--green)";
 
 
 
@@ -2510,7 +2510,7 @@ if(numFiles2 === 75)
 
 document.getElementById("myBar2").style.width = "75%";
 document.getElementById("myBar2").style.color = "var(--green)";
-    document.getElementById("myBar2").style.background = "var(--green)";
+document.getElementById("myBar2").style.background = "var(--green)";
 
 
 
@@ -2520,7 +2520,7 @@ if(numFiles2 === 76)
 
 document.getElementById("myBar2").style.width = "76%";
 document.getElementById("myBar2").style.color = "var(--green)";
-    document.getElementById("myBar2").style.background = "var(--green)";
+document.getElementById("myBar2").style.background = "var(--green)";
 
 
 
@@ -2530,7 +2530,7 @@ if(numFiles2 === 77)
 
 document.getElementById("myBar2").style.width = "77%";
 document.getElementById("myBar2").style.color = "var(--green)";
-    document.getElementById("myBar2").style.background = "var(--green)";
+document.getElementById("myBar2").style.background = "var(--green)";
 
 
 
@@ -2541,7 +2541,7 @@ if(numFiles2 === 78)
 
 document.getElementById("myBar2").style.width = "78%";
 document.getElementById("myBar2").style.color = "var(--green)";
-    document.getElementById("myBar2").style.background = "var(--green)";
+document.getElementById("myBar2").style.background = "var(--green)";
 
 
 
@@ -2551,7 +2551,7 @@ if(numFiles2 === 79)
 
 document.getElementById("myBar2").style.width = "79%";
 document.getElementById("myBar2").style.color = "var(--green)";
-    document.getElementById("myBar2").style.background = "var(--green)";
+document.getElementById("myBar2").style.background = "var(--green)";
 
 
 
@@ -2561,7 +2561,7 @@ if(numFiles2 === 80)
 
 document.getElementById("myBar2").style.width = "80%";
 document.getElementById("myBar2").style.color = "var(--green)";
-    document.getElementById("myBar2").style.background = "var(--green)";
+document.getElementById("myBar2").style.background = "var(--green)";
 
 
 
@@ -2570,25 +2570,25 @@ document.getElementById("myBar2").style.color = "var(--green)";
 if(numFiles2 === 81)
 {
 
-    document.getElementById("myBar2").style.width = "81%";
-    document.getElementById("myBar2").style.color = "var(--green)";
-    document.getElementById("myBar2").style.background = "var(--green)";
+document.getElementById("myBar2").style.width = "81%";
+document.getElementById("myBar2").style.color = "var(--green)";
+document.getElementById("myBar2").style.background = "var(--green)";
 
 }
 if(numFiles2 === 82)
 {
 
-    document.getElementById("myBar2").style.width = "82%";
-    document.getElementById("myBar2").style.color = "var(--green)";
-    document.getElementById("myBar2").style.background = "var(--green)";
+document.getElementById("myBar2").style.width = "82%";
+document.getElementById("myBar2").style.color = "var(--green)";
+document.getElementById("myBar2").style.background = "var(--green)";
 
 
 }
 if(numFiles2 === 83)
 {
-    document.getElementById("myBar2").style.width = "83%";
-    document.getElementById("myBar2").style.color = "var(--green)";
-    document.getElementById("myBar2").style.background = "var(--green)";
+document.getElementById("myBar2").style.width = "83%";
+document.getElementById("myBar2").style.color = "var(--green)";
+document.getElementById("myBar2").style.background = "var(--green)";
 
 
 }
@@ -2597,7 +2597,7 @@ if(numFiles2 === 84)
 
 document.getElementById("myBar2").style.width = "84%";
 document.getElementById("myBar2").style.color = "var(--green)";
-    document.getElementById("myBar2").style.background = "var(--green)";
+document.getElementById("myBar2").style.background = "var(--green)";
 
 
 
@@ -2607,7 +2607,7 @@ if(numFiles2 === 85)
 
 document.getElementById("myBar2").style.width = "85%";
 document.getElementById("myBar2").style.color = "var(--green)";
-    document.getElementById("myBar2").style.background = "var(--green)";
+document.getElementById("myBar2").style.background = "var(--green)";
 
 
 
@@ -2617,7 +2617,7 @@ if(numFiles2 === 86)
 
 document.getElementById("myBar2").style.width = "86%";
 document.getElementById("myBar2").style.color = "var(--green)";
-    document.getElementById("myBar2").style.background = "var(--green)";
+document.getElementById("myBar2").style.background = "var(--green)";
 
 
 
@@ -2627,7 +2627,7 @@ if(numFiles2 === 87)
 
 document.getElementById("myBar2").style.width = "87%";
 document.getElementById("myBar2").style.color = "var(--green)";
-    document.getElementById("myBar2").style.background = "var(--green)";
+document.getElementById("myBar2").style.background = "var(--green)";
 
 
 
@@ -2638,7 +2638,7 @@ if(numFiles2 === 88)
 
 document.getElementById("myBar2").style.width = "88%";
 document.getElementById("myBar2").style.color = "var(--green)";
-    document.getElementById("myBar2").style.background = "var(--green)";
+document.getElementById("myBar2").style.background = "var(--green)";
 
 
 
@@ -2648,7 +2648,7 @@ if(numFiles2 === 89)
 
 document.getElementById("myBar2").style.width = "89%";
 document.getElementById("myBar2").style.color = "var(--green)";
-    document.getElementById("myBar2").style.background = "var(--green)";
+document.getElementById("myBar2").style.background = "var(--green)";
 
 
 
@@ -2658,7 +2658,7 @@ if(numFiles2 === 90)
 
 document.getElementById("myBar2").style.width = "90%";
 document.getElementById("myBar2").style.color = "var(--green)";
-    document.getElementById("myBar2").style.background = "var(--green)";
+document.getElementById("myBar2").style.background = "var(--green)";
 
 
 
@@ -2667,25 +2667,25 @@ document.getElementById("myBar2").style.color = "var(--green)";
 if(numFiles2 === 91)
 {
 
-    document.getElementById("myBar2").style.width = "91%";
-    document.getElementById("myBar2").style.color = "var(--green)";
-    document.getElementById("myBar2").style.background = "var(--green)";
+document.getElementById("myBar2").style.width = "91%";
+document.getElementById("myBar2").style.color = "var(--green)";
+document.getElementById("myBar2").style.background = "var(--green)";
 
 }
 if(numFiles2 === 92)
 {
 
-    document.getElementById("myBar2").style.width = "92%";
-    document.getElementById("myBar2").style.color = "var(--green)";
-    document.getElementById("myBar2").style.background = "var(--green)";
+document.getElementById("myBar2").style.width = "92%";
+document.getElementById("myBar2").style.color = "var(--green)";
+document.getElementById("myBar2").style.background = "var(--green)";
 
 
 }
 if(numFiles2 === 93)
 {
-    document.getElementById("myBar2").style.width = "93%";
-    document.getElementById("myBar2").style.color = "var(--green)";
-    document.getElementById("myBar2").style.background = "var(--green)";
+document.getElementById("myBar2").style.width = "93%";
+document.getElementById("myBar2").style.color = "var(--green)";
+document.getElementById("myBar2").style.background = "var(--green)";
 
 
 }
@@ -2694,7 +2694,7 @@ if(numFiles2 === 94)
 
 document.getElementById("myBar2").style.width = "94%";
 document.getElementById("myBar2").style.color = "var(--green)";
-    document.getElementById("myBar2").style.background = "var(--green)";
+document.getElementById("myBar2").style.background = "var(--green)";
 
 
 
@@ -2704,7 +2704,7 @@ if(numFiles2 === 95)
 
 document.getElementById("myBar2").style.width = "95%";
 document.getElementById("myBar2").style.color = "var(--green)";
-    document.getElementById("myBar2").style.background = "var(--green)";
+document.getElementById("myBar2").style.background = "var(--green)";
 
 
 
@@ -2714,7 +2714,7 @@ if(numFiles2 === 96)
 
 document.getElementById("myBar2").style.width = "96%";
 document.getElementById("myBar2").style.color = "var(--green)";
-    document.getElementById("myBar2").style.background = "var(--green)";
+document.getElementById("myBar2").style.background = "var(--green)";
 
 
 
@@ -2724,7 +2724,7 @@ if(numFiles2 === 97)
 
 document.getElementById("myBar2").style.width = "97%";
 document.getElementById("myBar2").style.color = "var(--green)";
-    document.getElementById("myBar2").style.background = "var(--green)";
+document.getElementById("myBar2").style.background = "var(--green)";
 
 
 
@@ -2735,7 +2735,7 @@ if(numFiles2 === 98)
 
 document.getElementById("myBar2").style.width = "98%";
 document.getElementById("myBar2").style.color = "var(--green)";
-    document.getElementById("myBar2").style.background = "var(--green)";
+document.getElementById("myBar2").style.background = "var(--green)";
 
 
 
@@ -2745,7 +2745,7 @@ if(numFiles2 === 99)
 
 document.getElementById("myBar2").style.width = "99%";
 document.getElementById("myBar2").style.color = "var(--green)";
-    document.getElementById("myBar2").style.background = "var(--green)";
+document.getElementById("myBar2").style.background = "var(--green)";
 
 
 
@@ -2755,7 +2755,7 @@ if(numFiles2 === 100)
 
 document.getElementById("myBar2").style.width = "100%";
 document.getElementById("myBar2").style.color = "var(--green)";
-    document.getElementById("myBar2").style.background = "var(--green)";
+document.getElementById("myBar2").style.background = "var(--green)";
 
 
 

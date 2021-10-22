@@ -7,7 +7,14 @@ $recno = array('get_stock_kobutsu', 'get_stock_chassis_id', 'get_stock_customer_
 if(isset($_SESSION['agents_id'])) //checking session variable
 {
 if(trim($_POST['stock_all_agent']=="AllCar")){
-    $query="select * from ats_car_stock WHERE  ";
+    if(trim($_POST['get_stock_release_ok_date']) || trim($_POST['get_stock_bl_date']) || trim($_POST['get_stock_shipping_order_file']) || trim($_POST['get_stock_ship_ok_date']) || trim($_POST['get_stock_sure_ok_date']) || trim($_POST['get_stock_reserve_date']) || (trim ($_POST['get_stock_inyard_date']) || trim($_POST['get_stock_buying_date']) || trim($_POST['get_stock_rec_no']) || trim  ($_POST['get_stock_kobutsu'])  || trim  ($_POST['get_stock_chassis_id']) || trim($_POST['get_stock_customer_name']) || trim($_POST['get_stock_make']) || trim($_POST['stock_model']) || trim($_POST['get_stock_shift']) || trim($_POST['get_stock_reg_year']) || trim($_POST['get_stock_color']) || trim($_POST['stock_fuel']) || trim($_POST['get_stock_vessel_name']) || trim($_POST['get_stock_voyage']) || trim($_POST['get_stock_bl_no']) || trim($_POST['get_stock_buying_date_from']) || trim($_POST['get_stock_buying_date_till']) || trim($_POST['get_stock_reserve_ok_date_from']) || trim($_POST['get_stock_reserve_ok_date_till']) || trim($_POST['get_stock_ship_ok_date_from']) || trim($_POST['get_stock_ship_ok_date_till']) || trim($_POST['get_stock_release_ok_date_from']) || trim($_POST['get_stock_release_ok_date_till'])))
+    {
+        
+    $query="select * from ats_car_stock WHERE reserved_status <> 'RESERVED' in ($customeridrec)  AND ";
+    }
+    else {
+        $query="select * from ats_car_stock WHERE reserved_status <> 'RESERVED'";
+    }
        //rec no start
             if(trim($_POST['get_stock_rec_no'])){
                 $query.="reserved_status <> 'RESERVED' AND ats_car_stock_rec_no LIKE '%".$_POST['get_stock_rec_no']."%' ";
@@ -255,7 +262,6 @@ if(trim($_POST['stock_all_agent']=="AllCar")){
         //inyarddate
         if(empty($_POST['get_stock_rec_no']) && empty($_POST['get_stock_kobutsu']) && empty($_POST['get_stock_chassis_id']) && empty($_POST['get_stock_customer_name']) && empty($_POST['get_stock_make']) && empty($_POST['stock_model']) && empty($_POST['get_stock_shift']) && empty($_POST['get_stock_reg_year']) && empty($_POST['get_stock_color']) && empty($_POST['stock_fuel']) && empty($_POST['get_stock_vessel_name']) && empty($_POST['get_stock_voyage']) && empty($_POST['get_stock_bl_no']) && empty($_POST['get_stock_buying_date_from']) && empty($_POST['get_stock_buying_date_till']) && empty($_POST['get_stock_reserve_ok_date_from']) && empty($_POST['get_stock_reserve_ok_date_till']) && empty($_POST['get_stock_ship_ok_date_from']) && empty($_POST['get_stock_ship_ok_date_till']) && empty($_POST['get_stock_release_ok_date_from']) && empty($_POST['get_stock_release_ok_date_till']) && trim($_POST['get_stock_inyard_date_from']) && trim($_POST['get_stock_inyard_date_till']))
         {
-            echo "hassan1";
             $val17=$_POST['get_stock_inyard_date_from'];
             $val18=$_POST['get_stock_inyard_date_till'];
             $val171= date("Y-m-d", strtotime($val17));
@@ -266,7 +272,6 @@ if(trim($_POST['stock_all_agent']=="AllCar")){
         }
         if((trim($_POST['get_stock_rec_no']) || trim  ($_POST['get_stock_kobutsu'])  || trim  ($_POST['get_stock_chassis_id']) || trim($_POST['get_stock_customer_name']) || trim($_POST['get_stock_make']) || trim($_POST['stock_model']) || trim($_POST['get_stock_shift']) || trim($_POST['get_stock_reg_year']) || trim($_POST['get_stock_color']) || trim($_POST['stock_fuel']) || trim($_POST['get_stock_vessel_name']) || trim($_POST['get_stock_voyage']) || trim($_POST['get_stock_bl_no']) || trim($_POST['get_stock_buying_date_from']) || trim($_POST['get_stock_buying_date_till']) || trim($_POST['get_stock_reserve_ok_date_from']) || trim($_POST['get_stock_reserve_ok_date_till']) || trim($_POST['get_stock_ship_ok_date_from']) || trim($_POST['get_stock_ship_ok_date_till']) || trim($_POST['get_stock_release_ok_date_from']) || trim($_POST['get_stock_release_ok_date_till'])) && trim($_POST['get_stock_inyard_date_from']) && trim($_POST['get_stock_inyard_date_till']))
         {
-            echo "hassan2";
             $val17=$_POST['get_stock_inyard_date_from'];
             $val18=$_POST['get_stock_inyard_date_till'];
             $val171= date("Y-m-d", strtotime($val17));
@@ -589,7 +594,6 @@ if(trim($_POST['stock_all_agent']=="AllCar")){
            
         
         }
-        echo $query;
         //releaseokend
         //release
       
@@ -1211,7 +1215,6 @@ if(trim($_POST['stock_all_agent']=="AllReserved")){
 
 
         /////////////      RESERVED CAR END   /////////////
-         echo $query;
             $queryca=mysqli_query($connection,$query);
 }
 ///// ALL SOLD START ///////
@@ -1233,7 +1236,8 @@ if(trim($_POST['stock_all_agent']=="AllSold")){
 
     if(trim($_POST['get_stock_release_ok_date']) || trim($_POST['get_stock_bl_date']) || trim($_POST['get_stock_shipping_order_file']) || trim($_POST['get_stock_ship_ok_date']) || trim($_POST['get_stock_sure_ok_date']) || trim($_POST['get_stock_reserve_date']) || (trim ($_POST['get_stock_inyard_date']) || trim($_POST['get_stock_buying_date']) || trim($_POST['get_stock_rec_no']) || trim  ($_POST['get_stock_kobutsu'])  || trim  ($_POST['get_stock_chassis_id']) || trim($_POST['get_stock_customer_name']) || trim($_POST['get_stock_make']) || trim($_POST['stock_model']) || trim($_POST['get_stock_shift']) || trim($_POST['get_stock_reg_year']) || trim($_POST['get_stock_color']) || trim($_POST['stock_fuel']) || trim($_POST['get_stock_vessel_name']) || trim($_POST['get_stock_voyage']) || trim($_POST['get_stock_bl_no']) || trim($_POST['get_stock_buying_date_from']) || trim($_POST['get_stock_buying_date_till']) || trim($_POST['get_stock_reserve_ok_date_from']) || trim($_POST['get_stock_reserve_ok_date_till']) || trim($_POST['get_stock_ship_ok_date_from']) || trim($_POST['get_stock_ship_ok_date_till']) || trim($_POST['get_stock_release_ok_date_from']) || trim($_POST['get_stock_release_ok_date_till'])))
     {
-        echo "done";
+       
+
     $query="select * from ats_car_stock WHERE ats_car_stock_rec_no in ($customeridrec)  AND ";
     }
     else {
@@ -1821,7 +1825,6 @@ if(trim($_POST['stock_all_agent']=="AllSold")){
 
 
         /////////////      ALL CAR END   /////////////
-            echo $query;
             $queryca=mysqli_query($connection,$query);
 }
 if(trim($_POST['stock_all_agent']=="AllPaid")){
@@ -1842,7 +1845,7 @@ if(trim($_POST['stock_all_agent']=="AllPaid")){
 
     if(trim($_POST['get_stock_release_ok_date']) || trim($_POST['get_stock_bl_date']) || trim($_POST['get_stock_shipping_order_file']) || trim($_POST['get_stock_ship_ok_date']) || trim($_POST['get_stock_sure_ok_date']) || trim($_POST['get_stock_reserve_date']) || (trim ($_POST['get_stock_inyard_date']) || trim($_POST['get_stock_buying_date']) || trim($_POST['get_stock_rec_no']) || trim  ($_POST['get_stock_kobutsu'])  || trim  ($_POST['get_stock_chassis_id']) || trim($_POST['get_stock_customer_name']) || trim($_POST['get_stock_make']) || trim($_POST['stock_model']) || trim($_POST['get_stock_shift']) || trim($_POST['get_stock_reg_year']) || trim($_POST['get_stock_color']) || trim($_POST['stock_fuel']) || trim($_POST['get_stock_vessel_name']) || trim($_POST['get_stock_voyage']) || trim($_POST['get_stock_bl_no']) || trim($_POST['get_stock_buying_date_from']) || trim($_POST['get_stock_buying_date_till']) || trim($_POST['get_stock_reserve_ok_date_from']) || trim($_POST['get_stock_reserve_ok_date_till']) || trim($_POST['get_stock_ship_ok_date_from']) || trim($_POST['get_stock_ship_ok_date_till']) || trim($_POST['get_stock_release_ok_date_from']) || trim($_POST['get_stock_release_ok_date_till'])))
     {
-        echo "done";
+      
     $query="select * from ats_car_stock WHERE ats_car_stock_rec_no in ($customeridrec)  AND ";
     }
     else {
@@ -2430,6 +2433,7 @@ if(trim($_POST['stock_all_agent']=="AllPaid")){
           
             $queryca=mysqli_query($connection,$query);
 }
+echo $query;
 }
 
 ?>

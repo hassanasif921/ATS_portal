@@ -60,8 +60,8 @@ if (isset($_POST["btn_post"])) {
     }
     if ($query)
     {
-       
-        echo '<script type="text/javascript"> alert("POSTED")</script>';
+        echo '<script type="text/javascript">$.alert.open("info","SUCCESSFULY POSTED");
+         </script>';
         //echo '<script language="javascript">window.location.href ="employee-records.php"</script>';
     }
     else
@@ -81,7 +81,7 @@ if (isset($_POST["btn_post"])) {
                                         <span>Home</span>
                                     </a>
                                 </li>
-                                <li class="nav-item">
+                                <!-- <li class="nav-item">
                                     <a role="tab" data-toggle="tab" class="nav-link" href="#dashboard-overview" aria-selected="false">
                                         <span>Overview</span>
                                     </a>
@@ -90,7 +90,7 @@ if (isset($_POST["btn_post"])) {
                                     <a role="tab" data-toggle="tab" class="nav-link" href="#dashboard-statstics" aria-selected="false">
                                         <span>Statistics</span>
                                     </a>
-                                </li>    
+                                </li>     -->
                                 <li class="nav-item">
                                     <a role="tab" data-toggle="tab" class="nav-link" href="#dashboard-ranking" aria-selected="false">
                                         <span>Ranking</span>
@@ -1197,12 +1197,12 @@ if (isset($_POST["btn_post"])) {
                                                         <div class="menu-header-image opacity-4"
                                                             style="background-image: url('assets/images/dropdown-header/abstract2.jpg');"></div>
                                                         <div class="menu-header-content">
-                                                            <h5 class="menu-header-title text-capitalize mb-0 fsize-3">Top Sellers</h5>
-                                                            <h6 class="menu-header-subtitle mb-3">Yet another Example of Card Boxes</h6>
+                                                            <h5 class="menu-header-title text-capitalize mb-0 fsize-3">Top Seller Of The Month</h5>
+                                                          <h6 class="menu-header-subtitle mb-3"></h6> 
                                                             <div role="group" class="mb-0 btn-group">
-                                                                <button type="button" class="btn-pill pl-3 pr-3  btn btn-warning">John</button>
-                                                                <button type="button" class="pl-3 pr-3  btn btn-warning">Mary</button>
-                                                                <button type="button" class="btn-pill pl-3 pr-3  btn btn-warning">Katie</button>
+                                                                <?php $querycountsell=mysqli_query($connection,"SELECT COUNT(recordno),agent_name FROM ats_stock_reservation GROUP BY agent_name ")?>
+                                                                <button type="button" class="btn-pill pl-9 pr-9  btn btn-success"><?php ?></button>
+                                                              
                                                             </div>
                                                         </div>
                                                     </div>
@@ -1210,38 +1210,7 @@ if (isset($_POST["btn_post"])) {
                                                 <ul class="list-group list-group-flush">
                                                     <li class="p-0 list-group-item">
                                                         <div class="row">
-                                                            <div class="center-elem col-md-6">
-                                                                <div class="center-elem w-100">
-                                                                    <canvas id="doughnut-chart"></canvas>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-6">
-                                                                <div class="widget-chart">
-                                                                    <div class="widget-chart-content">
-                                                                        <div class="widget-numbers mt-0 text-danger">
-                                                                            <small>$</small>
-                                                                            158
-                                                                            <small class="opacity-5 pl-2">
-                                                                                <i class="fa fa-angle-up"></i>
-                                                                            </small>
-                                                                        </div>
-                                                                        <div class="widget-subheading">Sales Today</div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="divider mt-0 mb-0 mr-2"></div>
-                                                                <div class="widget-chart">
-                                                                    <div class="widget-chart-content">
-                                                                        <div class="widget-numbers mt-0 text-primary">
-                                                                            <small>$</small>
-                                                                            346
-                                                                            <small class="opacity-5 pl-2">
-                                                                                <i class="fa fa-angle-down"></i>
-                                                                            </small>
-                                                                        </div>
-                                                                        <div class="widget-subheading">Sales this Month</div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
+
                                                         </div>
                                                     </li>
                                                     <li class="p-0 list-group-item">
@@ -1260,6 +1229,7 @@ if (isset($_POST["btn_post"])) {
                                                 </ul>
                                             </div>
                                         </div>
+                                        
                                         <div class="col-lg-6 ">
                                             <div class="mb-3 card">
                                                 <div class="card-header-tab card-header">
@@ -1994,6 +1964,7 @@ if (isset($_POST["btn_post"])) {
                                     </div>
                                     
                                 </div>    
+                                
                             </div>
                             <div style="box-shadow: none;" class="app-inner-layout bg-transparent card ">
                                 <div style="margin-top: -4.6%;" class="p-3 scrollbar-sidebar">
@@ -2006,13 +1977,15 @@ if (isset($_POST["btn_post"])) {
                                                         <div class="widget-content">
                                                             <div class="text-center">
                                                             <?php 
-                                                               $now = new \DateTime('now');
+                                                               $now = new DateTime('now');
 
                                                             $month = $now->format('F'); ?>
 
                                                                 <h5 class="widget-heading opacity-4"><?php echo $month; ?> Totals</h5>
                                                                 <h5>
-                                                                <span><b class="text-success">$56,24</b> in sales</span></h5>
+                                                                <?php $querycountsales=mysqli_query($connection,"select COUNT(*) from ats_stock_reservation where agent_name='".$userid."' AND reservedpaymentstatus='CONFIRMED' AND sold_status=MONTH(CURRENT_DATE())");
+                                                                $rowcountsales=mysqli_fetch_array($querycountsales);?>
+                                                                <span><b class="text-success"><?php echo $rowcountsales[0]?></b> in sales</span></h5>
                                                             </div>
                                                         </div>
                                                     </li>
@@ -2257,6 +2230,7 @@ include("bottom.php");
             success: function(data){
                 if (data) {
                    
+
                     $("#dashboard-home").load(location.href+" #dashboard-home>*","");
                     
                 }
