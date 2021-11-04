@@ -1200,8 +1200,11 @@ if (isset($_POST["btn_post"])) {
                                                             <h5 class="menu-header-title text-capitalize mb-0 fsize-3">Top Seller Of The Month</h5>
                                                           <h6 class="menu-header-subtitle mb-3"></h6> 
                                                             <div role="group" class="mb-0 btn-group">
-                                                                <?php $querycountsell=mysqli_query($connection,"SELECT COUNT(recordno),agent_name FROM ats_stock_reservation GROUP BY agent_name ")?>
-                                                                <button type="button" class="btn-pill pl-9 pr-9  btn btn-success"><?php ?></button>
+                                                                <?php $querycountsell=mysqli_query($connection,"SELECT agent_name,recordno, COUNT(*) FROM ats_stock_reservation GROUP BY agent_name DESC LIMIT 1");
+                                                                $rowhighsale=mysqli_fetch_row($querycountsell);
+                                                                 $rowagentname=mysqli_fetch_row(mysqli_query($connection,"select ats_employee_firstName,ats_employee_middleName,ats_employee_lastName from ats_employee where ats_employee_id='".$rowhighsale[0]."'")); 
+                                                               ?>
+                                                                <button type="button" class="btn-pill pl-9 pr-9  btn btn-success"><?php echo $rowagentname[0]." ".$rowagentname[1]." ".$rowagentname[2]?></button>
                                                               
                                                             </div>
                                                         </div>
@@ -1213,760 +1216,74 @@ if (isset($_POST["btn_post"])) {
 
                                                         </div>
                                                     </li>
-                                                    <li class="p-0 list-group-item">
-                                                        <div class="grid-menu grid-menu-2col">
-                                                            <div class="no-gutters row">
-                                                                <div class="col-sm-12">
-                                                                    <div class="p-1">
-                                                                        <button type="button" class="btn-transition-text btn-transition btn-transition-alt pt-2 pb-2 btn btn-outline-warning">
-                                                                            <span class="text-uppercase font-weight-bold">Block Button Maybe?</span>
-                                                                        </button>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </li>
+                                                  
                                                 </ul>
                                             </div>
                                         </div>
                                         
-                                        <div class="col-lg-6 ">
+                                        <div class="col-lg-12 ">
                                             <div class="mb-3 card">
                                                 <div class="card-header-tab card-header">
                                                     <div class="card-header-title font-size-lg text-capitalize font-weight-normal">
-                                                        <i class="header-icon lnr-shirt mr-3 text-muted opacity-6"> </i>
+                                                        <i class="header-icon lnr-users mr-3 text-muted opacity-6"> </i>
                                                         Top Sellers
                                                     </div>
-                                                    <div class="btn-actions-pane-right actions-icon-btn">
-                                                        <div class="btn-group dropdown">
-                                                            <button type="button" data-toggle="dropdown" aria-haspopup="true"
-                                                                aria-expanded="false" class="btn-icon btn-icon-only btn btn-link">
-                                                                <i class="pe-7s-menu btn-icon-wrapper"></i>
-                                                            </button>
-                                                            <div tabindex="-1" role="menu" aria-hidden="true" class="dropdown-menu-shadow dropdown-menu-hover-link dropdown-menu">
-                                                                <h6 tabindex="-1" class="dropdown-header">Header</h6>
-                                                                <button type="button" tabindex="0" class="dropdown-item">
-                                                                    <i class="dropdown-icon lnr-inbox"> </i><span>Menus</span>
-                                                                </button>
-                                                                <button type="button" tabindex="0" class="dropdown-item">
-                                                                    <i class="dropdown-icon lnr-file-empty"> </i><span>Settings</span>
-                                                                </button>
-                                                                <button type="button" tabindex="0" class="dropdown-item">
-                                                                    <i class="dropdown-icon lnr-book"> </i><span>Actions</span>
-                                                                </button>
-                                                                <div tabindex="-1" class="dropdown-divider"></div>
-                                                                <div class="p-1 text-right">
-                                                                    <button class="mr-2 btn-shadow btn-sm btn btn-link">View Details</button>
-                                                                    <button class="mr-2 btn-shadow btn-sm btn btn-primary">Action</button>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
+                                                    
                                                 </div>
-                                                <div class="widget-chart widget-chart2 text-left p-0">
-                                                    <div class="widget-chat-wrapper-outer">
-                                                        <div class="widget-chart-content widget-chart-content-lg">
-                                                            <div class="widget-chart-flex">
-                                                                <div class="widget-title opacity-5 text-muted text-uppercase">New accounts since 2018</div>
-                                                            </div>
-                                                            <div class="widget-numbers">
-                                                                <div class="widget-chart-flex">
-                                                                    <div>
-                                                                        <span class="opacity-10 text-success pr-2">
-                                                                            <i class="fa fa-angle-up"></i>
-                                                                        </span>
-                                                                        <span>9</span>
-                                                                        <small class="opacity-5 pl-1">%</small>
-                                                                    </div>
-                                                                    <div class="widget-title ml-2 font-size-lg font-weight-normal text-muted">
-                                                                        <span class="text-danger pl-2">+14% failed</span>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="widget-chart-wrapper widget-chart-wrapper-xlg opacity-10 m-0">
-                                                            <div id="dashboard-sparkline-3"></div>
-                                                        </div>
-                                                    </div>
-                                                </div>
+                                                
                                                 <div class="pt-2 pb-0 card-body">
-                                                    <h6 class="text-muted text-uppercase font-size-md opacity-9 mb-2 font-weight-normal">Authors</h6>
+                                                    <span>
+                                                    <h6 class="text-left text-muted text-uppercase font-size-md opacity-9 mb-2 font-weight-normal">NAME</h6>
+                                                    <h6 class="text-right text-muted font-weight-normal">RANKING</h6>
+                                        </span>
                                                     <div class="scroll-area-md shadow-overflow">
                                                         <div class="scrollbar-container">
                                                             <ul class="rm-list-borders rm-list-borders-scroll list-group list-group-flush">
+                                                            <?php
+                                                            $i=1; 
+                                                            $querycountsell=mysqli_query($connection,"SELECT agent_name,recordno, COUNT(*) FROM ats_stock_reservation GROUP BY agent_name DESC LIMIT 1,2");
+                                                                while($rowhighsale=mysqli_fetch_array($querycountsell)){
+                                                                 $rowagentname=mysqli_fetch_row(mysqli_query($connection,"select ats_employee_firstName,ats_employee_middleName,ats_employee_lastName,ats_employee_image from ats_employee where ats_employee_id='".$rowhighsale[0]."'")); 
+                                                                    
+                                                               ?>
                                                                 <li class="list-group-item">
                                                                     <div class="widget-content p-0">
                                                                         <div class="widget-content-wrapper">
                                                                             <div class="widget-content-left mr-3">
-                                                                                <img width="38" class="rounded-circle" src="assets/images/avatars/1.jpg" alt="">
+                                                                                <img width="40" class="rounded-circle" src="data:image/jpg;charset=utf8;base64,<?php echo base64_encode($rowagentname[3]); ?>" alt="">
                                                                             </div>
                                                                             <div class="widget-content-left">
-                                                                                <div class="widget-heading">Viktor Martin</div>
+                                                                                <div class="widget-heading"><?php echo $rowagentname[0]." ".$rowagentname[1]." ".$rowagentname[2]?></div>
                                                                                 <div class="widget-subheading mt-1 opacity-10">
-                                                                                    <div class="badge badge-pill badge-dark">$152</div>
+                                                                               
                                                                                 </div>
                                                                             </div>
                                                                             <div class="widget-content-right">
                                                                                 <div class="fsize-1 text-focus">
-                                                                                    <small class="opacity-5 pr-1">$</small>
-                                                                                    <span>752</span>
-                                                                                    <small class="text-warning pl-2">
-                                                                                        <i class="fa fa-angle-down"></i>
-                                                                                    </small>
+                                                                                   
+                                                                                    <span><?php echo ++$i?></span>
+                                                                                 
                                                                                 </div>
                                                                             </div>
                                                                         </div>
                                                                     </div>
                                                                 </li>
-                                                                <li class="list-group-item">
-                                                                    <div class="widget-content p-0">
-                                                                        <div class="widget-content-wrapper">
-                                                                            <div class="widget-content-left mr-3">
-                                                                                <img width="38" class="rounded-circle" src="assets/images/avatars/2.jpg" alt="">
-                                                                            </div>
-                                                                            <div class="widget-content-left">
-                                                                                <div class="widget-heading">Denis Delgado</div>
-                                                                                <div class="widget-subheading mt-1 opacity-10">
-                                                                                    <div class="badge badge-pill badge-dark">$53</div>
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="widget-content-right">
-                                                                                <div class="fsize-1 text-focus">
-                                                                                    <small class="opacity-5 pr-1">$</small>
-                                                                                    <span>587</span>
-                                                                                    <small class="text-danger pl-2">
-                                                                                        <i class="fa fa-angle-up"></i>
-                                                                                    </small>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </li>
-                                                                <li class="list-group-item">
-                                                                    <div class="widget-content p-0">
-                                                                        <div class="widget-content-wrapper">
-                                                                            <div class="widget-content-left mr-3">
-                                                                                <img width="38" class="rounded-circle" src="assets/images/avatars/3.jpg" alt="">
-                                                                            </div>
-                                                                            <div class="widget-content-left">
-                                                                                <div class="widget-heading">Shawn Galloway</div>
-                                                                                <div class="widget-subheading mt-1 opacity-10">
-                                                                                    <div class="badge badge-pill badge-dark">$239</div>
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="widget-content-right">
-                                                                                <div class="fsize-1 text-focus">
-                                                                                    <small class="opacity-5 pr-1">$</small>
-                                                                                    <span>163</span>
-                                                                                    <small class="text-muted pl-2">
-                                                                                        <i class="fa fa-angle-down"></i>
-                                                                                    </small>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </li>
-                                                                <li class="list-group-item">
-                                                                    <div class="widget-content p-0">
-                                                                        <div class="widget-content-wrapper">
-                                                                            <div class="widget-content-left mr-3">
-                                                                                <img width="38" class="rounded-circle" src="assets/images/avatars/4.jpg" alt="">
-                                                                            </div>
-                                                                            <div class="widget-content-left">
-                                                                                <div class="widget-heading">Latisha Allison</div>
-                                                                                <div class="widget-subheading mt-1 opacity-10">
-                                                                                    <div class="badge badge-pill badge-dark">$21</div>
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="widget-content-right">
-                                                                                <div class="fsize-1 text-focus">
-                                                                                    <small class="opacity-5 pr-1">$</small>
-                                                                                    653
-                                                                                    <small class="text-primary pl-2">
-                                                                                        <i class="fa fa-angle-up"></i>
-                                                                                    </small>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </li>
-                                                                <li class="list-group-item">
-                                                                    <div class="widget-content p-0">
-                                                                        <div class="widget-content-wrapper">
-                                                                            <div class="widget-content-left mr-3">
-                                                                                <img width="38" class="rounded-circle" src="assets/images/avatars/5.jpg" alt="">
-                                                                            </div>
-                                                                            <div class="widget-content-left">
-                                                                                <div class="widget-heading">Lilly-Mae White</div>
-                                                                                <div class="widget-subheading mt-1 opacity-10">
-                                                                                    <div class="badge badge-pill badge-dark">$381</div>
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="widget-content-right">
-                                                                                <div class="fsize-1 text-focus">
-                                                                                    <small class="opacity-5 pr-1">$</small> 629
-                                                                                    <small class="text-muted pl-2">
-                                                                                        <i class="fa fa-angle-up"></i>
-                                                                                    </small>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </li>
-                                                                <li class="list-group-item">
-                                                                    <div class="widget-content p-0">
-                                                                        <div class="widget-content-wrapper">
-                                                                            <div class="widget-content-left mr-3">
-                                                                                <img width="38" class="rounded-circle" src="assets/images/avatars/8.jpg" alt="">
-                                                                            </div>
-                                                                            <div class="widget-content-left">
-                                                                                <div class="widget-heading">Julie Prosser</div>
-                                                                                <div class="widget-subheading mt-1 opacity-10">
-                                                                                    <div class="badge badge-pill badge-dark">$74</div>
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="widget-content-right">
-                                                                                <div class="fsize-1 text-focus">
-                                                                                    <small class="opacity-5 pr-1">$</small>462
-                                                                                    <small class="text-muted pl-2">
-                                                                                        <i class="fa fa-angle-down"></i>
-                                                                                    </small>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </li>
-                                                                <li class="border-bottom-0 list-group-item">
-                                                                    <div class="widget-content p-0">
-                                                                        <div class="widget-content-wrapper">
-                                                                            <div class="widget-content-left mr-3">
-                                                                                <img width="38" class="rounded-circle" src="assets/images/avatars/8.jpg" alt="">
-                                                                            </div>
-                                                                            <div class="widget-content-left">
-                                                                                <div class="widget-heading">Amin Hamer</div>
-                                                                                <div class="widget-subheading mt-1 opacity-10">
-                                                                                    <div class="badge badge-pill badge-dark">$7</div>
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="widget-content-right">
-                                                                                <div class="fsize-1 text-focus">
-                                                                                    <small class="opacity-5 pr-1">$</small>
-                                                                                    956
-                                                                                    <small class="text-success pl-2">
-                                                                                        <i class="fa fa-angle-up"></i>
-                                                                                    </small>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </li>
-                                                            </ul>
+                                                            <?php }?>
+
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="d-block text-center rm-border card-footer">
-                                                    <button class="btn btn-primary">
-                                                        View complete report
-                                                        <span class="text-white pl-2 opacity-3">
-                                                            <i class="fa fa-arrow-right"></i>
-                                                        </span>
-                                                    </button>
-                                                </div>
+                                                
                                             </div>
                                         </div>
-                                        <div class="col-lg-6 ">
-                                            <div class="mb-3 card">
-                                                <div class="card-header-tab card-header">
-                                                    <div class="card-header-title font-size-lg text-capitalize font-weight-normal">
-                                                        <i class="header-icon lnr-laptop-phone mr-3 text-muted opacity-6"> </i>Best Selling Products
-                                                    </div>
-                                                    <div class="btn-actions-pane-right actions-icon-btn">
-                                                        <div class="btn-group dropdown">
-                                                            <button data-toggle="dropdown" type="button" aria-haspopup="true"
-                                                                aria-expanded="false" class="btn-icon btn-icon-only btn btn-link">
-                                                                <i class="pe-7s-menu btn-icon-wrapper"></i></button>
-                                                            <div tabindex="-1" role="menu" aria-hidden="true" class="dropdown-menu-shadow dropdown-menu-hover-link dropdown-menu">
-                                                                <h6 tabindex="-1" class="dropdown-header">Header</h6>
-                                                                <button type="button" tabindex="0" class="dropdown-item">
-                                                                    <i class="dropdown-icon lnr-inbox"> </i><span>Menus</span>
-                                                                </button>
-                                                                <button type="button" tabindex="0" class="dropdown-item">
-                                                                    <i class="dropdown-icon lnr-file-empty"> </i><span>Settings</span>
-                                                                </button>
-                                                                <button type="button" tabindex="0" class="dropdown-item">
-                                                                    <i class="dropdown-icon lnr-book"> </i><span>Actions</span>
-                                                                </button>
-                                                                <div tabindex="-1" class="dropdown-divider"></div>
-                                                                <div class="p-1 text-right">
-                                                                    <button class="mr-2 btn-shadow btn-sm btn btn-link">View Details</button>
-                                                                    <button class="mr-2 btn-shadow btn-sm btn btn-primary">Action</button>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="widget-chart widget-chart2 text-left p-0">
-                                                    <div class="widget-chat-wrapper-outer">
-                                                        <div class="widget-chart-content widget-chart-content-lg">
-                                                            <div class="widget-chart-flex">
-                                                                <div class="widget-title opacity-5 text-muted text-uppercase">Toshiba Laptops
-                                                                </div>
-                                                            </div>
-                                                            <div class="widget-numbers">
-                                                                <div class="widget-chart-flex">
-                                                                    <div>
-                                                                        <span class="opacity-10 text-warning pr-2">
-                                                                            <i class="fa fa-dot-circle"></i>
-                                                                        </span>
-                                                                        <span>$984</span>
-                                                                    </div>
-                                                                    <div class="widget-title ml-2 font-size-lg font-weight-normal text-muted">
-                                                                        <span class="text-success pl-2">+14</span>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="widget-chart-wrapper widget-chart-wrapper-xlg opacity-10 m-0">
-                                                            <div id="dashboard-sparkline-2"></div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="pt-2 pb-0 card-body">
-                                                    <h6 class="text-muted text-uppercase font-size-md opacity-9 mb-2 font-weight-normal">Top
-                                                        Performing</h6>
-                                                    <div class="scroll-area-md shadow-overflow">
-                                                        <div class="scrollbar-container">
-                                                            <ul class="rm-list-borders rm-list-borders-scroll list-group list-group-flush">
-                                                                <li class="list-group-item">
-                                                                    <div class="widget-content p-0">
-                                                                        <div class="widget-content-wrapper">
-                                                                            <div class="widget-content-left mr-3">
-                                                                                <div class="icon-wrapper m-0">
-                                                                                    <div class="progress-circle-wrapper">
-                                                                                        <div class="progress-circle-wrapper">
-                                                                                            <div class="circle-progress circle-progress-gradient">
-                                                                                                <small></small>
-                                                                                            </div>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="widget-content-left">
-                                                                                <div class="widget-heading">Asus Laptop</div>
-                                                                                <div class="widget-subheading mt-1 opacity-10">
-                                                                                    <div class="badge badge-pill badge-dark">$152</div>
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="widget-content-right">
-                                                                                <div class="fsize-1 text-focus">
-                                                                                    <small class="opacity-5 pr-1">$</small>
-                                                                                    <span>752</span>
-                                                                                    <small class="text-warning pl-2">
-                                                                                        <i class="fa fa-angle-down"></i>
-                                                                                    </small>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </li>
-                                                                <li class="list-group-item">
-                                                                    <div class="widget-content p-0">
-                                                                        <div class="widget-content-wrapper">
-                                                                            <div class="widget-content-left mr-3">
-                                                                                <div class="icon-wrapper m-0">
-                                                                                    <div class="progress-circle-wrapper">
-                                                                                        <div class="progress-circle-wrapper">
-                                                                                            <div class="circle-progress circle-progress-danger">
-                                                                                                <small></small>
-                                                                                            </div>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="widget-content-left">
-                                                                                <div class="widget-heading">Dell Inspire</div>
-                                                                                <div class="widget-subheading mt-1 opacity-10">
-                                                                                    <div class="badge badge-pill badge-dark">$53</div>
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="widget-content-right">
-                                                                                <div class="fsize-1 text-focus">
-                                                                                    <small class="opacity-5 pr-1">$</small>
-                                                                                    <span>587</span>
-                                                                                    <small class="text-danger pl-2">
-                                                                                        <i class="fa fa-angle-up"></i>
-                                                                                    </small>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </li>
-                                                                <li class="list-group-item">
-                                                                    <div class="widget-content p-0">
-                                                                        <div class="widget-content-wrapper">
-                                                                            <div class="widget-content-left mr-3">
-                                                                                <div class="icon-wrapper m-0">
-                                                                                    <div class="progress-circle-wrapper">
-                                                                                        <div class="progress-circle-wrapper">
-                                                                                            <div class="circle-progress circle-progress-primary">
-                                                                                                <small></small>
-                                                                                            </div>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="widget-content-left">
-                                                                                <div class="widget-heading">Lenovo IdeaPad</div>
-                                                                                <div class="widget-subheading mt-1 opacity-10">
-                                                                                    <div class="badge badge-pill badge-dark">$239</div>
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="widget-content-right">
-                                                                                <div class="fsize-1 text-focus">
-                                                                                    <small class="opacity-5 pr-1">$</small>
-                                                                                    <span>163</span>
-                                                                                    <small class="text-muted pl-2">
-                                                                                        <i class="fa fa-angle-down"></i>
-                                                                                    </small>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </li>
-                                                                <li class="list-group-item">
-                                                                    <div class="widget-content p-0">
-                                                                        <div class="widget-content-wrapper">
-                                                                            <div class="widget-content-left mr-3">
-                                                                                <div class="icon-wrapper m-0">
-                                                                                    <div class="progress-circle-wrapper">
-                                                                                        <div class="progress-circle-wrapper">
-                                                                                            <div class="circle-progress circle-progress-info">
-                                                                                                <small></small>
-                                                                                            </div>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="widget-content-left">
-                                                                                <div class="widget-heading">Asus Vivobook</div>
-                                                                                <div class="widget-subheading mt-1 opacity-10">
-                                                                                    <div class="badge badge-pill badge-dark">$21</div>
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="widget-content-right">
-                                                                                <div class="fsize-1 text-focus">
-                                                                                    <small class="opacity-5 pr-1">$</small>
-                                                                                    653
-                                                                                    <small class="text-primary pl-2">
-                                                                                        <i class="fa fa-angle-up"></i>
-                                                                                    </small>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </li>
-                                                                <li class="list-group-item">
-                                                                    <div class="widget-content p-0">
-                                                                        <div class="widget-content-wrapper">
-                                                                            <div class="widget-content-left mr-3">
-                                                                                <div class="icon-wrapper m-0">
-                                                                                    <div class="progress-circle-wrapper">
-                                                                                        <div class="progress-circle-wrapper">
-                                                                                            <div class="circle-progress circle-progress-warning">
-                                                                                                <small></small>
-                                                                                            </div>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="widget-content-left">
-                                                                                <div class="widget-heading">Apple Macbook</div>
-                                                                                <div class="widget-subheading mt-1 opacity-10">
-                                                                                    <div class="badge badge-pill badge-dark">$381</div>
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="widget-content-right">
-                                                                                <div class="fsize-1 text-focus">
-                                                                                    <small class="opacity-5 pr-1">$</small>
-                                                                                    629
-                                                                                    <small class="text-muted pl-2">
-                                                                                        <i class="fa fa-angle-up"></i>
-                                                                                    </small>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </li>
-                                                                <li class="list-group-item">
-                                                                    <div class="widget-content p-0">
-                                                                        <div class="widget-content-wrapper">
-                                                                            <div class="widget-content-left mr-3">
-                                                                                <div class="icon-wrapper m-0">
-                                                                                    <div class="progress-circle-wrapper">
-                                                                                        <div class="progress-circle-wrapper">
-                                                                                            <div class="circle-progress circle-progress-dark">
-                                                                                                <small></small>
-                                                                                            </div>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="widget-content-left">
-                                                                                <div class="widget-heading">HP Envy 13"</div>
-                                                                                <div class="widget-subheading mt-1 opacity-10">
-                                                                                    <div class="badge badge-pill badge-dark">$74</div>
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="widget-content-right">
-                                                                                <div class="fsize-1 text-focus">
-                                                                                    <small class="opacity-5 pr-1">$</small>
-                                                                                    462
-                                                                                    <small class="text-muted pl-2">
-                                                                                        <i class="fa fa-angle-down"></i>
-                                                                                    </small>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </li>
-                                                                <li class="border-bottom-0 list-group-item">
-                                                                    <div class="widget-content p-0">
-                                                                        <div class="widget-content-wrapper">
-                                                                            <div class="widget-content-left mr-3">
-                                                                                <div class="icon-wrapper m-0">
-                                                                                    <div class="progress-circle-wrapper">
-                                                                                        <div class="progress-circle-wrapper">
-                                                                                            <div class="circle-progress circle-progress-alternate">
-                                                                                                <small></small>
-                                                                                            </div>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="widget-content-left">
-                                                                                <div class="widget-heading">Gaming Laptop HP</div>
-                                                                                <div class="widget-subheading mt-1 opacity-10">
-                                                                                    <div class="badge badge-pill badge-dark">$7</div>
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="widget-content-right">
-                                                                                <div class="fsize-1 text-focus">
-                                                                                    <small class="opacity-5 pr-1">$</small>
-                                                                                    956
-                                                                                    <small class="text-success pl-2">
-                                                                                        <i class="fa fa-angle-up"></i>
-                                                                                    </small>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </li>
-                                                            </ul>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="d-block text-center rm-border card-footer">
-                                                    <button class="btn btn-primary">
-                                                        View all participants
-                                                        <span class="text-white pl-2 opacity-3">
-                                                            <i class="fa fa-arrow-right"></i>
-                                                        </span>
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-12">
-                                            <div class="mb-3 card">
-                                                <div class="card-header-tab card-header-tab-animation card-header">
-                                                    <div class="card-header-title">
-                                                        <i class="header-icon lnr-apartment icon-gradient bg-love-kiss"> </i>
-                                                        Sales Report
-                                                    </div>
-                                                    <div class="btn-actions-pane-right text-capitalize">
-                                                        <button class="btn-wide btn-outline-2x btn btn-outline-success btn-sm">View All</button>
-                                                    </div>
-                                                </div>
-                                                <div class="card-body">
-                                                    <div class="tab-content">
-                                                        <div class="tab-pane fade active show" id="tab-eg-11">
-                                                            <div class="card mb-3 widget-chart widget-chart2 text-left p-0">
-                                                                <div class="widget-chat-wrapper-outer">
-                                                                    <div class="widget-chart-content pt-3 pr-3 pl-3">
-                                                                        <div class="widget-chart-flex">
-                                                                            <div class="widget-numbers">
-                                                                                <div class="widget-chart-flex">
-                                                                                    <div>
-                                                                                        <small class="opacity-5">$</small>
-                                                                                        <span>368</span></div>
-                                                                                    <div class="widget-title ml-2 opacity-5 font-size-lg text-muted">
-                                                                                        Total Leads</div>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="widget-chart-wrapper he-auto opacity-10 m-0">
-                                                                        <div id="dashboard-sparkline-carousel-2"></div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <h6 class="text-muted text-uppercase font-size-md opacity-5 font-weight-normal">Top
-                                                                Authors</h6>
-                                                            <div class="scroll-area-sm">
-                                                                <div class="scrollbar-container">
-                                                                    <ul class="rm-list-borders rm-list-borders-scroll list-group list-group-flush">
-                                                                        <li class="list-group-item">
-                                                                            <div class="widget-content p-0">
-                                                                                <div class="widget-content-wrapper">
-                                                                                    <div class="widget-content-left mr-3">
-                                                                                        <img width="42" class="rounded-circle" src="assets/images/avatars/9.jpg" alt="">
-                                                                                    </div>
-                                                                                    <div class="widget-content-left">
-                                                                                        <div class="widget-heading">Ella-Rose Henry</div>
-                                                                                        <div class="widget-subheading">Web Developer</div>
-                                                                                    </div>
-                                                                                    <div class="widget-content-right">
-                                                                                        <div class="font-size-xlg text-muted">
-                                                                                            <small class="opacity-5 pr-1">$</small>
-                                                                                            <span>129</span>
-                                                                                            <small class="text-danger pl-2">
-                                                                                                <i class="fa fa-angle-down"></i>
-                                                                                            </small>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
-                                                                        </li>
-                                                                        <li class="list-group-item">
-                                                                            <div class="widget-content p-0">
-                                                                                <div class="widget-content-wrapper">
-                                                                                    <div class="widget-content-left mr-3">
-                                                                                        <img width="42" class="rounded-circle" src="assets/images/avatars/5.jpg" alt="">
-                                                                                    </div>
-                                                                                    <div class="widget-content-left">
-                                                                                        <div class="widget-heading">Ruben Tillman</div>
-                                                                                        <div class="widget-subheading">UI Designer</div>
-                                                                                    </div>
-                                                                                    <div class="widget-content-right">
-                                                                                        <div class="font-size-xlg text-muted">
-                                                                                            <small class="opacity-5 pr-1">$</small>
-                                                                                            <span>54</span>
-                                                                                            <small class="text-success pl-2">
-                                                                                                <i class="fa fa-angle-up"></i>
-                                                                                            </small>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
-                                                                        </li>
-                                                                        <li class="list-group-item">
-                                                                            <div class="widget-content p-0">
-                                                                                <div class="widget-content-wrapper">
-                                                                                    <div class="widget-content-left mr-3">
-                                                                                        <img width="42" class="rounded-circle" src="assets/images/avatars/4.jpg" alt="">
-                                                                                    </div>
-                                                                                    <div class="widget-content-left">
-                                                                                        <div class="widget-heading">Vinnie Wagstaff</div>
-                                                                                        <div class="widget-subheading">Java Programmer</div>
-                                                                                    </div>
-                                                                                    <div class="widget-content-right">
-                                                                                        <div class="font-size-xlg text-muted">
-                                                                                            <small class="opacity-5 pr-1">$</small>
-                                                                                            <span>429</span>
-                                                                                            <small class="text-warning pl-2">
-                                                                                                <i class="fa fa-dot-circle"></i>
-                                                                                            </small>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
-                                                                        </li>
-                                                                        <li class="list-group-item">
-                                                                            <div class="widget-content p-0">
-                                                                                <div class="widget-content-wrapper">
-                                                                                    <div class="widget-content-left mr-3">
-                                                                                        <img width="42" class="rounded-circle" src="assets/images/avatars/3.jpg" alt="">
-                                                                                    </div>
-                                                                                    <div class="widget-content-left">
-                                                                                        <div class="widget-heading">Ella-Rose Henry</div>
-                                                                                        <div class="widget-subheading">Web Developer</div>
-                                                                                    </div>
-                                                                                    <div class="widget-content-right">
-                                                                                        <div class="font-size-xlg text-muted">
-                                                                                            <small class="opacity-5 pr-1">$</small>
-                                                                                            <span>129</span>
-                                                                                            <small class="text-danger pl-2">
-                                                                                                <i class="fa fa-angle-down"></i>
-                                                                                            </small>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
-                                                                        </li>
-                                                                        <li class="list-group-item">
-                                                                            <div class="widget-content p-0">
-                                                                                <div class="widget-content-wrapper">
-                                                                                    <div class="widget-content-left mr-3">
-                                                                                        <img width="42" class="rounded-circle" src="assets/images/avatars/2.jpg" alt="">
-                                                                                    </div>
-                                                                                    <div class="widget-content-left">
-                                                                                        <div class="widget-heading">Ruben Tillman</div>
-                                                                                        <div class="widget-subheading">UI Designer</div>
-                                                                                    </div>
-                                                                                    <div class="widget-content-right">
-                                                                                        <div class="font-size-xlg text-muted">
-                                                                                            <small class="opacity-5 pr-1">$</small>
-                                                                                            <span>54</span>
-                                                                                            <small class="text-success pl-2">
-                                                                                                <i class="fa fa-angle-up"></i>
-                                                                                            </small>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
-                                                                        </li>
-                                                                    </ul>
-                                                                </div>
-                                                            </div>
-                                                            <div class="divider"></div>
-                                                            <h6 class="text-muted text-uppercase font-size-md opacity-5 font-weight-normal">Last
-                                                                Month Top Seller</h6>
-                                                            <ul class="rm-list-borders rm-list-borders-scroll list-group list-group-flush">
-                                                                <li class="list-group-item">
-                                                                    <div class="widget-content p-0">
-                                                                        <div class="widget-content-wrapper">
-                                                                            <div class="widget-content-left mr-3">
-                                                                                <img width="42" class="rounded-circle" src="assets/images/avatars/8.jpg" alt="">
-                                                                            </div>
-                                                                            <div class="widget-content-left">
-                                                                                <div class="widget-heading">Ruben Tillman</div>
-                                                                                <div class="widget-subheading">UI Designer</div>
-                                                                            </div>
-                                                                            <div class="widget-content-right">
-                                                                                <div class="font-size-xlg text-muted">
-                                                                                    <small class="opacity-5 pr-1">$</small>
-                                                                                    <span>54</span>
-                                                                                    <small class="text-success pl-2">
-                                                                                        <i class="fa fa-angle-up">
-                                                                                        </i>
-                                                                                    </small>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </li>
-                                                            </ul>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
+                                     
                                         
                                     </div>
                                     
                                 </div>    
                                 
                             </div>
-                            <div style="box-shadow: none;" class="app-inner-layout bg-transparent card ">
+                                <div style="box-shadow: none;" class="app-inner-layout bg-transparent card ">
                                 <div style="margin-top: -4.6%;" class="p-3 scrollbar-sidebar">
                                     <div style="box-shadow: none;" class="card-shadow-primary profile-responsive card-border mb-3 card">
                                      

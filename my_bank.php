@@ -9,7 +9,14 @@ $query2=mysqli_fetch_row(mysqli_query($connection,"select SUM(remaining_amount) 
 $totalallocated=$queryunitcosting[0]-$query2[0];
 $total_remaining=$queryunitcosting[0]-$totalallocated;
 $query3=mysqli_fetch_row(mysqli_query($connection,"select SUM(remaining_amount) from ats_remittance where ats_remittance_agent_name='".$_SESSION['agents_id']."'"));
+if(isset($_SESSION['agents_id']))
+{
+$querylogin=mysqli_fetch_row(mysqli_query($connection,"select ats_employee_image,ats_employee_firstName,ats_employee_id from ats_employee where ats_employee_id='".$_SESSION['agents_id']."'"));
+$role="AGENTS";
+$username=$querylogin[2];
+$userid=$querylogin[2];
 
+}   
 ?>        
             <div class="app-main__outer">
                 <div class="app-main__inner p-0">
@@ -312,27 +319,26 @@ $query3=mysqli_fetch_row(mysqli_query($connection,"select SUM(remaining_amount) 
                                             </div> -->
                                             <div class="card-body">
                                                 <div class="">
-                                                    <div>
-                                                        <div class="text-center">
-                                                            <h5 class="menu-header-title">Monthly Sales</h5>
-                                                            <h6 class="menu-header-subtitle opacity-6">Total Sales (This Year)</h6>
-                                                        </div>
-                                                        <div id="chartContainer" style="height: 200px;"></div>
-                                                    </div>
+                                                   
                                                     <div class="card-body">
                                                         <div class="text-center">
                                                             <h5 class="menu-header-title">Total Sales</h5>
+                                                            <?php $querycountsales=mysqli_query($connection,"select COUNT(*) from ats_stock_reservation where agent_name='".$userid."' AND reservedpaymentstatus='CONFIRMED' AND sold_status=MONTH(CURRENT_DATE())");
+                                                                $rowcountsales=mysqli_fetch_array($querycountsales);
+                                                                $querycountsalestotal=mysqli_query($connection,"select COUNT(*) from ats_stock_reservation where agent_name='".$userid."' AND reservedpaymentstatus='CONFIRMED' ");
+                                                                $rowcountsalestotal=mysqli_fetch_array($querycountsalestotal);?>
+                                                            <br>
                                                         </div>
                                                         <label class="label-flip">
                                                             <input class="input-none" type="checkbox"/>
                                                             <div class="card-flip">
                                                                 <div class="front bg-slick-carbon">
                                                                     <h4 class="mt-3 text-white">Monthly Sales</h4>
-                                                                    <h5 class="text-primary"><b>0998</b></h5>
+                                                                    <h5 class="text-primary"><b><?php echo $rowcountsales[0]?></b></h5>
                                                                 </div>
                                                                 <div class="back bg-slick-carbon">
                                                                     <h4 class="mt-3 text-white">Total Sales</h4>
-                                                                    <h5 class="text-warning"><b>0998</b></h5>
+                                                                    <h5 class="text-warning"><b><?php echo $rowcountsalestotal[0]?></b></h5>
                                                                 </div>
                                                             </div>
                                                         </label>

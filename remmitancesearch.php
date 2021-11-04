@@ -42,8 +42,7 @@ if(isset($_POST['agent_id']))
                                                                         <th>Conversion Rate</th>
                                                                         <th>Vendor Name</th>
                                                                         <th>Account #</th>
-                                                                        <!-- <th>TT File</th>
-                                                                        <th>Confirmation File</th> -->
+                                                                   
                                                                         <?php if(!isset($_SESSION['agents_id'])){?>
                                                                         <th>Created At</th>
                                                                         <th>Updated At</th>
